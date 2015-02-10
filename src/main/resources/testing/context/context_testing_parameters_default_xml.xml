@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<description>
+		This configuration file contains the beans for reading
+		test parameters from a XML file.
+
+		The current version depends on the
+		JDOM2 API.
+
+		No validation is applied.
+
+		Some values are required to be
+		loaded from an
+		external
+		source, these are:
+
+		file.values: the location of
+		the parameters
+		file.
+		parser.processor.class: nodes parser.
+
+		All classes
+		are singletons
+		except for the streams.
+	</description>
+
+	<!-- ************************************************************ -->
+	<!-- ********************** REQUIRED BEANS ********************** -->
+	<!-- ************************************************************ -->
+
+	<!-- These are the beans required by the test parameters method -->
+
+	<!-- Parser for the parameters file -->
+	<!-- Reads an XML file and returns the parameters -->
+	<bean id="parser" class="com.wandrell.util.parser.xml.input.StAXInputParser">
+		<constructor-arg ref="decoder" />
+	</bean>
+
+	<!-- Values file stream -->
+	<!-- Streams the data of the parameters file -->
+	<!-- Requires the XML file -->
+	<bean id="streamValues" scope="prototype" class="com.wandrell.util.ResourceUtils"
+		factory-method="getClassPathInputStream">
+		<constructor-arg type="java.lang.String" value="${file.values}" />
+	</bean>
+
+	<!-- ************************************************************ -->
+	<!-- ********************** PARSER MODULES ********************** -->
+	<!-- ************************************************************ -->
+
+	<!-- Configuration for the parameters file parser -->
+
+	<!-- Processor -->
+	<bean id="decoder" class="${parser.decoder.class}" />
+
+</beans>

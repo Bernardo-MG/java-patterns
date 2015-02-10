@@ -1,0 +1,15 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:element name="value" type="xs:integer" />
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="uniqueData">
+			<xs:selector xpath="data" />
+			<xs:field xpath="." />
+		</xs:unique>
+	</xs:element>
+	
+</xs:schema>

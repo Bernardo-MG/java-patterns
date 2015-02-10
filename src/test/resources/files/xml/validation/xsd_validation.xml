@@ -1,0 +1,6 @@
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="xsd_validation.xsd">
+	<value>1</value>
+	<value>2</value>
+	<value>3</value>
+</root>
