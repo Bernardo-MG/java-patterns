@@ -139,14 +139,12 @@
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 			<version>${jaxen.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<!-- JDom 2 -->
 			<groupId>org.jdom</groupId>
 			<artifactId>jdom2</artifactId>
 			<version>${jdom.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<!-- Log4J -->
@@ -192,7 +190,6 @@
 					<artifactId>stax-api</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<!-- XMLUnit -->
