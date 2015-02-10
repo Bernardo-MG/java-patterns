@@ -34,10 +34,10 @@
  * <p>
  * Two kinds of command interfaces are provided: the
  * {@link com.wandrell.pattern.command.Command}, with a {@code void}
- * {@link com.wandrell.pattern.command.Command#execute() execute()} method, and the
- * {@link com.wandrell.pattern.command.ReturnCommand}, which returns a value when
- * it's {@link com.wandrell.pattern.command.ReturnCommand#execute() execute()}
- * method is called.
+ * {@link com.wandrell.pattern.command.Command#execute() execute()} method, and
+ * the {@link com.wandrell.pattern.command.ReturnCommand}, which returns a value
+ * when it's {@link com.wandrell.pattern.command.ReturnCommand#execute()
+ * execute()} method is called.
  * <p>
  * The executor interface is the
  * {@link com.wandrell.pattern.command.CommandExecutor}, making use of

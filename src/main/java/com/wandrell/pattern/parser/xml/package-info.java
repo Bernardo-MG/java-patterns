@@ -23,8 +23,8 @@
  */
 /**
  * Provides implementations of {@link com.wandrell.pattern.parser.InputParser
- * InputParser} and {@link com.wandrell.pattern.parser.OutputParser OutputParser}
- * for XML files.
+ * InputParser} and {@link com.wandrell.pattern.parser.OutputParser
+ * OutputParser} for XML files.
  * <p>
  * Also the {@link XMLValidationType} enumeration is included. This serves to
  * indicate the validation being applied to an XML file.

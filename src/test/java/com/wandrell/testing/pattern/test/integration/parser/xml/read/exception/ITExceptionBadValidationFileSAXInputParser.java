@@ -32,7 +32,6 @@ import com.wandrell.pattern.parser.InputParser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 import com.wandrell.pattern.parser.xml.input.JDOMDocumentDecoder;
 import com.wandrell.pattern.parser.xml.input.SAXInputParser;
-import com.wandrell.testing.pattern.framework.conf.FileConf;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
@@ -89,8 +88,7 @@ public final class ITExceptionBadValidationFileSAXInputParser {
         InputParser<Integer> parser = null;    // Tested parser
 
         parser = new SAXInputParser<Integer>(XMLValidationType.DTD,
-                ResourceUtils.getClassPathInputStream(FileConf.PROPERTIES),
-                getJDOMDocumentProcessorInteger());
+                IOUtils.toInputStream(""), getJDOMDocumentProcessorInteger());
 
         parser.read(ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ));
     }
@@ -124,8 +122,7 @@ public final class ITExceptionBadValidationFileSAXInputParser {
         InputParser<Integer> parser = null;    // Tested parser
 
         parser = new SAXInputParser<Integer>(XMLValidationType.XSD,
-                ResourceUtils.getClassPathInputStream(FileConf.PROPERTIES),
-                getJDOMDocumentProcessorInteger());
+                IOUtils.toInputStream(""), getJDOMDocumentProcessorInteger());
 
         parser.read(ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ));
     }

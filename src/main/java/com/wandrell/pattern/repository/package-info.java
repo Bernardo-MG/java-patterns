@@ -33,9 +33,9 @@
  * <p>
  * The {@link com.wandrell.pattern.repository.Repository Repository} interface
  * achieves this through the
- * {@link com.wandrell.pattern.repository.Repository#getCollection getCollection}
- * method, which makes use of the Java 8 {@code Predicate} to return a subset of
- * the repository's data.
+ * {@link com.wandrell.pattern.repository.Repository#getCollection
+ * getCollection} method, which makes use of the Java 8 {@code Predicate} to
+ * return a subset of the repository's data.
  * <p>
  * A basic implementation,
  * {@link com.wandrell.pattern.repository.CollectionRepository
