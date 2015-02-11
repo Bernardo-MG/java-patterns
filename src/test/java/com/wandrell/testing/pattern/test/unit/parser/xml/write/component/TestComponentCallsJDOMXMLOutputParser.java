@@ -37,7 +37,7 @@ import org.mockito.Mockito;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.parser.OutputParser;
-import com.wandrell.pattern.parser.xml.output.JDOMDocumentEncoder;
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
 
 /**
@@ -80,13 +80,13 @@ public final class TestComponentCallsJDOMXMLOutputParser {
     public final void testWrite_OutputStream_CorrectCallNumbers()
             throws Exception {
         final OutputStream stream;         // Stream for the output file
-        final JDOMDocumentEncoder<Object> processor;// Output processor
+        final Parser<Object, Document> processor;// Output processor
         final OutputParser<Object> parser; // Tested parser
 
-        processor = Mockito.mock(JDOMDocumentEncoder.class);
+        processor = Mockito.mock(Parser.class);
 
-        Mockito.when(processor.encode(Matchers.any())).thenReturn(
-                new Document());
+        Mockito.when(processor.parse(Matchers.any()))
+                .thenReturn(new Document());
 
         parser = new XMLOutputParser<Object>(processor);
 
@@ -95,8 +95,8 @@ public final class TestComponentCallsJDOMXMLOutputParser {
 
         parser.write(stream, new Integer(0));
 
-        Mockito.verify(processor, Mockito.times(1)).encode(Matchers.any());
-        Mockito.verify(processor, Mockito.only()).encode(Matchers.any());
+        Mockito.verify(processor, Mockito.times(1)).parse(Matchers.any());
+        Mockito.verify(processor, Mockito.only()).parse(Matchers.any());
     }
 
     /**
@@ -114,13 +114,13 @@ public final class TestComponentCallsJDOMXMLOutputParser {
     public final void testWrite_OutputWriter_CorrectCallNumbers()
             throws Exception {
         final Writer writer;               // Writer for the output file
-        final JDOMDocumentEncoder<Object> processor;// Output processor
+        final Parser<Object, Document> processor;// Output processor
         final OutputParser<Object> parser; // Tested parser
 
-        processor = Mockito.mock(JDOMDocumentEncoder.class);
+        processor = Mockito.mock(Parser.class);
 
-        Mockito.when(processor.encode(Matchers.any())).thenReturn(
-                new Document());
+        Mockito.when(processor.parse(Matchers.any()))
+                .thenReturn(new Document());
 
         parser = new XMLOutputParser<Object>(processor);
 
@@ -130,8 +130,8 @@ public final class TestComponentCallsJDOMXMLOutputParser {
 
         parser.write(writer, new Integer(0));
 
-        Mockito.verify(processor, Mockito.times(1)).encode(Matchers.any());
-        Mockito.verify(processor, Mockito.only()).encode(Matchers.any());
+        Mockito.verify(processor, Mockito.times(1)).parse(Matchers.any());
+        Mockito.verify(processor, Mockito.only()).parse(Matchers.any());
     }
 
 }

@@ -38,7 +38,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.parser.OutputParser;
-import com.wandrell.pattern.parser.xml.output.JDOMDocumentEncoder;
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
@@ -126,12 +126,12 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
      */
     @BeforeClass
     private final void initialize() {
-        final JDOMDocumentEncoder<Integer> encoder;
+        final Parser<Integer, Document> encoder;
 
-        encoder = new JDOMDocumentEncoder<Integer>() {
+        encoder = new Parser<Integer, Document>() {
 
             @Override
-            public final Document encode(final Integer value) {
+            public final Document parse(final Integer value) {
                 final Document writeDoc;
 
                 writeDoc = new Document();

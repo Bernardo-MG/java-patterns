@@ -38,6 +38,7 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import com.wandrell.pattern.parser.OutputParser;
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
@@ -62,54 +63,55 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
      * <p>
      * This is used with DTD validation.
      */
-    private static final String          ELEMENT_VALID    = "validator";
+    private static final String       ELEMENT_VALID    = "validator";
     /**
      * Prefix for the validation namespace.
      * <p>
      * This is used to build the namespace for XSD validation.
      */
-    private static final String          NAMESPACE_PREFIX = "xsi";
+    private static final String       NAMESPACE_PREFIX = "xsi";
     /**
      * URI for the validation namespace.
      * <p>
      * This is used to build the namespace for XSD validation.
      */
-    private static final String          NAMESPACE_URI    = "http://www.w3.org/2001/XMLSchema-instance";
+    private static final String       NAMESPACE_URI    = "http://www.w3.org/2001/XMLSchema-instance";
     /**
      * Attribute which indicates the validation file location.
      * <p>
      * This is used with XSD validation.
      */
-    private static final String          XSD_ATTRIBUTE    = "noNamespaceSchemaLocation";
+    private static final String       XSD_ATTRIBUTE    = "noNamespaceSchemaLocation";
     /**
-     * The module which will generate a {@code Document} from the parsed value.
+     * The parser which will generate a {@code Document} from the received
+     * value.
      */
-    private final JDOMDocumentEncoder<V> documentEncoder;
+    private final Parser<V, Document> documentParser;
     /**
      * Path to the validation file.
      */
-    private final String                 validationPath;
+    private final String              validationPath;
     /**
      * Type of validation being used.
      */
-    private final XMLValidationType      validationType;
+    private final XMLValidationType   validationType;
 
     /**
      * Constructs a parser with the specified processor and no validation.
      * 
-     * @param encoder
-     *            the encoder for creating a {@code Document} from the parsed
+     * @param docParser
+     *            the parser for creating a {@code Document} from the received
      *            value
      */
-    public XMLOutputParser(final JDOMDocumentEncoder<V> encoder) {
-        this(XMLValidationType.NONE, "", encoder);
+    public XMLOutputParser(final Parser<V, Document> docParser) {
+        this(XMLValidationType.NONE, "", docParser);
     }
 
     /**
      * Constructs a parser with the specified processor and validation.
      * 
-     * @param encoder
-     *            the encoder for creating a {@code Document} from the parsed
+     * @param docParser
+     *            the parser for creating a {@code Document} from the received
      *            value
      * @param validation
      *            the validation type
@@ -117,14 +119,14 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
      *            path to the validation file
      */
     public XMLOutputParser(final XMLValidationType validation,
-            final String path, final JDOMDocumentEncoder<V> encoder) {
+            final String path, final Parser<V, Document> docParser) {
         super();
 
-        checkNotNull(encoder, "Received a null pointer as encoder");
+        checkNotNull(docParser, "Received a null pointer as document parser");
         checkNotNull(validation, "Received a null pointer as validation type");
         checkNotNull(path, "Received a null pointer as validation path");
 
-        documentEncoder = encoder;
+        documentParser = docParser;
 
         validationType = validation;
 
@@ -149,7 +151,7 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
         checkNotNull(stream, "Received a null pointer as output stream");
         checkNotNull(value, "Received a null pointer as value");
 
-        doc = getDocumentEncoder().encode(value);
+        doc = getDocumentParser().parse(value);
 
         setValidation(doc);
 
@@ -174,7 +176,7 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
         checkNotNull(writer, "Received a null pointer as writer");
         checkNotNull(value, "Received a null pointer as value");
 
-        doc = getDocumentEncoder().encode(value);
+        doc = getDocumentParser().parse(value);
 
         setValidation(doc);
 
@@ -182,12 +184,12 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
     }
 
     /**
-     * Returns the module in charge of generating the {@code Document}.
+     * Returns the {@code Parser} in charge of generating the {@code Document}.
      * 
-     * @return the module in charge of generating the {@code Document}
+     * @return the {@code Parser} in charge of generating the {@code Document}
      */
-    private final JDOMDocumentEncoder<V> getDocumentEncoder() {
-        return documentEncoder;
+    private final Parser<V, Document> getDocumentParser() {
+        return documentParser;
     }
 
     /**

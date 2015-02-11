@@ -45,7 +45,7 @@ import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.OutputParser;
-import com.wandrell.pattern.parser.xml.output.JDOMDocumentEncoder;
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
@@ -175,12 +175,12 @@ public final class ITWriteNoValidationXMLOutputParser {
     @BeforeClass
     private final void initialize() {
 
-        final JDOMDocumentEncoder<Integer> encoder;
+        final Parser<Integer, Document> parserDoc;
 
-        encoder = new JDOMDocumentEncoder<Integer>() {
+        parserDoc = new Parser<Integer, Document>() {
 
             @Override
-            public final Document encode(final Integer value) {
+            public final Document parse(final Integer value) {
                 final Document writeDoc;
 
                 writeDoc = new Document();
@@ -194,7 +194,7 @@ public final class ITWriteNoValidationXMLOutputParser {
 
         };
 
-        parser = new XMLOutputParser<Integer>(encoder);
+        parser = new XMLOutputParser<Integer>(parserDoc);
     }
 
 }
