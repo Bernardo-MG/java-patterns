@@ -25,9 +25,9 @@ package com.wandrell.testing.pattern.test.integration.parser.xml.read.filtered;
 
 import org.jdom2.Document;
 
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLInputParser;
 import com.wandrell.pattern.parser.xml.input.FilteredEntriesXMLInputParser;
-import com.wandrell.pattern.parser.xml.input.JDOMDocumentDecoder;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.test.integration.parser.xml.read.AbstractITReadAbstractAttributesFilterXMLInputParser;
 
@@ -59,24 +59,24 @@ public final class ITReadFilteredNoValidationFilteredXMLInputParser extends
     }
 
     /**
-     * Generates the document processor for the test parser.
+     * Returns a placeholder {@code Document} {@code Parser}.
      * 
-     * @return the test document processor
+     * @return a placeholder {@code Document} {@code Parser}
      */
-    private static final JDOMDocumentDecoder<Integer>
+    private static final Parser<Document, Integer>
             getNodesCountDocumentProcessor() {
-        final JDOMDocumentDecoder<Integer> processor;
+        final Parser<Document, Integer> parser;
 
-        processor = new JDOMDocumentDecoder<Integer>() {
+        parser = new Parser<Document, Integer>() {
 
             @Override
-            public Integer decode(final Document doc) {
+            public Integer parse(final Document doc) {
                 return doc.getRootElement().getChildren().size();
             }
 
         };
 
-        return processor;
+        return parser;
     }
 
     /**

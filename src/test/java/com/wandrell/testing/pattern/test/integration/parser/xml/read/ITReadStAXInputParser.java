@@ -25,7 +25,7 @@ package com.wandrell.testing.pattern.test.integration.parser.xml.read;
 
 import org.jdom2.Document;
 
-import com.wandrell.pattern.parser.xml.input.JDOMDocumentDecoder;
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.input.StAXInputParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.test.integration.parser.AbstractITReadInputParser;
@@ -42,16 +42,16 @@ public final class ITReadStAXInputParser extends
         AbstractITReadInputParser<Integer> {
 
     /**
-     * Generates the document processor for the test parser.
+     * Returns a placeholder {@code Document} {@code Parser}.
      * 
-     * @return the test document processor
+     * @return a placeholder {@code Document} {@code Parser}
      */
-    private static final JDOMDocumentDecoder<Integer>
+    private final static Parser<Document, Integer>
             getJDOMDocumentProcessorInteger() {
-        return new JDOMDocumentDecoder<Integer>() {
+        return new Parser<Document, Integer>() {
 
             @Override
-            public final Integer decode(final Document doc) {
+            public final Integer parse(final Document doc) {
                 final Integer value;
 
                 value = Integer.parseInt(doc.getRootElement().getChildText(

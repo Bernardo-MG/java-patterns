@@ -30,8 +30,8 @@ import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.InputParser;
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.JDOMDocumentDecoder;
 import com.wandrell.pattern.parser.xml.input.SAXInputParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
@@ -76,16 +76,15 @@ public final class ITExceptionNoValidatesXSDSAXInputParser {
     }
 
     /**
-     * Generates the document processor for the test parser.
+     * Returns a placeholder {@code Document} {@code Parser}.
      * 
-     * @return the test document processor
+     * @return a placeholder {@code Document} {@code Parser}
      */
-    private final JDOMDocumentDecoder<Integer>
-            getJDOMDocumentProcessorInteger() {
-        return new JDOMDocumentDecoder<Integer>() {
+    private final Parser<Document, Integer> getJDOMDocumentProcessorInteger() {
+        return new Parser<Document, Integer>() {
 
             @Override
-            public final Integer decode(final Document doc) {
+            public final Integer parse(final Document doc) {
                 final Integer value;
 
                 value = Integer.parseInt(doc.getRootElement().getChildText(

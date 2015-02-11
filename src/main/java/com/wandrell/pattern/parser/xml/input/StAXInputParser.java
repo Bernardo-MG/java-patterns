@@ -23,8 +23,6 @@
  */
 package com.wandrell.pattern.parser.xml.input;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,10 +33,11 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.StAXStreamBuilder;
 
-import com.wandrell.pattern.parser.InputParser;
+import com.wandrell.pattern.parser.Parser;
 
 /**
  * Implementation of {link InputParser} parsing an XML file using the StAX API,
@@ -55,54 +54,28 @@ import com.wandrell.pattern.parser.InputParser;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class StAXInputParser<V> implements InputParser<V> {
+public final class StAXInputParser<V> extends AbstractJDOMInputParser<V> {
 
     /**
      * The text format accepted when transforming the {@code InputStream} into a
      * {@code Reader}.
      */
-    private static final String          FORMAT = "UTF-8";
+    private static final String FORMAT = "UTF-8";
     /**
      * Builder to transform the input into a {@code Document}.
      * <p>
      * It is lazily instantiated.
      */
-    private StAXStreamBuilder            builder;
-    /**
-     * The module which will parse the generated {@code Document}.
-     */
-    private final JDOMDocumentDecoder<V> documentDecoder;
+    private StAXStreamBuilder   builder;
 
     /**
      * Constructs a parser with the specified processor.
      * 
-     * @param decoder
-     *            the decoder for parsing the created {@code Document}
+     * @param docParser
+     *            the parser for the created {@code Document}
      */
-    public StAXInputParser(final JDOMDocumentDecoder<V> decoder) {
-        super();
-
-        checkNotNull(decoder, "Received a null pointer as document decoder");
-
-        documentDecoder = decoder;
-    }
-
-    @Override
-    public final V read(final InputStream stream) throws JDOMException,
-            IOException {
-        checkNotNull(stream, "Received a null pointer as input stream");
-
-        return read(new BufferedReader(new InputStreamReader(stream,
-                getFormat())));
-    }
-
-    @Override
-    public final V read(final Reader reader) throws JDOMException, IOException {
-
-        checkNotNull(reader, "Received a null pointer as reader");
-
-        return getDocumentDecoder().decode(
-                getBuilder().build(getXMLReader(reader)));
+    public StAXInputParser(final Parser<Document, V> docParser) {
+        super(docParser);
     }
 
     /**
@@ -119,15 +92,6 @@ public final class StAXInputParser<V> implements InputParser<V> {
         }
 
         return builder;
-    }
-
-    /**
-     * Returns the module in charge of reading the {@code Document}.
-     * 
-     * @return the module in charge of reading the {@code Document}
-     */
-    private final JDOMDocumentDecoder<V> getDocumentDecoder() {
-        return documentDecoder;
     }
 
     /**
@@ -154,15 +118,32 @@ public final class StAXInputParser<V> implements InputParser<V> {
         final XMLInputFactory factory;     // Factory to create the reader
         final XMLStreamReader staxReader;  // Resulting reader
 
-        factory = XMLInputFactory.newInstance();
+        if (!(reader instanceof XMLStreamReader)) {
+            factory = XMLInputFactory.newInstance();
 
-        try {
-            staxReader = factory.createXMLStreamReader(reader);
-        } catch (final XMLStreamException e) {
-            throw new RuntimeException(e);
+            try {
+                staxReader = factory.createXMLStreamReader(reader);
+            } catch (final XMLStreamException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            staxReader = (XMLStreamReader) reader;
         }
 
         return staxReader;
+    }
+
+    @Override
+    protected final Document getDocument(final InputStream stream)
+            throws JDOMException, IOException {
+        return getDocument(new BufferedReader(new InputStreamReader(stream,
+                getFormat())));
+    }
+
+    @Override
+    protected final Document getDocument(final Reader reader)
+            throws JDOMException, IOException {
+        return getBuilder().build(getXMLReader(reader));
     }
 
 }

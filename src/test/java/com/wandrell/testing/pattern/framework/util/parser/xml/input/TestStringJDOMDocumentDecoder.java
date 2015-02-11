@@ -7,17 +7,17 @@ import java.util.LinkedList;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
-import com.wandrell.pattern.parser.xml.input.JDOMDocumentDecoder;
+import com.wandrell.pattern.parser.Parser;
 
 public final class TestStringJDOMDocumentDecoder implements
-        JDOMDocumentDecoder<Collection<Collection<Object>>> {
+        Parser<Document, Collection<Collection<Object>>> {
 
     public TestStringJDOMDocumentDecoder() {
         super();
     }
 
     @Override
-    public final Collection<Collection<Object>> decode(final Document doc) {
+    public final Collection<Collection<Object>> parse(final Document doc) {
         final Element root;
         final Collection<Collection<Object>> result;
         Collection<Object> entry;

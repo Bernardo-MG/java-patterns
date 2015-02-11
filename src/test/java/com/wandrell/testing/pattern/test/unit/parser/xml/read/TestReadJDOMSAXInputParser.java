@@ -36,7 +36,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.parser.InputParser;
-import com.wandrell.pattern.parser.xml.input.JDOMDocumentDecoder;
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.input.SAXInputParser;
 
 /**
@@ -78,20 +78,20 @@ public final class TestReadJDOMSAXInputParser {
     @SuppressWarnings("unchecked")
     @BeforeTest
     public final void initialize() {
-        final JDOMDocumentDecoder<Object> processor;// Mocked processor
+        final Parser<Document, Object> parserDoc;// Mocked processor
         final Integer value;    // Returned value
 
         value = 1;
 
-        processor = Mockito.mock(JDOMDocumentDecoder.class);
+        parserDoc = Mockito.mock(Parser.class);
 
-        Mockito.doReturn(value).when(processor)
-                .decode(Matchers.any(Document.class));
+        Mockito.doReturn(value).when(parserDoc)
+                .parse(Matchers.any(Document.class));
 
-        Mockito.when(processor.decode(Matchers.any(Document.class)))
-                .thenReturn(1);
+        Mockito.when(parserDoc.parse(Matchers.any(Document.class))).thenReturn(
+                1);
 
-        parser = new SAXInputParser<>(processor);
+        parser = new SAXInputParser<>(parserDoc);
     }
 
     /**

@@ -36,6 +36,7 @@ import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.IOUtils;
+import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.input.sax.XMLReaderJDOMFactory;
@@ -44,6 +45,7 @@ import org.jdom2.input.sax.XMLReaders;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
@@ -62,43 +64,36 @@ import com.wandrell.pattern.parser.xml.XMLValidationType;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class SAXInputParser<V> implements XMLValidatedInputParser<V> {
+public final class SAXInputParser<V> extends AbstractJDOMInputParser<V>
+        implements XMLValidatedInputParser<V> {
 
     /**
      * The text format accepted for the validation files.
      */
-    private static final String          ENCODING = "UTF-8";
+    private static final String ENCODING = "UTF-8";
     /**
      * Builder to transform the input into a {@code Document}.
      * <p>
      * It is lazily instantiated.
      */
-    private SAXBuilder                   builder;
-    /**
-     * The module which will parse the generated {@code Document}.
-     */
-    private final JDOMDocumentDecoder<V> documentDecoder;
+    private SAXBuilder          builder;
     /**
      * Stream to the validation file.
      */
-    private InputStream                  streamValidation;
+    private InputStream         streamValidation;
     /**
      * The type of validation being used.
      */
-    private XMLValidationType            validationType;
+    private XMLValidationType   validationType;
 
     /**
      * Constructs a parser with the specified processor and no validation.
      * 
-     * @param decoder
-     *            the processor for parsing the created {@code Document}
+     * @param docParser
+     *            the parser for the created {@code Document}
      */
-    public SAXInputParser(final JDOMDocumentDecoder<V> decoder) {
-        super();
-
-        checkNotNull(decoder, "Received a null pointer as document decoder");
-
-        documentDecoder = decoder;
+    public SAXInputParser(final Parser<Document, V> docParser) {
+        super(docParser);
 
         validationType = XMLValidationType.NONE;
     }
@@ -110,15 +105,14 @@ public final class SAXInputParser<V> implements XMLValidatedInputParser<V> {
      *            the validation type to use
      * @param validationStream
      *            stream for the validation file
-     * @param decoder
-     *            the processor for parsing the created {@code Document}
+     * @param docParser
+     *            the parser for the created {@code Document}
      */
     public SAXInputParser(final XMLValidationType validation,
             final InputStream validationStream,
-            final JDOMDocumentDecoder<V> decoder) {
-        super();
+            final Parser<Document, V> docParser) {
+        super(docParser);
 
-        checkNotNull(decoder, "Received a null pointer as document processor");
         checkNotNull(validation, "Received a null pointer as validation type");
         checkNotNull(validationStream,
                 "Received a null pointer as validation file stream");
@@ -126,8 +120,6 @@ public final class SAXInputParser<V> implements XMLValidatedInputParser<V> {
         validationType = validation;
 
         streamValidation = validationStream;
-
-        documentDecoder = decoder;
     }
 
     /**
@@ -138,43 +130,6 @@ public final class SAXInputParser<V> implements XMLValidatedInputParser<V> {
     @Override
     public final XMLValidationType getValidationType() {
         return validationType;
-    }
-
-    /**
-     * Parses an object from an {@code InputStream}.
-     * 
-     * @param stream
-     *            {@code InputStream} with the data to be parsed
-     * @return an object parsed from the stream
-     * @throws JDOMException
-     *             when errors occur in parsing
-     * @throws IOException
-     *             when an I/O error prevents a document from being fully parsed
-     */
-    @Override
-    public final V read(final InputStream stream) throws JDOMException,
-            IOException {
-        checkNotNull(stream, "Received a null pointer as input stream");
-
-        return getDocumentDecoder().decode(getBuilder().build(stream));
-    }
-
-    /**
-     * Parses an object from a {@code Reader}.
-     * 
-     * @param reader
-     *            {@code Reader} with the data to be parsed
-     * @return an object parsed from the stream
-     * @throws JDOMException
-     *             when errors occur in parsing
-     * @throws IOException
-     *             when an I/O error prevents a document from being fully parsed
-     */
-    @Override
-    public final V read(final Reader reader) throws JDOMException, IOException {
-        checkNotNull(reader, "Received a null pointer as reader");
-
-        return getDocumentDecoder().decode(getBuilder().build(reader));
     }
 
     @Override
@@ -214,15 +169,6 @@ public final class SAXInputParser<V> implements XMLValidatedInputParser<V> {
         }
 
         return builder;
-    }
-
-    /**
-     * Returns the module in charge of parsing the {@code Document}.
-     * 
-     * @return the module in charge of parsing the {@code Document}
-     */
-    private final JDOMDocumentDecoder<V> getDocumentDecoder() {
-        return documentDecoder;
     }
 
     /**
@@ -318,6 +264,18 @@ public final class SAXInputParser<V> implements XMLValidatedInputParser<V> {
         }
 
         return factoryValidation;
+    }
+
+    @Override
+    protected final Document getDocument(final InputStream stream)
+            throws JDOMException, IOException {
+        return getBuilder().build(stream);
+    }
+
+    @Override
+    protected final Document getDocument(final Reader reader)
+            throws JDOMException, IOException {
+        return getBuilder().build(reader);
     }
 
 }

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2014 the original author or authors.
+ * Copyright (c) 2015 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,33 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.parser.xml.input;
-
-import org.jdom2.Document;
+package com.wandrell.pattern.parser;
 
 /**
- * Interface parsing a {@link Document} into a value.
+ * Interface for the parser pattern.
  * <p>
- * This way the XML input parsers just have to build a {@link Document}, and
- * then the actual parsing process is encapsulated on a module implementing this
- * interface.
+ * This pattern allows to transform one object into another, being one of them
+ * usually a data structure, and the other an instance of a concrete type.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @param <V>
- *            the type to be parsed from the {@code Document}
- * @see SAXInputParser
- * @see StAXInputParser
+ * @param <I>
+ *            the input type
+ * @param <O>
+ *            the output type
  */
-public interface JDOMDocumentDecoder<V> {
+public interface Parser<I, O> {
 
     /**
-     * Parses a value from a {@code Document}.
+     * Parses the input into an instance of the output type.
      * 
-     * @param doc
-     *            the {@code Document} to parse
-     * @return the value created from parsing the {@code Document}
+     * @param input
+     *            object to parse
+     * @return the input parsed into a new object
      */
-    public V decode(final Document doc);
+    public O parse(final I input);
 
 }

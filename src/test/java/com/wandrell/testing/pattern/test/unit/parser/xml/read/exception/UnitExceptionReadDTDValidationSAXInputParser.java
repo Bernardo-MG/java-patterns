@@ -27,8 +27,8 @@ import org.jdom2.Document;
 
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.InputParser;
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.JDOMDocumentDecoder;
 import com.wandrell.pattern.parser.xml.input.SAXInputParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.test.unit.parser.xml.read.exception.AbstractUnitExceptionReadXMLInputParser;
@@ -64,12 +64,12 @@ public final class UnitExceptionReadDTDValidationSAXInputParser extends
      * 
      * @return the test document processor
      */
-    private static final JDOMDocumentDecoder<Integer>
+    private static final Parser<Document, Integer>
             getJDOMDocumentProcessorInteger() {
-        return new JDOMDocumentDecoder<Integer>() {
+        return new Parser<Document, Integer>() {
 
             @Override
-            public final Integer decode(final Document doc) {
+            public final Integer parse(final Document doc) {
                 final Integer value;
 
                 value = Integer.parseInt(doc.getRootElement().getChildText(

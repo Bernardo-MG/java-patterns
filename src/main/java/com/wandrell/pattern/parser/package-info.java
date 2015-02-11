@@ -22,14 +22,17 @@
  * SOFTWARE.
  */
 /**
- * Provides a collection of data parsers for I/O operations.
+ * Provides a collection parsers.
  * <p>
- * This is done through the {@link InputParser} and {@link OutputParser}
- * interfaces, which serve to hide the actual API being used.
+ * The parser patterns offers a way to transform one structure into another,
+ * usually an object into a data structure, or the other way around.
  * <p>
- * As the names implies, instances of {@code InputParser} create a value from IO
- * classes, while instances of {@code OutputParser} send a value through IO
- * classes.
+ * This way the actual process of transformation is hidden, all that it is
+ * needed to use is an adequate instance of the parser.
+ * <p>
+ * Currently, the parsers offered use I/O structures for one of the sides of the
+ * operation. These parsers are {@link InputParser} and {@link OutputParser}
+ * interfaces.
  */
 package com.wandrell.pattern.parser;
 

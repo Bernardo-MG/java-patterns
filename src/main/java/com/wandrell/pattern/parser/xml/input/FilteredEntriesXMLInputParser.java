@@ -41,6 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.MoreObjects;
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
@@ -90,9 +91,10 @@ public final class FilteredEntriesXMLInputParser<V> extends
      */
     private final SAXInputParser<Document> baseParser;
     /**
-     * The processor in charge of parsing the filtered nodes.
+     * The parser to transform the generated {@code Document} into the returned
+     * value.
      */
-    private final JDOMDocumentDecoder<V>   documentDecoder;
+    private final Parser<Document, V>      documentParser;
     /**
      * The XPath expression as a string.
      */
@@ -126,27 +128,27 @@ public final class FilteredEntriesXMLInputParser<V> extends
      * 
      * @param node
      *            the name of the nodes to filter
-     * @param decoder
-     *            the processor for parsing the created {@code Document}
+     * @param docParser
+     *            the parser for the created {@code Document}
      */
     public FilteredEntriesXMLInputParser(final String node,
-            final JDOMDocumentDecoder<V> decoder) {
+            final Parser<Document, V> docParser) {
         super();
 
         checkNotNull(node, "Received a null pointer as node");
-        checkNotNull(decoder, "Received a null pointer as decoder");
+        checkNotNull(docParser, "Received a null pointer as document parser");
 
         nodeName = node;
 
-        this.documentDecoder = decoder;
+        documentParser = docParser;
 
         // The parser receives a processor which just returns the generated
         // document
         baseParser = new SAXInputParser<Document>(
-                new JDOMDocumentDecoder<Document>() {
+                new Parser<Document, Document>() {
 
                     @Override
-                    public final Document decode(final Document doc) {
+                    public final Document parse(final Document doc) {
                         return doc;
                     }
 
@@ -163,28 +165,28 @@ public final class FilteredEntriesXMLInputParser<V> extends
      *            the validation file stream
      * @param node
      *            the name of the nodes to filter
-     * @param decoder
-     *            the decoder for parsing the {@code Document}
+     * @param docParser
+     *            the parser for the created {@code Document}
      */
     public FilteredEntriesXMLInputParser(final XMLValidationType validation,
             final InputStream validationStream, final String node,
-            final JDOMDocumentDecoder<V> decoder) {
+            final Parser<Document, V> docParser) {
         super();
 
         checkNotNull(node, "Received a null pointer as node");
-        checkNotNull(decoder, "Received a null pointer as processor");
+        checkNotNull(docParser, "Received a null pointer as document parser");
 
         nodeName = node;
 
-        this.documentDecoder = decoder;
+        documentParser = docParser;
 
         // The parser receives a processor which just returns the generated
         // document
         baseParser = new SAXInputParser<Document>(validation, validationStream,
-                new JDOMDocumentDecoder<Document>() {
+                new Parser<Document, Document>() {
 
                     @Override
-                    public final Document decode(final Document doc) {
+                    public final Document parse(final Document doc) {
                         return doc;
                     }
 
@@ -212,8 +214,7 @@ public final class FilteredEntriesXMLInputParser<V> extends
             IOException {
         checkNotNull(stream, "Received a null pointer as input stream");
 
-        return getDocumentDecoder()
-                .decode(filter(getBaseParser().read(stream)));
+        return getDocumentParser().parse(filter(getBaseParser().read(stream)));
     }
 
     /**
@@ -231,8 +232,7 @@ public final class FilteredEntriesXMLInputParser<V> extends
     public final V read(final Reader reader) throws JDOMException, IOException {
         checkNotNull(reader, "Received a null pointer as reader");
 
-        return getDocumentDecoder()
-                .decode(filter(getBaseParser().read(reader)));
+        return getDocumentParser().parse(filter(getBaseParser().read(reader)));
     }
 
     @Override
@@ -327,12 +327,13 @@ public final class FilteredEntriesXMLInputParser<V> extends
     }
 
     /**
-     * Returns the module in charge of parsing the {@code Document}.
+     * Returns the parser which transforms the generated {@code Document} into
+     * the returned value.
      * 
-     * @return the module in charge of parsing the {@code Document}
+     * @return the parser for the {@code Document}
      */
-    private final JDOMDocumentDecoder<V> getDocumentDecoder() {
-        return documentDecoder;
+    private final Parser<Document, V> getDocumentParser() {
+        return documentParser;
     }
 
     /**
