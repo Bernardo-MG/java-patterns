@@ -56,7 +56,7 @@ public abstract class AbstractJDOMInputParser<V> implements InputParser<V> {
     private final Parser<Document, V> documentParser;
 
     /**
-     * Constructs a parser with the specified processor and no validation.
+     * Constructs a parser with the specified parser.
      * 
      * @param docParser
      *            the parser for the created {@code Document}

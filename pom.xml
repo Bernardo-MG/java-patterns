@@ -96,6 +96,7 @@
 		<jdom.version>2.0.5</jdom.version>
 		<log4j.version>1.2.17</log4j.version>
 		<mockito.version>1.9.5</mockito.version>
+		<opencsv.version>2.3</opencsv.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<testng.version>6.8.8</testng.version>
 		<xmlunit.version>1.5</xmlunit.version>
@@ -158,6 +159,12 @@
 			<artifactId>mockito-all</artifactId>
 			<version>${mockito.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<!-- OpenCSV -->
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>${opencsv.version}</version>
 		</dependency>
 		<dependency>
 			<!-- SLF4J API -->
