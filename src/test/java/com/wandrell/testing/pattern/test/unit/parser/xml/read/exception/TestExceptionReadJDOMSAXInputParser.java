@@ -23,19 +23,18 @@
  */
 package com.wandrell.testing.pattern.test.unit.parser.xml.read.exception;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.apache.commons.io.IOUtils;
 import org.jdom2.Document;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.parser.InputParser;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.SAXInputParser;
+import com.wandrell.pattern.parser.xml.input.SAXParser;
 
 /**
  * Unit tests for {@link SAXInputParser}, checking that a
@@ -44,8 +43,6 @@ import com.wandrell.pattern.parser.xml.input.SAXInputParser;
  * <p>
  * Checks the following cases:
  * <ol>
- * <li>When reading an {@code InputStream} for a file which is not an XML file a
- * {@code Exception} is thrown</li>
  * <li>When reading a {@code Reader} for a file which is not an XML file a
  * {@code Exception} is thrown</li>
  * </ol>
@@ -59,7 +56,7 @@ public final class TestExceptionReadJDOMSAXInputParser {
     /**
      * Parser being tested.
      */
-    private InputParser<Object> parser;
+    private Parser<Reader, Document> parser;
 
     /**
      * Default constructor.
@@ -71,17 +68,9 @@ public final class TestExceptionReadJDOMSAXInputParser {
     /**
      * Creates the parser being tested before any test is run.
      */
-    @SuppressWarnings("unchecked")
     @BeforeTest
     public final void initialize() {
-        final Parser<Document, Object> parserDoc;// Mocked parser
-
-        parserDoc = Mockito.mock(Parser.class);
-
-        Mockito.when(parserDoc.parse(Matchers.any(Document.class))).thenReturn(
-                1);
-
-        parser = new SAXInputParser<>(parserDoc);
+        parser = new SAXParser();
     }
 
     /**
@@ -97,23 +86,7 @@ public final class TestExceptionReadJDOMSAXInputParser {
 
         stream = IOUtils.toInputStream("");
 
-        parser.read(new InputStreamReader(stream));
-    }
-
-    /**
-     * Tests that when reading a {@code Reader} for a file which is not an XML
-     * file a {@code Exception} is thrown.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test(expectedExceptions = Exception.class)
-    public final void testRead_Stream_Empty_Exception() throws Exception {
-        final InputStream stream;       // Stream to the invalid file
-
-        stream = IOUtils.toInputStream("");
-
-        parser.read(stream);
+        parser.parse(new BufferedReader(new InputStreamReader(stream)));
     }
 
 }

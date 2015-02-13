@@ -24,8 +24,11 @@
 package com.wandrell.pattern.parser.xml.input;
 
 import java.io.InputStream;
+import java.io.Reader;
 
-import com.wandrell.pattern.parser.InputParser;
+import org.jdom2.Document;
+
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
@@ -40,7 +43,7 @@ import com.wandrell.pattern.parser.xml.XMLValidationType;
  * @param <V>
  *            the type to be parsed from the input
  */
-public interface XMLValidatedInputParser<V> extends InputParser<V> {
+public interface XMLValidatedParser extends Parser<Reader, Document> {
 
     /**
      * Returns the validation type being used.

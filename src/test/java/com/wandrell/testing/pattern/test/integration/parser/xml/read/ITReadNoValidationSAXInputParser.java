@@ -23,13 +23,18 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml.read;
 
-import org.jdom2.Document;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
-import com.wandrell.pattern.parser.InputParser;
+import org.jdom2.Document;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.SAXInputParser;
+import com.wandrell.pattern.parser.xml.input.SAXParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
-import com.wandrell.testing.pattern.framework.test.integration.parser.AbstractITReadInputParser;
 
 /**
  * Integration tests for {@link SAXInputParser} implementing
@@ -39,30 +44,25 @@ import com.wandrell.testing.pattern.framework.test.integration.parser.AbstractIT
  * @version 0.1.0
  * @see SAXInputParser
  */
-public final class ITReadNoValidationSAXInputParser extends
-        AbstractITReadInputParser<Integer> {
+public final class ITReadNoValidationSAXInputParser {
 
     /**
-     * Generates the parser to be tested.
-     * 
-     * @return the parser to be tested
+     * Default constructor.
      */
-    private static final InputParser<Integer> buildParser() {
-        final InputParser<Integer> parser;
-
-        parser = new SAXInputParser<Integer>(getJDOMDocumentProcessorInteger());
-
-        return parser;
+    public ITReadNoValidationSAXInputParser() {
+        super();
     }
 
-    /**
-     * Returns a placeholder {@code Document} {@code Parser}.
-     * 
-     * @return a placeholder {@code Document} {@code Parser}
-     */
-    private final static Parser<Document, Integer>
-            getJDOMDocumentProcessorInteger() {
-        return new Parser<Document, Integer>() {
+    @Test
+    public final void testRead() throws Exception {
+        final Parser<Reader, Document> parserA;
+        final Parser<Document, Integer> parserB;
+        final Reader reader;
+        final Integer value;
+
+        parserA = new SAXParser();
+
+        parserB = new Parser<Document, Integer>() {
 
             @Override
             public final Integer parse(final Document doc) {
@@ -75,13 +75,12 @@ public final class ITReadNoValidationSAXInputParser extends
             }
 
         };
-    }
 
-    /**
-     * Default constructor.
-     */
-    public ITReadNoValidationSAXInputParser() {
-        super(buildParser(), XMLConf.INTEGER_READ, 1);
+        reader = new BufferedReader(new InputStreamReader(
+                ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ)));
+        value = parserB.parse(parserA.parse(reader));
+
+        Assert.assertEquals(value, (Integer) 1);
     }
 
 }

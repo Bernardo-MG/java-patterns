@@ -25,7 +25,6 @@ package com.wandrell.pattern.parser.xml.output;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 
@@ -140,12 +139,12 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
      *            {@code OutputStream} to receive the parsed object
      * @param value
      *            object to parse
-     * @throws IOException
+     * @throws Exception
      *             when there's any problem writing
      */
     @Override
     public final void write(final OutputStream stream, final V value)
-            throws IOException {
+            throws Exception {
         final Document doc;
 
         checkNotNull(stream, "Received a null pointer as output stream");
@@ -165,12 +164,12 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
      *            {@code Writer} to receive the parsed object
      * @param value
      *            object to parse
-     * @throws IOException
+     * @throws Exception
      *             when there's any problem writing
      */
     @Override
     public final void write(final Writer writer, final V value)
-            throws IOException {
+            throws Exception {
         final Document doc;
 
         checkNotNull(writer, "Received a null pointer as writer");

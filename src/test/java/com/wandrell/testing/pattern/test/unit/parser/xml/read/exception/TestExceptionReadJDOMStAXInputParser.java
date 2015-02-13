@@ -23,22 +23,19 @@
  */
 package com.wandrell.testing.pattern.test.unit.parser.xml.read.exception;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.apache.commons.io.IOUtils;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
-import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.parser.InputParser;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.SAXInputParser;
-import com.wandrell.pattern.parser.xml.input.StAXInputParser;
+import com.wandrell.pattern.parser.xml.input.SAXParser;
 
 /**
  * Unit tests for {@link StAXInputParser}, checking that a
@@ -47,8 +44,6 @@ import com.wandrell.pattern.parser.xml.input.StAXInputParser;
  * <p>
  * Checks the following cases:
  * <ol>
- * <li>When reading an {@code InputStream} for a file which is not an XML file a
- * {@code JDOMParseException} is thrown</li>
  * <li>When reading a {@code Reader} for a file which is not an XML file a
  * {@code JDOMParseException} is thrown</li>
  * </ol>
@@ -62,7 +57,7 @@ public final class TestExceptionReadJDOMStAXInputParser {
     /**
      * Parser being tested.
      */
-    private InputParser<Object> parser;
+    private Parser<Reader, Document> parser;
 
     public TestExceptionReadJDOMStAXInputParser() {
         super();
@@ -71,17 +66,9 @@ public final class TestExceptionReadJDOMStAXInputParser {
     /**
      * Creates the parser being tested before any test is run.
      */
-    @SuppressWarnings("unchecked")
     @BeforeTest
     public final void initialize() {
-        final Parser<Document, Object> parserDoc;// Mocked parser
-
-        parserDoc = Mockito.mock(Parser.class);
-
-        Mockito.when(parserDoc.parse(Matchers.any(Document.class))).thenReturn(
-                1);
-
-        parser = new SAXInputParser<>(parserDoc);
+        parser = new SAXParser();
     }
 
     /**
@@ -97,23 +84,7 @@ public final class TestExceptionReadJDOMStAXInputParser {
 
         stream = IOUtils.toInputStream("");
 
-        Assert.assertEquals(parser.read(new InputStreamReader(stream)), 1);
-    }
-
-    /**
-     * Tests that when reading a {@code Reader} for a file which is not an XML
-     * file a {@code JDOMParseException} is thrown.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test(expectedExceptions = JDOMException.class)
-    public final void testRead_Stream_Empty_Exception() throws Exception {
-        final InputStream stream;
-
-        stream = IOUtils.toInputStream("");
-
-        Assert.assertEquals(parser.read(stream), 1);
+        parser.parse(new BufferedReader(new InputStreamReader(stream)));
     }
 
 }

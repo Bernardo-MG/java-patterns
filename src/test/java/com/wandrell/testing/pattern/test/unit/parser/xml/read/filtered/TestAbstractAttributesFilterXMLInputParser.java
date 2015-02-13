@@ -26,16 +26,17 @@ package com.wandrell.testing.pattern.test.unit.parser.xml.read.filtered;
 import java.io.InputStream;
 import java.io.Reader;
 
+import org.jdom2.Document;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLInputParser;
+import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLParser;
 
 /**
- * Unit tests for {@link AbstractAttributesFilterXMLInputParser}.
+ * Unit tests for {@link AbstractAttributesFilterXMLParser}.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -53,20 +54,20 @@ import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLInputPar
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see AbstractAttributesFilterXMLInputParser
+ * @see AbstractAttributesFilterXMLParser
  */
 public final class TestAbstractAttributesFilterXMLInputParser {
 
     /**
      * Attribute being used for the tests.
      */
-    private static final String                             ATTRIBUTE = "attribute";
+    private static final String               ATTRIBUTE = "attribute";
     /**
      * Parser being tested.
      * <p>
      * It is created once for all the tests.
      */
-    private AbstractAttributesFilterXMLInputParser<Integer> parser;
+    private AbstractAttributesFilterXMLParser parser;
 
     /**
      * Default constructor.
@@ -89,7 +90,7 @@ public final class TestAbstractAttributesFilterXMLInputParser {
      */
     @BeforeTest
     public final void initialize() {
-        parser = new AbstractAttributesFilterXMLInputParser<Integer>() {
+        parser = new AbstractAttributesFilterXMLParser() {
 
             @Override
             public final XMLValidationType getValidationType() {
@@ -97,14 +98,8 @@ public final class TestAbstractAttributesFilterXMLInputParser {
             }
 
             @Override
-            public final Integer read(final InputStream stream)
-                    throws Exception {
-                return 0;
-            }
-
-            @Override
-            public final Integer read(final Reader reader) throws Exception {
-                return 0;
+            public final Document parse(final Reader reader) throws Exception {
+                return new Document();
             }
 
             @Override

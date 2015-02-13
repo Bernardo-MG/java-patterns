@@ -23,16 +23,19 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml.read.exception;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
 import org.jdom2.Document;
 import org.jdom2.input.JDOMParseException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
-import com.wandrell.pattern.parser.InputParser;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.SAXInputParser;
+import com.wandrell.pattern.parser.xml.input.SAXParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
@@ -53,7 +56,7 @@ public final class ITExceptionNoValidatesDTDSAXInputParser {
     /**
      * Parser to test
      */
-    private InputParser<Integer> parser;
+    private Parser<Reader, Document> parser;
 
     /**
      * Default constructor.
@@ -71,29 +74,8 @@ public final class ITExceptionNoValidatesDTDSAXInputParser {
      */
     @Test(expectedExceptions = JDOMParseException.class)
     public final void testRead_NotValidates_ThrowsException() throws Exception {
-        parser.read(ResourceUtils
-                .getClassPathInputStream(XMLConf.INTEGER_NO_VALIDATES));
-    }
-
-    /**
-     * Returns a test {@code Document} {@code Parser}.
-     * 
-     * @return a test {@code Document} {@code Parser}
-     */
-    private final Parser<Document, Integer> getJDOMDocumentProcessorInteger() {
-        return new Parser<Document, Integer>() {
-
-            @Override
-            public final Integer parse(final Document doc) {
-                final Integer value;
-
-                value = Integer.parseInt(doc.getRootElement().getChildText(
-                        XMLConf.NODE_VALUE));
-
-                return value;
-            }
-
-        };
+        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
+                .getClassPathInputStream(XMLConf.INTEGER_NO_VALIDATES))));
     }
 
     /**
@@ -101,9 +83,8 @@ public final class ITExceptionNoValidatesDTDSAXInputParser {
      */
     @BeforeClass
     private final void initialize() {
-        parser = new SAXInputParser<Integer>(XMLValidationType.DTD,
-                ResourceUtils.getClassPathInputStream(XMLConf.DTD_VALIDATION),
-                getJDOMDocumentProcessorInteger());
+        parser = new SAXParser(XMLValidationType.DTD,
+                ResourceUtils.getClassPathInputStream(XMLConf.DTD_VALIDATION));
     }
 
 }

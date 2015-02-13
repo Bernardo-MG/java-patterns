@@ -26,14 +26,12 @@ package com.wandrell.pattern.parser.xml.input;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.Collection;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
@@ -41,7 +39,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.MoreObjects;
-import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
@@ -72,14 +69,14 @@ import com.wandrell.pattern.parser.xml.XMLValidationType;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class FilteredEntriesXMLInputParser<V> extends
-        AbstractAttributesFilterXMLInputParser<V> {
+public final class FilteredEntriesXMLInputParser extends
+        AbstractAttributesFilterXMLParser {
 
     /**
      * Logger being used to log the generated XPath expression.
      */
-    private static final Logger            LOGGER = LoggerFactory
-                                                          .getLogger(FilteredEntriesXMLInputParser.class);
+    private static final Logger      LOGGER = LoggerFactory
+                                                    .getLogger(FilteredEntriesXMLInputParser.class);
     /**
      * Base parser handling the creation of the {@code Document}.
      * <p>
@@ -89,27 +86,22 @@ public final class FilteredEntriesXMLInputParser<V> extends
      * The parser is based on the SAX API, allowing to use validation, which is
      * required if default attribute values are to be used.
      */
-    private final SAXInputParser<Document> baseParser;
-    /**
-     * The parser to transform the generated {@code Document} into the returned
-     * value.
-     */
-    private final Parser<Document, V>      documentParser;
+    private final SAXParser          baseParser;
     /**
      * The XPath expression as a string.
      */
-    private String                         expression;
+    private String                   expression;
     /**
      * The name of the nodes to filter.
      * <p>
      * All the nodes with this name will be acquires with an XPath query to be
      * filtered.
      */
-    private final String                   nodeName;
+    private final String             nodeName;
     /**
      * The XPath expression.
      */
-    private XPathExpression<Element>       xpath;
+    private XPathExpression<Element> xpath;
 
     /**
      * Returns the logger being used by this class.
@@ -128,31 +120,15 @@ public final class FilteredEntriesXMLInputParser<V> extends
      * 
      * @param node
      *            the name of the nodes to filter
-     * @param docParser
-     *            the parser for the created {@code Document}
      */
-    public FilteredEntriesXMLInputParser(final String node,
-            final Parser<Document, V> docParser) {
+    public FilteredEntriesXMLInputParser(final String node) {
         super();
 
         checkNotNull(node, "Received a null pointer as node");
-        checkNotNull(docParser, "Received a null pointer as document parser");
 
         nodeName = node;
 
-        documentParser = docParser;
-
-        // The parser receives a processor which just returns the generated
-        // document
-        baseParser = new SAXInputParser<Document>(
-                new Parser<Document, Document>() {
-
-                    @Override
-                    public final Document parse(final Document doc) {
-                        return doc;
-                    }
-
-                });
+        baseParser = new SAXParser();
     }
 
     /**
@@ -165,32 +141,16 @@ public final class FilteredEntriesXMLInputParser<V> extends
      *            the validation file stream
      * @param node
      *            the name of the nodes to filter
-     * @param docParser
-     *            the parser for the created {@code Document}
      */
     public FilteredEntriesXMLInputParser(final XMLValidationType validation,
-            final InputStream validationStream, final String node,
-            final Parser<Document, V> docParser) {
+            final InputStream validationStream, final String node) {
         super();
 
         checkNotNull(node, "Received a null pointer as node");
-        checkNotNull(docParser, "Received a null pointer as document parser");
 
         nodeName = node;
 
-        documentParser = docParser;
-
-        // The parser receives a processor which just returns the generated
-        // document
-        baseParser = new SAXInputParser<Document>(validation, validationStream,
-                new Parser<Document, Document>() {
-
-                    @Override
-                    public final Document parse(final Document doc) {
-                        return doc;
-                    }
-
-                });
+        baseParser = new SAXParser(validation, validationStream);
     }
 
     @Override
@@ -198,41 +158,9 @@ public final class FilteredEntriesXMLInputParser<V> extends
         return getBaseParser().getValidationType();
     }
 
-    /**
-     * Parses an object from an {@code InputStream}.
-     * 
-     * @param stream
-     *            {@code InputStream} with the data to be parsed
-     * @return an object parsed from the stream
-     * @throws JDOMException
-     *             when errors occur in parsing
-     * @throws IOException
-     *             when an I/O error prevents a document from being fully parsed
-     */
     @Override
-    public final V read(final InputStream stream) throws JDOMException,
-            IOException {
-        checkNotNull(stream, "Received a null pointer as input stream");
-
-        return getDocumentParser().parse(filter(getBaseParser().read(stream)));
-    }
-
-    /**
-     * Parses an object from a {@code Reader}.
-     * 
-     * @param reader
-     *            {@code Reader} with the data to be parsed
-     * @return an object parsed from the stream
-     * @throws JDOMException
-     *             when errors occur in parsing
-     * @throws IOException
-     *             when an I/O error prevents a document from being fully parsed
-     */
-    @Override
-    public final V read(final Reader reader) throws JDOMException, IOException {
-        checkNotNull(reader, "Received a null pointer as reader");
-
-        return getDocumentParser().parse(filter(getBaseParser().read(reader)));
+    public final Document parse(final Reader input) throws Exception {
+        return filter(getBaseParser().parse(input));
     }
 
     @Override
@@ -322,18 +250,8 @@ public final class FilteredEntriesXMLInputParser<V> extends
      * 
      * @return the base parser
      */
-    private final SAXInputParser<Document> getBaseParser() {
+    private final XMLValidatedParser getBaseParser() {
         return baseParser;
-    }
-
-    /**
-     * Returns the parser which transforms the generated {@code Document} into
-     * the returned value.
-     * 
-     * @return the parser for the {@code Document}
-     */
-    private final Parser<Document, V> getDocumentParser() {
-        return documentParser;
     }
 
     /**

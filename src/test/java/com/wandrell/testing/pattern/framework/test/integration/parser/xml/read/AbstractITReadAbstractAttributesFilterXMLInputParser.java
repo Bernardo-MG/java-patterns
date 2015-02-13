@@ -26,46 +26,43 @@ package com.wandrell.testing.pattern.framework.test.integration.parser.xml.read;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import org.jdom2.Document;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
-import com.wandrell.pattern.parser.InputParser;
-import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLInputParser;
+import com.wandrell.pattern.parser.Parser;
+import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
- * Abstract integration tests for {@link AbstractAttributesFilterXMLInputParser}
- * .
+ * Abstract integration tests for {@link AbstractAttributesFilterXMLParser} .
  * <p>
  * Checks the following cases:
  * <ol>
  * <li>The returned entries change after changing the filtered attributes when
- * using an {@code InputStream} or a {@code Reader}.</li>
- * <li>Applying no filter returns all the entries when using an
- * {@code InputStream} or a {@code Reader}.</li>
- * <li>Rejecting a not existing attribute returns no entries when using an
- * {@code InputStream} or a {@code Reader}.</li>
- * <li>Requiring a not existing attribute returns no entries when using an
- * {@code InputStream} or a {@code Reader}.</li>
- * <li>Requiring and rejecting the same attribute returns no entries when using
- * an {@code InputStream} or a {@code Reader}.</li>
- * <li>Rejecting the attribute 1 returns the correct amount of entries when
- * using an {@code InputStream} or a {@code Reader}.</li>
- * <li>Rejecting the attribute 1 and 2 returns the correct amount of entries
- * when using an {@code InputStream} or a {@code Reader}.</li>
- * <li>Requiring the attribute 1 returns the correct amount of entries when
- * using an {@code InputStream} or a {@code Reader}.</li>
- * <li>Requiring the attribute 1 and 2 returns the correct amount of entries
- * when using an {@code InputStream} or a {@code Reader}.</li>
- * <li>Requiring the attribute 1 and rejecting the attribute 2 returns the
- * correct amount of entries when using an {@code InputStream} or a
+ * using a {@code Reader}.</li>
+ * <li>Applying no filter returns all the entries when using a {@code Reader}.</li>
+ * <li>Rejecting a not existing attribute returns no entries when using a
  * {@code Reader}.</li>
+ * <li>Requiring a not existing attribute returns no entries when using a
+ * {@code Reader}.</li>
+ * <li>Requiring and rejecting the same attribute returns no entries when using
+ * a {@code Reader}.</li>
+ * <li>Rejecting the attribute 1 returns the correct amount of entries when
+ * using a {@code Reader}.</li>
+ * <li>Rejecting the attribute 1 and 2 returns the correct amount of entries
+ * when using a {@code Reader}.</li>
+ * <li>Requiring the attribute 1 returns the correct amount of entries when
+ * using a {@code Reader}.</li>
+ * <li>Requiring the attribute 1 and 2 returns the correct amount of entries
+ * when using a {@code Reader}.</li>
+ * <li>Requiring the attribute 1 and rejecting the attribute 2 returns the
+ * correct amount of entries when using a {@code Reader}.</li>
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
@@ -78,52 +75,67 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
      * Amount of entries after filtering based on rejecting a not existing
      * attribute.
      */
-    private static final Integer                            NO_NOT_EXISTING               = 0;
+    private static final Integer                    NO_NOT_EXISTING               = 0;
     /**
      * Amount of entries after filtering based on rejecting and requiring the
      * same attribute.
      */
-    private static final Integer                            WITH_ATTRIBUTE1_NO_ATTRIBUTE1 = 0;
+    private static final Integer                    WITH_ATTRIBUTE1_NO_ATTRIBUTE1 = 0;
     /**
      * Amount of entries after filtering based on requiring a not existing
      * attribute.
      */
-    private static final Integer                            WITH_NOT_EXISTING             = 0;
+    private static final Integer                    WITH_NOT_EXISTING             = 0;
     /**
      * Amount of entries after filtering based on rejecting the attribute 1.
      */
-    private final Integer                                   noAttribute1;
+    private final Integer                           noAttribute1;
     /**
      * Amount of entries after filtering based on rejecting the attribute 1 and
      * the attribute 2.
      */
-    private final Integer                                   noAttribute1NoAttribute2;
+    private final Integer                           noAttribute1NoAttribute2;
     /**
      * Parser being tested.
      */
-    private final AbstractAttributesFilterXMLInputParser<V> parser;
+    private final AbstractAttributesFilterXMLParser parser;
+    /**
+     * Parser which counts the {@code Document} root nodes.
+     */
+    private final Parser<Document, Integer>         parserNodes;
     /**
      * Path to the test values file.
      */
-    private final String                                    path;
+    private final String                            path;
     /**
      * Amount of entries after applying no filter.
      */
-    private final Integer                                   total;
+    private final Integer                           total;
     /**
      * Amount of entries after filtering based on requiring the attribute 1.
      */
-    private final Integer                                   withAttribute1;
+    private final Integer                           withAttribute1;
     /**
      * Amount of entries after filtering based on requiring the attribute 1 and
      * rejecting the attribute 2.
      */
-    private final Integer                                   withAttribute1NoAttribute2;
+    private final Integer                           withAttribute1NoAttribute2;
     /**
      * Amount of entries after filtering based on requiring the attribute 1 and
      * the attribute 2.
      */
-    private final Integer                                   withAttribute1WithAttribute2;
+    private final Integer                           withAttribute1WithAttribute2;
+
+    {
+        parserNodes = new Parser<Document, Integer>() {
+
+            @Override
+            public Integer parse(final Document doc) {
+                return doc.getRootElement().getChildren().size();
+            }
+
+        };
+    }
 
     /**
      * Constructs the test with the specified counts.
@@ -147,10 +159,10 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
      *            total amount of entries
      */
     public AbstractITReadAbstractAttributesFilterXMLInputParser(
-            final AbstractAttributesFilterXMLInputParser<V> parser,
-            final String path, final Integer no1, final Integer no1no2,
-            final Integer with1, final Integer with1with2,
-            final Integer with1no2, final Integer total) {
+            final AbstractAttributesFilterXMLParser parser, final String path,
+            final Integer no1, final Integer no1no2, final Integer with1,
+            final Integer with1with2, final Integer with1no2,
+            final Integer total) {
         super();
 
         checkNotNull(parser, "Received a null pointer as parser");
@@ -184,202 +196,6 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
 
     /**
      * Tests that the returned entries change after changing the filtered
-     * attributes when using an {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_FilterChanges_Adapts() throws Exception {
-        InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        Assert.assertEquals(getParser().read(stream), total);
-
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-        Assert.assertEquals(getParser().read(stream),
-                WITH_ATTRIBUTE1_NO_ATTRIBUTE1);
-    }
-
-    /**
-     * Tests that applying no filter returns all the entries when using an
-     * {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_NoFilter_ReturnsAll() throws Exception {
-        final InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        Assert.assertEquals(getParser().read(stream), total);
-    }
-
-    /**
-     * Tests that rejecting the attribute 1 returns the correct amount of
-     * entries when using an {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_Rejects1_ReturnsPart() throws Exception {
-        final InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-
-        Assert.assertEquals(getParser().read(stream), noAttribute1);
-    }
-
-    /**
-     * Tests that rejecting the attribute 1 and 2 returns the correct amount of
-     * entries when using an {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_Rejects1And2_ReturnsPart()
-            throws Exception {
-        final InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
-
-        Assert.assertEquals(getParser().read(stream), noAttribute1NoAttribute2);
-    }
-
-    /**
-     * Tests that rejecting a not existing attribute returns no entries when
-     * using an {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_RejectsNotExisting_ReturnsNone()
-            throws Exception {
-        final InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_NOT_EXISTING);
-
-        Assert.assertEquals(getParser().read(stream), NO_NOT_EXISTING);
-    }
-
-    /**
-     * Tests that requiring the attribute 1 returns the correct amount of
-     * entries when using an {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_Requires1_ReturnsPart() throws Exception {
-        final InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-
-        Assert.assertEquals(getParser().read(stream), withAttribute1);
-    }
-
-    /**
-     * Tests that requiring the attribute 1 and 2 returns the correct amount of
-     * entries when using an {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_Requires1And2_ReturnsPart()
-            throws Exception {
-        final InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
-
-        Assert.assertEquals(getParser().read(stream),
-                withAttribute1WithAttribute2);
-    }
-
-    /**
-     * Tests that requiring and rejecting the same attribute returns no entries
-     * when using an {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_Requires1Rejects1_ReturnsNone()
-            throws Exception {
-        final InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-
-        Assert.assertEquals(getParser().read(stream),
-                WITH_ATTRIBUTE1_NO_ATTRIBUTE1);
-    }
-
-    /**
-     * Tests that requiring the attribute 1 and rejecting the attribute 2
-     * returns the correct amount of entries when using an {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_Requires1Rejects2_ReturnsPart()
-            throws Exception {
-        final InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
-
-        Assert.assertEquals(getParser().read(stream),
-                withAttribute1NoAttribute2);
-    }
-
-    /**
-     * Tests that requiring a not existing attribute returns no entries when
-     * using an {@code InputStream}.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
-     */
-    @Test
-    public final void testInputStream_RequiresNotExisting_ReturnsNone()
-            throws Exception {
-        final InputStream stream; // Stream for the test data
-
-        stream = ResourceUtils.getClassPathInputStream(getPath());
-
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_NOT_EXISTING);
-
-        Assert.assertEquals(getParser().read(stream), WITH_NOT_EXISTING);
-    }
-
-    /**
-     * Tests that the returned entries change after changing the filtered
      * attributes when using an {@code Reader}.
      * 
      * @throws Exception
@@ -392,14 +208,15 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
         r = new BufferedReader(new InputStreamReader(
                 ResourceUtils.getClassPathInputStream(getPath())));
 
-        Assert.assertEquals(getParser().read(r), total);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)), total);
 
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
 
         r = new BufferedReader(new InputStreamReader(
                 ResourceUtils.getClassPathInputStream(getPath())));
-        Assert.assertEquals(getParser().read(r), WITH_ATTRIBUTE1_NO_ATTRIBUTE1);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
+                WITH_ATTRIBUTE1_NO_ATTRIBUTE1);
     }
 
     /**
@@ -416,7 +233,7 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
         r = new BufferedReader(new InputStreamReader(
                 ResourceUtils.getClassPathInputStream(getPath())));
 
-        Assert.assertEquals(getParser().read(r), total);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)), total);
     }
 
     /**
@@ -435,7 +252,8 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
 
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
 
-        Assert.assertEquals(getParser().read(r), noAttribute1);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
+                noAttribute1);
     }
 
     /**
@@ -455,7 +273,8 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
 
-        Assert.assertEquals(getParser().read(r), noAttribute1NoAttribute2);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
+                noAttribute1NoAttribute2);
     }
 
     /**
@@ -475,7 +294,8 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
 
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_NOT_EXISTING);
 
-        Assert.assertEquals(getParser().read(r), NO_NOT_EXISTING);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
+                NO_NOT_EXISTING);
     }
 
     /**
@@ -494,7 +314,8 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
 
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
 
-        Assert.assertEquals(getParser().read(r), withAttribute1);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
+                withAttribute1);
     }
 
     /**
@@ -514,7 +335,8 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
 
-        Assert.assertEquals(getParser().read(r), withAttribute1WithAttribute2);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
+                withAttribute1WithAttribute2);
     }
 
     /**
@@ -535,7 +357,8 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
 
-        Assert.assertEquals(getParser().read(r), WITH_ATTRIBUTE1_NO_ATTRIBUTE1);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
+                WITH_ATTRIBUTE1_NO_ATTRIBUTE1);
     }
 
     /**
@@ -556,7 +379,8 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
 
-        Assert.assertEquals(getParser().read(r), withAttribute1NoAttribute2);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
+                withAttribute1NoAttribute2);
     }
 
     /**
@@ -576,7 +400,8 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
 
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_NOT_EXISTING);
 
-        Assert.assertEquals(getParser().read(r), WITH_NOT_EXISTING);
+        Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
+                WITH_NOT_EXISTING);
     }
 
     /**
@@ -584,7 +409,7 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
      * 
      * @return the parser being tested
      */
-    protected final AbstractAttributesFilterXMLInputParser<V> getParser() {
+    protected final AbstractAttributesFilterXMLParser getParser() {
         return parser;
     }
 

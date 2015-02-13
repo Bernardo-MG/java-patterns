@@ -45,11 +45,9 @@ import java.util.LinkedHashSet;
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @param <V>
- *            the type to be parsed from the input
  */
-public abstract class AbstractAttributesFilterXMLInputParser<V> implements
-        XMLValidatedInputParser<V> {
+public abstract class AbstractAttributesFilterXMLParser implements
+        XMLValidatedParser {
 
     /**
      * Attributes which should be set as {@code false}. Otherwise, the node will
@@ -71,7 +69,7 @@ public abstract class AbstractAttributesFilterXMLInputParser<V> implements
     /**
      * Default constructor.
      */
-    public AbstractAttributesFilterXMLInputParser() {
+    public AbstractAttributesFilterXMLParser() {
         super();
     }
 

@@ -23,10 +23,7 @@
  */
 package com.wandrell.pattern.parser.xml.input;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 
 import javax.xml.stream.XMLInputFactory;
@@ -54,28 +51,26 @@ import com.wandrell.pattern.parser.Parser;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class StAXInputParser<V> extends AbstractJDOMInputParser<V> {
+public final class StAXParser implements Parser<Reader, Document> {
 
-    /**
-     * The text format accepted when transforming the {@code InputStream} into a
-     * {@code Reader}.
-     */
-    private static final String FORMAT = "UTF-8";
     /**
      * Builder to transform the input into a {@code Document}.
      * <p>
      * It is lazily instantiated.
      */
-    private StAXStreamBuilder   builder;
+    private StAXStreamBuilder builder;
 
     /**
-     * Constructs a parser with the specified processor.
-     * 
-     * @param docParser
-     *            the parser for the created {@code Document}
+     * Constructs a parser.
      */
-    public StAXInputParser(final Parser<Document, V> docParser) {
-        super(docParser);
+    public StAXParser() {
+        super();
+    }
+
+    @Override
+    public final Document parse(final Reader input) throws JDOMException,
+            IOException {
+        return getBuilder().build(getXMLReader(input));
     }
 
     /**
@@ -92,16 +87,6 @@ public final class StAXInputParser<V> extends AbstractJDOMInputParser<V> {
         }
 
         return builder;
-    }
-
-    /**
-     * Returns the code for the charset when creating a {@code Reader} from an
-     * {@code InputParser}.
-     * 
-     * @return the text format used on the {@code InputParser}
-     */
-    private final String getFormat() {
-        return FORMAT;
     }
 
     /**
@@ -131,19 +116,6 @@ public final class StAXInputParser<V> extends AbstractJDOMInputParser<V> {
         }
 
         return staxReader;
-    }
-
-    @Override
-    protected final Document getDocument(final InputStream stream)
-            throws JDOMException, IOException {
-        return getDocument(new BufferedReader(new InputStreamReader(stream,
-                getFormat())));
-    }
-
-    @Override
-    protected final Document getDocument(final Reader reader)
-            throws JDOMException, IOException {
-        return getBuilder().build(getXMLReader(reader));
     }
 
 }

@@ -23,12 +23,18 @@
  */
 package com.wandrell.testing.pattern.framework.test.unit.parser.xml.read.exception;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PipedInputStream;
+import java.io.Reader;
+
 import org.apache.commons.io.IOUtils;
+import org.jdom2.Document;
 import org.jdom2.JDOMException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.parser.InputParser;
-import com.wandrell.testing.pattern.framework.test.unit.parser.AbstractTestExceptionReadInputParser;
+import com.wandrell.pattern.parser.Parser;
 
 /**
  * Abstract implementation of {@link AbstractTestExceptionReadInputParser} for
@@ -37,14 +43,16 @@ import com.wandrell.testing.pattern.framework.test.unit.parser.AbstractTestExcep
  * Adds the following cases:
  * <ol>
  * <li>A {@code JDOMException} is thrown when trying to parse a non XML file.</li>
+ * <li>An {@code Exception} is thrown when reading from a closed {@code Reader}.
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
  * @see InputParser
  */
-public abstract class AbstractUnitExceptionReadXMLInputParser<V> extends
-        AbstractTestExceptionReadInputParser<V> {
+public abstract class AbstractUnitExceptionReadXMLInputParser<V> {
+
+    private final Parser<Reader, Document> parser;
 
     /**
      * Constructs the test.
@@ -52,8 +60,11 @@ public abstract class AbstractUnitExceptionReadXMLInputParser<V> extends
      * @param parser
      *            parser to read
      */
-    public AbstractUnitExceptionReadXMLInputParser(final InputParser<V> parser) {
-        super(parser);
+    public AbstractUnitExceptionReadXMLInputParser(
+            final Parser<Reader, Document> parser) {
+        super();
+
+        this.parser = parser;
     }
 
     /**
@@ -64,7 +75,29 @@ public abstract class AbstractUnitExceptionReadXMLInputParser<V> extends
      */
     @Test(expectedExceptions = JDOMException.class)
     public final void testRead_NotXML_ThrowsException() throws Exception {
-        getParser().read(IOUtils.toInputStream(""));
+        parser.parse(new BufferedReader(new InputStreamReader(IOUtils
+                .toInputStream(""))));
+    }
+
+    /**
+     * Tests an {@code Exception} is thrown when reading from a closed
+     * {@code Reader}.
+     * 
+     * @throws Exception
+     *             always, as part of the test
+     */
+    @Test(expectedExceptions = Exception.class)
+    public final void testRead_Reader_Closed_ThrowsException() throws Exception {
+        Reader reader = null; // Stubbed reader
+
+        try {
+            reader = new InputStreamReader(new PipedInputStream());
+            reader.close();
+        } catch (final Exception e) {
+            Assert.fail(e.getMessage());
+        }
+
+        parser.parse(reader);
     }
 
 }

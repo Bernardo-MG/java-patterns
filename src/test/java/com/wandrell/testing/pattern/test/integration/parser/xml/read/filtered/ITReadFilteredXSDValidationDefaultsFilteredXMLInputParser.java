@@ -23,12 +23,9 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml.read.filtered;
 
-import org.jdom2.Document;
-
 import com.wandrell.pattern.ResourceUtils;
-import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLInputParser;
+import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLParser;
 import com.wandrell.pattern.parser.xml.input.FilteredEntriesXMLInputParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.test.integration.parser.xml.read.AbstractITReadAbstractAttributesFilterXMLInputParser;
@@ -53,36 +50,14 @@ public final class ITReadFilteredXSDValidationDefaultsFilteredXMLInputParser
      * 
      * @return the parser to be tested
      */
-    private static final AbstractAttributesFilterXMLInputParser<Integer>
-            buildParser() {
-        final AbstractAttributesFilterXMLInputParser<Integer> parser;
+    private static final AbstractAttributesFilterXMLParser buildParser() {
+        final AbstractAttributesFilterXMLParser parser;
 
-        parser = new FilteredEntriesXMLInputParser<Integer>(
+        parser = new FilteredEntriesXMLInputParser(
                 XMLValidationType.XSD,
                 ResourceUtils
                         .getClassPathInputStream(XMLConf.FILTERED_VALIDATION_XSD),
-                XMLConf.NODE_ROOT_FILTER, getNodesCountDocumentProcessor());
-
-        return parser;
-    }
-
-    /**
-     * Returns a placeholder {@code Document} {@code Parser}.
-     * 
-     * @return a placeholder {@code Document} {@code Parser}
-     */
-    private static final Parser<Document, Integer>
-            getNodesCountDocumentProcessor() {
-        final Parser<Document, Integer> parser;
-
-        parser = new Parser<Document, Integer>() {
-
-            @Override
-            public Integer parse(final Document doc) {
-                return doc.getRootElement().getChildren().size();
-            }
-
-        };
+                XMLConf.NODE_ROOT_FILTER);
 
         return parser;
     }

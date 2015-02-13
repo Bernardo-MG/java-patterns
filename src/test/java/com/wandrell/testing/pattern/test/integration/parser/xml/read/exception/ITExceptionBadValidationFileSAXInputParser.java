@@ -23,15 +23,18 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml.read.exception;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
 import org.apache.commons.io.IOUtils;
 import org.jdom2.Document;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
-import com.wandrell.pattern.parser.InputParser;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.SAXInputParser;
+import com.wandrell.pattern.parser.xml.input.SAXParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
@@ -68,12 +71,12 @@ public final class ITExceptionBadValidationFileSAXInputParser {
      */
     @Test(expectedExceptions = Exception.class)
     public final void testRead_DTD_Empty() throws Exception {
-        InputParser<Integer> parser = null;    // Tested parser
+        Parser<Reader, Document> parser = null;    // Tested parser
 
-        parser = new SAXInputParser<Integer>(XMLValidationType.DTD,
-                IOUtils.toInputStream(""), getJDOMDocumentProcessorInteger());
+        parser = new SAXParser(XMLValidationType.DTD, IOUtils.toInputStream(""));
 
-        parser.read(ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ));
+        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
+                .getClassPathInputStream(XMLConf.INTEGER_READ))));
     }
 
     /**
@@ -85,12 +88,12 @@ public final class ITExceptionBadValidationFileSAXInputParser {
      */
     @Test(expectedExceptions = Exception.class)
     public final void testRead_DTD_Invalid() throws Exception {
-        InputParser<Integer> parser = null;    // Tested parser
+        Parser<Reader, Document> parser = null;    // Tested parser
 
-        parser = new SAXInputParser<Integer>(XMLValidationType.DTD,
-                IOUtils.toInputStream(""), getJDOMDocumentProcessorInteger());
+        parser = new SAXParser(XMLValidationType.DTD, IOUtils.toInputStream(""));
 
-        parser.read(ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ));
+        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
+                .getClassPathInputStream(XMLConf.INTEGER_READ))));
     }
 
     /**
@@ -102,12 +105,12 @@ public final class ITExceptionBadValidationFileSAXInputParser {
      */
     @Test(expectedExceptions = Exception.class)
     public final void testRead_XSD_Empty() throws Exception {
-        InputParser<Integer> parser = null;    // Tested parser
+        Parser<Reader, Document> parser = null;    // Tested parser
 
-        parser = new SAXInputParser<Integer>(XMLValidationType.XSD,
-                IOUtils.toInputStream(""), getJDOMDocumentProcessorInteger());
+        parser = new SAXParser(XMLValidationType.XSD, IOUtils.toInputStream(""));
 
-        parser.read(ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ));
+        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
+                .getClassPathInputStream(XMLConf.INTEGER_READ))));
     }
 
     /**
@@ -119,33 +122,12 @@ public final class ITExceptionBadValidationFileSAXInputParser {
      */
     @Test(expectedExceptions = Exception.class)
     public final void testRead_XSD_Invalid() throws Exception {
-        InputParser<Integer> parser = null;    // Tested parser
+        Parser<Reader, Document> parser = null;    // Tested parser
 
-        parser = new SAXInputParser<Integer>(XMLValidationType.XSD,
-                IOUtils.toInputStream(""), getJDOMDocumentProcessorInteger());
+        parser = new SAXParser(XMLValidationType.XSD, IOUtils.toInputStream(""));
 
-        parser.read(ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ));
-    }
-
-    /**
-     * Returns a placeholder {@code Document} {@code Parser}.
-     * 
-     * @return a placeholder {@code Document} {@code Parser}
-     */
-    private final Parser<Document, Integer> getJDOMDocumentProcessorInteger() {
-        return new Parser<Document, Integer>() {
-
-            @Override
-            public final Integer parse(final Document doc) {
-                final Integer value;
-
-                value = Integer.parseInt(doc.getRootElement().getChildText(
-                        XMLConf.NODE_VALUE));
-
-                return value;
-            }
-
-        };
+        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
+                .getClassPathInputStream(XMLConf.INTEGER_READ))));
     }
 
 }

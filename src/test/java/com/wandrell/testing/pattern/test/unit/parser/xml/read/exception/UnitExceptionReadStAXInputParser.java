@@ -23,11 +23,7 @@
  */
 package com.wandrell.testing.pattern.test.unit.parser.xml.read.exception;
 
-import org.jdom2.Document;
-
-import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.StAXInputParser;
-import com.wandrell.testing.pattern.framework.conf.XMLConf;
+import com.wandrell.pattern.parser.xml.input.StAXParser;
 import com.wandrell.testing.pattern.framework.test.unit.parser.xml.read.exception.AbstractUnitExceptionReadXMLInputParser;
 
 /**
@@ -42,32 +38,10 @@ public final class UnitExceptionReadStAXInputParser extends
         AbstractUnitExceptionReadXMLInputParser<Integer> {
 
     /**
-     * Generates the document processor for the test parser.
-     * 
-     * @return the test document processor
-     */
-    private static final Parser<Document, Integer>
-            getJDOMDocumentProcessorInteger() {
-        return new Parser<Document, Integer>() {
-
-            @Override
-            public final Integer parse(final Document doc) {
-                final Integer value;
-
-                value = Integer.parseInt(doc.getRootElement().getChildText(
-                        XMLConf.NODE_VALUE));
-
-                return value;
-            }
-
-        };
-    }
-
-    /**
      * Default constructor.
      */
     public UnitExceptionReadStAXInputParser() {
-        super(new StAXInputParser<Integer>(getJDOMDocumentProcessorInteger()));
+        super(new StAXParser());
     }
 
 }

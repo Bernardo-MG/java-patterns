@@ -23,17 +23,17 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.dsv.read;
 
-import com.wandrell.pattern.parser.dsv.input.DSVInputParser;
+import com.wandrell.pattern.parser.dsv.input.DSVParser;
 import com.wandrell.testing.pattern.framework.conf.DSVConf;
 import com.wandrell.testing.pattern.framework.test.integration.parser.dsv.read.AbstractITReadDSVInputParser;
 
 /**
- * Integration tests for {@link DSVInputParser} implementing
+ * Integration tests for {@link DSVParser} implementing
  * {@code AbstractITReadDSVInputParser} and using a comma as the delimiter.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see DSVInputParser
+ * @see DSVParser
  */
 public final class ITReadCommaDSVInputParser extends
         AbstractITReadDSVInputParser {

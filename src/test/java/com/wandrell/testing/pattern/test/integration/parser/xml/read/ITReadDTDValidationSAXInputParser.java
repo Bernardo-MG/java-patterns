@@ -23,15 +23,19 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml.read;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
 import org.jdom2.Document;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
-import com.wandrell.pattern.parser.InputParser;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.SAXInputParser;
+import com.wandrell.pattern.parser.xml.input.SAXParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
-import com.wandrell.testing.pattern.framework.test.integration.parser.AbstractITReadInputParser;
 
 /**
  * Integration tests for {@link SAXInputParser} implementing
@@ -41,32 +45,26 @@ import com.wandrell.testing.pattern.framework.test.integration.parser.AbstractIT
  * @version 0.1.0
  * @see SAXInputParser
  */
-public final class ITReadDTDValidationSAXInputParser extends
-        AbstractITReadInputParser<Integer> {
+public final class ITReadDTDValidationSAXInputParser {
 
     /**
-     * Generates the parser to be tested.
-     * 
-     * @return the parser to be tested
+     * Default constructor.
      */
-    private static final InputParser<Integer> buildParser() {
-        final InputParser<Integer> parser;
-
-        parser = new SAXInputParser<Integer>(XMLValidationType.DTD,
-                ResourceUtils.getClassPathInputStream(XMLConf.DTD_VALIDATION),
-                getJDOMDocumentProcessorInteger());
-
-        return parser;
+    public ITReadDTDValidationSAXInputParser() {
+        super();
     }
 
-    /**
-     * Returns a placeholder {@code Document} {@code Parser}.
-     * 
-     * @return a placeholder {@code Document} {@code Parser}
-     */
-    private final static Parser<Document, Integer>
-            getJDOMDocumentProcessorInteger() {
-        return new Parser<Document, Integer>() {
+    @Test
+    public final void testRead() throws Exception {
+        final Parser<Reader, Document> parserA;
+        final Parser<Document, Integer> parserB;
+        final Reader reader;
+        final Integer value;
+
+        parserA = new SAXParser(XMLValidationType.DTD,
+                ResourceUtils.getClassPathInputStream(XMLConf.DTD_VALIDATION));
+
+        parserB = new Parser<Document, Integer>() {
 
             @Override
             public final Integer parse(final Document doc) {
@@ -79,13 +77,12 @@ public final class ITReadDTDValidationSAXInputParser extends
             }
 
         };
-    }
 
-    /**
-     * Default constructor.
-     */
-    public ITReadDTDValidationSAXInputParser() {
-        super(buildParser(), XMLConf.VALIDATED_DTD, 1);
+        reader = new BufferedReader(new InputStreamReader(
+                ResourceUtils.getClassPathInputStream(XMLConf.VALIDATED_DTD)));
+        value = parserB.parse(parserA.parse(reader));
+
+        Assert.assertEquals(value, (Integer) 1);
     }
 
 }

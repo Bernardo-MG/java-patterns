@@ -23,12 +23,12 @@
  */
 package com.wandrell.testing.pattern.test.unit.parser.xml.read.exception;
 
+import java.io.Reader;
+
 import org.jdom2.Document;
 
-import com.wandrell.pattern.parser.InputParser;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.SAXInputParser;
-import com.wandrell.testing.pattern.framework.conf.XMLConf;
+import com.wandrell.pattern.parser.xml.input.SAXParser;
 import com.wandrell.testing.pattern.framework.test.unit.parser.xml.read.exception.AbstractUnitExceptionReadXMLInputParser;
 
 /**
@@ -47,34 +47,8 @@ public final class UnitExceptionReadNoValidationSAXInputParser extends
      * 
      * @return the parser to be tested
      */
-    private static final InputParser<Integer> buildParser() {
-        final InputParser<Integer> parser;     // Tested parser
-
-        parser = new SAXInputParser<Integer>(getJDOMDocumentProcessorInteger());
-
-        return parser;
-    }
-
-    /**
-     * Generates the document processor for the test parser.
-     * 
-     * @return the test document processor
-     */
-    private static final Parser<Document, Integer>
-            getJDOMDocumentProcessorInteger() {
-        return new Parser<Document, Integer>() {
-
-            @Override
-            public final Integer parse(final Document doc) {
-                final Integer value;
-
-                value = Integer.parseInt(doc.getRootElement().getChildText(
-                        XMLConf.NODE_VALUE));
-
-                return value;
-            }
-
-        };
+    private static final Parser<Reader, Document> buildParser() {
+        return new SAXParser();
     }
 
     /**

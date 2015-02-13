@@ -25,17 +25,12 @@ package com.wandrell.pattern.parser.dsv.input;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Collection;
 import java.util.LinkedList;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-import com.wandrell.pattern.parser.InputParser;
 import com.wandrell.pattern.parser.Parser;
 
 /**
@@ -52,53 +47,38 @@ import com.wandrell.pattern.parser.Parser;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class DSVInputParser<V> implements InputParser<Collection<V>> {
+public final class DSVParser implements Parser<Reader, Collection<String[]>> {
 
     /**
      * Delimiter separating the values on the file.
      */
-    private final Character           delimiter;
-    /**
-     * The parser to transform the generated array of strings into the returned
-     * value.
-     */
-    private final Parser<String[], V> lineParser;
+    private final Character delimiter;
 
     /**
      * Constructs a parser with the specified separator and parser.
      * 
      * @param separator
      *            the separator used on the DSV file
-     * @param parser
-     *            parser for the lines
      */
-    public DSVInputParser(final Character separator,
-            final Parser<String[], V> parser) {
+    public DSVParser(final Character separator) {
         super();
 
         checkNotNull(separator,
                 "Received a null pointer as document line separator");
-        checkNotNull(parser, "Received a null pointer as document line parser");
 
         delimiter = separator;
-        lineParser = parser;
     }
 
     @Override
-    public final Collection<V> read(final InputStream stream)
-            throws IOException {
-        return read(new BufferedReader(new InputStreamReader(stream)));
-    }
-
-    @Override
-    public final Collection<V> read(final Reader reader) throws IOException {
-        final Collection<V> result;
+    public final Collection<String[]> parse(final Reader input)
+            throws Exception {
+        final Collection<String[]> result;
         String[] line;
 
-        try (final CSVReader csvreader = new CSVReader(reader, getDelimiter())) {
-            result = new LinkedList<>();
+        result = new LinkedList<>();
+        try (final CSVReader csvreader = new CSVReader(input, getDelimiter())) {
             while ((line = csvreader.readNext()) != null) {
-                result.add(getLineParser().parse(line));
+                result.add(line);
             }
         }
 
@@ -107,10 +87,6 @@ public final class DSVInputParser<V> implements InputParser<Collection<V>> {
 
     private final Character getDelimiter() {
         return delimiter;
-    }
-
-    private final Parser<String[], V> getLineParser() {
-        return lineParser;
     }
 
 }

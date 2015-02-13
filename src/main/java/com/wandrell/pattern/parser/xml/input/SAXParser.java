@@ -45,7 +45,6 @@ import org.jdom2.input.sax.XMLReaders;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
-import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
@@ -64,8 +63,7 @@ import com.wandrell.pattern.parser.xml.XMLValidationType;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class SAXInputParser<V> extends AbstractJDOMInputParser<V>
-        implements XMLValidatedInputParser<V> {
+public final class SAXParser implements XMLValidatedParser {
 
     /**
      * The text format accepted for the validation files.
@@ -88,12 +86,9 @@ public final class SAXInputParser<V> extends AbstractJDOMInputParser<V>
 
     /**
      * Constructs a parser with the specified processor and no validation.
-     * 
-     * @param docParser
-     *            the parser for the created {@code Document}
      */
-    public SAXInputParser(final Parser<Document, V> docParser) {
-        super(docParser);
+    public SAXParser() {
+        super();
 
         validationType = XMLValidationType.NONE;
     }
@@ -105,13 +100,10 @@ public final class SAXInputParser<V> extends AbstractJDOMInputParser<V>
      *            the validation type to use
      * @param validationStream
      *            stream for the validation file
-     * @param docParser
-     *            the parser for the created {@code Document}
      */
-    public SAXInputParser(final XMLValidationType validation,
-            final InputStream validationStream,
-            final Parser<Document, V> docParser) {
-        super(docParser);
+    public SAXParser(final XMLValidationType validation,
+            final InputStream validationStream) {
+        super();
 
         checkNotNull(validation, "Received a null pointer as validation type");
         checkNotNull(validationStream,
@@ -122,14 +114,15 @@ public final class SAXInputParser<V> extends AbstractJDOMInputParser<V>
         streamValidation = validationStream;
     }
 
-    /**
-     * Returns the type of validation being used.
-     * 
-     * @return the type of validation being used
-     */
     @Override
     public final XMLValidationType getValidationType() {
         return validationType;
+    }
+
+    @Override
+    public final Document parse(final Reader input) throws JDOMException,
+            IOException {
+        return getBuilder().build(input);
     }
 
     @Override
@@ -264,18 +257,6 @@ public final class SAXInputParser<V> extends AbstractJDOMInputParser<V>
         }
 
         return factoryValidation;
-    }
-
-    @Override
-    protected final Document getDocument(final InputStream stream)
-            throws JDOMException, IOException {
-        return getBuilder().build(stream);
-    }
-
-    @Override
-    protected final Document getDocument(final Reader reader)
-            throws JDOMException, IOException {
-        return getBuilder().build(reader);
     }
 
 }

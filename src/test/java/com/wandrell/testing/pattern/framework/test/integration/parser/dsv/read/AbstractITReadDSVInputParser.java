@@ -23,6 +23,9 @@
  */
 package com.wandrell.testing.pattern.framework.test.integration.parser.dsv.read;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -32,12 +35,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
-import com.wandrell.pattern.parser.InputParser;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.dsv.input.DSVInputParser;
+import com.wandrell.pattern.parser.dsv.input.DSVParser;
 
 /**
- * Abstract integration tests for {@link DSVInputParser}.
+ * Abstract integration tests for {@link DSVParser}.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -88,20 +90,29 @@ public abstract class AbstractITReadDSVInputParser {
      */
     @BeforeClass
     public final void initialize() throws Exception {
-        final InputParser<Collection<Collection<Integer>>> parser;
-        final Parser<String[], Collection<Integer>> parserLine;
+        final Reader reader;
+        final Parser<Reader, Collection<String[]>> parserA;
+        final Parser<Collection<String[]>, Collection<Collection<Integer>>> parserB;
 
-        parserLine = new Parser<String[], Collection<Integer>>() {
+        parserA = new DSVParser(separator);
+
+        parserB = new Parser<Collection<String[]>, Collection<Collection<Integer>>>() {
 
             @Override
-            public final Collection<Integer> parse(final String[] input) {
-                final Collection<Integer> results;
+            public final Collection<Collection<Integer>> parse(
+                    final Collection<String[]> input) {
+                final Collection<Collection<Integer>> results;
+                Collection<Integer> values;
 
                 results = new LinkedList<>();
-                for (final String value : input) {
-                    if (value.matches("\\d+")) {
-                        results.add(Integer.parseInt(value));
+                for (final String[] line : input) {
+                    values = new LinkedList<>();
+                    for (final String value : line) {
+                        if (value.matches("\\d+")) {
+                            values.add(Integer.parseInt(value));
+                        }
                     }
+                    results.add(values);
                 }
 
                 return results;
@@ -109,9 +120,9 @@ public abstract class AbstractITReadDSVInputParser {
 
         };
 
-        parser = new DSVInputParser<Collection<Integer>>(separator, parserLine);
-
-        data = parser.read(ResourceUtils.getClassPathInputStream(path));
+        reader = new BufferedReader(new InputStreamReader(
+                ResourceUtils.getClassPathInputStream(path)));
+        data = parserB.parse(parserA.parse(reader));
     }
 
     /**
