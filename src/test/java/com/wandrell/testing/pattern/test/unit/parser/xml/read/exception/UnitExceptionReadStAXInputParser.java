@@ -23,7 +23,7 @@
  */
 package com.wandrell.testing.pattern.test.unit.parser.xml.read.exception;
 
-import com.wandrell.pattern.parser.xml.input.StAXParser;
+import com.wandrell.pattern.parser.xml.input.XMLParser;
 import com.wandrell.testing.pattern.framework.test.unit.parser.xml.read.exception.AbstractUnitExceptionReadXMLInputParser;
 
 /**
@@ -41,7 +41,7 @@ public final class UnitExceptionReadStAXInputParser extends
      * Default constructor.
      */
     public UnitExceptionReadStAXInputParser() {
-        super(new StAXParser());
+        super(new XMLParser());
     }
 
 }

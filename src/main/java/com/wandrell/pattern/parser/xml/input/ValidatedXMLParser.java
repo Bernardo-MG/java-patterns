@@ -45,6 +45,7 @@ import org.jdom2.input.sax.XMLReaders;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
@@ -63,7 +64,7 @@ import com.wandrell.pattern.parser.xml.XMLValidationType;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class SAXParser implements XMLValidatedParser {
+public final class ValidatedXMLParser implements Parser<Reader, Document> {
 
     /**
      * The text format accepted for the validation files.
@@ -87,7 +88,7 @@ public final class SAXParser implements XMLValidatedParser {
     /**
      * Constructs a parser with the specified processor and no validation.
      */
-    public SAXParser() {
+    public ValidatedXMLParser() {
         super();
 
         validationType = XMLValidationType.NONE;
@@ -101,7 +102,7 @@ public final class SAXParser implements XMLValidatedParser {
      * @param validationStream
      *            stream for the validation file
      */
-    public SAXParser(final XMLValidationType validation,
+    public ValidatedXMLParser(final XMLValidationType validation,
             final InputStream validationStream) {
         super();
 
@@ -114,7 +115,11 @@ public final class SAXParser implements XMLValidatedParser {
         streamValidation = validationStream;
     }
 
-    @Override
+    /**
+     * Returns the validation type being used.
+     * 
+     * @return the XML validation type being used
+     */
     public final XMLValidationType getValidationType() {
         return validationType;
     }
@@ -125,7 +130,14 @@ public final class SAXParser implements XMLValidatedParser {
         return getBuilder().build(input);
     }
 
-    @Override
+    /**
+     * Sets the validation to be used, along the validation source.
+     * 
+     * @param type
+     *            the validation type
+     * @param validationStream
+     *            stream for the validation file
+     */
     public final void setValidation(final XMLValidationType type,
             final InputStream validationStream) {
         checkNotNull(type, "Received a null pointer as validation type");

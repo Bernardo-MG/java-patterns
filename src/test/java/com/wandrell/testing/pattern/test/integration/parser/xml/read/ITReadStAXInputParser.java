@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.StAXParser;
+import com.wandrell.pattern.parser.xml.input.XMLParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
@@ -60,7 +60,7 @@ public final class ITReadStAXInputParser {
         final Reader reader;
         final Integer value;
 
-        parserA = new StAXParser();
+        parserA = new XMLParser();
 
         parserB = new Parser<Document, Integer>() {
 

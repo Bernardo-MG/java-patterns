@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.SAXParser;
+import com.wandrell.pattern.parser.xml.input.ValidatedXMLParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
@@ -60,7 +60,7 @@ public final class ITReadXSDValidationSAXInputParser {
         final Reader reader;
         final Integer value;
 
-        parserA = new SAXParser(XMLValidationType.XSD,
+        parserA = new ValidatedXMLParser(XMLValidationType.XSD,
                 ResourceUtils.getClassPathInputStream(XMLConf.XSD_VALIDATION));
 
         parserB = new Parser<Document, Integer>() {

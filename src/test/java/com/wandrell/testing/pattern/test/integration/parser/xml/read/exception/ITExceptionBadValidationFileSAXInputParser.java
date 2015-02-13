@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.SAXParser;
+import com.wandrell.pattern.parser.xml.input.ValidatedXMLParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
@@ -73,7 +73,8 @@ public final class ITExceptionBadValidationFileSAXInputParser {
     public final void testRead_DTD_Empty() throws Exception {
         Parser<Reader, Document> parser = null;    // Tested parser
 
-        parser = new SAXParser(XMLValidationType.DTD, IOUtils.toInputStream(""));
+        parser = new ValidatedXMLParser(XMLValidationType.DTD,
+                IOUtils.toInputStream(""));
 
         parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
                 .getClassPathInputStream(XMLConf.INTEGER_READ))));
@@ -90,7 +91,8 @@ public final class ITExceptionBadValidationFileSAXInputParser {
     public final void testRead_DTD_Invalid() throws Exception {
         Parser<Reader, Document> parser = null;    // Tested parser
 
-        parser = new SAXParser(XMLValidationType.DTD, IOUtils.toInputStream(""));
+        parser = new ValidatedXMLParser(XMLValidationType.DTD,
+                IOUtils.toInputStream(""));
 
         parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
                 .getClassPathInputStream(XMLConf.INTEGER_READ))));
@@ -107,7 +109,8 @@ public final class ITExceptionBadValidationFileSAXInputParser {
     public final void testRead_XSD_Empty() throws Exception {
         Parser<Reader, Document> parser = null;    // Tested parser
 
-        parser = new SAXParser(XMLValidationType.XSD, IOUtils.toInputStream(""));
+        parser = new ValidatedXMLParser(XMLValidationType.XSD,
+                IOUtils.toInputStream(""));
 
         parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
                 .getClassPathInputStream(XMLConf.INTEGER_READ))));
@@ -124,7 +127,8 @@ public final class ITExceptionBadValidationFileSAXInputParser {
     public final void testRead_XSD_Invalid() throws Exception {
         Parser<Reader, Document> parser = null;    // Tested parser
 
-        parser = new SAXParser(XMLValidationType.XSD, IOUtils.toInputStream(""));
+        parser = new ValidatedXMLParser(XMLValidationType.XSD,
+                IOUtils.toInputStream(""));
 
         parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
                 .getClassPathInputStream(XMLConf.INTEGER_READ))));

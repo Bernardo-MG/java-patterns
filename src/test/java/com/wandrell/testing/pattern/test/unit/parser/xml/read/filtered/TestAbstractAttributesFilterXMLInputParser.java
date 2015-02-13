@@ -23,7 +23,6 @@
  */
 package com.wandrell.testing.pattern.test.unit.parser.xml.read.filtered;
 
-import java.io.InputStream;
 import java.io.Reader;
 
 import org.jdom2.Document;
@@ -32,7 +31,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.parser.xml.XMLValidationType;
 import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLParser;
 
 /**
@@ -93,18 +91,9 @@ public final class TestAbstractAttributesFilterXMLInputParser {
         parser = new AbstractAttributesFilterXMLParser() {
 
             @Override
-            public final XMLValidationType getValidationType() {
-                return XMLValidationType.NONE;
-            }
-
-            @Override
             public final Document parse(final Reader reader) throws Exception {
                 return new Document();
             }
-
-            @Override
-            public final void setValidation(final XMLValidationType type,
-                    final InputStream validationStream) {}
 
             @Override
             protected final void statusChanged() {}

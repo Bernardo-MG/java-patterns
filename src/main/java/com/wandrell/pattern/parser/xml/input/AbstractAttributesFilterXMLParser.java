@@ -25,9 +25,14 @@ package com.wandrell.pattern.parser.xml.input;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.io.Reader;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+
+import org.jdom2.Document;
+
+import com.wandrell.pattern.parser.Parser;
 
 /**
  * Abstract {@code InputParser} for parsing XML files and filtering the
@@ -47,7 +52,7 @@ import java.util.LinkedHashSet;
  * @version 0.1.0
  */
 public abstract class AbstractAttributesFilterXMLParser implements
-        XMLValidatedParser {
+        Parser<Reader, Document> {
 
     /**
      * Attributes which should be set as {@code false}. Otherwise, the node will

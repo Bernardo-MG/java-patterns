@@ -51,7 +51,7 @@ import com.wandrell.pattern.parser.Parser;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class StAXParser implements Parser<Reader, Document> {
+public final class XMLParser implements Parser<Reader, Document> {
 
     /**
      * Builder to transform the input into a {@code Document}.
@@ -63,7 +63,7 @@ public final class StAXParser implements Parser<Reader, Document> {
     /**
      * Constructs a parser.
      */
-    public StAXParser() {
+    public XMLParser() {
         super();
     }
 

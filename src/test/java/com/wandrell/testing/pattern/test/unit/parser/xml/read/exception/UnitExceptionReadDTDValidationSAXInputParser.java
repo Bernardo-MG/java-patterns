@@ -30,7 +30,7 @@ import org.jdom2.Document;
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.SAXParser;
+import com.wandrell.pattern.parser.xml.input.ValidatedXMLParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.test.unit.parser.xml.read.exception.AbstractUnitExceptionReadXMLInputParser;
 
@@ -51,7 +51,7 @@ public final class UnitExceptionReadDTDValidationSAXInputParser extends
      * @return the parser to be tested
      */
     private static final Parser<Reader, Document> buildParser() {
-        return new SAXParser(XMLValidationType.DTD,
+        return new ValidatedXMLParser(XMLValidationType.DTD,
                 ResourceUtils.getClassPathInputStream(XMLConf.DTD_VALIDATION));
     }
 

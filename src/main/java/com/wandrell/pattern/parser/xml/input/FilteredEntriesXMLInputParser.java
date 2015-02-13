@@ -86,7 +86,7 @@ public final class FilteredEntriesXMLInputParser extends
      * The parser is based on the SAX API, allowing to use validation, which is
      * required if default attribute values are to be used.
      */
-    private final SAXParser          baseParser;
+    private final ValidatedXMLParser baseParser;
     /**
      * The XPath expression as a string.
      */
@@ -128,7 +128,7 @@ public final class FilteredEntriesXMLInputParser extends
 
         nodeName = node;
 
-        baseParser = new SAXParser();
+        baseParser = new ValidatedXMLParser();
     }
 
     /**
@@ -150,10 +150,14 @@ public final class FilteredEntriesXMLInputParser extends
 
         nodeName = node;
 
-        baseParser = new SAXParser(validation, validationStream);
+        baseParser = new ValidatedXMLParser(validation, validationStream);
     }
 
-    @Override
+    /**
+     * Returns the validation type being used.
+     * 
+     * @return the XML validation type being used
+     */
     public final XMLValidationType getValidationType() {
         return getBaseParser().getValidationType();
     }
@@ -163,7 +167,14 @@ public final class FilteredEntriesXMLInputParser extends
         return filter(getBaseParser().parse(input));
     }
 
-    @Override
+    /**
+     * Sets the validation to be used, along the validation source.
+     * 
+     * @param type
+     *            the validation type
+     * @param validationStream
+     *            stream for the validation file
+     */
     public final void setValidation(final XMLValidationType type,
             final InputStream validationStream) {
         getBaseParser().setValidation(type, validationStream);
@@ -250,7 +261,7 @@ public final class FilteredEntriesXMLInputParser extends
      * 
      * @return the base parser
      */
-    private final XMLValidatedParser getBaseParser() {
+    private final ValidatedXMLParser getBaseParser() {
         return baseParser;
     }
 
