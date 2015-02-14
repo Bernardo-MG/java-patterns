@@ -11,6 +11,6 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_JDK_VERSION" == "$JDK_DEP
 
 else
 
-   echo "Java artifact to repository"
+   echo "Java artifact won't be deployed to repository"
 
 fi
