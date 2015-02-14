@@ -87,10 +87,6 @@ public final class XMLOutputter implements Outputter<Document> {
 
     /**
      * Constructs a parser with the specified processor and no validation.
-     * 
-     * @param docParser
-     *            the parser for creating a {@code Document} from the received
-     *            value
      */
     public XMLOutputter() {
         this(XMLValidationType.NONE, "");
@@ -99,9 +95,6 @@ public final class XMLOutputter implements Outputter<Document> {
     /**
      * Constructs a parser with the specified processor and validation.
      * 
-     * @param docParser
-     *            the parser for creating a {@code Document} from the received
-     *            value
      * @param validation
      *            the validation type
      * @param path

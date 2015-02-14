@@ -61,8 +61,6 @@ import com.google.common.base.MoreObjects;
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @param <V>
- *            the type to be parsed from the input
  */
 public final class FilteredEntriesXMLFileParser extends
         AbstractAttributesFilterXMLFileParser {

@@ -48,8 +48,6 @@ import com.wandrell.pattern.parser.Parser;
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @param <V>
- *            the type to be parsed from the XML file
  */
 public final class XMLFileParser implements Parser<Reader, Document> {
 
