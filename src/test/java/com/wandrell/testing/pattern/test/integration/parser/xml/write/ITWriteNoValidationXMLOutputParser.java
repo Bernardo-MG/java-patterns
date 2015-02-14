@@ -45,7 +45,6 @@ import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.OutputParser;
-import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
@@ -70,19 +69,19 @@ public final class ITWriteNoValidationXMLOutputParser {
      * <p>
      * Used to avoid name collisions when creating test files.
      */
-    private static final Random   random        = new Random();
+    private static final Random    random        = new Random();
     /**
      * Template path for the tests.
      */
-    private static final String   TEMPLATE_PATH = "target/test_write_Stream_";
+    private static final String    TEMPLATE_PATH = "target/test_write_Stream_";
     /**
      * Parser being tested.
      */
-    private OutputParser<Integer> parser;
+    private OutputParser<Document> parser;
     /**
      * Value to parse.
      */
-    private Integer               value         = 1;
+    private Document               value;
 
     /**
      * Default constructor.
@@ -174,27 +173,12 @@ public final class ITWriteNoValidationXMLOutputParser {
      */
     @BeforeClass
     private final void initialize() {
+        value = new Document();
+        value.addContent(new Element(XMLConf.NODE_ROOT));
+        value.getRootElement().addContent(
+                new Element(XMLConf.NODE_VALUE).addContent("1"));
 
-        final Parser<Integer, Document> parserDoc;
-
-        parserDoc = new Parser<Integer, Document>() {
-
-            @Override
-            public final Document parse(final Integer value) {
-                final Document writeDoc;
-
-                writeDoc = new Document();
-                writeDoc.addContent(new Element(XMLConf.NODE_ROOT));
-                writeDoc.getRootElement().addContent(
-                        new Element(XMLConf.NODE_VALUE).addContent(value
-                                .toString()));
-
-                return writeDoc;
-            }
-
-        };
-
-        parser = new XMLOutputParser<Integer>(parserDoc);
+        parser = new XMLOutputParser();
     }
 
 }

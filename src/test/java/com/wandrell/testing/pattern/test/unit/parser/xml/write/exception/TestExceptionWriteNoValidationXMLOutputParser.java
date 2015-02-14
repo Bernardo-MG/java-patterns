@@ -32,15 +32,12 @@ import java.io.PipedOutputStream;
 import java.io.Writer;
 
 import org.jdom2.Document;
-import org.jdom2.Element;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.parser.OutputParser;
-import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
-import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
  * Unit tests for {@link XMLOutputParser}, checking that exceptions are thrown
@@ -61,11 +58,7 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
     /**
      * Parser being tested.
      */
-    private OutputParser<Integer> parser;
-    /**
-     * Value to parse.
-     */
-    private Integer               value = 1;
+    private OutputParser<Document> parser;
 
     /**
      * Default constructor.
@@ -94,7 +87,7 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
             Assert.fail(e.getMessage());
         }
 
-        parser.write(stream, value);
+        parser.write(stream, new Document());
     }
 
     /**
@@ -118,7 +111,7 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
             Assert.fail(e.getMessage());
         }
 
-        parser.write(writer, value);
+        parser.write(writer, new Document());
     }
 
     /**
@@ -126,26 +119,7 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
      */
     @BeforeClass
     private final void initialize() {
-        final Parser<Integer, Document> encoder;
-
-        encoder = new Parser<Integer, Document>() {
-
-            @Override
-            public final Document parse(final Integer value) {
-                final Document writeDoc;
-
-                writeDoc = new Document();
-                writeDoc.addContent(new Element(XMLConf.NODE_ROOT));
-                writeDoc.getRootElement().addContent(
-                        new Element(XMLConf.NODE_VALUE).addContent(value
-                                .toString()));
-
-                return writeDoc;
-            }
-
-        };
-
-        parser = new XMLOutputParser<Integer>(encoder);
+        parser = new XMLOutputParser();
     }
 
 }

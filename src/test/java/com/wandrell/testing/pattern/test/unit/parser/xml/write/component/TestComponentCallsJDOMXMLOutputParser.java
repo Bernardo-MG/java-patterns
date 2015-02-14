@@ -81,19 +81,19 @@ public final class TestComponentCallsJDOMXMLOutputParser {
             throws Exception {
         final OutputStream stream;         // Stream for the output file
         final Parser<Object, Document> processor;// Output processor
-        final OutputParser<Object> parser; // Tested parser
+        final OutputParser<Document> parser; // Tested parser
 
         processor = Mockito.mock(Parser.class);
 
         Mockito.when(processor.parse(Matchers.any()))
                 .thenReturn(new Document());
 
-        parser = new XMLOutputParser<Object>(processor);
+        parser = new XMLOutputParser();
 
         stream = new BufferedOutputStream(new PipedOutputStream(
                 new PipedInputStream()));
 
-        parser.write(stream, new Integer(0));
+        parser.write(stream, processor.parse(new Integer(0)));
 
         Mockito.verify(processor, Mockito.times(1)).parse(Matchers.any());
         Mockito.verify(processor, Mockito.only()).parse(Matchers.any());
@@ -115,20 +115,20 @@ public final class TestComponentCallsJDOMXMLOutputParser {
             throws Exception {
         final Writer writer;               // Writer for the output file
         final Parser<Object, Document> processor;// Output processor
-        final OutputParser<Object> parser; // Tested parser
+        final OutputParser<Document> parser; // Tested parser
 
         processor = Mockito.mock(Parser.class);
 
         Mockito.when(processor.parse(Matchers.any()))
                 .thenReturn(new Document());
 
-        parser = new XMLOutputParser<Object>(processor);
+        parser = new XMLOutputParser();
 
         writer = new BufferedWriter(new OutputStreamWriter(
                 new BufferedOutputStream(new PipedOutputStream(
                         new PipedInputStream()))));
 
-        parser.write(writer, new Integer(0));
+        parser.write(writer, processor.parse(new Integer(0)));
 
         Mockito.verify(processor, Mockito.times(1)).parse(Matchers.any());
         Mockito.verify(processor, Mockito.only()).parse(Matchers.any());

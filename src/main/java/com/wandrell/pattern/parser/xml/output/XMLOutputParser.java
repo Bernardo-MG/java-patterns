@@ -37,7 +37,6 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import com.wandrell.pattern.parser.OutputParser;
-import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
@@ -55,45 +54,40 @@ import com.wandrell.pattern.parser.xml.XMLValidationType;
  * @param <V>
  *            the type to be parsed
  */
-public final class XMLOutputParser<V> implements OutputParser<V> {
+public final class XMLOutputParser implements OutputParser<Document> {
 
     /**
      * The name of the element registering the validation file.
      * <p>
      * This is used with DTD validation.
      */
-    private static final String       ELEMENT_VALID    = "validator";
+    private static final String     ELEMENT_VALID    = "validator";
     /**
      * Prefix for the validation namespace.
      * <p>
      * This is used to build the namespace for XSD validation.
      */
-    private static final String       NAMESPACE_PREFIX = "xsi";
+    private static final String     NAMESPACE_PREFIX = "xsi";
     /**
      * URI for the validation namespace.
      * <p>
      * This is used to build the namespace for XSD validation.
      */
-    private static final String       NAMESPACE_URI    = "http://www.w3.org/2001/XMLSchema-instance";
+    private static final String     NAMESPACE_URI    = "http://www.w3.org/2001/XMLSchema-instance";
     /**
      * Attribute which indicates the validation file location.
      * <p>
      * This is used with XSD validation.
      */
-    private static final String       XSD_ATTRIBUTE    = "noNamespaceSchemaLocation";
-    /**
-     * The parser which will generate a {@code Document} from the received
-     * value.
-     */
-    private final Parser<V, Document> documentParser;
+    private static final String     XSD_ATTRIBUTE    = "noNamespaceSchemaLocation";
     /**
      * Path to the validation file.
      */
-    private final String              validationPath;
+    private final String            validationPath;
     /**
      * Type of validation being used.
      */
-    private final XMLValidationType   validationType;
+    private final XMLValidationType validationType;
 
     /**
      * Constructs a parser with the specified processor and no validation.
@@ -102,8 +96,8 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
      *            the parser for creating a {@code Document} from the received
      *            value
      */
-    public XMLOutputParser(final Parser<V, Document> docParser) {
-        this(XMLValidationType.NONE, "", docParser);
+    public XMLOutputParser() {
+        this(XMLValidationType.NONE, "");
     }
 
     /**
@@ -117,15 +111,11 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
      * @param path
      *            path to the validation file
      */
-    public XMLOutputParser(final XMLValidationType validation,
-            final String path, final Parser<V, Document> docParser) {
+    public XMLOutputParser(final XMLValidationType validation, final String path) {
         super();
 
-        checkNotNull(docParser, "Received a null pointer as document parser");
         checkNotNull(validation, "Received a null pointer as validation type");
         checkNotNull(path, "Received a null pointer as validation path");
-
-        documentParser = docParser;
 
         validationType = validation;
 
@@ -143,18 +133,15 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
      *             when there's any problem writing
      */
     @Override
-    public final void write(final OutputStream stream, final V value)
+    public final void write(final OutputStream stream, final Document value)
             throws Exception {
-        final Document doc;
 
         checkNotNull(stream, "Received a null pointer as output stream");
         checkNotNull(value, "Received a null pointer as value");
 
-        doc = getDocumentParser().parse(value);
+        setValidation(value);
 
-        setValidation(doc);
-
-        new XMLOutputter(Format.getPrettyFormat()).output(doc, stream);
+        new XMLOutputter(Format.getPrettyFormat()).output(value, stream);
     }
 
     /**
@@ -168,27 +155,15 @@ public final class XMLOutputParser<V> implements OutputParser<V> {
      *             when there's any problem writing
      */
     @Override
-    public final void write(final Writer writer, final V value)
+    public final void write(final Writer writer, final Document value)
             throws Exception {
-        final Document doc;
 
         checkNotNull(writer, "Received a null pointer as writer");
         checkNotNull(value, "Received a null pointer as value");
 
-        doc = getDocumentParser().parse(value);
+        setValidation(value);
 
-        setValidation(doc);
-
-        new XMLOutputter(Format.getPrettyFormat()).output(doc, writer);
-    }
-
-    /**
-     * Returns the {@code Parser} in charge of generating the {@code Document}.
-     * 
-     * @return the {@code Parser} in charge of generating the {@code Document}
-     */
-    private final Parser<V, Document> getDocumentParser() {
-        return documentParser;
+        new XMLOutputter(Format.getPrettyFormat()).output(value, writer);
     }
 
     /**
