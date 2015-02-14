@@ -25,7 +25,7 @@ Issues are managed at the GitHub [project issues page][].
 The application is coded in Java, using Maven to handle the project's configuration and tests.
 
 ### Prerequisites
-Requires JDK 8.
+Requires JDK 7/8 or OpenJDK 7 .
 
 All other dependencies are handled through Maven, and noted in the included POM file.
 
