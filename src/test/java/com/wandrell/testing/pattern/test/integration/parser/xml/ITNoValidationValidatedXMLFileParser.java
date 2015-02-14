@@ -64,7 +64,7 @@ public final class ITNoValidationValidatedXMLFileParser {
      *             never, this is a required declaration
      */
     @Test
-    public final void testRead() throws Exception {
+    public final void testParse() throws Exception {
         final Parser<Reader, Document> parserA;  // Parser tested
         final Parser<Document, Integer> parserB; // Parser for the result
         final Reader reader; // Reader to the test file
