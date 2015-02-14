@@ -5,12 +5,12 @@
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_JDK_VERSION" == "$JDK_DEPLOY" ] && [[ "$TRAVIS_BRANCH" == "master" || "$TRAVIS_BRANCH" == "develop" ]]; then
 
-   echo "Deploying Maven site"
+   echo "Deploying Java artifact to repository"
 
    mvn deploy --settings ~/settings.xml
 
 else
 
-   echo "Maven site won't be deployed"
+   echo "Java artifact to repository"
 
 fi

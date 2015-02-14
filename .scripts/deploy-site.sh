@@ -5,11 +5,17 @@
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_JDK_VERSION" == "$JDK_DEPLOY" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
 
+   echo "Deploying Maven site"
+
    mvn site site:deploy --settings ~/settings.xml > site_output.txt
    head -50 site_output.txt
    echo " "
    echo "(...)"
    echo " "
    tail -50 site_output.txt
+
+else
+
+   echo "Maven site won't be deployed"
 
 fi
