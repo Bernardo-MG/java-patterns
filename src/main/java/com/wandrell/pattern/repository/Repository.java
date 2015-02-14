@@ -24,7 +24,6 @@
 package com.wandrell.pattern.repository;
 
 import java.util.Collection;
-import java.util.function.Predicate;
 
 /**
  * Interface for implementing the repository pattern.
@@ -50,6 +49,23 @@ import java.util.function.Predicate;
 public interface Repository<V> {
 
     /**
+     * Filter for querying repositories.
+     * <p>
+     * All the entities which validate this filter will be returned by
+     * {@code getCollection}.
+     * 
+     * @author Bernardo Martínez Garrido
+     *
+     * @param <V>
+     *            the type stored on the repository
+     */
+    public interface Filter<V> {
+
+        public Boolean isValid(final V entity);
+
+    }
+
+    /**
      * Adds an entity to the repository.
      * 
      * @param entity
@@ -61,16 +77,16 @@ public interface Repository<V> {
      * Queries the entities in the repository and returns a collection of them.
      * <p>
      * The collection is created filtering the stored data with the specified
-     * {@code Predicate}.
+     * {@code Filter}.
      * <p>
      * This works the same as filtering a {@code Collection}. All the entities
-     * validating the {@code Predicate} will be returned.
+     * validating the {@code Filter} will be returned.
      * 
-     * @param predicate
-     *            the {@code Predicate} used on the filter
+     * @param filter
+     *            the {@code Filter} used on the filter
      * @return the filtered subset of entities
      */
-    public Collection<V> getCollection(final Predicate<V> predicate);
+    public Collection<V> getCollection(final Filter<V> filter);
 
     /**
      * Removes an entity from the repository.

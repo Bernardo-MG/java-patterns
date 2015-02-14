@@ -27,8 +27,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Collection-based implementation of {@code Repository}.
@@ -77,9 +75,17 @@ public final class CollectionRepository<V> implements Repository<V> {
     }
 
     @Override
-    public final Collection<V> getCollection(final Predicate<V> predicate) {
-        return getData().stream().filter(predicate)
-                .collect(Collectors.toList());
+    public final Collection<V> getCollection(final Filter<V> filter) {
+        final Collection<V> result;
+
+        result = new LinkedList<>();
+        for (final V entity : getData()) {
+            if (filter.isValid(entity)) {
+                result.add(entity);
+            }
+        }
+
+        return result;
     }
 
     @Override

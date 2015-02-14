@@ -89,6 +89,7 @@ public final class ITNoValidationXMLOutputter {
      */
     public ITNoValidationXMLOutputter() {
         super();
+        // TODO: Make this test with validation.
     }
 
     /**
