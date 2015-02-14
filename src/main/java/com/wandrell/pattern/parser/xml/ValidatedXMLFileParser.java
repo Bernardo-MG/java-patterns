@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -273,7 +274,7 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
                             getEncoding())));
 
             factoryValidation = new XMLReaderXSDFactory(sources);
-        } catch (final Exception e) {
+        } catch (final JDOMException | UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
 

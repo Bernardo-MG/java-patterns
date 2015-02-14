@@ -23,18 +23,16 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.jdom2.Document;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLFileParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
+import com.wandrell.testing.pattern.framework.util.ResourceUtils;
 
 /**
  * Integration tests for {@link XMLFileParser}.
@@ -86,8 +84,7 @@ public final class ITXMLFileParser {
 
         };
 
-        reader = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ)));
+        reader = ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ);
         value = parserB.parse(parserA.parse(reader));
 
         Assert.assertEquals(value, (Integer) 1);

@@ -31,11 +31,11 @@ import org.jdom2.Document;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
+import com.wandrell.testing.pattern.framework.util.ResourceUtils;
 
 /**
  * Integration tests for {@link ValidatedXMLFileParser} with XSD validation.

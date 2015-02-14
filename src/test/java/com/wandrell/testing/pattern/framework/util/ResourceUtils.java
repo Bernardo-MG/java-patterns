@@ -21,14 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern;
+package com.wandrell.testing.pattern.framework.util;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
 
 /**
@@ -76,6 +79,22 @@ public final class ResourceUtils {
     }
 
     /**
+     * Creates a {@code Reader} pointing to the file specified by the path, if
+     * it exists.
+     * <p>
+     * If any problem occurs during this process a {@code RuntimeException} is
+     * thrown, or an {@code IllegalArgumentException} if the file is not found.
+     * 
+     * @param path
+     *            the path to transform
+     * @return an {@code InputStream} pointing to the path
+     */
+    public static final Reader getClassPathReader(final String path) {
+        return new BufferedReader(new InputStreamReader(
+                getClassPathInputStream(path)));
+    }
+
+    /**
      * Creates an {@code URL} pointing to the file specified by the path, if it
      * exists.
      * 
@@ -83,7 +102,7 @@ public final class ResourceUtils {
      *            the path to transform
      * @return an URL pointing inside the class path
      */
-    public static final URL getClassPathURL(final String path) {
+    private static final URL getClassPathURL(final String path) {
         checkNotNull(path, "Received a null pointer as path");
 
         return ResourceUtils.class.getClassLoader().getResource(path);

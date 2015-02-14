@@ -31,6 +31,7 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,10 +44,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.outputter.Outputter;
 import com.wandrell.pattern.outputter.xml.XMLOutputter;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
+import com.wandrell.testing.pattern.framework.util.ResourceUtils;
 
 /**
  * Integration tests for {@link XMLOutputter}, checking that XML files with no
@@ -142,15 +143,14 @@ public final class ITNoValidationXMLOutputter {
      *             never, this is a required declaration
      */
     private final void assertEquals(final Path path) throws Exception {
-        final InputStream streamTest;     // Stream to the created file
-        final InputStream streamExpected; // Stream to the expected file
+        final InputStream streamTest; // Stream to the created file
+        final Reader readerExpected;  // Reader to the expected file
 
         streamTest = new FileInputStream(path.toFile());
-        streamExpected = ResourceUtils
-                .getClassPathInputStream(XMLConf.INTEGER_EXPECTED);
+        readerExpected = ResourceUtils
+                .getClassPathReader(XMLConf.INTEGER_EXPECTED);
 
-        Assert.assertTrue(XMLUnit.compareXML(
-                new InputStreamReader(streamExpected),
+        Assert.assertTrue(XMLUnit.compareXML(readerExpected,
                 new InputStreamReader(streamTest)).identical());
     }
 

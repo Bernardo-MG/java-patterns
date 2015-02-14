@@ -31,11 +31,11 @@ import org.apache.commons.io.IOUtils;
 import org.jdom2.Document;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
+import com.wandrell.testing.pattern.framework.util.ResourceUtils;
 
 /**
  * Integration tests for {@link ValidatedXMLFileParser}, checking that
@@ -76,8 +76,7 @@ public final class ITExceptionBadValidationFileSAXInputParser {
         parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
                 IOUtils.toInputStream(""));
 
-        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
-                .getClassPathInputStream(XMLConf.INTEGER_READ))));
+        parser.parse(ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ));
     }
 
     /**
@@ -94,8 +93,7 @@ public final class ITExceptionBadValidationFileSAXInputParser {
         parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
                 IOUtils.toInputStream(""));
 
-        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
-                .getClassPathInputStream(XMLConf.INTEGER_READ))));
+        parser.parse(ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ));
     }
 
     /**
@@ -130,8 +128,7 @@ public final class ITExceptionBadValidationFileSAXInputParser {
         parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
                 IOUtils.toInputStream(""));
 
-        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
-                .getClassPathInputStream(XMLConf.INTEGER_READ))));
+        parser.parse(ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ));
     }
 
 }

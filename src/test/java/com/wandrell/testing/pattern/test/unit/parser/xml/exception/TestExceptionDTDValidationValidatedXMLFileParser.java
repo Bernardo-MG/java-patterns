@@ -27,12 +27,12 @@ import java.io.Reader;
 
 import org.jdom2.Document;
 
-import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
+import com.wandrell.testing.pattern.framework.util.ResourceUtils;
 
 /**
  * Unit tests for {@link ValidatedXMLFileParser} implementing

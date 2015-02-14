@@ -25,8 +25,6 @@ package com.wandrell.testing.pattern.framework.test.integration.parser.xml;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.jdom2.Document;
@@ -34,10 +32,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
+import com.wandrell.testing.pattern.framework.util.ResourceUtils;
 
 /**
  * Abstract integration tests for {@link AbstractAttributesFilterXMLFileParser}.
@@ -197,16 +195,14 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     public final void testReader_FilterChanges_Adapts() throws Exception {
         Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)), total);
 
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 WITH_ATTRIBUTE1_NO_ATTRIBUTE1);
     }
@@ -221,8 +217,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     public final void testReader_NoFilter_ReturnsAll() throws Exception {
         final Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)), total);
     }
@@ -238,8 +233,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     public final void testReader_Rejects1_ReturnsPart() throws Exception {
         final Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
 
@@ -258,8 +252,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     public final void testReader_Rejects1And2_ReturnsPart() throws Exception {
         final Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
@@ -279,8 +272,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
             throws Exception {
         final Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_NOT_EXISTING);
 
@@ -299,8 +291,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     public final void testReader_Requires1_ReturnsPart() throws Exception {
         final Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
 
@@ -319,8 +310,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     public final void testReader_Requires1And2_ReturnsPart() throws Exception {
         final Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
@@ -340,8 +330,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
             throws Exception {
         final Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
@@ -362,8 +351,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
             throws Exception {
         final Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
         getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
@@ -383,8 +371,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
             throws Exception {
         final Reader r; // Reader for the test data
 
-        r = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(getPath())));
+        r = ResourceUtils.getClassPathReader(getPath());
 
         getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_NOT_EXISTING);
 

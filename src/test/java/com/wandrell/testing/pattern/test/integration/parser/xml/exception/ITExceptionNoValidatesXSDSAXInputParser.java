@@ -23,8 +23,6 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml.exception;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.jdom2.Document;
@@ -32,11 +30,11 @@ import org.jdom2.input.JDOMParseException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
+import com.wandrell.testing.pattern.framework.util.ResourceUtils;
 
 /**
  * Integration tests for {@link ValidatedXMLFileParser} using XSD validation.
@@ -74,8 +72,8 @@ public final class ITExceptionNoValidatesXSDSAXInputParser {
      */
     @Test(expectedExceptions = JDOMParseException.class)
     public final void testParse_NotValidates_ThrowsException() throws Exception {
-        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
-                .getClassPathInputStream(XMLConf.INTEGER_NO_VALIDATES))));
+        parser.parse(ResourceUtils
+                .getClassPathReader(XMLConf.INTEGER_NO_VALIDATES));
     }
 
     /**
