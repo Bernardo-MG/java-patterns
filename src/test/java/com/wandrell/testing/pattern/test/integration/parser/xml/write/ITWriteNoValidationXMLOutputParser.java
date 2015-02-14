@@ -44,12 +44,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
-import com.wandrell.pattern.parser.OutputParser;
-import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
+import com.wandrell.pattern.outputter.Outputter;
+import com.wandrell.pattern.outputter.xml.XMLOutputter;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
- * Integration tests for {@link XMLOutputParser}, checking XML files with no
+ * Integration tests for {@link XMLOutputter}, checking XML files with no
  * validation are created.
  * <p>
  * Checks the following cases:
@@ -60,7 +60,7 @@ import com.wandrell.testing.pattern.framework.conf.XMLConf;
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see XMLOutputParser
+ * @see XMLOutputter
  */
 public final class ITWriteNoValidationXMLOutputParser {
 
@@ -69,19 +69,19 @@ public final class ITWriteNoValidationXMLOutputParser {
      * <p>
      * Used to avoid name collisions when creating test files.
      */
-    private static final Random    random        = new Random();
+    private static final Random random        = new Random();
     /**
      * Template path for the tests.
      */
-    private static final String    TEMPLATE_PATH = "target/test_write_Stream_";
+    private static final String TEMPLATE_PATH = "target/test_write_Stream_";
     /**
      * Parser being tested.
      */
-    private OutputParser<Document> parser;
+    private Outputter<Document> parser;
     /**
      * Value to parse.
      */
-    private Document               value;
+    private Document            value;
 
     /**
      * Default constructor.
@@ -106,7 +106,7 @@ public final class ITWriteNoValidationXMLOutputParser {
             stream = new BufferedOutputStream(new FileOutputStream(
                     path.toFile()));
 
-            parser.write(stream, value);
+            parser.write(value, stream);
         } catch (final Exception e) {
             Assert.fail(e.getMessage());
         }
@@ -128,7 +128,7 @@ public final class ITWriteNoValidationXMLOutputParser {
 
         try {
             writer = new BufferedWriter(new FileWriter(path.toFile()));
-            parser.write(writer, value);
+            parser.write(value, writer);
         } catch (final Exception e) {
             Assert.fail(e.getMessage());
         }
@@ -178,7 +178,7 @@ public final class ITWriteNoValidationXMLOutputParser {
         value.getRootElement().addContent(
                 new Element(XMLConf.NODE_VALUE).addContent("1"));
 
-        parser = new XMLOutputParser();
+        parser = new XMLOutputter();
     }
 
 }

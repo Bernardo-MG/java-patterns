@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.parser;
+package com.wandrell.pattern.outputter;
 
 import java.io.OutputStream;
 import java.io.Writer;
@@ -45,21 +45,21 @@ import java.io.Writer;
  * @param <V>
  *            the type to be parsed into the output
  */
-public interface OutputParser<V> {
+public interface Outputter<V> {
 
     /**
      * Parses an object and sends it through an {@code OutputStream}.
      * <p>
      * The stream is expected to be closed when the operation ends.
      * 
-     * @param stream
-     *            {@code OutputStream} to receive the parsed object
      * @param value
      *            object to parse
+     * @param stream
+     *            {@code OutputStream} to receive the parsed object
      * @throws Exception
      *             when writing causes an error
      */
-    public void write(final OutputStream stream, final V value)
+    public void write(final V value, final OutputStream stream)
             throws Exception;
 
     /**
@@ -67,13 +67,13 @@ public interface OutputParser<V> {
      * <p>
      * The reader is expected to be closed when the operation ends.
      * 
-     * @param writer
-     *            {@code Writer} to receive the parsed object
      * @param value
      *            object to parse
+     * @param writer
+     *            {@code Writer} to receive the parsed object
      * @throws Exception
      *             when writing causes an error
      */
-    public void write(final Writer writer, final V value) throws Exception;
+    public void write(final V value, final Writer writer) throws Exception;
 
 }

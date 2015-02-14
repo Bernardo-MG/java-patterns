@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.parser.xml.output;
+package com.wandrell.pattern.outputter.xml;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -34,9 +34,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 
-import com.wandrell.pattern.parser.OutputParser;
+import com.wandrell.pattern.outputter.Outputter;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
@@ -54,7 +53,7 @@ import com.wandrell.pattern.parser.xml.XMLValidationType;
  * @param <V>
  *            the type to be parsed
  */
-public final class XMLOutputParser implements OutputParser<Document> {
+public final class XMLOutputter implements Outputter<Document> {
 
     /**
      * The name of the element registering the validation file.
@@ -96,7 +95,7 @@ public final class XMLOutputParser implements OutputParser<Document> {
      *            the parser for creating a {@code Document} from the received
      *            value
      */
-    public XMLOutputParser() {
+    public XMLOutputter() {
         this(XMLValidationType.NONE, "");
     }
 
@@ -111,7 +110,7 @@ public final class XMLOutputParser implements OutputParser<Document> {
      * @param path
      *            path to the validation file
      */
-    public XMLOutputParser(final XMLValidationType validation, final String path) {
+    public XMLOutputter(final XMLValidationType validation, final String path) {
         super();
 
         checkNotNull(validation, "Received a null pointer as validation type");
@@ -125,45 +124,47 @@ public final class XMLOutputParser implements OutputParser<Document> {
     /**
      * Parses an object and sends it through an {@code OutputStream}.
      * 
-     * @param stream
-     *            {@code OutputStream} to receive the parsed object
      * @param value
      *            object to parse
+     * @param stream
+     *            {@code OutputStream} to receive the parsed object
      * @throws Exception
      *             when there's any problem writing
      */
     @Override
-    public final void write(final OutputStream stream, final Document value)
+    public final void write(final Document value, final OutputStream stream)
             throws Exception {
 
-        checkNotNull(stream, "Received a null pointer as output stream");
         checkNotNull(value, "Received a null pointer as value");
+        checkNotNull(stream, "Received a null pointer as output stream");
 
         setValidation(value);
 
-        new XMLOutputter(Format.getPrettyFormat()).output(value, stream);
+        new org.jdom2.output.XMLOutputter(Format.getPrettyFormat()).output(
+                value, stream);
     }
 
     /**
      * Parses an object and sends it through a {@code Writer}.
      * 
-     * @param writer
-     *            {@code Writer} to receive the parsed object
      * @param value
      *            object to parse
+     * @param writer
+     *            {@code Writer} to receive the parsed object
      * @throws Exception
      *             when there's any problem writing
      */
     @Override
-    public final void write(final Writer writer, final Document value)
+    public final void write(final Document value, final Writer writer)
             throws Exception {
 
-        checkNotNull(writer, "Received a null pointer as writer");
         checkNotNull(value, "Received a null pointer as value");
+        checkNotNull(writer, "Received a null pointer as writer");
 
         setValidation(value);
 
-        new XMLOutputter(Format.getPrettyFormat()).output(value, writer);
+        new org.jdom2.output.XMLOutputter(Format.getPrettyFormat()).output(
+                value, writer);
     }
 
     /**

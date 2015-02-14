@@ -36,12 +36,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.parser.OutputParser;
-import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
+import com.wandrell.pattern.outputter.Outputter;
+import com.wandrell.pattern.outputter.xml.XMLOutputter;
 
 /**
- * Unit tests for {@link XMLOutputParser}, checking that exceptions are thrown
- * when errors occur during writing.
+ * Unit tests for {@link XMLOutputter}, checking that exceptions are thrown when
+ * errors occur during writing.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -51,14 +51,14 @@ import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see XMLOutputParser
+ * @see XMLOutputter
  */
 public final class TestExceptionWriteNoValidationXMLOutputParser {
 
     /**
      * Parser being tested.
      */
-    private OutputParser<Document> parser;
+    private Outputter<Document> parser;
 
     /**
      * Default constructor.
@@ -87,7 +87,7 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
             Assert.fail(e.getMessage());
         }
 
-        parser.write(stream, new Document());
+        parser.write(new Document(), stream);
     }
 
     /**
@@ -111,7 +111,7 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
             Assert.fail(e.getMessage());
         }
 
-        parser.write(writer, new Document());
+        parser.write(new Document(), writer);
     }
 
     /**
@@ -119,7 +119,7 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
      */
     @BeforeClass
     private final void initialize() {
-        parser = new XMLOutputParser();
+        parser = new XMLOutputter();
     }
 
 }

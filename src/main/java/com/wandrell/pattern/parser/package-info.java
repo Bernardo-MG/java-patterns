@@ -22,17 +22,13 @@
  * SOFTWARE.
  */
 /**
- * Provides a collection parsers.
+ * Provides interfaces and basic implementations for the parser pattern.
  * <p>
- * The parser patterns offers a way to transform one structure into another,
- * usually an object into a data structure, or the other way around.
+ * This pattern allows to convert one structure to another, both containing the
+ * same or similar data. And it is represented by the {@link Parser} interface.
  * <p>
- * This way the actual process of transformation is hidden, all that it is
- * needed to use is an adequate instance of the parser.
- * <p>
- * Currently, the parsers offered use I/O structures for one of the sides of the
- * operation. These parsers are {@link InputParser} and {@link OutputParser}
- * interfaces.
+ * When working with common data structures, such as XML or JSON, this interface
+ * also serves to hide the actual implementation being used.
  */
 package com.wandrell.pattern.parser;
 

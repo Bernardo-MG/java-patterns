@@ -36,12 +36,12 @@ import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.parser.OutputParser;
+import com.wandrell.pattern.outputter.Outputter;
+import com.wandrell.pattern.outputter.xml.XMLOutputter;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
 
 /**
- * Unit tests for {@link XMLOutputParser}, checking that the
+ * Unit tests for {@link XMLOutputter}, checking that the
  * {@code JDOMDocumentOutputProcessor} module is called when reading.
  * <p>
  * Checks the following cases:
@@ -54,7 +54,7 @@ import com.wandrell.pattern.parser.xml.output.XMLOutputParser;
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see XMLOutputParser
+ * @see XMLOutputter
  */
 public final class TestComponentCallsJDOMXMLOutputParser {
 
@@ -81,19 +81,19 @@ public final class TestComponentCallsJDOMXMLOutputParser {
             throws Exception {
         final OutputStream stream;         // Stream for the output file
         final Parser<Object, Document> processor;// Output processor
-        final OutputParser<Document> parser; // Tested parser
+        final Outputter<Document> parser; // Tested parser
 
         processor = Mockito.mock(Parser.class);
 
         Mockito.when(processor.parse(Matchers.any()))
                 .thenReturn(new Document());
 
-        parser = new XMLOutputParser();
+        parser = new XMLOutputter();
 
         stream = new BufferedOutputStream(new PipedOutputStream(
                 new PipedInputStream()));
 
-        parser.write(stream, processor.parse(new Integer(0)));
+        parser.write(processor.parse(new Integer(0)), stream);
 
         Mockito.verify(processor, Mockito.times(1)).parse(Matchers.any());
         Mockito.verify(processor, Mockito.only()).parse(Matchers.any());
@@ -115,20 +115,20 @@ public final class TestComponentCallsJDOMXMLOutputParser {
             throws Exception {
         final Writer writer;               // Writer for the output file
         final Parser<Object, Document> processor;// Output processor
-        final OutputParser<Document> parser; // Tested parser
+        final Outputter<Document> parser; // Tested parser
 
         processor = Mockito.mock(Parser.class);
 
         Mockito.when(processor.parse(Matchers.any()))
                 .thenReturn(new Document());
 
-        parser = new XMLOutputParser();
+        parser = new XMLOutputter();
 
         writer = new BufferedWriter(new OutputStreamWriter(
                 new BufferedOutputStream(new PipedOutputStream(
                         new PipedInputStream()))));
 
-        parser.write(writer, processor.parse(new Integer(0)));
+        parser.write(processor.parse(new Integer(0)), writer);
 
         Mockito.verify(processor, Mockito.times(1)).parse(Matchers.any());
         Mockito.verify(processor, Mockito.only()).parse(Matchers.any());

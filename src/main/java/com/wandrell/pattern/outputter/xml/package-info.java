@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 /**
- * Provides implementations of {@link com.wandrell.pattern.parser.OutputParser
+ * Provides implementations of {@link com.wandrell.pattern.outputter.Outputter
  * OutputParser} for XML files.
  * <p>
- * The main class is {@link XMLOutputParser}, which is capable of creating XML
+ * The main class is {@link XMLOutputter}, which is capable of creating XML
  * files adding, if needed, XSD or DTD validation info.
  */
-package com.wandrell.pattern.parser.xml.output;
+package com.wandrell.pattern.outputter.xml;
 
