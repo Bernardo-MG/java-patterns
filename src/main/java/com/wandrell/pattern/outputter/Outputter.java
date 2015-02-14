@@ -27,53 +27,44 @@ import java.io.OutputStream;
 import java.io.Writer;
 
 /**
- * Interface for parsing Java objects for output operations in a generic way,
- * hiding the actual API being used. For handling input operations check
- * {@link InputParser}.
+ * Interface for sending Java objects through output operations. Commonly this
+ * means writing an object into a file.
  * <p>
- * The parsing is expected to send an object through the output, and to close
- * that same output once the operation is finished.
- * <p>
- * Nothing more is required from the implementations of this interface, as it is
- * meant to serve as an adapter for any API.
- * <p>
- * That is the same reason for using generic exceptions on the writing methods.
- * As the API is not known, the exceptions being thrown are also unknown.
+ * It is expected to close the output object once the operation is finished.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
  * @param <V>
- *            the type to be parsed into the output
+ *            the type to be sent into the output
  */
 public interface Outputter<V> {
 
     /**
-     * Parses an object and sends it through an {@code OutputStream}.
+     * Sends an object through an {@code OutputStream}.
      * <p>
      * The stream is expected to be closed when the operation ends.
      * 
      * @param value
-     *            object to parse
+     *            object to send
      * @param stream
      *            {@code OutputStream} to receive the parsed object
      * @throws Exception
-     *             when writing causes an error
+     *             when sending the object causes an error
      */
-    public void write(final V value, final OutputStream stream)
-            throws Exception;
+    public void send(final V value, final OutputStream stream) throws Exception;
 
     /**
-     * Parses an object and sends it through a {@code Writer}.
+     * Sends an object through a {@code Writer}.
      * <p>
      * The reader is expected to be closed when the operation ends.
      * 
      * @param value
-     *            object to parse
+     *            object to send
      * @param writer
      *            {@code Writer} to receive the parsed object
      * @throws Exception
-     *             when writing causes an error
+     *             when sending the object causes an error
      */
-    public void write(final V value, final Writer writer) throws Exception;
+    public void send(final V value, final Writer writer) throws Exception;
 
 }

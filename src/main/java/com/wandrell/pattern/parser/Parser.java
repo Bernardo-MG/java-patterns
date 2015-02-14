@@ -26,8 +26,14 @@ package com.wandrell.pattern.parser;
 /**
  * Interface for the parser pattern.
  * <p>
- * This pattern allows to transform one object into another, being one of them
- * usually a data structure, and the other an instance of a concrete type.
+ * This pattern allows to transform one structure to another, both containing
+ * the same or similar data.
+ * <p>
+ * Nothing can assure before hand if this is a lossfull or lossless parser,
+ * meaning that data is lost or not during the parsing process.
+ * <p>
+ * If a complex parsing is required, it is better to create several parsers and
+ * chain their results than creating a big single parser.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0

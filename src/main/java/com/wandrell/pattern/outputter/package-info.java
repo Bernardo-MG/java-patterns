@@ -22,26 +22,14 @@
  * SOFTWARE.
  */
 /**
- * Provides interfaces and basic implementations for the parser pattern.
+ * Provides interfaces and basic implementations for outputters.
  * <p>
- * This pattern allows to transform one structure to another, both containing
- * the same or similar data. And it is represented by the {@link Parser}
- * interface.
+ * An outputter sends a data structure through an output operation.
  * <p>
- * Usually this is required when reading the contents of a file into the
- * application, in which case a {@code Reader}, {@code InputStream} or similar
- * class is used as the input.
+ * This solves the need of writing a data structure to a file, for example.
  * <p>
- * If the file being parsed is of a common data type, such as XML or JSON, this
- * interface also serves to hide the actual implementation being used, working
- * as an adapter.
- * <p>
- * Parsers can be used to parse the result of another parser, creating a chain
- * of parser, which can help to simplify complex parsing procedures. The basic
- * implementations contained in the library are meant to be the first step in
- * such a chain.
- * <p>
- * The {@code xml} package contains parsers for XML files.
+ * Basic XML outputters for XML files are included in the {@code xml} package.
+ * These are based on JDOM2 and meant to ease the use of this library.
  */
-package com.wandrell.pattern.parser;
+package com.wandrell.pattern.outputter;
 

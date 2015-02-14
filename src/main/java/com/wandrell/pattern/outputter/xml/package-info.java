@@ -23,10 +23,11 @@
  */
 /**
  * Provides implementations of {@link com.wandrell.pattern.outputter.Outputter
- * OutputParser} for XML files.
+ * Outputter} for XML files.
  * <p>
- * The main class is {@link XMLOutputter}, which is capable of creating XML
- * files adding, if needed, XSD or DTD validation info.
+ * {@link XMLOutputter} sends a JDOM2 {@link org.jdom2.Document Document}
+ * through and output class. As noted, it is based on JDOM2, and is meant to
+ * ease it's use.
  */
 package com.wandrell.pattern.outputter.xml;
 

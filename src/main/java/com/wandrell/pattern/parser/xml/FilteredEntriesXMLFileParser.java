@@ -26,12 +26,14 @@ package com.wandrell.pattern.parser.xml;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.Collection;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
@@ -41,10 +43,10 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.MoreObjects;
 
 /**
- * Implementation of {@code AbstractFilteredAttributesXMLInputParser} using the
- * which filters only nodes with a set name.
+ * Implementation of {@code AbstractAttributesFilterXMLFileParser} which filters
+ * only nodes with an specific name.
  * <p>
- * All the nodes with a specific name are acquired through an XPath query, then
+ * All the nodes with this name are acquired through an XPath query, then
  * filtered according to the attributes they have.
  * <p>
  * Any node not having all the required attributes set as {@code true}, or
@@ -55,13 +57,7 @@ import com.google.common.base.MoreObjects;
  * attributes.
  * <p>
  * After being filtered all these nodes, and their subnodes, will be combined
- * into a single {@code Document} and processed as normal.
- * <p>
- * This parser has been created to generate test parameters from an XML file,
- * and is indirectly used by {@link com.wandrell.util.TestUtils TestUtils}.
- * <p>
- * Due to the way the filter works, it can fit into any process which requires
- * generating a collection of values from several nodes.
+ * into a single {@code Document} before returning it.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
@@ -82,8 +78,8 @@ public final class FilteredEntriesXMLFileParser extends
      * This is just to use inheritance by composition, and does nothing apart
      * from returning the {@code Document} it generates.
      * <p>
-     * The parser is based on the SAX API, allowing to use validation, which is
-     * required if default attribute values are to be used.
+     * The parser allows applying validation, which is required if default
+     * attribute values are to be used.
      */
     private final ValidatedXMLFileParser baseParser;
     /**
@@ -99,6 +95,8 @@ public final class FilteredEntriesXMLFileParser extends
     private final String                 nodeName;
     /**
      * The XPath expression.
+     * <p>
+     * This will be created after any change to the required attributes.
      */
     private XPathExpression<Element>     xpath;
 
@@ -114,8 +112,7 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * Constructs a parser which will filter nodes with the specified name, and
-     * use the specified processor.
+     * Constructs a parser which will filter nodes with the specified name.
      * 
      * @param node
      *            the name of the nodes to filter
@@ -131,8 +128,8 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * Constructs a parser which will filter nodes with the specified name, and
-     * use the specified processor, applying the specified validation.
+     * Constructs a parser which will filter nodes with the specified name,
+     * applying the specified validation.
      * 
      * @param validation
      *            the validation type
@@ -161,8 +158,20 @@ public final class FilteredEntriesXMLFileParser extends
         return getBaseParser().getValidationType();
     }
 
+    /**
+     * Parses the XML file from the input into a JDOM2 {@code Document}.
+     * 
+     * @param input
+     *            {@code Reader} for the XML file
+     * @return a {@code Document} with the XML contents
+     * @throws JDOMException
+     *             when parsing causes an error
+     * @throws IOException
+     *             when and IO exception stops the parsing
+     */
     @Override
-    public final Document parse(final Reader input) throws Exception {
+    public final Document parse(final Reader input) throws JDOMException,
+            IOException {
         return filter(getBaseParser().parse(input));
     }
 

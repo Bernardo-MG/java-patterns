@@ -35,18 +35,18 @@ import org.jdom2.Document;
 import com.wandrell.pattern.parser.Parser;
 
 /**
- * Abstract {@code InputParser} for parsing XML files and filtering the
- * contained data based on boolean attributes.
+ * Abstract {@code Parser} for XML files, allowing filtering the contained data
+ * based on boolean attributes.
  * <p>
- * The exact way the filtering is applied depends of each implementation.
+ * The exact way the filtering is applied will depend on the implementation.
  * <p>
  * This class just stores two collections of attributes names: one for the
  * required ones, which should be set to {@code true}, and another for the
  * rejected ones, which should be set to {@code false}.
  * <p>
  * All the nodes which do not fit this criteria are expected be ignored when
- * parsing the XML file. What happens if a node lacks any of the attributes will
- * depend on the implementation.
+ * parsing the XML file. What happens if one node lacks any of the attributes
+ * will depend on the implementation.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0

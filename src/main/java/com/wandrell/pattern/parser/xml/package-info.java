@@ -22,19 +22,18 @@
  * SOFTWARE.
  */
 /**
- * Provides implementations of {@link com.wandrell.pattern.parser.InputParser
- * InputParser} for XML files.
+ * Provides implementations of {@link com.wandrell.pattern.parser.Parser Parser}
+ * for XML files.
  * <p>
- * Two main implementations are offered, {@link SAXInputParser} based on the SAX
- * API, and {@code JDOMStAXInputParser} based on the StAX API. Both make use of
- * the JDOM library.
+ * {@link XMLFileParser} is a faster parser, where no validation is applied,
+ * while {@link ValidatedXMLFileParser} applies XSD or DTD validation files, but
+ * in exchange can be slower.
  * <p>
- * The first allows the use of validation files, while the second does not, but
- * in exchange it is expected to be faster.
+ * Additionally there is the {@link FilteredEntriesXMLFileParser}, which filters
+ * the file's contents, returning only a part of it.
  * <p>
- * Additionally to this, there is the {@code FilteredEntriesXMLInputParser},
- * which allows to filter the XML file, parsing only a selected group of nodes,
- * generated from applying a filter to the parsed XML file.
+ * They all depend on the JDOM2 library, as the value returned from by the
+ * parsers is a {@link org.jdom2.Document Document}.
  */
 package com.wandrell.pattern.parser.xml;
 

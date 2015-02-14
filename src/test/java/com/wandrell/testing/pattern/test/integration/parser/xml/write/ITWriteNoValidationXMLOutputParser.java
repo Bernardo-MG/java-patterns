@@ -106,7 +106,7 @@ public final class ITWriteNoValidationXMLOutputParser {
             stream = new BufferedOutputStream(new FileOutputStream(
                     path.toFile()));
 
-            parser.write(value, stream);
+            parser.send(value, stream);
         } catch (final Exception e) {
             Assert.fail(e.getMessage());
         }
@@ -128,7 +128,7 @@ public final class ITWriteNoValidationXMLOutputParser {
 
         try {
             writer = new BufferedWriter(new FileWriter(path.toFile()));
-            parser.write(value, writer);
+            parser.send(value, writer);
         } catch (final Exception e) {
             Assert.fail(e.getMessage());
         }

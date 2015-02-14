@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -48,20 +47,24 @@ import org.xml.sax.InputSource;
 import com.wandrell.pattern.parser.Parser;
 
 /**
- * Implementation of {link InputParser} parsing from an XML file using the SAX
- * API, with the help of the JDOM library.
+ * Implementation of {@link Parser} for XML files, which can apply XSD or DTD
+ * validation files.
  * <p>
- * For this a {@link org.jdom2.Document Document} is built from the input, which
- * is then sent to a {@link JDOMDocumentDecoder}, which will create the returned
- * object from it.
+ * While the validation can check if the parsed file is valid or not, it can
+ * also be used to apply default values.
  * <p>
- * Validation can be applied to the parsed file, in the form of XSD or DTD
- * files.
+ * A {@code Reader} to the file is received by the parser, and then transformed
+ * into a {@link org.jdom2.Document Document}, which is the returned result.
+ * <p>
+ * This parser is meant for those cases where validation is needed. If you don't
+ * need it, think about using {@code XMLFileParser}, which may be faster.
+ * <p>
+ * The parsing process uses JDOM2 library SAX API classes.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
  * @param <V>
- *            the type to be parsed from the input
+ *            the type to be parsed from the XML file
  */
 public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
 
@@ -70,7 +73,7 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
      */
     private static final String ENCODING = "UTF-8";
     /**
-     * Builder to transform the input into a {@code Document}.
+     * Builder to transform the {@code Reader} into a {@code Document}.
      * <p>
      * It is lazily instantiated.
      */
@@ -80,12 +83,12 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
      */
     private InputStream         streamValidation;
     /**
-     * The type of validation being used.
+     * The type of validation being applied.
      */
     private XMLValidationType   validationType;
 
     /**
-     * Constructs a parser with the specified processor and no validation.
+     * Constructs a parser with no validation.
      */
     public ValidatedXMLFileParser() {
         super();
@@ -94,7 +97,7 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
     }
 
     /**
-     * Constructs a parser with the specified processor and validation.
+     * Constructs a parser with the specified validation.
      * 
      * @param validation
      *            the validation type to use
@@ -123,6 +126,17 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
         return validationType;
     }
 
+    /**
+     * Parses the XML file from the input into a JDOM2 {@code Document}.
+     * 
+     * @param input
+     *            {@code Reader} for the XML file
+     * @return a {@code Document} with the XML contents
+     * @throws JDOMException
+     *             when parsing causes an error
+     * @throws IOException
+     *             when and IO exception stops the parsing
+     */
     @Override
     public final Document parse(final Reader input) throws JDOMException,
             IOException {
@@ -130,7 +144,7 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
     }
 
     /**
-     * Sets the validation to be used, along the validation source.
+     * Sets the validation type and file to be used.
      * 
      * @param type
      *            the validation type
@@ -150,7 +164,7 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
 
     /**
      * Returns the {@code SAXBuilder} to be used when creating a
-     * {@code Document} from the parsed {@code InputStream} or {@code Reader}.
+     * {@code Document} from the parsed {@code Reader}.
      * <p>
      * It will be created the first time it is required.
      * 
@@ -252,7 +266,7 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
      */
     private final XMLReaderJDOMFactory getXSDValidationFactory() {
         final XMLReaderJDOMFactory factoryValidation;
-        final Source[] sources;
+        final Source[] sources; // Sources for the validation files
 
         try {
             sources = new Source[1];
@@ -261,9 +275,7 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
                             getEncoding())));
 
             factoryValidation = new XMLReaderXSDFactory(sources);
-        } catch (final JDOMException e) {
-            throw new RuntimeException(e);
-        } catch (final UnsupportedEncodingException e) {
+        } catch (final Exception e) {
             throw new RuntimeException(e);
         }
 

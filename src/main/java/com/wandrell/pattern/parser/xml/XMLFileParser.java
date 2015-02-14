@@ -23,7 +23,6 @@
  */
 package com.wandrell.pattern.parser.xml;
 
-import java.io.IOException;
 import java.io.Reader;
 
 import javax.xml.stream.XMLInputFactory;
@@ -37,24 +36,25 @@ import org.jdom2.input.StAXStreamBuilder;
 import com.wandrell.pattern.parser.Parser;
 
 /**
- * Implementation of {link InputParser} parsing an XML file using the StAX API,
- * with the help of the JDOM library.
+ * Implementation of {@link Parser} for XML files, applying no validation.
  * <p>
- * For this a {@link org.jdom2.Document Document} is created from the input,
- * which is then sent to a {@link JDOMDocumentDecoder}, which will create the
- * returned object from it.
+ * A {@code Reader} to the file is received by the parser, and then transformed
+ * into a {@link org.jdom2.Document Document}, which is the returned result.
  * <p>
- * No validation can be applied.
+ * No validation can be applied to the parsing. If you need validation, to for
+ * example apply default values, use {@link ValidatedXMLFileParser}.
+ * <p>
+ * The parsing process uses JDOM2 library StAX API classes.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
  * @param <V>
- *            the type to be parsed from the input
+ *            the type to be parsed from the XML file
  */
 public final class XMLFileParser implements Parser<Reader, Document> {
 
     /**
-     * Builder to transform the input into a {@code Document}.
+     * Builder to transform the {@code Reader} into a {@code Document}.
      * <p>
      * It is lazily instantiated.
      */
@@ -67,19 +67,27 @@ public final class XMLFileParser implements Parser<Reader, Document> {
         super();
     }
 
+    /**
+     * Parses the XML file from the input into a JDOM2 {@code Document}.
+     * 
+     * @param input
+     *            {@code Reader} for the XML file
+     * @return a {@code Document} with the XML contents
+     * @throws JDOMException
+     *             when parsing causes an error
+     */
     @Override
-    public final Document parse(final Reader input) throws JDOMException,
-            IOException {
+    public final Document parse(final Reader input) throws JDOMException {
         return getBuilder().build(getXMLReader(input));
     }
 
     /**
-     * Returns the {@code SAXBuilder} to be used when creating a
-     * {@code Document} from the parsed {@code InputStream} or {@code Reader}.
+     * Returns the {@code StAXStreamBuilder} to be used when creating a
+     * {@code Document} from the parsed {@code Reader}.
      * <p>
      * It will be created the first time it is required.
      * 
-     * @return the {@code SAXBuilder} used
+     * @return the {@code StAXStreamBuilder} used
      */
     private final StAXStreamBuilder getBuilder() {
         if (builder == null) {
@@ -90,14 +98,14 @@ public final class XMLFileParser implements Parser<Reader, Document> {
     }
 
     /**
-     * Returns a {@code Reader} prepared for the StAX parsing process.
+     * Prepares a {@code Reader} for the StAX parsing process.
      * <p>
-     * It will be a stream based reader, instead of an event based one, to make
-     * the parsing process faster.
+     * The returned {@code Reader} will be a stream based reader, instead of an
+     * event based one, to make the parsing process faster.
      * 
      * @param reader
-     *            the base {@code Reader} to use as source
-     * @return a {@code XMLStreamReader} for the same data
+     *            the base {@code Reader} for the XML file
+     * @return a {@code XMLStreamReader} for the same file
      */
     private final XMLStreamReader getXMLReader(final Reader reader) {
         final XMLInputFactory factory;     // Factory to create the reader

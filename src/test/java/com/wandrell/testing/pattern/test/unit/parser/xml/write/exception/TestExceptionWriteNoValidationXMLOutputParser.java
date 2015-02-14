@@ -87,7 +87,7 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
             Assert.fail(e.getMessage());
         }
 
-        parser.write(new Document(), stream);
+        parser.send(new Document(), stream);
     }
 
     /**
@@ -111,7 +111,7 @@ public final class TestExceptionWriteNoValidationXMLOutputParser {
             Assert.fail(e.getMessage());
         }
 
-        parser.write(new Document(), writer);
+        parser.send(new Document(), writer);
     }
 
     /**

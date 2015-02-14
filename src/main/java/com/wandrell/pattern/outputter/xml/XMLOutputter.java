@@ -39,19 +39,16 @@ import com.wandrell.pattern.outputter.Outputter;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
- * Implementation of {@code OutputParser} parsing into an XML file.
+ * Implementation of {@code Outputter} parsing into an XML file.
  * <p>
- * For this a {@link org.jdom2.Document Document} is built from a received value
- * with the help of a {@link JDOMDocumentEncoder}, and then this is sent through
- * an IO operation.
+ * For this a {@link org.jdom2.Document Document} is received and then sent
+ * through an IO operation.
  * <p>
- * Validation can be applied to the parsed file, in the form of XSD or DTD
- * files. This information will be kept on the resulting file.
+ * Validation information can be set into the outputter. This will be saved on
+ * the resulting XML file along the other data.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @param <V>
- *            the type to be parsed
  */
 public final class XMLOutputter implements Outputter<Document> {
 
@@ -122,7 +119,7 @@ public final class XMLOutputter implements Outputter<Document> {
     }
 
     /**
-     * Parses an object and sends it through an {@code OutputStream}.
+     * Sends an object through an {@code OutputStream}.
      * 
      * @param value
      *            object to parse
@@ -132,7 +129,7 @@ public final class XMLOutputter implements Outputter<Document> {
      *             when there's any problem writing
      */
     @Override
-    public final void write(final Document value, final OutputStream stream)
+    public final void send(final Document value, final OutputStream stream)
             throws Exception {
 
         checkNotNull(value, "Received a null pointer as value");
@@ -145,7 +142,7 @@ public final class XMLOutputter implements Outputter<Document> {
     }
 
     /**
-     * Parses an object and sends it through a {@code Writer}.
+     * Sends an object through a {@code Writer}.
      * 
      * @param value
      *            object to parse
@@ -155,7 +152,7 @@ public final class XMLOutputter implements Outputter<Document> {
      *             when there's any problem writing
      */
     @Override
-    public final void write(final Document value, final Writer writer)
+    public final void send(final Document value, final Writer writer)
             throws Exception {
 
         checkNotNull(value, "Received a null pointer as value");

@@ -93,7 +93,7 @@ public final class TestComponentCallsJDOMXMLOutputParser {
         stream = new BufferedOutputStream(new PipedOutputStream(
                 new PipedInputStream()));
 
-        parser.write(processor.parse(new Integer(0)), stream);
+        parser.send(processor.parse(new Integer(0)), stream);
 
         Mockito.verify(processor, Mockito.times(1)).parse(Matchers.any());
         Mockito.verify(processor, Mockito.only()).parse(Matchers.any());
@@ -128,7 +128,7 @@ public final class TestComponentCallsJDOMXMLOutputParser {
                 new BufferedOutputStream(new PipedOutputStream(
                         new PipedInputStream()))));
 
-        parser.write(processor.parse(new Integer(0)), writer);
+        parser.send(processor.parse(new Integer(0)), writer);
 
         Mockito.verify(processor, Mockito.times(1)).parse(Matchers.any());
         Mockito.verify(processor, Mockito.only()).parse(Matchers.any());
