@@ -72,7 +72,14 @@ public final class TestCollectionRepository {
      */
     @BeforeMethod
     public final void cleanUp() {
-        for (final String entity : repository.getCollection(s -> true)) {
+        for (final String entity : repository.getCollection(new Filter<String>() {
+
+            @Override
+            final public Boolean isValid(final String entity) {
+                return true;
+            }
+
+        })) {
             repository.remove(entity);
         }
 
@@ -86,7 +93,7 @@ public final class TestCollectionRepository {
      */
     @BeforeClass
     public final void initialize() {
-        repository = new CollectionRepository<>(new LinkedHashSet<>());
+        repository = new CollectionRepository<>(new LinkedHashSet<String>());
     }
 
     /**
@@ -98,7 +105,14 @@ public final class TestCollectionRepository {
 
         repository.add("d");
 
-        entities = repository.getCollection(s -> true);
+        entities = repository.getCollection(new Filter<String>() {
+
+            @Override
+            final public Boolean isValid(final String entity) {
+                return true;
+            }
+
+        });
 
         Assert.assertEquals(entities.size(), 4);
         Assert.assertTrue(entities.contains("d"));
@@ -146,7 +160,14 @@ public final class TestCollectionRepository {
         entities.remove("b");
 
         Assert.assertEquals(entities.size(), 0);
-        Assert.assertEquals(repository.getCollection(s -> true).size(), 3);
+        Assert.assertEquals(repository.getCollection(new Filter<String>() {
+
+            @Override
+            final public Boolean isValid(final String entity) {
+                return true;
+            }
+
+        }).size(), 3);
     }
 
     /**
@@ -158,7 +179,14 @@ public final class TestCollectionRepository {
 
         repository.remove("b");
 
-        entities = repository.getCollection(s -> true);
+        entities = repository.getCollection(new Filter<String>() {
+
+            @Override
+            final public Boolean isValid(final String entity) {
+                return true;
+            }
+
+        });
 
         Assert.assertEquals(entities.size(), 2);
         Assert.assertTrue(!entities.contains("b"));
@@ -174,7 +202,14 @@ public final class TestCollectionRepository {
 
         repository.update("c");
 
-        entities = repository.getCollection(s -> true);
+        entities = repository.getCollection(new Filter<String>() {
+
+            @Override
+            final public Boolean isValid(final String entity) {
+                return true;
+            }
+
+        });
 
         Assert.assertEquals(entities.size(), 3);
         Assert.assertTrue(entities.contains("c"));
@@ -189,7 +224,14 @@ public final class TestCollectionRepository {
 
         repository.update("d");
 
-        entities = repository.getCollection(s -> true);
+        entities = repository.getCollection(new Filter<String>() {
+
+            @Override
+            final public Boolean isValid(final String entity) {
+                return true;
+            }
+
+        });
 
         Assert.assertEquals(entities.size(), 3);
         Assert.assertTrue(!entities.contains("d"));
