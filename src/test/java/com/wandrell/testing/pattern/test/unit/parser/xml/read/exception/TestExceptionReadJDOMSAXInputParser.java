@@ -34,7 +34,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.ValidatedXMLParser;
+import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 
 /**
  * Unit tests for {@link SAXInputParser}, checking that a
@@ -70,7 +70,7 @@ public final class TestExceptionReadJDOMSAXInputParser {
      */
     @BeforeTest
     public final void initialize() {
-        parser = new ValidatedXMLParser();
+        parser = new ValidatedXMLFileParser();
     }
 
     /**

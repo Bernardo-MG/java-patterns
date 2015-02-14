@@ -23,13 +23,13 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml.read.filtered;
 
-import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLParser;
-import com.wandrell.pattern.parser.xml.input.FilteredEntriesXMLInputParser;
+import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
+import com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.test.integration.parser.xml.read.AbstractITReadAbstractAttributesFilterXMLInputParser;
 
 /**
- * Integration tests for {@link FilteredEntriesXMLInputParser} implementing
+ * Integration tests for {@link FilteredEntriesXMLFileParser} implementing
  * {@code AbstractITReadAbstractAttributesFilterXMLInputParser} and no
  * validation.
  * <p>
@@ -38,7 +38,7 @@ import com.wandrell.testing.pattern.framework.test.integration.parser.xml.read.A
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see FilteredEntriesXMLInputParser
+ * @see FilteredEntriesXMLFileParser
  */
 public final class ITReadFilteredNoValidationFullFilteredXMLInputParser extends
         AbstractITReadAbstractAttributesFilterXMLInputParser<Integer> {
@@ -48,10 +48,10 @@ public final class ITReadFilteredNoValidationFullFilteredXMLInputParser extends
      * 
      * @return the parser to be tested
      */
-    private static final AbstractAttributesFilterXMLParser buildParser() {
-        final AbstractAttributesFilterXMLParser parser;
+    private static final AbstractAttributesFilterXMLFileParser buildParser() {
+        final AbstractAttributesFilterXMLFileParser parser;
 
-        parser = new FilteredEntriesXMLInputParser(XMLConf.NODE_ROOT_FILTER);
+        parser = new FilteredEntriesXMLFileParser(XMLConf.NODE_ROOT_FILTER);
 
         return parser;
     }

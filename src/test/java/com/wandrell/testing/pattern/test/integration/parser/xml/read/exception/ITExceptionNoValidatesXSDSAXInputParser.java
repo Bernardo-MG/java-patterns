@@ -34,8 +34,8 @@ import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
+import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.parser.xml.XMLValidationType;
-import com.wandrell.pattern.parser.xml.input.ValidatedXMLParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
@@ -83,7 +83,7 @@ public final class ITExceptionNoValidatesXSDSAXInputParser {
      */
     @BeforeClass
     private final void initialize() {
-        parser = new ValidatedXMLParser(XMLValidationType.XSD,
+        parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
                 ResourceUtils.getClassPathInputStream(XMLConf.XSD_VALIDATION));
     }
 

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.parser.xml.input;
+package com.wandrell.pattern.parser.xml;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -39,7 +39,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.MoreObjects;
-import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
  * Implementation of {@code AbstractFilteredAttributesXMLInputParser} using the
@@ -69,14 +68,14 @@ import com.wandrell.pattern.parser.xml.XMLValidationType;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class FilteredEntriesXMLInputParser extends
-        AbstractAttributesFilterXMLParser {
+public final class FilteredEntriesXMLFileParser extends
+        AbstractAttributesFilterXMLFileParser {
 
     /**
      * Logger being used to log the generated XPath expression.
      */
-    private static final Logger      LOGGER = LoggerFactory
-                                                    .getLogger(FilteredEntriesXMLInputParser.class);
+    private static final Logger          LOGGER = LoggerFactory
+                                                        .getLogger(FilteredEntriesXMLFileParser.class);
     /**
      * Base parser handling the creation of the {@code Document}.
      * <p>
@@ -86,22 +85,22 @@ public final class FilteredEntriesXMLInputParser extends
      * The parser is based on the SAX API, allowing to use validation, which is
      * required if default attribute values are to be used.
      */
-    private final ValidatedXMLParser baseParser;
+    private final ValidatedXMLFileParser baseParser;
     /**
      * The XPath expression as a string.
      */
-    private String                   expression;
+    private String                       expression;
     /**
      * The name of the nodes to filter.
      * <p>
      * All the nodes with this name will be acquires with an XPath query to be
      * filtered.
      */
-    private final String             nodeName;
+    private final String                 nodeName;
     /**
      * The XPath expression.
      */
-    private XPathExpression<Element> xpath;
+    private XPathExpression<Element>     xpath;
 
     /**
      * Returns the logger being used by this class.
@@ -121,14 +120,14 @@ public final class FilteredEntriesXMLInputParser extends
      * @param node
      *            the name of the nodes to filter
      */
-    public FilteredEntriesXMLInputParser(final String node) {
+    public FilteredEntriesXMLFileParser(final String node) {
         super();
 
         checkNotNull(node, "Received a null pointer as node");
 
         nodeName = node;
 
-        baseParser = new ValidatedXMLParser();
+        baseParser = new ValidatedXMLFileParser();
     }
 
     /**
@@ -142,7 +141,7 @@ public final class FilteredEntriesXMLInputParser extends
      * @param node
      *            the name of the nodes to filter
      */
-    public FilteredEntriesXMLInputParser(final XMLValidationType validation,
+    public FilteredEntriesXMLFileParser(final XMLValidationType validation,
             final InputStream validationStream, final String node) {
         super();
 
@@ -150,7 +149,7 @@ public final class FilteredEntriesXMLInputParser extends
 
         nodeName = node;
 
-        baseParser = new ValidatedXMLParser(validation, validationStream);
+        baseParser = new ValidatedXMLFileParser(validation, validationStream);
     }
 
     /**
@@ -261,7 +260,7 @@ public final class FilteredEntriesXMLInputParser extends
      * 
      * @return the base parser
      */
-    private final ValidatedXMLParser getBaseParser() {
+    private final ValidatedXMLFileParser getBaseParser() {
         return baseParser;
     }
 

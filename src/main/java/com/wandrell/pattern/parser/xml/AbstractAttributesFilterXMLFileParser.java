@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.parser.xml.input;
+package com.wandrell.pattern.parser.xml;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -51,7 +51,7 @@ import com.wandrell.pattern.parser.Parser;
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
  */
-public abstract class AbstractAttributesFilterXMLParser implements
+public abstract class AbstractAttributesFilterXMLFileParser implements
         Parser<Reader, Document> {
 
     /**
@@ -74,7 +74,7 @@ public abstract class AbstractAttributesFilterXMLParser implements
     /**
      * Default constructor.
      */
-    public AbstractAttributesFilterXMLParser() {
+    public AbstractAttributesFilterXMLFileParser() {
         super();
     }
 

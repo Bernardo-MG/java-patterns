@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.ValidatedXMLParser;
+import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
@@ -60,7 +60,7 @@ public final class ITReadNoValidationSAXInputParser {
         final Reader reader;
         final Integer value;
 
-        parserA = new ValidatedXMLParser();
+        parserA = new ValidatedXMLFileParser();
 
         parserB = new Parser<Document, Integer>() {
 

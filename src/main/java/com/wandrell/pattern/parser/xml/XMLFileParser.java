@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.parser.xml.input;
+package com.wandrell.pattern.parser.xml;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -51,7 +51,7 @@ import com.wandrell.pattern.parser.Parser;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class XMLParser implements Parser<Reader, Document> {
+public final class XMLFileParser implements Parser<Reader, Document> {
 
     /**
      * Builder to transform the input into a {@code Document}.
@@ -63,7 +63,7 @@ public final class XMLParser implements Parser<Reader, Document> {
     /**
      * Constructs a parser.
      */
-    public XMLParser() {
+    public XMLFileParser() {
         super();
     }
 

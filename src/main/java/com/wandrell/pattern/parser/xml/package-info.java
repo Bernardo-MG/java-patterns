@@ -23,11 +23,18 @@
  */
 /**
  * Provides implementations of {@link com.wandrell.pattern.parser.InputParser
- * InputParser} and {@link com.wandrell.pattern.parser.OutputParser
- * OutputParser} for XML files.
+ * InputParser} for XML files.
  * <p>
- * Also the {@link XMLValidationType} enumeration is included. This serves to
- * indicate the validation being applied to an XML file.
+ * Two main implementations are offered, {@link SAXInputParser} based on the SAX
+ * API, and {@code JDOMStAXInputParser} based on the StAX API. Both make use of
+ * the JDOM library.
+ * <p>
+ * The first allows the use of validation files, while the second does not, but
+ * in exchange it is expected to be faster.
+ * <p>
+ * Additionally to this, there is the {@code FilteredEntriesXMLInputParser},
+ * which allows to filter the XML file, parsing only a selected group of nodes,
+ * generated from applying a filter to the parsed XML file.
  */
 package com.wandrell.pattern.parser.xml;
 

@@ -28,7 +28,7 @@ import java.io.Reader;
 import org.jdom2.Document;
 
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.ValidatedXMLParser;
+import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.testing.pattern.framework.test.unit.parser.xml.read.exception.AbstractUnitExceptionReadXMLInputParser;
 
 /**
@@ -48,7 +48,7 @@ public final class UnitExceptionReadNoValidationSAXInputParser extends
      * @return the parser to be tested
      */
     private static final Parser<Reader, Document> buildParser() {
-        return new ValidatedXMLParser();
+        return new ValidatedXMLFileParser();
     }
 
     /**

@@ -31,10 +31,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLParser;
+import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
 
 /**
- * Unit tests for {@link AbstractAttributesFilterXMLParser}.
+ * Unit tests for {@link AbstractAttributesFilterXMLFileParser}.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -52,20 +52,20 @@ import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLParser;
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see AbstractAttributesFilterXMLParser
+ * @see AbstractAttributesFilterXMLFileParser
  */
 public final class TestAbstractAttributesFilterXMLInputParser {
 
     /**
      * Attribute being used for the tests.
      */
-    private static final String               ATTRIBUTE = "attribute";
+    private static final String                   ATTRIBUTE = "attribute";
     /**
      * Parser being tested.
      * <p>
      * It is created once for all the tests.
      */
-    private AbstractAttributesFilterXMLParser parser;
+    private AbstractAttributesFilterXMLFileParser parser;
 
     /**
      * Default constructor.
@@ -88,7 +88,7 @@ public final class TestAbstractAttributesFilterXMLInputParser {
      */
     @BeforeTest
     public final void initialize() {
-        parser = new AbstractAttributesFilterXMLParser() {
+        parser = new AbstractAttributesFilterXMLFileParser() {
 
             @Override
             public final Document parse(final Reader reader) throws Exception {

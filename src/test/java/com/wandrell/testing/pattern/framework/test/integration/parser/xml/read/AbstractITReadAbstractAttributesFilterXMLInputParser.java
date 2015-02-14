@@ -36,11 +36,12 @@ import org.testng.annotations.Test;
 
 import com.wandrell.pattern.ResourceUtils;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.input.AbstractAttributesFilterXMLParser;
+import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 
 /**
- * Abstract integration tests for {@link AbstractAttributesFilterXMLParser} .
+ * Abstract integration tests for {@link AbstractAttributesFilterXMLFileParser}
+ * .
  * <p>
  * Checks the following cases:
  * <ol>
@@ -75,56 +76,56 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
      * Amount of entries after filtering based on rejecting a not existing
      * attribute.
      */
-    private static final Integer                    NO_NOT_EXISTING               = 0;
+    private static final Integer                        NO_NOT_EXISTING               = 0;
     /**
      * Amount of entries after filtering based on rejecting and requiring the
      * same attribute.
      */
-    private static final Integer                    WITH_ATTRIBUTE1_NO_ATTRIBUTE1 = 0;
+    private static final Integer                        WITH_ATTRIBUTE1_NO_ATTRIBUTE1 = 0;
     /**
      * Amount of entries after filtering based on requiring a not existing
      * attribute.
      */
-    private static final Integer                    WITH_NOT_EXISTING             = 0;
+    private static final Integer                        WITH_NOT_EXISTING             = 0;
     /**
      * Amount of entries after filtering based on rejecting the attribute 1.
      */
-    private final Integer                           noAttribute1;
+    private final Integer                               noAttribute1;
     /**
      * Amount of entries after filtering based on rejecting the attribute 1 and
      * the attribute 2.
      */
-    private final Integer                           noAttribute1NoAttribute2;
+    private final Integer                               noAttribute1NoAttribute2;
     /**
      * Parser being tested.
      */
-    private final AbstractAttributesFilterXMLParser parser;
+    private final AbstractAttributesFilterXMLFileParser parser;
     /**
      * Parser which counts the {@code Document} root nodes.
      */
-    private final Parser<Document, Integer>         parserNodes;
+    private final Parser<Document, Integer>             parserNodes;
     /**
      * Path to the test values file.
      */
-    private final String                            path;
+    private final String                                path;
     /**
      * Amount of entries after applying no filter.
      */
-    private final Integer                           total;
+    private final Integer                               total;
     /**
      * Amount of entries after filtering based on requiring the attribute 1.
      */
-    private final Integer                           withAttribute1;
+    private final Integer                               withAttribute1;
     /**
      * Amount of entries after filtering based on requiring the attribute 1 and
      * rejecting the attribute 2.
      */
-    private final Integer                           withAttribute1NoAttribute2;
+    private final Integer                               withAttribute1NoAttribute2;
     /**
      * Amount of entries after filtering based on requiring the attribute 1 and
      * the attribute 2.
      */
-    private final Integer                           withAttribute1WithAttribute2;
+    private final Integer                               withAttribute1WithAttribute2;
 
     {
         parserNodes = new Parser<Document, Integer>() {
@@ -159,10 +160,10 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
      *            total amount of entries
      */
     public AbstractITReadAbstractAttributesFilterXMLInputParser(
-            final AbstractAttributesFilterXMLParser parser, final String path,
-            final Integer no1, final Integer no1no2, final Integer with1,
-            final Integer with1with2, final Integer with1no2,
-            final Integer total) {
+            final AbstractAttributesFilterXMLFileParser parser,
+            final String path, final Integer no1, final Integer no1no2,
+            final Integer with1, final Integer with1with2,
+            final Integer with1no2, final Integer total) {
         super();
 
         checkNotNull(parser, "Received a null pointer as parser");
@@ -409,7 +410,7 @@ public abstract class AbstractITReadAbstractAttributesFilterXMLInputParser<V> {
      * 
      * @return the parser being tested
      */
-    protected final AbstractAttributesFilterXMLParser getParser() {
+    protected final AbstractAttributesFilterXMLFileParser getParser() {
         return parser;
     }
 

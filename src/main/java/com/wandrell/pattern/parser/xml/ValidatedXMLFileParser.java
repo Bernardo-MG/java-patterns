@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.parser.xml.input;
+package com.wandrell.pattern.parser.xml;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -46,7 +46,6 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
  * Implementation of {link InputParser} parsing from an XML file using the SAX
@@ -64,7 +63,7 @@ import com.wandrell.pattern.parser.xml.XMLValidationType;
  * @param <V>
  *            the type to be parsed from the input
  */
-public final class ValidatedXMLParser implements Parser<Reader, Document> {
+public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
 
     /**
      * The text format accepted for the validation files.
@@ -88,7 +87,7 @@ public final class ValidatedXMLParser implements Parser<Reader, Document> {
     /**
      * Constructs a parser with the specified processor and no validation.
      */
-    public ValidatedXMLParser() {
+    public ValidatedXMLFileParser() {
         super();
 
         validationType = XMLValidationType.NONE;
@@ -102,7 +101,7 @@ public final class ValidatedXMLParser implements Parser<Reader, Document> {
      * @param validationStream
      *            stream for the validation file
      */
-    public ValidatedXMLParser(final XMLValidationType validation,
+    public ValidatedXMLFileParser(final XMLValidationType validation,
             final InputStream validationStream) {
         super();
 
