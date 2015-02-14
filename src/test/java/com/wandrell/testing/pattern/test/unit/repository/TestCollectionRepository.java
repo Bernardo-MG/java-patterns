@@ -33,6 +33,7 @@ import org.testng.annotations.Test;
 
 import com.wandrell.pattern.repository.CollectionRepository;
 import com.wandrell.pattern.repository.Repository;
+import com.wandrell.pattern.repository.Repository.Filter;
 
 /**
  * Unit tests for {@link Repository}.
@@ -111,7 +112,14 @@ public final class TestCollectionRepository {
     public final void testGetCollection_Filter_Filters() {
         final Collection<String> entities; // Filtered entities
 
-        entities = repository.getCollection(s -> s == "b");
+        entities = repository.getCollection(new Filter<String>() {
+
+            @Override
+            final public Boolean isValid(final String entity) {
+                return entity.equals("b");
+            }
+
+        });
 
         Assert.assertEquals(entities.size(), 1);
         Assert.assertTrue(entities.contains("b"));
@@ -126,7 +134,14 @@ public final class TestCollectionRepository {
     public final void testGetCollection_Remove_OriginalNotChanges() {
         final Collection<String> entities; // Filtered entities
 
-        entities = repository.getCollection(s -> s == "b");
+        entities = repository.getCollection(new Filter<String>() {
+
+            @Override
+            final public Boolean isValid(final String entity) {
+                return entity.equals("b");
+            }
+
+        });
 
         entities.remove("b");
 
