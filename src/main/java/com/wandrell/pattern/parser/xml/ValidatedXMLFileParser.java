@@ -45,6 +45,7 @@ import org.jdom2.input.sax.XMLReaders;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
+import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.Parser;
 
 /**

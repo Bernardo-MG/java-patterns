@@ -41,6 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.MoreObjects;
+import com.wandrell.pattern.conf.XMLValidationType;
 
 /**
  * Implementation of {@code AbstractAttributesFilterXMLFileParser} which filters

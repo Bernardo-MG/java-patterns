@@ -35,8 +35,8 @@ import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.jdom2.output.Format;
 
+import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.outputter.Outputter;
-import com.wandrell.pattern.parser.xml.XMLValidationType;
 
 /**
  * Implementation of {@code Outputter} parsing into an XML file.

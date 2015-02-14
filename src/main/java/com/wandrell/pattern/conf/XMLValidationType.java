@@ -21,45 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.testing.pattern.test.unit.parser.xml.exception;
-
-import java.io.Reader;
-
-import org.jdom2.Document;
-
-import com.wandrell.pattern.conf.XMLValidationType;
-import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
-import com.wandrell.testing.pattern.framework.conf.XMLConf;
-import com.wandrell.testing.pattern.framework.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
-import com.wandrell.testing.pattern.framework.util.ResourceUtils;
+package com.wandrell.pattern.conf;
 
 /**
- * Unit tests for {@link ValidatedXMLFileParser} implementing
- * {@code AbstractUnitExceptionParseXMLReaderParser} and using DTD validation.
+ * Enumeration representing the different XML validation methods.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see ValidatedXMLFileParser
  */
-public final class TestExceptionDTDValidationValidatedXMLFileParser extends
-        AbstractUnitExceptionParseXMLReaderParser<Integer> {
+public enum XMLValidationType {
 
     /**
-     * Generates the parser to be tested.
-     * 
-     * @return the parser to be tested
+     * DTD validation.
      */
-    private static final Parser<Reader, Document> buildParser() {
-        return new ValidatedXMLFileParser(XMLValidationType.DTD,
-                ResourceUtils.getClassPathInputStream(XMLConf.DTD_VALIDATION));
-    }
-
+    DTD,
     /**
-     * Default constructor.
+     * No validation.
      */
-    public TestExceptionDTDValidationValidatedXMLFileParser() {
-        super(buildParser());
-    }
+    NONE,
+    /**
+     * XSD validation.
+     */
+    XSD
 
 }

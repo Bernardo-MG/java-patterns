@@ -23,9 +23,9 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml.filtered;
 
+import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
 import com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser;
-import com.wandrell.pattern.parser.xml.XMLValidationType;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.test.integration.parser.xml.AbstractITParseAbstractAttributesFilterXMLFileParser;
 import com.wandrell.testing.pattern.framework.util.ResourceUtils;
