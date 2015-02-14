@@ -72,14 +72,15 @@ public final class TestCollectionRepository {
      */
     @BeforeMethod
     public final void cleanUp() {
-        for (final String entity : repository.getCollection(new Filter<String>() {
+        for (final String entity : repository
+                .getCollection(new Filter<String>() {
 
-            @Override
-            final public Boolean isValid(final String entity) {
-                return true;
-            }
+                    @Override
+                    final public Boolean isValid(final String entity) {
+                        return true;
+                    }
 
-        })) {
+                })) {
             repository.remove(entity);
         }
 
@@ -93,7 +94,8 @@ public final class TestCollectionRepository {
      */
     @BeforeClass
     public final void initialize() {
-        repository = new CollectionRepository<>(new LinkedHashSet<String>());
+        repository = new CollectionRepository<String>(
+                new LinkedHashSet<String>());
     }
 
     /**

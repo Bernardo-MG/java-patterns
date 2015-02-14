@@ -274,7 +274,9 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
                             getEncoding())));
 
             factoryValidation = new XMLReaderXSDFactory(sources);
-        } catch (final JDOMException | UnsupportedEncodingException e) {
+        } catch (final JDOMException e) {
+            throw new RuntimeException(e);
+        } catch (final UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
 

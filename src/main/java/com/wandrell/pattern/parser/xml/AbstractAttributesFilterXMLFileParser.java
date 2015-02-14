@@ -61,7 +61,7 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
      * There is no reason to store each attribute more than once, so a set is
      * used.
      */
-    private final Collection<String> attrRejected = new LinkedHashSet<>();
+    private final Collection<String> attrRejected = new LinkedHashSet<String>();
     /**
      * Attributes which should be set as {@code true}. Otherwise, the node will
      * be ignored.
@@ -69,7 +69,7 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
      * There is no reason to store each attribute more than once, so a set is
      * used.
      */
-    private final Collection<String> attrRequired = new LinkedHashSet<>();
+    private final Collection<String> attrRequired = new LinkedHashSet<String>();
 
     /**
      * Default constructor.

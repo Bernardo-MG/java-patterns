@@ -78,7 +78,7 @@ public final class CollectionRepository<V> implements Repository<V> {
     public final Collection<V> getCollection(final Filter<V> filter) {
         final Collection<V> result;
 
-        result = new LinkedList<>();
+        result = new LinkedList<V>();
         for (final V entity : getData()) {
             if (filter.isValid(entity)) {
                 result.add(entity);
