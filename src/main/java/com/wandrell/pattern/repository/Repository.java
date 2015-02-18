@@ -61,6 +61,16 @@ public interface Repository<V> {
      */
     public interface Filter<V> {
 
+        /**
+         * Checks if the entity is to be accepted or not.
+         * <p>
+         * If it is accepted, then it should be returned by the
+         * {@code getCollection} method.
+         * 
+         * @param entity
+         *            the entity to check
+         * @return {@code true} if the entity is valid, {@code false} otherwise
+         */
         public Boolean isValid(final V entity);
 
     }

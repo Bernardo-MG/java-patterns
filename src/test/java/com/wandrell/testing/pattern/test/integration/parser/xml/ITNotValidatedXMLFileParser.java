@@ -23,43 +23,54 @@
  */
 package com.wandrell.testing.pattern.test.integration.parser.xml;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.jdom2.Document;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
-import com.wandrell.pattern.parser.xml.XMLFileParser;
+import com.wandrell.pattern.parser.xml.NotValidatedXMLFileParser;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.util.ResourceUtils;
 
 /**
- * Integration tests for {@link XMLFileParser} with no validation.
+ * Integration tests for {@link NotValidatedXMLFileParser}.
  * <p>
  * Checks the following cases:
  * <ol>
  * <li>Parsing a XML file returns the expected value.</li>
- * <li>Parsing a XML file with XSD validation returns the expected value.</li>
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see XMLFileParser
+ * @see NotValidatedXMLFileParser
  */
-public final class ITXMLFileParser {
+public final class ITNotValidatedXMLFileParser {
 
     /**
-     * Parser to generate the tested value from the {@code Document}.
+     * Default constructor.
      */
-    private final Parser<Document, Integer> parserDoc;
+    public ITNotValidatedXMLFileParser() {
+        super();
+    }
 
-    {
-        parserDoc = new Parser<Document, Integer>() {
+    /**
+     * Tests that parsing a XML file returns the expected value.
+     * 
+     * @throws Exception
+     *             never, this is a required declaration
+     */
+    @Test
+    public final void testParse() throws Exception {
+        final Parser<Reader, Document> parserA;  // Parser tested
+        final Parser<Document, Integer> parserB; // Parser for the result
+        final Reader reader; // Reader to the test file
+        final Integer value; // Tested result from the parsed file
+
+        parserA = new NotValidatedXMLFileParser();
+
+        parserB = new Parser<Document, Integer>() {
 
             @Override
             public final Integer parse(final Document doc) {
@@ -72,56 +83,9 @@ public final class ITXMLFileParser {
             }
 
         };
-    }
 
-    /**
-     * Default constructor.
-     */
-    public ITXMLFileParser() {
-        super();
-    }
-
-    /**
-     * Tests that parsing a XML file returns the expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
-     */
-    @Test
-    public final void testParse() throws Exception {
-        final Parser<Reader, Document> parser;  // Parser tested
-        final Reader reader; // Reader to the test file
-        final Integer value; // Tested result from the parsed file
-
-        parser = new ValidatedXMLFileParser();
-
-        reader = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ)));
-        value = parserDoc.parse(parser.parse(reader));
-
-        Assert.assertEquals(value, (Integer) 1);
-    }
-
-    /**
-     * Tests that parsing a XSD-validated XML file returns the expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
-     */
-    @Test
-    public final void testParse_XSD() throws Exception {
-        final XMLFileParser parser;  // Parser tested
-        final Reader reader; // Reader to the test file
-        final Integer value; // Tested result from the parsed file
-
-        parser = new XMLFileParser();
-
-        parser.setValidation(XMLValidationType.XSD,
-                ResourceUtils.getClassPathInputStream(XMLConf.XSD_VALIDATION));
-
-        reader = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(XMLConf.VALIDATED_XSD)));
-        value = parserDoc.parse(parser.parse(reader));
+        reader = ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ);
+        value = parserB.parse(parserA.parse(reader));
 
         Assert.assertEquals(value, (Integer) 1);
     }

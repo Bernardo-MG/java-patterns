@@ -26,14 +26,12 @@ package com.wandrell.pattern.parser.xml;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.Collection;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
@@ -69,7 +67,7 @@ public final class FilteredEntriesXMLFileParser extends
     /**
      * Logger being used to log the generated XPath expression.
      */
-    private static final Logger          LOGGER = LoggerFactory
+    private static final Logger      LOGGER     = LoggerFactory
                                                         .getLogger(FilteredEntriesXMLFileParser.class);
     /**
      * Base parser handling the creation of the {@code Document}.
@@ -80,24 +78,24 @@ public final class FilteredEntriesXMLFileParser extends
      * The parser allows applying validation, which is required if default
      * attribute values are to be used.
      */
-    private final ValidatedXMLFileParser baseParser;
+    private final XMLFileParser      baseParser = new XMLFileParser();
     /**
      * The XPath expression as a string.
      */
-    private String                       expression;
+    private String                   expression;
     /**
      * The name of the nodes to filter.
      * <p>
      * All the nodes with this name will be acquires with an XPath query to be
      * filtered.
      */
-    private final String                 nodeName;
+    private final String             nodeName;
     /**
      * The XPath expression.
      * <p>
      * This will be created after any change to the required attributes.
      */
-    private XPathExpression<Element>     xpath;
+    private XPathExpression<Element> xpath;
 
     /**
      * Returns the logger being used by this class.
@@ -122,8 +120,6 @@ public final class FilteredEntriesXMLFileParser extends
         checkNotNull(node, "Received a null pointer as node");
 
         nodeName = node;
-
-        baseParser = new ValidatedXMLFileParser();
     }
 
     /**
@@ -145,7 +141,7 @@ public final class FilteredEntriesXMLFileParser extends
 
         nodeName = node;
 
-        baseParser = new ValidatedXMLFileParser(validation, validationStream);
+        getBaseParser().setValidation(validation, validationStream);
     }
 
     /**
@@ -163,14 +159,11 @@ public final class FilteredEntriesXMLFileParser extends
      * @param input
      *            {@code Reader} for the XML file
      * @return a {@code Document} with the XML contents
-     * @throws JDOMException
-     *             when parsing causes an error
-     * @throws IOException
-     *             when and IO exception stops the parsing
+     * @throws Exception
+     *             when an error ocurrs during parsing
      */
     @Override
-    public final Document parse(final Reader input) throws JDOMException,
-            IOException {
+    public final Document parse(final Reader input) throws Exception {
         return filter(getBaseParser().parse(input));
     }
 
@@ -268,7 +261,7 @@ public final class FilteredEntriesXMLFileParser extends
      * 
      * @return the base parser
      */
-    private final ValidatedXMLFileParser getBaseParser() {
+    private final XMLFileParser getBaseParser() {
         return baseParser;
     }
 

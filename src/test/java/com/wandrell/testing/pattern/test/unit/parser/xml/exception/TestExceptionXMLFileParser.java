@@ -23,22 +23,22 @@
  */
 package com.wandrell.testing.pattern.test.unit.parser.xml.exception;
 
-import com.wandrell.pattern.parser.xml.XMLFileParser;
+import com.wandrell.pattern.parser.xml.NotValidatedXMLFileParser;
 import com.wandrell.testing.pattern.framework.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
 
 /**
- * Unit tests for {@link XMLFileParser} implementing
+ * Unit tests for {@link NotValidatedXMLFileParser} implementing
  * {@code AbstractUnitExceptionReadXMLInputParser}.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
- * @see XMLFileParser
+ * @see NotValidatedXMLFileParser
  */
 public final class TestExceptionXMLFileParser extends
         AbstractUnitExceptionParseXMLReaderParser<Integer> {
 
     public TestExceptionXMLFileParser() {
-        super(new XMLFileParser());
+        super(new NotValidatedXMLFileParser());
     }
 
 }

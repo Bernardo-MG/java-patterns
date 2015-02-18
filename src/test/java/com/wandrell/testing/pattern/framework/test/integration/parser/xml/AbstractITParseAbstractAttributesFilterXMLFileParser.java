@@ -192,7 +192,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_FilterChanges_Adapts() throws Exception {
+    public final void testParse_FilterChanges_Adapts() throws Exception {
         Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -214,7 +214,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_NoFilter_ReturnsAll() throws Exception {
+    public final void testParse_NoFilter_ReturnsAll() throws Exception {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -230,7 +230,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_Rejects1_ReturnsPart() throws Exception {
+    public final void testParse_Rejects1_ReturnsPart() throws Exception {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -249,7 +249,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_Rejects1And2_ReturnsPart() throws Exception {
+    public final void testParse_Rejects1And2_ReturnsPart() throws Exception {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -268,7 +268,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_RejectsNotExisting_ReturnsNone()
+    public final void testParse_RejectsNotExisting_ReturnsNone()
             throws Exception {
         final Reader r; // Reader for the test data
 
@@ -288,7 +288,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_Requires1_ReturnsPart() throws Exception {
+    public final void testParse_Requires1_ReturnsPart() throws Exception {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -307,7 +307,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_Requires1And2_ReturnsPart() throws Exception {
+    public final void testParse_Requires1And2_ReturnsPart() throws Exception {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -326,7 +326,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_Requires1Rejects1_ReturnsNone()
+    public final void testParse_Requires1Rejects1_ReturnsNone()
             throws Exception {
         final Reader r; // Reader for the test data
 
@@ -347,7 +347,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_Requires1Rejects2_ReturnsPart()
+    public final void testParse_Requires1Rejects2_ReturnsPart()
             throws Exception {
         final Reader r; // Reader for the test data
 
@@ -367,7 +367,7 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      *             never, this is just a required declaration
      */
     @Test
-    public final void testReader_RequiresNotExisting_ReturnsNone()
+    public final void testParse_RequiresNotExisting_ReturnsNone()
             throws Exception {
         final Reader r; // Reader for the test data
 

@@ -79,7 +79,7 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
     }
 
     /**
-     * Adds an attribute which the parsed node should have with a value of
+     * Adds an attribute which the parsed nodes should have with a value of
      * {@code false}.
      * <p>
      * Any node not having this attribute set to {@code false} will be ignored.
@@ -97,7 +97,7 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
     }
 
     /**
-     * Adds an attribute which the parsed node should have with a value of
+     * Adds an attribute which the parsed nodes should have with a value of
      * {@code true}.
      * <p>
      * Any node not having this attribute set to {@code true} will be ignored.

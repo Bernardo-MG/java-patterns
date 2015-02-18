@@ -139,8 +139,6 @@ public final class PropertiesApplicationInfoService implements
      * A template properties file with all the required keys can be found at the
      * path {@code src/files/application-info.properties} on this library
      * 
-     * @param executor
-     *            the {@code CommandExecutor} to internally handle the commands
      * @param properties
      *            the {@code Properties} with the application's info
      */

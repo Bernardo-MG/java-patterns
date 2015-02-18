@@ -25,9 +25,14 @@
  * Provides implementations of {@link com.wandrell.pattern.parser.Parser Parser}
  * for XML files.
  * <p>
- * {@link XMLFileParser} is a faster parser, where no validation is applied,
- * while {@link ValidatedXMLFileParser} applies XSD or DTD validation files, but
- * in exchange can be slower.
+ * {@link NotValidatedXMLFileParser} is a faster parser, where no validation is
+ * applied, while {@link ValidatedXMLFileParser} applies XSD or DTD validation
+ * files, but in exchange can be slower.
+ * <p>
+ * While these two are offered as is, they are not required.
+ * {@link XMLFileParser} takes care of the speed problem, as it is composed by
+ * both parsers, and will switch from one to another depending on if validation
+ * is needed or not.
  * <p>
  * Additionally there is the {@link FilteredEntriesXMLFileParser}, which filters
  * the file's contents, returning only a part of it.

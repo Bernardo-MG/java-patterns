@@ -41,8 +41,8 @@ import com.wandrell.testing.pattern.framework.util.ResourceUtils;
  * @version 0.1.0
  * @see FilteredEntriesXMLFileParser
  */
-public final class ITFilteredDTDValidationFilteredEntriesXMLFileParser extends
-        AbstractITParseAbstractAttributesFilterXMLFileParser<Integer> {
+public final class ITFilteredDTDValidationDefaultsFilteredEntriesXMLFileParser
+        extends AbstractITParseAbstractAttributesFilterXMLFileParser<Integer> {
 
     /**
      * Generates the parser to be tested.
@@ -64,7 +64,7 @@ public final class ITFilteredDTDValidationFilteredEntriesXMLFileParser extends
     /**
      * Default constructor.
      */
-    public ITFilteredDTDValidationFilteredEntriesXMLFileParser() {
+    public ITFilteredDTDValidationDefaultsFilteredEntriesXMLFileParser() {
         super(buildParser(), XMLConf.FILTERED_WITH_VALIDATION_DTD, 6, 4, 3, 1,
                 2, 9);
     }
