@@ -6,19 +6,19 @@ The patterns currently included are:
 * An API and basic implementation for the repository pattern.
 * An API and basic implementations for the parser pattern.
 
-### Webpage
+## Webpage
 Currently the project has no webpage.
 
-#### Documentation webpage
+### Documentation webpage
 The project has a [Maven site][] and [Javadoc page][] with the information from the
 latest release.
 
-### Status
+## Status
 The project is still under development, so expect a certain degree of volatility.
 
 Still, it is mostly stable, and classpath or name changes should be infrequent, but classes may be added or removed without warning.
 
-#### Issues management
+### Issues management
 Issues are managed at the GitHub [project issues page][].
 
 ## Building the code
