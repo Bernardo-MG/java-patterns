@@ -1,10 +1,16 @@
-# Wandrell's Java Patterns
-Library with various design patterns for Java.
+# Java Patterns
+Common design patterns for Java.
 
-The patterns currently included are:
-* An API and basic implementation for the command and executor pattern.
-* An API and basic implementation for the repository pattern.
-* An API and basic implementations for the parser pattern.
+Not all the design patterns have been included in this library. This is a compilation of only those which I've needed, and only if there wasn't any available implementation for them. 
+
+For each of them an interface and, when possible, also a basic implementation are offered.
+
+Currently the patterns included are as follows:
+* Command and Executor patterns. For encapsulating code executions.
+* Repository pattern. To access persistent entities as if they were on a list.
+* Parser pattern. To transform a data structure into another.
+* Outputter pattern. To send data structures through output operations.
+* Prototype pattern. To easily create copies of existing entitites.
 
 ## Webpage
 Currently the project has no webpage.
