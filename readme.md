@@ -10,7 +10,7 @@ Currently the patterns included are as follows:
 * Repository pattern. To access persistent entities as if they were on a list.
 * Parser pattern. To transform a data structure into another.
 * Outputter pattern. To send data structures through output operations.
-* Prototype pattern. To easily create copies of existing entitites.
+* Prototype pattern. To easily create copies of existing entities.
 
 ## Webpage
 Currently the project has no webpage.
