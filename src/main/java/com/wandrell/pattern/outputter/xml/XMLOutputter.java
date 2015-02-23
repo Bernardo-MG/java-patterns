@@ -39,16 +39,19 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.outputter.Outputter;
 
 /**
- * Implementation of {@code Outputter} parsing into an XML file.
+ * Implementation of {@code Outputter} for creating XML files.
  * <p>
  * For this a {@link org.jdom2.Document Document} is received and then sent
  * through an IO operation.
  * <p>
  * Validation information can be set into the outputter. This will be saved on
  * the resulting XML file along the other data.
+ * <p>
+ * The JDOM2 API is being used for this job.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
+ * @see Document
  */
 public final class XMLOutputter implements Outputter<Document> {
 
@@ -86,14 +89,14 @@ public final class XMLOutputter implements Outputter<Document> {
     private final XMLValidationType validationType;
 
     /**
-     * Constructs a parser with the specified processor and no validation.
+     * Constructs an outputter with no validation.
      */
     public XMLOutputter() {
         this(XMLValidationType.NONE, "");
     }
 
     /**
-     * Constructs a parser with the specified processor and validation.
+     * Constructs an outputter with the specified validation.
      * 
      * @param validation
      *            the validation type
@@ -112,14 +115,16 @@ public final class XMLOutputter implements Outputter<Document> {
     }
 
     /**
-     * Sends an object through an {@code OutputStream}.
+     * Sends a {@code Document} through an {@code OutputStream}.
+     * <p>
+     * The {@code Document} will be transformed into an XML text file.
      * 
      * @param value
-     *            object to parse
+     *            {@code Document} to send
      * @param stream
-     *            {@code OutputStream} to receive the parsed object
+     *            {@code OutputStream} to receive the resulting XML text
      * @throws Exception
-     *             when there's any problem writing
+     *             when there's any problem on the outputting process
      */
     @Override
     public final void send(final Document value, final OutputStream stream)
@@ -135,14 +140,16 @@ public final class XMLOutputter implements Outputter<Document> {
     }
 
     /**
-     * Sends an object through a {@code Writer}.
+     * Sends a {@code Document} through an {@code Writer}.
+     * <p>
+     * The {@code Document} will be transformed into an XML text file.
      * 
      * @param value
-     *            object to parse
+     *            {@code Document} to send
      * @param writer
-     *            {@code Writer} to receive the parsed object
+     *            {@code Writer} to receive the resulting XML text
      * @throws Exception
-     *             when there's any problem writing
+     *             when there's any problem on the writing process
      */
     @Override
     public final void send(final Document value, final Writer writer)
@@ -160,7 +167,7 @@ public final class XMLOutputter implements Outputter<Document> {
     /**
      * Returns the name of the element registering the validation file.
      * <p>
-     * This is used with DTD validation..
+     * This is used with DTD validation.
      * 
      * @return the DTD validation file element name
      */

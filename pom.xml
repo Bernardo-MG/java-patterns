@@ -97,6 +97,7 @@
 		<log4j.version>1.2.17</log4j.version>
 		<mockito.version>1.9.5</mockito.version>
 		<slf4j.version>1.7.7</slf4j.version>
+		<snakeyaml.version>1.14</snakeyaml.version>
 		<testng.version>6.8.8</testng.version>
 		<xmlunit.version>1.5</xmlunit.version>
 		<woodstox.version>4.4.1</woodstox.version>
@@ -139,12 +140,14 @@
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 			<version>${jaxen.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<!-- JDom 2 -->
 			<groupId>org.jdom</groupId>
 			<artifactId>jdom2</artifactId>
 			<version>${jdom.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<!-- Log4J -->
@@ -173,6 +176,13 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
+			<!-- SnakeYAML -->
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>${snakeyaml.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<!-- TestNG -->
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -190,6 +200,7 @@
 					<artifactId>stax-api</artifactId>
 				</exclusion>
 			</exclusions>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<!-- XMLUnit -->
