@@ -27,15 +27,24 @@ package com.wandrell.pattern.command;
  * Interface for the command pattern. This is the most basic type of command,
  * which doesn't return anything when executed.
  * <p>
- * For commands which do return values use the {@link ReturnCommand}.
+ * A command is a behavioral design pattern which encapsulates a piece of code,
+ * which this way can be stored and transmitted, until it is required to be
+ * executed.
  * <p>
- * Commands are meant to encapsulate code, which will then be executed through a
- * {@link CommandExecutor}. The executor is also expected to handle any
- * exception thrown by the command.
+ * This execution is done through the {@link #execute() execute} method.
+ * <p>
+ * But this is not meant to be called manually. Instead a
+ * {@link CommandExecutor} will receive the command and then call its
+ * {@code execute} method. This way commands are kept isolated from the rest of
+ * the code.
+ * <p>
+ * As previously stated, this a basic command which does not return anything on
+ * execution. For commands which do return values use the {@link ReturnCommand}.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
  * @see CommandExecutor
+ * @see ReturnCommand
  */
 public interface Command {
 
