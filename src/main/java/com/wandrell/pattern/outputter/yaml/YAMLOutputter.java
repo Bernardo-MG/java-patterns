@@ -78,8 +78,6 @@ public final class YAMLOutputter implements Outputter<Object> {
      *            object to send
      * @param stream
      *            {@code OutputStream} to receive the resulting YAML text
-     * @throws Exception
-     *             when there's any problem on the outputting process
      */
     @Override
     public final void send(final Object value, final OutputStream stream) {
@@ -95,8 +93,6 @@ public final class YAMLOutputter implements Outputter<Object> {
      *            object to send
      * @param writer
      *            {@code Writer} to receive the resulting YAML text
-     * @throws Exception
-     *             when there's any problem on the writing process
      */
     @Override
     public final void send(final Object value, final Writer writer) {
