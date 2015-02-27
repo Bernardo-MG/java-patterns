@@ -34,7 +34,7 @@
    echo "</servers>";
    
    # Active profile
-   if [ "$TRAVIS_BRANCH" == "develop"]; then
+   if [ "$TRAVIS_BRANCH" == "develop" ]; then
       echo "<activeProfiles>"
          echo "<activeProfile>development</activeProfile>"
       echo "</activeProfiles>"
