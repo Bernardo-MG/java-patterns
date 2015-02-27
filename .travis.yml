@@ -4,10 +4,11 @@ jdk:
   - oraclejdk7
   - openjdk7
 
-before_script:
-  - 
+before_install:
+  - chmod +x ./.scripts/create-maven-settings.sh
   - chmod +x ./.scripts/deploy.sh
   - chmod +x ./.scripts/deploy-site.sh
+  - ./.scripts/create-maven-settings.sh
 script:
   - mvn clean verify
 after_success:
