@@ -26,6 +26,7 @@ package com.wandrell.pattern.outputter.yaml;
 import java.io.BufferedWriter;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import org.yaml.snakeyaml.DumperOptions;
@@ -47,9 +48,13 @@ import com.wandrell.pattern.outputter.Outputter;
 public final class YAMLOutputter implements Outputter<Object> {
 
     /**
+     * Encoding for the output file.
+     */
+    private static final String ENCODING = "UTF-8";
+    /**
      * YAML file contents builder.
      */
-    private final Yaml yaml;
+    private final Yaml          yaml;
 
     {
         // The YAML builder is initialized.
@@ -78,10 +83,14 @@ public final class YAMLOutputter implements Outputter<Object> {
      *            object to send
      * @param stream
      *            {@code OutputStream} to receive the resulting YAML text
+     * @throws UnsupportedEncodingException
+     *             if the stream is not in UTF-8 format
      */
     @Override
-    public final void send(final Object value, final OutputStream stream) {
-        send(value, new BufferedWriter(new OutputStreamWriter(stream)));
+    public final void send(final Object value, final OutputStream stream)
+            throws UnsupportedEncodingException {
+        send(value,
+                new BufferedWriter(new OutputStreamWriter(stream, ENCODING)));
     }
 
     /**
