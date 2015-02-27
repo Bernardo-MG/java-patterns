@@ -7,11 +7,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_JDK_VERSION" == "$JDK_DEP
 
    echo "Deploying Maven site"
 
-   if [ "$TRAVIS_BRANCH" == "master"]; then
-      mvn site site:deploy --settings ~/settings.xml > site_output.txt
-   elif [ "$TRAVIS_BRANCH" == "develop"]; then
-      mvn site site:deploy --settings ~/settings.xml > site_output.txt -Pdevelopment
-   fi
+   mvn site site:deploy --settings ~/settings.xml > site_output.txt
 	  
    head -50 site_output.txt
    echo " "
