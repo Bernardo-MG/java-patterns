@@ -22,7 +22,10 @@
  * SOFTWARE.
  */
 /**
- * Contains classes uses for configuration.
+ * Contains classes with configuration information.
+ * <p>
+ * Currently only {@link XMLValidationType} exists. It is an enumerator for the
+ * XML validation types.
  */
 package com.wandrell.pattern.conf;
 

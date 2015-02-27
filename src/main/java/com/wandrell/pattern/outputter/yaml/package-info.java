@@ -25,9 +25,8 @@
  * Provides implementations of {@link com.wandrell.pattern.outputter.Outputter
  * Outputter} for YAML files.
  * <p>
- * {@link XMLOutputter} sends a JDOM2 {@link org.jdom2.Document Document}
- * through an output class. As noted, it is based on JDOM2, and meant to ease
- * this API's use.
+ * {@link YAMLOutputter} transforms a {@code Object} into a YAML text file and
+ * sends it through an output class.
  */
 package com.wandrell.pattern.outputter.yaml;
 

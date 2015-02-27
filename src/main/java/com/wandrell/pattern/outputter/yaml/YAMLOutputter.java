@@ -35,10 +35,9 @@ import org.yaml.snakeyaml.Yaml;
 import com.wandrell.pattern.outputter.Outputter;
 
 /**
- * Implementation of {@code Outputter} for creating YAML files.
+ * Implementation of {@link Outputter} for creating YAML files.
  * <p>
- * For this an {@code Object is received and then sent
- * through an IO operation.
+ * For this an {@code Object} is received and then sent through an IO operation.
  * <p>
  * The SnakeYAML library is being used for this job.
  * 

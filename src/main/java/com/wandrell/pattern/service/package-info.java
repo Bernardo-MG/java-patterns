@@ -21,38 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.command;
-
 /**
- * Interface for the command pattern which returns a value when executed.
- * <p>
- * For commands which do not return values use the {@link Command}.
- * <p>
- * Commands are meant to encapsulate code, which will then be executed through a
- * {@link CommandExecutor}. The executor is also expected to handle any
- * exception thrown by the command.
- * 
- * @author Bernardo Martínez Garrido
- * @version 0.1.0
- * @see CommandExecutor
- * @param <V>
- *            the type being returned
+ * Provides interfaces and basic implementations for general use services.
  */
-public interface ReturnCommand<V> {
+package com.wandrell.pattern.service;
 
-    /**
-     * Executes the command and returns a value.
-     * <p>
-     * Any exception caused during the execution is expected to be let spread,
-     * and not be caught inside the command.
-     * <p>
-     * The value to be returned is expected to be tightly related to the
-     * command's job.
-     * 
-     * @return a value generated during the execution
-     * @throws Exception
-     *             when any exception is thrown during the execution
-     */
-    public V execute() throws Exception;
-
-}

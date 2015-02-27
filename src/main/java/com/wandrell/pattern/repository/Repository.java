@@ -26,7 +26,7 @@ package com.wandrell.pattern.repository;
 import java.util.Collection;
 
 /**
- * Interface for implementing the repository pattern.
+ * Interface for the repository pattern.
  * <p>
  * Implementations of this interface contain a set of entities. The source of
  * this data does not matter, as one of the uses of this interface is hiding it.

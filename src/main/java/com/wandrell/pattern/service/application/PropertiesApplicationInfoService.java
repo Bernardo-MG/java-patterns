@@ -30,7 +30,7 @@ import java.net.URISyntaxException;
 import java.util.Properties;
 
 /**
- * Properties based implementation of {@link ApplicationInfoService}. All the
+ * Properties-based implementation of {@link ApplicationInfoService}. All the
  * info to be returned by this class is stored on a properties file.
  * <p>
  * The data of the properties file is received as a {@code Properties} object by

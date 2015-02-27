@@ -32,8 +32,8 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.Parser;
 
 /**
- * Implementation of {@link Parser} for XML files, which can apply XSD or DTD
- * validation files.
+ * Implementation of {@link Parser} for XML files, which adapts to the
+ * validation requirements.
  * <p>
  * The difference with this and {@link ValidatedXMLFileParser} is that this
  * class is composed of an instance of that parser and of

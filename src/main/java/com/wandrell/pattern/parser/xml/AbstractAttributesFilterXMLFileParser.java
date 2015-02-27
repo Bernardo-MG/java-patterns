@@ -35,7 +35,7 @@ import org.jdom2.Document;
 import com.wandrell.pattern.parser.Parser;
 
 /**
- * Abstract {@code Parser} for XML files, allowing filtering the contained data
+ * Abstract {@link Parser} for XML files, allowing filtering the contained data
  * based on boolean attributes.
  * <p>
  * The exact way the filtering is applied will depend on the implementation.

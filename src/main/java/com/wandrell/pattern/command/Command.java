@@ -24,8 +24,8 @@
 package com.wandrell.pattern.command;
 
 /**
- * Interface for implementing the command pattern. In this case this is a
- * command which doesn't return any value.
+ * Interface for the command pattern. This is the most basic type of command,
+ * which doesn't return anything when executed.
  * <p>
  * For commands which do return values use the {@link ReturnCommand}.
  * <p>

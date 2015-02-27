@@ -24,7 +24,7 @@
 package com.wandrell.pattern.prototype;
 
 /**
- * Interface for implementing the prototype pattern.
+ * Interface for the prototype pattern.
  * <p>
  * This is a substitute for the {@code Cloneable} interface, to avoid the
  * problems and unneeded complications which usually come from it.

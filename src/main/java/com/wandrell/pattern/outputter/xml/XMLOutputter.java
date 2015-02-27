@@ -39,7 +39,7 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.outputter.Outputter;
 
 /**
- * Implementation of {@code Outputter} for creating XML files.
+ * Implementation of {@link Outputter} for creating XML files.
  * <p>
  * For this a {@link org.jdom2.Document Document} is received and then sent
  * through an IO operation.

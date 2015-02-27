@@ -24,9 +24,9 @@
 package com.wandrell.pattern.command;
 
 /**
- * Interface for implementing the command executor pattern. It is prepared to
- * work with the two command pattern interfaces existing on this same package:
- * {@link Command} and {@link ReturnCommand}.
+ * Interface for the command executor pattern. It is prepared to work with the
+ * two command pattern interfaces existing on this same package: {@link Command}
+ * and {@link ReturnCommand}.
  * <p>
  * The executor's job is receiving one of these commands and processing it by
  * calling the command's {@code execute()} method, with the only difference

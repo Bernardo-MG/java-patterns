@@ -42,7 +42,7 @@ import com.google.common.base.MoreObjects;
 import com.wandrell.pattern.conf.XMLValidationType;
 
 /**
- * Implementation of {@code AbstractAttributesFilterXMLFileParser} which filters
+ * Implementation of {@link AbstractAttributesFilterXMLFileParser} which filters
  * only nodes with an specific name.
  * <p>
  * All the nodes with this name are acquired through an XPath query, then

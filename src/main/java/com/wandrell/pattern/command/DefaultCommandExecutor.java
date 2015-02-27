@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Default implementation of the {@code CommandExecutor} interface. This
+ * Default implementation of the {@link CommandExecutor} interface. This
  * executor just calls the received command's {@code execute()} method, and
  * returns any value if needed.
  * <p>
