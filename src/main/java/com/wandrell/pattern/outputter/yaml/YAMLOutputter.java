@@ -48,7 +48,7 @@ import com.wandrell.pattern.outputter.Outputter;
 public final class YAMLOutputter implements Outputter<Object> {
 
     /**
-     * Encoding for the output file.
+     * Encoding for the output stream.
      */
     private static final String ENCODING = "UTF-8";
     /**
@@ -89,8 +89,8 @@ public final class YAMLOutputter implements Outputter<Object> {
     @Override
     public final void send(final Object value, final OutputStream stream)
             throws UnsupportedEncodingException {
-        send(value,
-                new BufferedWriter(new OutputStreamWriter(stream, ENCODING)));
+        send(value, new BufferedWriter(new OutputStreamWriter(stream,
+                getEncoding())));
     }
 
     /**
@@ -106,6 +106,15 @@ public final class YAMLOutputter implements Outputter<Object> {
     @Override
     public final void send(final Object value, final Writer writer) {
         getYaml().dump(value, writer);
+    }
+
+    /**
+     * Returns the code for the charset used for the output stream.
+     * 
+     * @return the text format used on the files
+     */
+    private final String getEncoding() {
+        return ENCODING;
     }
 
     /**
