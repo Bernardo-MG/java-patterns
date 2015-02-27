@@ -7,7 +7,11 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_JDK_VERSION" == "$JDK_DEP
 
    echo "Deploying Java artifact to repository"
 
-   mvn deploy --settings ~/settings.xml
+   if [ "$TRAVIS_BRANCH" == "master"]; then
+      mvn deploy --settings ~/settings.xml
+   elif [ "$TRAVIS_BRANCH" == "develop"]; then
+      mvn deploy --settings ~/settings.xml -Pdevelopment
+   fi
 
 else
 
