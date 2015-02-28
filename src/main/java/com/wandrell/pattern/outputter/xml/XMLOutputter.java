@@ -39,15 +39,17 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.outputter.Outputter;
 
 /**
- * Implementation of {@link Outputter} for creating XML files.
+ * Implementation of {@link Outputter} for XML data. Behind the scenes this is
+ * based on the JDOM 2 API.
  * <p>
- * For this a {@link org.jdom2.Document Document} is received and then sent
- * through an IO operation.
+ * The data is received as a JDOM 2 {@link org.jdom2.Document Document}, along
+ * the output object to be used.
  * <p>
- * Validation information can be set into the outputter. This will be saved on
- * the resulting XML file along the other data.
+ * It is also possible to include XML validation data, which will be added to
+ * the {@code Document} before sending it.
  * <p>
- * The JDOM2 API is being used for this job.
+ * Note that the validation file path won't be checked in any way, just stored
+ * on the {@code Document} as received.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
@@ -56,47 +58,56 @@ import com.wandrell.pattern.outputter.Outputter;
 public final class XMLOutputter implements Outputter<Document> {
 
     /**
-     * The name of the element registering the validation file.
+     * The name of the element registering the validation file being used.
      * <p>
-     * This is used with DTD validation.
+     * This will be used only if DTD validation is set.
      */
-    private static final String     ELEMENT_VALID    = "validator";
+    private static final String ELEMENT_VALID    = "validator";
     /**
      * Prefix for the validation namespace.
      * <p>
-     * This is used to build the namespace for XSD validation.
+     * This will be used only if XSD validation is set.
      */
-    private static final String     NAMESPACE_PREFIX = "xsi";
+    private static final String NAMESPACE_PREFIX = "xsi";
     /**
      * URI for the validation namespace.
      * <p>
-     * This is used to build the namespace for XSD validation.
+     * This will be used only if XSD validation is set.
      */
-    private static final String     NAMESPACE_URI    = "http://www.w3.org/2001/XMLSchema-instance";
+    private static final String NAMESPACE_URI    = "http://www.w3.org/2001/XMLSchema-instance";
     /**
-     * Attribute which indicates the validation file location.
+     * Attribute indicating the validation file location.
      * <p>
-     * This is used with XSD validation.
+     * This will be used only if XSD validation is set.
      */
-    private static final String     XSD_ATTRIBUTE    = "noNamespaceSchemaLocation";
+    private static final String XSD_ATTRIBUTE    = "noNamespaceSchemaLocation";
     /**
      * Path to the validation file.
+     * <p>
+     * It should be noted that this file won't be read.
+     * <p>
+     * The path will be stored along the rest of the validation data on the
+     * resulting file.
      */
-    private final String            validationPath;
+    private String              validationPath;
     /**
      * Type of validation being used.
      */
-    private final XMLValidationType validationType;
+    private XMLValidationType   validationType;
 
     /**
-     * Constructs an outputter with no validation.
+     * Constructs an {@code XMLOutputter} with no validation.
      */
     public XMLOutputter() {
         this(XMLValidationType.NONE, "");
     }
 
     /**
-     * Constructs an outputter with the specified validation.
+     * Constructs an {@code XMLOutputter} with the specified validation
+     * information.
+     * <p>
+     * Note that the received path will just be added to the {@code Document} as
+     * received, doing no verification or reading.
      * 
      * @param validation
      *            the validation type
@@ -110,7 +121,28 @@ public final class XMLOutputter implements Outputter<Document> {
         checkNotNull(path, "Received a null pointer as validation path");
 
         validationType = validation;
+        validationPath = path;
+    }
 
+    /**
+     * Sets the validation data to be stored on the resulting XML structure.
+     * <p>
+     * Note that the path won't be checked in any way, it will just be stored as
+     * received on the {@code Document} validation information before sending
+     * it.
+     * 
+     * @param validation
+     *            the validation type
+     * @param path
+     *            path to the validation file
+     */
+    public final void setValidation(final XMLValidationType validation,
+            final String path) {
+
+        checkNotNull(validation, "Received a null pointer as validation type");
+        checkNotNull(path, "Received a null pointer as validation path");
+
+        validationType = validation;
         validationPath = path;
     }
 
@@ -140,7 +172,7 @@ public final class XMLOutputter implements Outputter<Document> {
     }
 
     /**
-     * Sends a {@code Document} through an {@code Writer}.
+     * Sends a {@code Document} through a {@code Writer}.
      * <p>
      * The {@code Document} will be transformed into an XML text file.
      * 
@@ -167,7 +199,7 @@ public final class XMLOutputter implements Outputter<Document> {
     /**
      * Returns the name of the element registering the validation file.
      * <p>
-     * This is used with DTD validation.
+     * This is used for DTD validation.
      * 
      * @return the DTD validation file element name
      */
@@ -177,6 +209,9 @@ public final class XMLOutputter implements Outputter<Document> {
 
     /**
      * Returns the path to the validation file.
+     * <p>
+     * This file won't be read, it will just be stored in the {@code Document}
+     * as part of the validation info.
      * 
      * @return the path to the validation file.
      */
@@ -196,7 +231,7 @@ public final class XMLOutputter implements Outputter<Document> {
     /**
      * Returns the attribute which indicates the validation file location.
      * <p>
-     * This is used with XSD validation.
+     * This is used for XSD validation.
      * 
      * @return the XSD validation file attribute
      */
@@ -207,7 +242,7 @@ public final class XMLOutputter implements Outputter<Document> {
     /**
      * Returns the validation namespace.
      * <p>
-     * This is used with XSD validation.
+     * This is used for XSD validation.
      * 
      * @return the validation file namespace
      */
@@ -217,6 +252,10 @@ public final class XMLOutputter implements Outputter<Document> {
 
     /**
      * Sets the validation data into the specified {@code Document}.
+     * <p>
+     * How the data will be stores depends on the type of validation being used,
+     * and in case of applying no validation the {@code Document} won't be
+     * touched.
      * 
      * @param doc
      *            the {@code Document} into which to set the validation data

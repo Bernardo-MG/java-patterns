@@ -25,9 +25,9 @@
  * Provides implementations of {@link com.wandrell.pattern.outputter.Outputter
  * Outputter} for XML files.
  * <p>
- * {@link XMLOutputter} sends a JDOM2 {@link org.jdom2.Document Document}
- * through an output class. As noted, it is based on JDOM2, and meant to ease
- * this API's use.
+ * Currently the only one existing is
+ * {@link com.wandrell.pattern.outputter.xml.XMLOutputter XMLOutputter}, which
+ * sends a JDOM2 {@link org.jdom2.Document Document} through an output class.
  */
 package com.wandrell.pattern.outputter.xml;
 

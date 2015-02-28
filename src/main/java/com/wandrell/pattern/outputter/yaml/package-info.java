@@ -25,8 +25,10 @@
  * Provides implementations of {@link com.wandrell.pattern.outputter.Outputter
  * Outputter} for YAML files.
  * <p>
- * {@link YAMLOutputter} transforms a {@code Object} into a YAML text file and
- * sends it through an output class.
+ * Currently the only one existing is
+ * {@link com.wandrell.pattern.outputter.yaml.YAMLOutputter YAMLOutputter},
+ * which transforms an {@code Object} into a YAML text file and sends it through
+ * an output class.
  */
 package com.wandrell.pattern.outputter.yaml;
 

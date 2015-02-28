@@ -25,20 +25,23 @@
  * Provides interfaces and basic implementations for the command and command
  * executor patterns.
  * <p>
- * The command, in the shape of the {@link Command} and the
- * {@link ReturnCommand}, encapsulates pieces of code to be executed at a later
- * time. In a way, it can be seen as a function which can be stored and
- * transmitted like any object.
+ * The command, in the shape of the {@link com.wandrell.pattern.command.Command
+ * Command} and the {@link com.wandrell.pattern.command.ReturnCommand
+ * ReturnCommand}, encapsulates pieces of code to be executed at a later time.
+ * In a way, it can be seen as a function which can be stored and transmitted
+ * like any object.
  * <p>
- * It is the {@link CommandExecutor}'s job to take care of running those
- * commands. Additionally, it also handles any other required operation, such as
- * setting up the environment or catching exceptions.
+ * It is the {@link com.wandrell.pattern.command.CommandExecutor
+ * CommandExecutor}'s job to take care of running those commands. Additionally,
+ * it also handles any other required operation, such as setting up the
+ * environment or catching exceptions.
  * <p>
  * There is a default basic implementation of this executor interface, the
- * {@link DefaultCommandExecutor}, which does little more than calling the
- * command's {@code execute} method, but there are no default implementations of
- * the command interfaces, as these are meant to be created on a case-by-case
- * basis, fitting concrete needs.
+ * {@link com.wandrell.pattern.command.DefaultCommandExecutor
+ * DefaultCommandExecutor}, which does little more than calling the command's
+ * {@code execute} method, but there are no default implementations of the
+ * command interfaces, as these are meant to be created on a case-by-case basis,
+ * fitting concrete needs.
  */
 package com.wandrell.pattern.command;
 
