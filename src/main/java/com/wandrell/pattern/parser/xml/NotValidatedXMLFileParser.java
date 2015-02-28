@@ -37,14 +37,13 @@ import com.wandrell.pattern.parser.Parser;
 
 /**
  * Implementation of {@link Parser} for XML files, applying no validation.
+ * Behind the scenes this is using the JDOM2 library StAX API classes.
  * <p>
- * A {@code Reader} to the file is received by the parser, and then transformed
- * into a {@link org.jdom2.Document Document}, which is the returned result.
+ * A {@code Reader} for the file is received by the parser, and then transformed
+ * into a {@link org.jdom2.Document Document} before being returned.
  * <p>
- * No validation can be applied to the parsing. If you need validation, to for
- * example apply default values, use {@link ValidatedXMLFileParser}.
- * <p>
- * The parsing process uses JDOM2 library StAX API classes.
+ * No validation can be applied to the parsing. If you need validation, for
+ * example for applying default values, use {@link ValidatedXMLFileParser}.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0

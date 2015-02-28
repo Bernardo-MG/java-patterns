@@ -24,8 +24,8 @@
 /**
  * Contains classes with configuration information.
  * <p>
- * Currently only {@link XMLValidationType} exists. It is an enumerator for the
- * XML validation types.
+ * Currently only {@link com.wandrell.pattern.conf.XMLValidationType
+ * XMLValidationType} exists. It is an enumerator for the XML validation types.
  */
 package com.wandrell.pattern.conf;
 

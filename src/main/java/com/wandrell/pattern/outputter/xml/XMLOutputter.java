@@ -125,28 +125,6 @@ public final class XMLOutputter implements Outputter<Document> {
     }
 
     /**
-     * Sets the validation data to be stored on the resulting XML structure.
-     * <p>
-     * Note that the path won't be checked in any way, it will just be stored as
-     * received on the {@code Document} validation information before sending
-     * it.
-     * 
-     * @param validation
-     *            the validation type
-     * @param path
-     *            path to the validation file
-     */
-    public final void setValidation(final XMLValidationType validation,
-            final String path) {
-
-        checkNotNull(validation, "Received a null pointer as validation type");
-        checkNotNull(path, "Received a null pointer as validation path");
-
-        validationType = validation;
-        validationPath = path;
-    }
-
-    /**
      * Sends a {@code Document} through an {@code OutputStream}.
      * <p>
      * The {@code Document} will be transformed into an XML text file.
@@ -194,6 +172,28 @@ public final class XMLOutputter implements Outputter<Document> {
 
         new org.jdom2.output.XMLOutputter(Format.getPrettyFormat()).output(
                 value, writer);
+    }
+
+    /**
+     * Sets the validation data to be stored on the resulting XML structure.
+     * <p>
+     * Note that the path won't be checked in any way, it will just be stored as
+     * received on the {@code Document} validation information before sending
+     * it.
+     * 
+     * @param validation
+     *            the validation type
+     * @param path
+     *            path to the validation file
+     */
+    public final void setValidation(final XMLValidationType validation,
+            final String path) {
+
+        checkNotNull(validation, "Received a null pointer as validation type");
+        checkNotNull(path, "Received a null pointer as validation path");
+
+        validationType = validation;
+        validationPath = path;
     }
 
     /**

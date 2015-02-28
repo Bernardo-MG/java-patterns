@@ -27,10 +27,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -50,18 +47,17 @@ import com.wandrell.pattern.parser.Parser;
 
 /**
  * Implementation of {@link Parser} for XML files, which can apply XSD or DTD
- * validation files.
+ * validation files. Behind the scenes this is using the JDOM2 library SAX API
+ * classes.
  * <p>
- * While the validation can check if the parsed file is valid or not, it can
- * also be used to apply default values.
+ * A {@code Reader} for the file is received by the parser, and then transformed
+ * into a {@link org.jdom2.Document Document} before being returned.
  * <p>
- * A {@code Reader} to the file is received by the parser, and then transformed
- * into a {@link org.jdom2.Document Document}, which is the returned result.
+ * It should be noted that while the most obvious use of validation is verifying
+ * the file, it can also be used to apply default values to it.
  * <p>
  * This parser is meant for those cases where validation is needed. If you don't
  * need it, think about using {@code XMLFileParser}, which may be faster.
- * <p>
- * The parsing process uses JDOM2 library SAX API classes.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
@@ -69,73 +65,84 @@ import com.wandrell.pattern.parser.Parser;
 public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
 
     /**
-     * The text format accepted for the validation files.
-     */
-    private static final String ENCODING = "UTF-8";
-    /**
      * Builder to transform the {@code Reader} into a {@code Document}.
      * <p>
      * It is lazily instantiated.
      */
-    private SAXBuilder          builder;
+    private SAXBuilder        builder;
     /**
-     * Stream to the validation file.
+     * Flag indicating if the validation should be set on the builder or not.
+     * <p>
+     * This changes to {@code true} when the validation data changes, and to
+     * {@code false} when the builder is created.
      */
-    private InputStream         streamValidation;
+    private Boolean           valChanged = true;
+    /**
+     * {@code Reader} for the validation file.
+     * <p>
+     * It will be used just once, when initializing the validation factory. So
+     * it doesn't matter if it can be read multiple times or not.
+     */
+    private Reader            valData;
     /**
      * The type of validation being applied.
      */
-    private XMLValidationType   validationType;
+    private XMLValidationType valType;
 
     /**
-     * Constructs a parser with no validation.
+     * Constructs a {@code ValidatedXMLFileParser} with no validation.
      */
     public ValidatedXMLFileParser() {
         super();
 
-        validationType = XMLValidationType.NONE;
+        valType = XMLValidationType.NONE;
     }
 
     /**
-     * Constructs a parser with the specified validation.
+     * Constructs a {@code ValidatedXMLFileParser} with the specified
+     * validation.
      * 
-     * @param validation
+     * @param validationType
      *            the validation type to use
-     * @param validationStream
-     *            stream for the validation file
+     * @param validationFile
+     *            reader for the validation file
      */
-    public ValidatedXMLFileParser(final XMLValidationType validation,
-            final InputStream validationStream) {
+    public ValidatedXMLFileParser(final XMLValidationType validationType,
+            final Reader validationFile) {
         super();
 
-        checkNotNull(validation, "Received a null pointer as validation type");
-        checkNotNull(validationStream,
-                "Received a null pointer as validation file stream");
+        checkNotNull(validationType,
+                "Received a null pointer as validation type");
+        checkNotNull(validationFile,
+                "Received a null pointer as validation file reader");
 
-        validationType = validation;
-
-        streamValidation = validationStream;
+        valType = validationType;
+        valData = validationFile;
     }
 
     /**
-     * Returns the validation type being used.
+     * Returns the validation type being used, or that no validation is being
+     * applied.
      * 
      * @return the XML validation type being used
      */
     public final XMLValidationType getValidationType() {
-        return validationType;
+        return valType;
     }
 
     /**
      * Parses the XML file from the input into a JDOM2 {@code Document}.
+     * <p>
+     * Validation will be applied during this process, which can cause failures
+     * and exceptions to be thrown.
      * 
      * @param input
      *            {@code Reader} for the XML file
      * @return a {@code Document} with the XML contents
      * @throws JDOMException
-     *             when parsing causes an error
+     *             when an error stops the parsing
      * @throws IOException
-     *             when and IO exception stops the parsing
+     *             when an IO exception stops the parsing
      */
     @Override
     public final Document parse(final Reader input) throws JDOMException,
@@ -148,32 +155,41 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
      * 
      * @param type
      *            the validation type
-     * @param validationStream
-     *            stream for the validation file
+     * @param file
+     *            reader for the validation file
      */
     public final void setValidation(final XMLValidationType type,
-            final InputStream validationStream) {
+            final Reader file) {
         checkNotNull(type, "Received a null pointer as validation type");
-        checkNotNull(validationStream,
-                "Received a null pointer as validation file stream");
+        if (type != XMLValidationType.NONE) {
+            checkNotNull(file,
+                    "Received a null pointer as validation file reader");
+        }
 
-        validationType = type;
+        valType = type;
+        valData = file;
 
-        streamValidation = validationStream;
+        setValidationChanged(true);
     }
 
     /**
      * Returns the {@code SAXBuilder} to be used when creating a
      * {@code Document} from the parsed {@code Reader}.
      * <p>
-     * It will be created the first time it is required.
+     * The builder will be created the first time it is required, or if the
+     * validation data has been changed after the last call.
      * 
      * @return the {@code SAXBuilder} used
      */
     private final SAXBuilder getBuilder() {
         if (builder == null) {
             builder = new SAXBuilder();
+        }
 
+        if (hasValidationChanged()) {
+            builder = new SAXBuilder();
+
+            // If validation is being applied a factory for it is set
             switch (getValidationType()) {
                 case XSD:
                     builder.setXMLReaderFactory(getXSDValidationFactory());
@@ -182,20 +198,15 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
                     builder.setXMLReaderFactory(XMLReaders.DTDVALIDATING);
                     builder.setEntityResolver(getEntityResolver());
                     break;
+                case NONE:
+                    builder.setXMLReaderFactory(null);
                 default:
             }
+
+            setValidationChanged(false);
         }
 
         return builder;
-    }
-
-    /**
-     * Returns the code for the charset used on the validation files.
-     * 
-     * @return the text format used on the files
-     */
-    private final String getEncoding() {
-        return ENCODING;
     }
 
     /**
@@ -206,21 +217,52 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
     private final EntityResolver getEntityResolver() {
         return new EntityResolver() {
 
+            /**
+             * Contents of the DTD validation file.
+             * <p>
+             * This way it is only needed to use the reader once, no matter how
+             * many times the validation is applied.
+             * <p>
+             * This will be initialized the first, and only, time the validation
+             * file is read.
+             */
             private String dtd;
 
             @Override
             public final InputSource resolveEntity(final String publicId,
                     final String systemId) throws IOException {
-                final StringBuilder readDTD;
                 final InputSource source;
+
+                source = new InputSource(IOUtils.toInputStream(
+                        getDTDFileContents(), "UTF-8"));
+                source.setPublicId(publicId);
+                source.setSystemId(systemId);
+
+                return source;
+            }
+
+            /**
+             * Returns the DTD validation file contents.
+             * <p>
+             * The first time this file is read it's contents will be stored in
+             * the {@code dtd} variable.
+             * <p>
+             * This way the file is read only once, avoiding problems caused by
+             * the file reader being closed.
+             * 
+             * @return the contents of the validation file
+             * @throws IOException
+             *             when an error occurs while reading the file
+             */
+            private final String getDTDFileContents() throws IOException {
+                final StringBuilder readDTD;
                 BufferedReader reader;
                 String line;
 
                 if (dtd == null) {
                     reader = null;
                     try {
-                        reader = new BufferedReader(new InputStreamReader(
-                                getValidationInputStream(), getEncoding()));
+                        reader = IOUtils.toBufferedReader(getValidationData());
 
                         readDTD = new StringBuilder();
                         line = reader.readLine();
@@ -237,26 +279,21 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
                     dtd = readDTD.toString();
                 }
 
-                source = new InputSource(IOUtils.toInputStream(dtd,
-                        getEncoding()));
-                source.setPublicId(publicId);
-                source.setSystemId(systemId);
-
-                return source;
+                return dtd;
             }
         };
     }
 
     /**
-     * Returns the stream for the validation file.
+     * Returns the reader for the validation file.
      * <p>
-     * It should be noted that this is a single use stream. So the validation
-     * data should be parsed once only.
+     * It should be noted that this is a single use reader. So the validation
+     * data can, and should, be parsed once only.
      * 
      * @return the stream for the validation file
      */
-    private final InputStream getValidationInputStream() {
-        return streamValidation;
+    private final Reader getValidationData() {
+        return valData;
     }
 
     /**
@@ -270,18 +307,37 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
 
         try {
             sources = new Source[1];
-            sources[0] = new StreamSource(new BufferedReader(
-                    new InputStreamReader(getValidationInputStream(),
-                            getEncoding())));
+            sources[0] = new StreamSource(getValidationData());
 
             factoryValidation = new XMLReaderXSDFactory(sources);
         } catch (final JDOMException e) {
             throw new RuntimeException(e);
-        } catch (final UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
         }
 
         return factoryValidation;
+    }
+
+    /**
+     * Indicates if the validation information has changed.
+     * 
+     * @return {@code true} if the validation data has changed, {@code false}
+     *         otherwise
+     */
+    private final Boolean hasValidationChanged() {
+        return valChanged;
+    }
+
+    /**
+     * Sets the validation changed status.
+     * <p>
+     * If validation should be set again on the builder, this can be indicated
+     * giving a {@code true} value to this method.
+     * 
+     * @param changed
+     *            the validation changed status
+     */
+    private final void setValidationChanged(final Boolean changed) {
+        valChanged = changed;
     }
 
 }

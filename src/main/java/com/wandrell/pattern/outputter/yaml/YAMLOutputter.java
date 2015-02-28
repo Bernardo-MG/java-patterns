@@ -41,7 +41,7 @@ import com.wandrell.pattern.outputter.Outputter;
  * The data is just receives as an object, which will be automatically
  * transformed into the resulting data.
  * <p>
- * The easiest way to use this class is sending a {@code map<String, Object>},
+ * The easiest way to use this class is sending a {@code Map<String, Object>},
  * where the values may be other maps or collections.
  * <p>
  * That structure adapts easily into a YAML tree and is easy to understand.

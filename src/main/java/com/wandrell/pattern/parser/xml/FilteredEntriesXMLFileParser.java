@@ -26,7 +26,6 @@ package com.wandrell.pattern.parser.xml;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.InputStream;
 import java.io.Reader;
 import java.util.Collection;
 
@@ -43,20 +42,20 @@ import com.wandrell.pattern.conf.XMLValidationType;
 
 /**
  * Implementation of {@link AbstractAttributesFilterXMLFileParser} which filters
- * only nodes with an specific name.
+ * only nodes having an specific name. The resulting data is returned as a JDOM
+ * 2 {@code Document}.
  * <p>
- * All the nodes with this name are acquired through an XPath query, then
- * filtered according to the attributes they have.
+ * All the nodes with this name are acquired through an XPath query. Then those
+ * not not having a certain combination of attributes will be filtered out, and
+ * won't appear on the resulting {@code Document}.
  * <p>
- * Any node not having all the required attributes set as {@code true}, or
- * having any of the rejected attributes set as {@code true} is rejected.
+ * This filtering process is simple. All those not having all the required
+ * attributes set as {@code true}, or having any of the rejected attributes set
+ * as {@code true} will be removed from the result. Along any node missing any
+ * of the attributes.
  * <p>
- * Nodes not having any of these attributes are ignored. It should be noted that
- * this parser accepts validation files, which may set default values to the
- * attributes.
- * <p>
- * After being filtered all these nodes, and their subnodes, will be combined
- * into a single {@code Document} before returning it.
+ * It should be noted that this parser accepts validation files, which can be
+ * used to set default values on the attributes.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
@@ -73,27 +72,29 @@ public final class FilteredEntriesXMLFileParser extends
      * Base parser handling the creation of the {@code Document}.
      * <p>
      * This is just to use inheritance by composition, and does nothing apart
-     * from returning the {@code Document} it generates.
-     * <p>
-     * The parser allows applying validation, which is required if default
-     * attribute values are to be used.
+     * from returning the {@code Document} it generates, and handling
+     * validation.
      */
     private final XMLFileParser      baseParser = new XMLFileParser();
     /**
      * The XPath expression as a string.
+     * <p>
+     * This is created from the filter data and then transformed into an XPath
+     * structure.
      */
     private String                   expression;
     /**
      * The name of the nodes to filter.
      * <p>
-     * All the nodes with this name will be acquires with an XPath query to be
-     * filtered.
+     * This is used to create the XPath query, as it will return only those
+     * nodes with this name.
      */
     private final String             nodeName;
     /**
      * The XPath expression.
      * <p>
-     * This will be created after any change to the required attributes.
+     * This is created from the expression string, and used to filter the data
+     * read from the XML file.
      */
     private XPathExpression<Element> xpath;
 
@@ -109,7 +110,8 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * Constructs a parser which will filter nodes with the specified name.
+     * Constructs a {@code FilteredEntriesXMLFileParser} which will only pick
+     * nodes with the specified name.
      * 
      * @param node
      *            the name of the nodes to filter
@@ -123,31 +125,32 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * Constructs a parser which will filter nodes with the specified name,
-     * applying the specified validation.
+     * Constructs a {@code FilteredEntriesXMLFileParser} which will only pick
+     * nodes with the specified name, after applying the specified validation.
      * 
      * @param validation
-     *            the validation type
-     * @param validationStream
-     *            the validation file stream
+     *            the validation type to apply
+     * @param validationFile
+     *            reader for the validation file
      * @param node
      *            the name of the nodes to filter
      */
     public FilteredEntriesXMLFileParser(final XMLValidationType validation,
-            final InputStream validationStream, final String node) {
+            final Reader validationFile, final String node) {
         super();
 
         checkNotNull(node, "Received a null pointer as node");
 
         nodeName = node;
 
-        getBaseParser().setValidation(validation, validationStream);
+        getBaseParser().setValidation(validation, validationFile);
     }
 
     /**
-     * Returns the validation type being used.
+     * Returns the XML validation being used, or that no validation is being
+     * applied.
      * 
-     * @return the XML validation type being used
+     * @return the XML validation being used
      */
     public final XMLValidationType getValidationType() {
         return getBaseParser().getValidationType();
@@ -155,6 +158,9 @@ public final class FilteredEntriesXMLFileParser extends
 
     /**
      * Parses the XML file from the input into a JDOM2 {@code Document}.
+     * <p>
+     * This will contain only those nodes that pass the filter. Which means,
+     * only those with the expected name and attributes.
      * 
      * @param input
      *            {@code Reader} for the XML file
@@ -172,12 +178,12 @@ public final class FilteredEntriesXMLFileParser extends
      * 
      * @param type
      *            the validation type
-     * @param validationStream
-     *            stream for the validation file
+     * @param file
+     *            reader for the validation file
      */
     public final void setValidation(final XMLValidationType type,
-            final InputStream validationStream) {
-        getBaseParser().setValidation(type, validationStream);
+            final Reader file) {
+        getBaseParser().setValidation(type, file);
     }
 
     @Override
@@ -188,9 +194,12 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * Builds the XPath predicate filtering the nodes based on the attributes.
+     * Builds the attributes XPath predicate for the filter.
+     * <p>
+     * The predicate filters out all those nodes not having the expected
+     * attributes.
      * 
-     * @return the XPath predicate filtering the attributes
+     * @return the XPath predicate to filter the attributes
      */
     private final String buildAttributesPredicate() {
         final StringBuffer predicate; // Buffer for creating the predicate
@@ -217,24 +226,31 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * Filters the received {@code Document}.
+     * Filters the received {@code Document}, returning a new {@code Document}
+     * containing only those nodes with the expected name and attributes.
      * <p>
-     * All the nodes resulting from the XPath query are used to create a new
-     * {@code Document}, which will be the one returned.
+     * For this an XPath expression is built and used.
+     * <p>
+     * The filter will always use and apply the latest filter data.
      * 
-     * @param doc
+     * @param document
      *            the {@code Document} to parse
      * @return the filtered {@code Document}
      */
-    private final Document filter(final Document doc) {
+    private final Document filter(final Document document) {
         final Collection<Element> nodes;  // Nodes resulting from the filter
         final Element root;               // Root for the new document
+        final String rootName;            // Name for the root element
 
-        checkNotNull(doc, "Received a null pointer as document");
-        checkArgument(doc.hasRootElement(), "Received a document with no root");
+        checkNotNull(document, "Received a null pointer as document");
+        checkArgument(document.hasRootElement(),
+                "Received a document with no root");
+
+        // Acquires the root name
+        rootName = document.getRootElement().getName();
 
         // Filters the nodes
-        nodes = getXPathExpression().evaluate(doc.getRootElement());
+        nodes = getXPathExpression().evaluate(document.getRootElement());
 
         // Logs the result
         if (getLogger().isDebugEnabled()) {
@@ -244,20 +260,23 @@ public final class FilteredEntriesXMLFileParser extends
                             getExpression(), nodes.size()));
         }
 
-        // Builds a new tree with the nodes
-        root = new Element("root");
+        // Nodes are detached from the original Document
         for (final Element node : nodes) {
             node.detach();
         }
+
+        // Builds a new tree with the nodes
+        root = new Element(rootName);
         root.setContent(nodes);
 
         return new Document(root);
     }
 
     /**
-     * Returns the base parser which creates the {@code Document}.
+     * Returns the base parser.
      * <p>
-     * This is just to implement inheritance by composition.
+     * This is used to create the {@code Document} and handle validation, and
+     * serves to implement inheritance by composition.
      * 
      * @return the base parser
      */
@@ -266,16 +285,14 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * Generates the XPath expression for filtering the nodes.
+     * Generates the XPath expression for filtering the nodes. It will be used
+     * to create an XPath object.
      * <p>
-     * This is created combining the nodes name and the required and rejected
-     * attributes.
+     * This will search for those nodes having the expected name and attributes.
+     * All the ones not fitting this criteria will be ignored.
      * <p>
-     * The required attributes should be set to {@code true}, the rejected ones
-     * should be set to {@code false}.
-     * <p>
-     * All the nodes which do not fit the attributes criteria, or don't have the
-     * correct name, will be ignored.
+     * The required attributes should be set to {@code true}, and the rejected
+     * ones should be set to {@code false}.
      * 
      * @return the XPath expression used to filter the nodes
      */
@@ -302,7 +319,7 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * The name of the nodes to filter.
+     * The expected node name.
      * <p>
      * All nodes not having this name will be ignored.
      * 
@@ -313,7 +330,12 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * Returns the XPath expression.
+     * Returns the {@code XPathExpression} used for filtering.
+     * <p>
+     * If this is the first time the method is called, or the filtering data has
+     * changed, then the expression will be rebuilt and compiled.
+     * <p>
+     * Otherwise the same expression will be reused.
      * 
      * @return the XPath expression
      */
@@ -327,14 +349,14 @@ public final class FilteredEntriesXMLFileParser extends
     }
 
     /**
-     * The data used the generate the XPath query has changed, and the XPath
-     * data should be built again.
+     * Signals that the data used the generate the XPath query has changed, and
+     * the XPath expression should be built again.
      * <p>
-     * For this it is only needed to set the XPath expression to {@code null},
-     * so when they are required the class will have to build them.
+     * The {@code XPathExpression} instance will be set to {@code null}, so it
+     * is built again the next time it is required.
      */
     @Override
-    protected final void statusChanged() {
+    protected final void onAttributesChange() {
         expression = null;
         xpath = null;
     }

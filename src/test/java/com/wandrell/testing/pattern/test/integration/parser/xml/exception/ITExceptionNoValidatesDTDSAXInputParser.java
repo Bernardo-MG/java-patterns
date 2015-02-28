@@ -82,7 +82,7 @@ public final class ITExceptionNoValidatesDTDSAXInputParser {
     @BeforeClass
     private final void initialize() {
         parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
-                ResourceUtils.getClassPathInputStream(XMLConf.DTD_VALIDATION));
+                ResourceUtils.getClassPathReader(XMLConf.DTD_VALIDATION));
     }
 
 }

@@ -117,10 +117,9 @@ public final class ITXMLFileParser {
         parser = new XMLFileParser();
 
         parser.setValidation(XMLValidationType.XSD,
-                ResourceUtils.getClassPathInputStream(XMLConf.XSD_VALIDATION));
+                ResourceUtils.getClassPathReader(XMLConf.XSD_VALIDATION));
 
-        reader = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(XMLConf.VALIDATED_XSD)));
+        reader = ResourceUtils.getClassPathReader(XMLConf.VALIDATED_XSD);
         value = parserDoc.parse(parser.parse(reader));
 
         Assert.assertEquals(value, (Integer) 1);

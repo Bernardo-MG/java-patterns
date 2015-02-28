@@ -36,8 +36,9 @@
  * configuration needs to a minimum, and hiding the actual API being used.
  * <p>
  * The outputters are stored in packages named after the format they can send.
- * The {@code xml} package contains outputters for XML data, while the
- * {@code yaml} contains them for YAML data.
+ * The {@link com.wandrell.pattern.outputter.xml xml} package contains
+ * outputters for XML data, while the
+ * {@link com.wandrell.pattern.outputter.yaml yaml} contains them for YAML data.
  */
 package com.wandrell.pattern.outputter;
 

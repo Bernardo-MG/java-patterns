@@ -53,10 +53,9 @@ public final class ITFilteredXSDValidationDefaultsFilteredEntriesXMLFileParser
     private static final AbstractAttributesFilterXMLFileParser buildParser() {
         final AbstractAttributesFilterXMLFileParser parser;
 
-        parser = new FilteredEntriesXMLFileParser(
-                XMLValidationType.XSD,
+        parser = new FilteredEntriesXMLFileParser(XMLValidationType.XSD,
                 ResourceUtils
-                        .getClassPathInputStream(XMLConf.FILTERED_VALIDATION_XSD),
+                        .getClassPathReader(XMLConf.FILTERED_VALIDATION_XSD),
                 XMLConf.NODE_ROOT_FILTER);
 
         return parser;
