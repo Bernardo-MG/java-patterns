@@ -198,9 +198,8 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
                     builder.setXMLReaderFactory(XMLReaders.DTDVALIDATING);
                     builder.setEntityResolver(getEntityResolver());
                     break;
-                case NONE:
-                    builder.setXMLReaderFactory(null);
                 default:
+                    builder.setXMLReaderFactory(null);
             }
 
             setValidationChanged(false);
