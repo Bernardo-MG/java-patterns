@@ -18,7 +18,7 @@ Currently the project has no webpage.
 ### Documentation webpage
 The project has a [Maven site][] and [Javadoc page][] with the information from the latest release.
 
-There is also a [development Maven site][] and a [development Javadoc page][], with the information from the latest development snapshot.
+There is also a [development Maven site][] and a [development Javadoc page][], generated from the latest development snapshot.
 
 ## Status
 The project is still under development, so expect a certain degree of volatility.
