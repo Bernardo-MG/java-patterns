@@ -24,7 +24,7 @@
 package com.wandrell.pattern.conf;
 
 /**
- * Enumeration representing the different XML validation methods.
+ * Enumeration representing the various XML validation methods.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0

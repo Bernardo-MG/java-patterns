@@ -25,8 +25,9 @@
  * Provides implementations of {@link com.wandrell.pattern.outputter.Outputter
  * Outputter} for XML files.
  * <p>
- * {@link YAMLOutputter} transforms a {@code Object} into a YAML text file and
- * sends it through an output class.
+ * Currently the only one existing is
+ * {@link com.wandrell.pattern.outputter.xml.XMLOutputter XMLOutputter}, which
+ * sends a JDOM2 {@link org.jdom2.Document Document} through an output class.
  */
 package com.wandrell.pattern.outputter.xml;
 

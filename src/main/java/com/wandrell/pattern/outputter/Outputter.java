@@ -30,6 +30,9 @@ import java.io.Writer;
  * Interface for sending Java objects through output operations. Commonly this
  * means writing an object into a file.
  * <p>
+ * Most of the time this interface will be used to hide the actual API being
+ * used for the job, to reduce the coupling with third party libraries.
+ * <p>
  * It is expected to close the output object once the operation is finished.
  * 
  * @author Bernardo Martínez Garrido
@@ -49,7 +52,7 @@ public interface Outputter<V> {
      * @param stream
      *            {@code OutputStream} to receive the parsed object
      * @throws Exception
-     *             when sending the object causes an error
+     *             if sending the object causes an error
      */
     public void send(final V value, final OutputStream stream) throws Exception;
 
@@ -63,7 +66,7 @@ public interface Outputter<V> {
      * @param writer
      *            {@code Writer} to receive the parsed object
      * @throws Exception
-     *             when sending the object causes an error
+     *             if sending the object causes an error
      */
     public void send(final V value, final Writer writer) throws Exception;
 

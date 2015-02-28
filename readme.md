@@ -50,6 +50,7 @@ To acquire it through Git use the following clone URI:
 Releases can be found in the [releases repository][] on Bintray.
 
 It can be added to Maven as a repository using the following URI:
+
 `http://dl.bintray.com/bernardo-mg/maven`
 
 ## Continuous integration

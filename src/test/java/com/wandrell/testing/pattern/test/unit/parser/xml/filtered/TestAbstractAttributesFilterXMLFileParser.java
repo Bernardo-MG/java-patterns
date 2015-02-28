@@ -96,7 +96,7 @@ public final class TestAbstractAttributesFilterXMLFileParser {
             }
 
             @Override
-            protected final void statusChanged() {}
+            protected final void onAttributesChange() {}
 
         };
     }

@@ -23,7 +23,6 @@
  */
 package com.wandrell.pattern.parser.xml;
 
-import java.io.InputStream;
 import java.io.Reader;
 
 import org.jdom2.Document;
@@ -32,18 +31,19 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.Parser;
 
 /**
- * Implementation of {@link Parser} for XML files, which can apply XSD or DTD
- * validation files.
+ * Implementation of {@link Parser} for XML files, which adapts to the
+ * validation requirements.
  * <p>
- * The difference with this and {@link ValidatedXMLFileParser} is that this
- * class is composed of an instance of that parser and of
- * {@link NotValidatedXMLFileParser}, and switches between them.
+ * This parser can apply validation, but has a big difference which sets it
+ * apart from {@link ValidatedXMLFileParser}, and it is that class is composed
+ * of an instance of that parser and one of {@link NotValidatedXMLFileParser}.
  * <p>
- * When no validation is applied, the instance of
- * {@code NotValidatedXMLFileParser} will be used, otherwise the
- * {@code ValidatedXMLFileParser} will take care of the parsing process.
+ * The reason for this is that when no validation is applied, the instance of
+ * {@code NotValidatedXMLFileParser} will be the one taking care of the parsing
+ * process, and in any other case the {@code ValidatedXMLFileParser} will do the
+ * work.
  * <p>
- * This way when no validation is required the faster parser is used.
+ * This way when no validation is used the parsing can become faster.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
@@ -53,28 +53,43 @@ public final class XMLFileParser implements Parser<Reader, Document> {
     /**
      * Parser with no validation.
      * <p>
-     * This is faster. When no validation is required this fact is taken
-     * advantage of, using this parser.
+     * This one is faster, and when no validation is required this fact is taken
+     * advantage of.
      */
     private final NotValidatedXMLFileParser parserNotValidated = new NotValidatedXMLFileParser();
     /**
      * Parser with validation.
      * <p>
-     * This is slower, but needed when validation is applied.
+     * This is slower, but needed when validation is to be applied.
      */
     private final ValidatedXMLFileParser    parserValidated    = new ValidatedXMLFileParser();
 
     /**
-     * Constructs a parser.
+     * Constructs an {@code XMLFileParser}.
      */
     public XMLFileParser() {
         super();
     }
 
     /**
-     * Returns the validation type being used.
+     * Constructs a {@code XMLFileParser} with the specified validation.
      * 
-     * @return the XML validation type being used
+     * @param validationType
+     *            the validation type to use
+     * @param validationFile
+     *            reader for the validation file
+     */
+    public XMLFileParser(final XMLValidationType validationType,
+            final Reader validationFile) {
+        super();
+        getValidatedParser().setValidation(validationType, validationFile);
+    }
+
+    /**
+     * Returns the XML validation being used, or that no validation is being
+     * applied.
+     * 
+     * @return the XML validation being used
      */
     public final XMLValidationType getValidationType() {
         return getValidatedParser().getValidationType();
@@ -82,6 +97,9 @@ public final class XMLFileParser implements Parser<Reader, Document> {
 
     /**
      * Parses the XML file from the input into a JDOM2 {@code Document}.
+     * <p>
+     * Validation can be applied during this process, which may cause failures
+     * and exceptions to be thrown.
      * 
      * @param input
      *            {@code Reader} for the XML file
@@ -99,16 +117,18 @@ public final class XMLFileParser implements Parser<Reader, Document> {
      * 
      * @param type
      *            the validation type
-     * @param validationStream
-     *            stream for the validation file
+     * @param file
+     *            reader for the validation file
      */
     public final void setValidation(final XMLValidationType type,
-            final InputStream validationStream) {
-        getValidatedParser().setValidation(type, validationStream);
+            final Reader file) {
+        getValidatedParser().setValidation(type, file);
     }
 
     /**
      * Returns the parser with no validation.
+     * <p>
+     * This is faster, a fact taken advantage of when no validation is required.
      * 
      * @return the parser with no validation
      */
@@ -119,13 +139,13 @@ public final class XMLFileParser implements Parser<Reader, Document> {
     /**
      * Returns the parser to be used on the parsing process.
      * <p>
-     * When no validation is required, this will be the parser with no
-     * validation. Otherwise the validated parser will be used.
+     * If validation is required the parser with no validation is returned,
+     * otherwise the validated parser will be the one returned.
      * 
      * @return the parser to be used
      */
     private final Parser<Reader, Document> getParser() {
-        final Parser<Reader, Document> parser;
+        final Parser<Reader, Document> parser; // Parser to use
 
         if (getValidationType() == XMLValidationType.NONE) {
             // No validation being applied
@@ -140,6 +160,8 @@ public final class XMLFileParser implements Parser<Reader, Document> {
 
     /**
      * Returns the parser with validation.
+     * <p>
+     * This one is slower, so it will only be used if validation is needed.
      * 
      * @return the parser with validation
      */

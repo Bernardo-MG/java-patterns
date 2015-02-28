@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2015 the original author or authors.
+ * Copyright (c) 2014 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,7 @@
  * SOFTWARE.
  */
 /**
- * Contains classes with configuration information.
- * <p>
- * Currently only {@link com.wandrell.pattern.conf.XMLValidationType
- * XMLValidationType} exists. It is an enumerator for the XML validation types.
+ * Provides interfaces and basic implementations for general-use services.
  */
-package com.wandrell.pattern.conf;
+package com.wandrell.pattern.service;
 

@@ -82,7 +82,7 @@ public final class ITExceptionNoValidatesXSDSAXInputParser {
     @BeforeClass
     private final void initialize() {
         parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
-                ResourceUtils.getClassPathInputStream(XMLConf.XSD_VALIDATION));
+                ResourceUtils.getClassPathReader(XMLConf.XSD_VALIDATION));
     }
 
 }

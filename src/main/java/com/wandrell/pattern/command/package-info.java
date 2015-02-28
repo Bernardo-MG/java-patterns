@@ -22,40 +22,26 @@
  * SOFTWARE.
  */
 /**
- * Provides interfaces and basic implementations for the command and executor
- * pattern.
+ * Provides interfaces and basic implementations for the command and command
+ * executor patterns.
  * <p>
- * This pattern consists of two type of objects: the commands, which encapsulate
- * pieces of code; and the executor, which runs these commands calling an
- * execution method ({@code execute()} in the case of the provided interfaces),
- * but also takes care of any additional operation their execution may require,
- * such as catching exceptions, injecting dependencies or setting up their
- * environment.
+ * The command, in the shape of the {@link com.wandrell.pattern.command.Command
+ * Command} and the {@link com.wandrell.pattern.command.ReturnCommand
+ * ReturnCommand}, encapsulates pieces of code to be executed at a later time.
+ * In a way, it can be seen as a function which can be stored and transmitted
+ * like any object.
  * <p>
- * Two kinds of command interfaces are provided: the
- * {@link com.wandrell.pattern.command.Command}, with a {@code void}
- * {@link com.wandrell.pattern.command.Command#execute() execute()} method, and
- * the {@link com.wandrell.pattern.command.ReturnCommand}, which returns a value
- * when it's {@link com.wandrell.pattern.command.ReturnCommand#execute()
- * execute()} method is called.
+ * It is the {@link com.wandrell.pattern.command.CommandExecutor
+ * CommandExecutor}'s job to take care of running those commands. Additionally,
+ * it also handles any other required operation, such as setting up the
+ * environment or catching exceptions.
  * <p>
- * The executor interface is the
- * {@link com.wandrell.pattern.command.CommandExecutor}, making use of
- * {@code execute} methods to run any of the two mentioned commands: one void
- * {@link com.wandrell.pattern.command.CommandExecutor#execute(Command)
- * execute(Command)} for executing a {@code Command}, and one
- * {@link com.wandrell.pattern.command.CommandExecutor#execute(ReturnCommand)
- * execute(ReturnCommand)} for executing a {@code ReturnCommand} and return the
- * same value this command returned.
- * <p>
- * No default general-use implementation of the command interfaces is provided,
- * as they are expected to be implemented in a case-by-case basis. But there are
- * a few commands, used for specific jobs, in their own sub-packages which may
- * serve as examples.
- * <p>
- * For the executor, on the other hand, there is a basic implementation, the
- * {@link com.wandrell.pattern.command.DefaultCommandExecutor}, implementing the
- * execution methods in the most basic way.
+ * There is a default basic implementation of this executor interface, the
+ * {@link com.wandrell.pattern.command.DefaultCommandExecutor
+ * DefaultCommandExecutor}, which does little more than calling the command's
+ * {@code execute} method, but there are no default implementations of the
+ * command interfaces, as these are meant to be created on a case-by-case basis,
+ * fitting concrete needs.
  */
 package com.wandrell.pattern.command;
 

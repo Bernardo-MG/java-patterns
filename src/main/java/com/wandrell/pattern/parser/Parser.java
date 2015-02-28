@@ -26,32 +26,48 @@ package com.wandrell.pattern.parser;
 /**
  * Interface for the parser pattern.
  * <p>
- * This pattern allows to transform one structure to another, both containing
- * the same or similar data.
+ * This pattern allows to transform a structure received as input to another
+ * one, both containing the same or similar data. If no data is lost during this
+ * process, then it is said to be a lossless parsing, otherwise it is a lossfull
+ * one, but that is an implementation detail, not handled by the interface.
  * <p>
- * Nothing can assure before hand if this is a lossfull or lossless parser,
- * meaning that data is lost or not during the parsing process.
+ * A straightforward examplefor this interface would be reading from a file,
+ * using a {@code Parser} which receives a {@code Reader} for a YAML file and
+ * returns a model object.
  * <p>
- * If a complex parsing is required, it is better to create several parsers and
- * chain their results than creating a big single parser.
+ * While this is perfectly good use, it is preferable to use parsers for the
+ * smallest possible job and then chain their results. In the previous example
+ * reading the file and parsing its contents are two different sections on the
+ * parsing process.
+ * <p>
+ * So it is possible to create a parser which receives the {@code Reader} and
+ * returns a {@code Map} with the contents, and then a second which receives
+ * this {@code Map} and returns a model object. The value returned from the
+ * first is given to the second, which then creates the final one.
+ * <p>
+ * This way the parsers become easier to maintain, and if possible also
+ * reusable.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
  * @param <I>
- *            the input type
+ *            the input type to be parsed
  * @param <O>
- *            the output type
+ *            the output type parsed from the input
  */
 public interface Parser<I, O> {
 
     /**
      * Parses the input into an instance of the output type.
+     * <p>
+     * During the parsing process it is possible to find errors which stop the
+     * parsing process completely. In those case an {@code Exception} is thrown.
      * 
      * @param input
      *            object to parse
      * @return the input parsed into a new object
      * @throws Exception
-     *             when parsing causes an error
+     *             when the parsing causes an error
      */
     public O parse(final I input) throws Exception;
 

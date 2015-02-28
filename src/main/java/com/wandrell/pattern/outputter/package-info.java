@@ -24,12 +24,21 @@
 /**
  * Provides interfaces and basic implementations for outputters.
  * <p>
- * An outputter sends a data structure through an output operation.
+ * An outputter sends a data structure through an output operation to, for
+ * example, write it into a file.
  * <p>
- * This solves the need of writing a data structure to a file, for example.
+ * This is done through the {@link com.wandrell.pattern.outputter.Outputter
+ * Outputter} interface, which offers methods to send the data through an
+ * {@code OutputStream} or an {@code OutputWriter}.
  * <p>
- * Basic XML outputters for XML files are included in the {@code xml} package.
- * These are based on JDOM2 and meant to ease the use of this library.
+ * Basic implementations of this interface, based on third party libraries, are
+ * offered. These are meant as a way to easily handle file formats, reducing the
+ * configuration needs to a minimum, and hiding the actual API being used.
+ * <p>
+ * The outputters are stored in packages named after the format they can send.
+ * The {@link com.wandrell.pattern.outputter.xml xml} package contains
+ * outputters for XML data, while the
+ * {@link com.wandrell.pattern.outputter.yaml yaml} contains them for YAML data.
  */
 package com.wandrell.pattern.outputter;
 

@@ -52,10 +52,9 @@ public final class ITFilteredDTDValidationDefaultsFilteredEntriesXMLFileParser
     private static final AbstractAttributesFilterXMLFileParser buildParser() {
         final AbstractAttributesFilterXMLFileParser parser;
 
-        parser = new FilteredEntriesXMLFileParser(
-                XMLValidationType.DTD,
+        parser = new FilteredEntriesXMLFileParser(XMLValidationType.DTD,
                 ResourceUtils
-                        .getClassPathInputStream(XMLConf.FILTERED_VALIDATION_DTD),
+                        .getClassPathReader(XMLConf.FILTERED_VALIDATION_DTD),
                 XMLConf.NODE_ROOT_FILTER);
 
         return parser;

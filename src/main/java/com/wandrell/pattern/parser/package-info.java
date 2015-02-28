@@ -24,24 +24,16 @@
 /**
  * Provides interfaces and basic implementations for the parser pattern.
  * <p>
- * This pattern allows to transform one structure to another, both containing
- * the same or similar data. And it is represented by the {@link Parser}
- * interface.
+ * This pattern allows transforming one structure to another, both containing
+ * the same or similar data. In the case any data is lost during the process
+ * this is called a lossfull parsing, otherwise it is a lossless parsing.
  * <p>
- * Usually this is required when reading the contents of a file into the
- * application, in which case a {@code Reader}, {@code InputStream} or similar
- * class is used as the input.
+ * The interface {@link com.wandrell.pattern.parser.Parser Parser} offers a
+ * generic way to implement any kind of parser, through a method that just
+ * receives one object and returns another.
  * <p>
- * If the file being parsed is of a common data type, such as XML or JSON, this
- * interface also serves to hide the actual implementation being used, working
- * as an adapter.
- * <p>
- * Parsers can be used to parse the result of another parser, creating a chain
- * of parser, which can help to simplify complex parsing procedures. The basic
- * implementations contained in the library are meant to be the first step in
- * such a chain.
- * <p>
- * The {@code xml} package contains parsers for XML files.
+ * Implementations of this interface for processing XML files can be found on
+ * the {@link com.wandrell.pattern.parser.xml xml} package.
  */
 package com.wandrell.pattern.parser;
 

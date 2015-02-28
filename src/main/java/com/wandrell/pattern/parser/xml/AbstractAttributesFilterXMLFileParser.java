@@ -35,18 +35,26 @@ import org.jdom2.Document;
 import com.wandrell.pattern.parser.Parser;
 
 /**
- * Abstract {@code Parser} for XML files, allowing filtering the contained data
- * based on boolean attributes.
+ * Abstract {@link Parser} for XML files, allowing filtering the contents based
+ * on boolean attributes. The contents will be parsed into a JDOM 2
+ * {@code Document}.
  * <p>
- * The exact way the filtering is applied will depend on the implementation.
+ * It does not offer an actual filtering process, that's a detail to be taken
+ * care by implementations.
  * <p>
- * This class just stores two collections of attributes names: one for the
- * required ones, which should be set to {@code true}, and another for the
- * rejected ones, which should be set to {@code false}.
+ * This class just stores two collections, which are the names of the boolean
+ * attributes to be used for filtering the file. They are divided between
+ * required ones, those which need to be set to {@code true}, and the rejected
+ * ones, those which need to be set to {@code false}.
  * <p>
- * All the nodes which do not fit this criteria are expected be ignored when
- * parsing the XML file. What happens if one node lacks any of the attributes
- * will depend on the implementation.
+ * All the nodes whose attributes do not fit this criteria are expected be
+ * ignored when parsing the XML file. What happens if a node lacks any of the
+ * attributes will depend on the implementation.
+ * <p>
+ * Another important implementation detail is handling how the filter is
+ * created. While the exact workings of it are left open, an abstract method,
+ * {@link #onAttributesChange}, is offered as a way to react when the attributes
+ * are modified.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
@@ -72,17 +80,15 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
     private final Collection<String> attrRequired = new LinkedHashSet<String>();
 
     /**
-     * Default constructor.
+     * Constructs an {@code AbstractAttributesFilterXMLFileParser}.
      */
     public AbstractAttributesFilterXMLFileParser() {
         super();
     }
 
     /**
-     * Adds an attribute which the parsed nodes should have with a value of
-     * {@code false}.
-     * <p>
-     * Any node not having this attribute set to {@code false} will be ignored.
+     * Adds an attribute which should be set to {@code false} on the parsed
+     * nodes, or else these nodes will be ignored.
      * 
      * @param attribute
      *            an attribute the read nodes should have set to {@code false}
@@ -92,15 +98,13 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
 
         if (attribute.length() > 0) {
             getRejectedAttributesModifiable().add(attribute);
-            statusChanged();
+            onAttributesChange();
         }
     }
 
     /**
-     * Adds an attribute which the parsed nodes should have with a value of
-     * {@code true}.
-     * <p>
-     * Any node not having this attribute set to {@code true} will be ignored.
+     * Adds an attribute which should be set to {@code true} on the parsed
+     * nodes, or else these nodes will be ignored.
      * 
      * @param attribute
      *            an attribute the read nodes should have set to {@code true}
@@ -110,7 +114,7 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
 
         if (attribute.length() > 0) {
             getRequiredAttributesModifiable().add(attribute);
-            statusChanged();
+            onAttributesChange();
         }
     }
 
@@ -118,29 +122,35 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
      * Removes all the rejected attributes used for filtering.
      * <p>
      * These are the attributes which should be set to {@code false} on the
-     * nodes, or otherwise the node will be ignored.
+     * parsed nodes, or else these nodes will be ignored.
      */
     public final void clearRejectedAttributes() {
         getRejectedAttributesModifiable().clear();
-        statusChanged();
+        onAttributesChange();
     }
 
     /**
      * Removes all the required attributes used for filtering.
      * <p>
      * These are the attributes which should be set to {@code true} on the
-     * nodes, or otherwise the node will be ignored.
+     * parsed nodes, or else these nodes will be ignored.
      */
     public final void clearRequiredAttributes() {
         getRequiredAttributesModifiable().clear();
-        statusChanged();
+        onAttributesChange();
     }
 
     /**
-     * Returns a collection containing all the rejected attributes.
+     * Returns a non modifiable collection containing all the rejected
+     * attributes.
      * <p>
      * These are the attributes which should be set to {@code false} on the
-     * nodes, or otherwise the node will be ignored.
+     * parsed nodes, or else these nodes will be ignored.
+     * <p>
+     * This collection is unmodifiable. To change the stored rejected attributes
+     * use the {@link #addRejectedAttribute}, {@link #removeRejectedAttribute}
+     * or {@link #removeRejectedAttribute}.
+     * 
      * 
      * @return the attributes which should be set as {@code false}
      */
@@ -150,10 +160,15 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
     }
 
     /**
-     * Returns a collection containing all the required attributes.
+     * Returns a non modifiable collection containing all the required
+     * attributes.
      * <p>
      * These are the attributes which should be set to {@code true} on the
-     * nodes, or otherwise the node will be ignored.
+     * parsed nodes, or else these nodes will be ignored.
+     * <p>
+     * This collection is unmodifiable. To change the stored required attributes
+     * use the {@link #addRequiredAttribute}, {@link #removeRequiredAttribute}
+     * or {@link #removeRequiredAttribute}.
      * 
      * @return the attributes which should be set as {@code true}
      */
@@ -170,7 +185,8 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
      */
     public final void removeRejectedAttribute(final String attribute) {
         getRejectedAttributesModifiable().remove(attribute);
-        statusChanged();
+
+        onAttributesChange();
     }
 
     /**
@@ -181,11 +197,12 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
      */
     public final void removeRequiredAttribute(final String attribute) {
         getRequiredAttributesModifiable().remove(attribute);
-        statusChanged();
+
+        onAttributesChange();
     }
 
     /**
-     * Returns the modifiable reference to the rejected attributes collection.
+     * Returns the modifiable collection containing all the rejected attributes.
      * <p>
      * These are the attributes which should be set to {@code false} on the
      * nodes, or otherwise the node will be ignored.
@@ -197,7 +214,7 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
     }
 
     /**
-     * Returns the modifiable reference to the required attributes collection.
+     * Returns the modifiable collection containing all the required attributes.
      * <p>
      * These are the attributes which should be set to {@code true} on the
      * nodes, or otherwise the node will be ignored.
@@ -209,8 +226,11 @@ public abstract class AbstractAttributesFilterXMLFileParser implements
     }
 
     /**
-     * Indicates that the data used to filter the file has changed.
+     * Signals that changes have occurred to the attributes used for filtering.
+     * <p>
+     * This method is called after adding and removing both required and
+     * rejected attributes.
      */
-    protected abstract void statusChanged();
+    protected abstract void onAttributesChange();
 
 }

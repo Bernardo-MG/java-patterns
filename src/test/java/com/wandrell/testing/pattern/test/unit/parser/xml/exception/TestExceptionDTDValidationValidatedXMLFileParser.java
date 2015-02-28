@@ -52,7 +52,7 @@ public final class TestExceptionDTDValidationValidatedXMLFileParser extends
      */
     private static final Parser<Reader, Document> buildParser() {
         return new ValidatedXMLFileParser(XMLValidationType.DTD,
-                ResourceUtils.getClassPathInputStream(XMLConf.DTD_VALIDATION));
+                ResourceUtils.getClassPathReader(XMLConf.DTD_VALIDATION));
     }
 
     /**

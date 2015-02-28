@@ -25,20 +25,24 @@
  * Provides implementations of {@link com.wandrell.pattern.parser.Parser Parser}
  * for XML files.
  * <p>
- * {@link NotValidatedXMLFileParser} is a faster parser, where no validation is
- * applied, while {@link ValidatedXMLFileParser} applies XSD or DTD validation
- * files, but in exchange can be slower.
+ * {@link com.wandrell.pattern.parser.xml.NotValidatedXMLFileParser
+ * NotValidatedXMLFileParser} is the faster parser in the package, but it does
+ * not allows validation to be applied.
  * <p>
- * While these two are offered as is, they are not required.
- * {@link XMLFileParser} takes care of the speed problem, as it is composed by
- * both parsers, and will switch from one to another depending on if validation
- * is needed or not.
+ * {@link com.wandrell.pattern.parser.xml.ValidatedXMLFileParser
+ * ValidatedXMLFileParser} does allow to apply an XML validation process, but
+ * the parsing can be slower.
  * <p>
- * Additionally there is the {@link FilteredEntriesXMLFileParser}, which filters
- * the file's contents, returning only a part of it.
+ * Usually one or the other will be picked depending on if it is needed to apply
+ * validation or not. To ease this a default XML parser,
+ * {@link com.wandrell.pattern.parser.xml.XMLFileParser XMLFileParser}, takes
+ * care of making this choice. It is composed by both parsers and picks one or
+ * the other depending on if it is needed to apply validation or not.
  * <p>
- * They all depend on the JDOM2 library, as the value returned from by the
- * parsers is a {@link org.jdom2.Document Document}.
+ * Additionally there is the
+ * {@link com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser
+ * FilteredEntriesXMLFileParser} which filters an XML file contents, returning
+ * only part of it.
  */
 package com.wandrell.pattern.parser.xml;
 

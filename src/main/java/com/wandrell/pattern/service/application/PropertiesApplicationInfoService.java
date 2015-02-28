@@ -30,15 +30,16 @@ import java.net.URISyntaxException;
 import java.util.Properties;
 
 /**
- * Properties based implementation of {@link ApplicationInfoService}. All the
- * info to be returned by this class is stored on a properties file.
+ * Properties-based implementation of {@link ApplicationInfoService}. All the
+ * info to be returned by this class is stored on, and read from, a properties
+ * file.
  * <p>
- * The data of the properties file is received as a {@code Properties} object by
- * the constructor, and is expected to not change during the execution of the
+ * The data from this file is received as a {@code Properties} object by the
+ * constructor, and is expected to not change during the execution of the
  * application.
  * <p>
- * This data will be read from specific keys, which should be stored, along a
- * valid value, on the {@code Properties}.
+ * This data will be read using specific keys which should be stored, along a
+ * valid value, on the received {@code Properties}.
  * <p>
  * These keys and their expected values are as follow:
  * <table summary="Application info key-value pairs" border=1>
@@ -67,9 +68,6 @@ import java.util.Properties;
  * <td>Application's version</td>
  * </tr>
  * </table>
- * <p>
- * All these pairs are required to be on the received {@code Properties}
- * instance for the service to work correctly.
  * <p>
  * To ease the use of this class, a template properties file can be found at the
  * path {@code src/files/application-info.properties} on this library.
@@ -100,8 +98,8 @@ public final class PropertiesApplicationInfoService implements
     /**
      * Key for the application's SCM URL.
      * <p>
-     * While this key's value is a string, it should be noted that it will be
-     * converted into an URI, so it should be parseable into one.
+     * While the value for this key is a string, it should be noted that it will
+     * be converted into an URI, so it should be parseable into one.
      */
     public static final String KEY_DOWNLOAD_URL;
     /**
@@ -127,14 +125,11 @@ public final class PropertiesApplicationInfoService implements
     }
 
     /**
-     * Constructs an application info service with the specified executor and
-     * properties table.
-     * <p>
-     * The executor will be used with the commands which handle the operations
-     * internally, and has no special requirement.
+     * Constructs a {@code PropertiesApplicationInfoService} with the specified
+     * {@code Properties}.
      * <p>
      * The properties table should contain the key-value pairs specified on this
-     * class' javadoc.
+     * class javadoc.
      * <p>
      * A template properties file with all the required keys can be found at the
      * path {@code src/files/application-info.properties} on this library
@@ -192,10 +187,10 @@ public final class PropertiesApplicationInfoService implements
     }
 
     /**
-     * Returns the properties table containing the application's info.
+     * Returns the {@code Properties} containing the application's info.
      * <p>
-     * It is expected to contain all the key-value pairs specified on this
-     * class' javadoc.
+     * It is expected to contain all the key-value pairs specified on this class
+     * javadoc.
      * 
      * @return the {@code Properties} containing the application's info
      */

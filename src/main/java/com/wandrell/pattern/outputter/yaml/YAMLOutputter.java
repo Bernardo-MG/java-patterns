@@ -35,12 +35,16 @@ import org.yaml.snakeyaml.Yaml;
 import com.wandrell.pattern.outputter.Outputter;
 
 /**
- * Implementation of {@code Outputter} for creating YAML files.
+ * Implementation of {@link Outputter} for creating YAML files. Behind the
+ * scenes this is based on the SnakeYAML library.
  * <p>
- * For this an {@code Object is received and then sent
- * through an IO operation.
+ * The data is just receives as an object, which will be automatically
+ * transformed into the resulting data.
  * <p>
- * The SnakeYAML library is being used for this job.
+ * The easiest way to use this class is sending a {@code Map<String, Object>},
+ * where the values may be other maps or collections.
+ * <p>
+ * That structure adapts easily into a YAML tree and is easy to understand.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
@@ -52,12 +56,12 @@ public final class YAMLOutputter implements Outputter<Object> {
      */
     private static final String ENCODING = "UTF-8";
     /**
-     * YAML file contents builder.
+     * Builder for the YAML file contents.
      */
     private final Yaml          yaml;
 
     {
-        // The YAML builder is initialized.
+        // The YAML builder is initialized in this block.
         final DumperOptions options; // Options for the YAML file
 
         // An indented style is used for the output file
@@ -68,7 +72,7 @@ public final class YAMLOutputter implements Outputter<Object> {
     }
 
     /**
-     * Constructs a YAML outputter.
+     * Constructs a {@code YAMLOutputter}.
      */
     public YAMLOutputter() {
         super();
@@ -94,7 +98,7 @@ public final class YAMLOutputter implements Outputter<Object> {
     }
 
     /**
-     * Sends an object through an {@code OutputStream}.
+     * Sends an object through a {@code OutputStream}.
      * <p>
      * The object will be transformed into an YAML text file.
      * 
