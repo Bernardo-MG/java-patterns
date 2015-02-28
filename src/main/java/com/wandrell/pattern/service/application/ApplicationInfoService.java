@@ -29,15 +29,12 @@ import java.net.URI;
  * Service for acquiring an application's information. This is the kind of info
  * which would be shown on the "about" dialog.
  * <p>
- * The main use of this class is actually loading that same dialog, but can also
- * be used in other parts of the program to, for example, show it's name on a
- * title bar, or to show the version on the front page.
- * <p>
- * For this purpose implementation are expected to give the correct information
- * for the application where it is currently being used.
+ * The main use of this interface is storing that general information which may
+ * be used to identify the program or the people who worked on it, but that is
+ * not vital for the application's correct work.
  * <p>
  * If any of the methods is unable to return a valid value, it is expected to
- * return null, and not throw an exception or give any random value.
+ * return {@code null}, and not throw an exception or give any random value.
  * <p>
  * What is a valid value may depend between implementations and applications. It
  * is possible for the service to be localized, and would for example return the

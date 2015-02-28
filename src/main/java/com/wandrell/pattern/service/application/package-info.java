@@ -22,14 +22,16 @@
  * SOFTWARE.
  */
 /**
- * Provides services for handling application related operations.
+ * Provides services for handling application-related operations.
  * <p>
- * Currently only a service is offered, {@link ApplicationInfoService}, which
- * allows to access the application's information for such jobs as, for example,
- * creating and showing an "about" dialog.
+ * Currently only a service is offered,
+ * {@link com.wandrell.pattern.service.application.ApplicationInfoService
+ * ApplicationInfoService}, which allows to access the application's information
+ * to, for example, create and show an "about" dialog.
  * <p>
- * {@link PropertiesApplicationInfoService} is an implementation which, as the
- * name implies, is base on a properties file containing all the information.
+ * {@link com.wandrell.pattern.service.application.PropertiesApplicationInfoService
+ * PropertiesApplicationInfoService} is an implementation which, as the name
+ * implies, is based on a properties file containing all that information.
  */
 package com.wandrell.pattern.service.application;
 

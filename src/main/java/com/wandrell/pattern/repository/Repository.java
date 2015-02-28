@@ -26,20 +26,18 @@ package com.wandrell.pattern.repository;
 import java.util.Collection;
 
 /**
- * Interface for the repository pattern.
+ * Interface for the repository pattern. Offers a way to apply CRUD operations
+ * into a collection of instances taken from a hidden source.
  * <p>
- * Implementations of this interface contain a set of entities. The source of
- * this data does not matter, as one of the uses of this interface is hiding it.
+ * This serves as a way to handle persistent data, without needing to know where
+ * that data persists.
  * <p>
- * These entities can be easily modified or queried with the interface's
- * methods, which allow CRUD operations.
+ * Most of the methods on this interface are very simple, but the one used for
+ * reading, the {@link #getCollection getCollection(Filter)} method, has a bit
+ * of additional complexity due it's use of {@link Filter Filter}.
  * <p>
- * Most of the methods related to these operations are very simple, but the one
- * used for reading, the {@link #getCollection} method, has a bit of additional
- * complexity due to the use of {@code Predicate}.
- * <p>
- * Still, it is very straightforward. The method will return all the entities
- * which validate the received {@code Predicate}.
+ * And still that one is too very straightforward, as that method will just
+ * return all the entities which validate the received {@code Filter}.
  * 
  * @author Bernardo Martínez Garrido
  * @version 0.1.0
@@ -51,8 +49,8 @@ public interface Repository<V> {
     /**
      * Filter for querying repositories.
      * <p>
-     * All the entities which validate this filter will be returned by
-     * {@code getCollection}.
+     * It is used to indicate which properties are wanted on the entities
+     * acquired from a {@code Repository}.
      * 
      * @author Bernardo Martínez Garrido
      *
@@ -62,10 +60,12 @@ public interface Repository<V> {
     public interface Filter<V> {
 
         /**
-         * Checks if the entity is to be accepted or not.
+         * Checks if the entity is acceptable or not.
          * <p>
-         * If it is accepted, then it should be returned by the
-         * {@code getCollection} method.
+         * This is used to check that the entity has a precise series of
+         * properties.
+         * <p>
+         * For example, it can check that the entity has a concrete name.
          * 
          * @param entity
          *            the entity to check
@@ -87,13 +87,10 @@ public interface Repository<V> {
      * Queries the entities in the repository and returns a collection of them.
      * <p>
      * The collection is created filtering the stored data with the specified
-     * {@code Filter}.
-     * <p>
-     * This works the same as filtering a {@code Collection}. All the entities
-     * validating the {@code Filter} will be returned.
+     * {@code Filter}. All the entities validating this filter will be returned.
      * 
      * @param filter
-     *            the {@code Filter} used on the filter
+     *            the {@code Filter} to be applied on the entities
      * @return the filtered subset of entities
      */
     public Collection<V> getCollection(final Filter<V> filter);

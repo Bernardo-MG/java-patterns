@@ -47,7 +47,7 @@ public final class CollectionRepository<V> implements Repository<V> {
     private final Collection<V> data;
 
     /**
-     * Default constructor.
+     * Constructs a {@code CollectionRepository}.
      * 
      * Will use a {@code LinkedList} as the collection.
      */
@@ -56,7 +56,8 @@ public final class CollectionRepository<V> implements Repository<V> {
     }
 
     /**
-     * Constructs a repository with the specified {@code Collection}.
+     * Constructs a {@code CollectionRepository} with the specified
+     * {@code Collection}.
      * 
      * @param collection
      *            the data to store

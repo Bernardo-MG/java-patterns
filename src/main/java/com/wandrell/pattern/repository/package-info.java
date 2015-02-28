@@ -23,19 +23,19 @@
  */
 /**
  * Provides interfaces and basic implementations for the repository pattern.
+ * This pattern is similar to a DAO, as it allows accessing data through CRUD
+ * operations, hiding the source of this data.
  * <p>
- * This pattern is similar to a DAO, it allows accessing data through CRUD
- * operations, hiding the source if this data.
- * <p>
- * The main difference is when accessing this data. While the DAO operates in a
- * case by case way, the repository works like a collection which can be
- * searched.
+ * The main difference is the data access logic. While the DAO operates in a
+ * case by case way, returning a concrete object, the repository works like a
+ * collection where queries can be made.
  * <p>
  * The {@link com.wandrell.pattern.repository.Repository Repository} interface
  * achieves this through the
  * {@link com.wandrell.pattern.repository.Repository#getCollection
- * getCollection} method, which makes use of the Java 8 {@code Predicate} to
- * return a subset of the repository's data.
+ * getCollection} method, which makes use of the
+ * {@link com.wandrell.pattern.repository.Repository.Filter Filter} interface to
+ * return a specific subset of the repository's data.
  * <p>
  * A basic implementation,
  * {@link com.wandrell.pattern.repository.CollectionRepository

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 /**
- * Provides interfaces and basic implementations for general use services.
+ * Provides interfaces and basic implementations for general-use services.
  */
 package com.wandrell.pattern.service;
 

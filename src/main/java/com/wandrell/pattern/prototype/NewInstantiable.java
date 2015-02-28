@@ -33,7 +33,7 @@ package com.wandrell.pattern.prototype;
  * parent already does, and even if it is an abstract class.
  * <p>
  * This way the {@code createNewInstance} method always returns an instance of
- * the correct class.
+ * the current class.
  * <p>
  * The easiest way to implement the interface is just using a copy constructor
  * to generate a copy of the object on the {@code createNewInstance} method.
