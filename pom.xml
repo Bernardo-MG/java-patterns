@@ -70,9 +70,6 @@
 		</profile>
 		<profile>
 			<id>development</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<distributionManagement>
 				<site>
 					<id>wandrell-site-development</id>
