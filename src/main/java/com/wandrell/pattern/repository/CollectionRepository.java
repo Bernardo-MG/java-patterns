@@ -28,6 +28,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import com.google.common.base.Predicate;
+
 /**
  * Collection-based implementation of {@code Repository}.
  * <p>
@@ -76,12 +78,12 @@ public final class CollectionRepository<V> implements Repository<V> {
     }
 
     @Override
-    public final Collection<V> getCollection(final Filter<V> filter) {
+    public final Collection<V> getCollection(final Predicate<V> filter) {
         final Collection<V> result;
 
         result = new LinkedList<V>();
         for (final V entity : getData()) {
-            if (filter.isValid(entity)) {
+            if (filter.apply(entity)) {
                 result.add(entity);
             }
         }

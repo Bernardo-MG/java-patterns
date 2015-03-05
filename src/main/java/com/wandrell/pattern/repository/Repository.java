@@ -25,6 +25,8 @@ package com.wandrell.pattern.repository;
 
 import java.util.Collection;
 
+import com.google.common.base.Predicate;
+
 /**
  * Interface for the repository pattern. Offers a way to apply CRUD operations
  * into a collection of instances taken from a hidden source.
@@ -34,7 +36,7 @@ import java.util.Collection;
  * <p>
  * Most of the methods on this interface are very simple, but the one used for
  * reading, the {@link #getCollection getCollection(Filter)} method, has a bit
- * of additional complexity due it's use of {@link Filter Filter}.
+ * of additional complexity due it's use of {@code Predicate}.
  * <p>
  * And still that one is too very straightforward, as that method will just
  * return all the entities which validate the received {@code Filter}.
@@ -43,37 +45,9 @@ import java.util.Collection;
  * @version 0.1.0
  * @param <V>
  *            the type stored on the repository
+ * @see Predicate
  */
 public interface Repository<V> {
-
-    /**
-     * Filter for querying repositories.
-     * <p>
-     * It is used to indicate which properties are wanted on the entities
-     * acquired from a {@code Repository}.
-     * 
-     * @author Bernardo Martínez Garrido
-     *
-     * @param <V>
-     *            the type stored on the repository
-     */
-    public interface Filter<V> {
-
-        /**
-         * Checks if the entity is acceptable or not.
-         * <p>
-         * This is used to check that the entity has a precise series of
-         * properties.
-         * <p>
-         * For example, it can check that the entity has a concrete name.
-         * 
-         * @param entity
-         *            the entity to check
-         * @return {@code true} if the entity is valid, {@code false} otherwise
-         */
-        public Boolean isValid(final V entity);
-
-    }
 
     /**
      * Adds an entity to the repository.
@@ -87,13 +61,15 @@ public interface Repository<V> {
      * Queries the entities in the repository and returns a collection of them.
      * <p>
      * The collection is created filtering the stored data with the specified
-     * {@code Filter}. All the entities validating this filter will be returned.
+     * {@code Predicate}. All the entities validating this predicate will be
+     * returned.
      * 
-     * @param filter
-     *            the {@code Filter} to be applied on the entities
+     * @param predicate
+     *            the {@code Predicate} which the returned entities should
+     *            validate
      * @return the filtered subset of entities
      */
-    public Collection<V> getCollection(final Filter<V> filter);
+    public Collection<V> getCollection(final Predicate<V> predicate);
 
     /**
      * Removes an entity from the repository.

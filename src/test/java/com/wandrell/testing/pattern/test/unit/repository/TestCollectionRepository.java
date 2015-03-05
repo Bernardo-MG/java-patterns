@@ -31,9 +31,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.google.common.base.Predicate;
 import com.wandrell.pattern.repository.CollectionRepository;
 import com.wandrell.pattern.repository.Repository;
-import com.wandrell.pattern.repository.Repository.Filter;
 
 /**
  * Unit tests for {@link Repository}.
@@ -73,10 +73,10 @@ public final class TestCollectionRepository {
     @BeforeMethod
     public final void cleanUp() {
         for (final String entity : repository
-                .getCollection(new Filter<String>() {
+                .getCollection(new Predicate<String>() {
 
                     @Override
-                    final public Boolean isValid(final String entity) {
+                    final public boolean apply(final String entity) {
                         return true;
                     }
 
@@ -107,10 +107,10 @@ public final class TestCollectionRepository {
 
         repository.add("d");
 
-        entities = repository.getCollection(new Filter<String>() {
+        entities = repository.getCollection(new Predicate<String>() {
 
             @Override
-            final public Boolean isValid(final String entity) {
+            final public boolean apply(final String entity) {
                 return true;
             }
 
@@ -128,10 +128,10 @@ public final class TestCollectionRepository {
     public final void testGetCollection_Filter_Filters() {
         final Collection<String> entities; // Filtered entities
 
-        entities = repository.getCollection(new Filter<String>() {
+        entities = repository.getCollection(new Predicate<String>() {
 
             @Override
-            final public Boolean isValid(final String entity) {
+            final public boolean apply(final String entity) {
                 return entity.equals("b");
             }
 
@@ -150,10 +150,10 @@ public final class TestCollectionRepository {
     public final void testGetCollection_Remove_OriginalNotChanges() {
         final Collection<String> entities; // Filtered entities
 
-        entities = repository.getCollection(new Filter<String>() {
+        entities = repository.getCollection(new Predicate<String>() {
 
             @Override
-            final public Boolean isValid(final String entity) {
+            final public boolean apply(final String entity) {
                 return entity.equals("b");
             }
 
@@ -162,10 +162,10 @@ public final class TestCollectionRepository {
         entities.remove("b");
 
         Assert.assertEquals(entities.size(), 0);
-        Assert.assertEquals(repository.getCollection(new Filter<String>() {
+        Assert.assertEquals(repository.getCollection(new Predicate<String>() {
 
             @Override
-            final public Boolean isValid(final String entity) {
+            final public boolean apply(final String entity) {
                 return true;
             }
 
@@ -181,10 +181,10 @@ public final class TestCollectionRepository {
 
         repository.remove("b");
 
-        entities = repository.getCollection(new Filter<String>() {
+        entities = repository.getCollection(new Predicate<String>() {
 
             @Override
-            final public Boolean isValid(final String entity) {
+            final public boolean apply(final String entity) {
                 return true;
             }
 
@@ -204,10 +204,10 @@ public final class TestCollectionRepository {
 
         repository.update("c");
 
-        entities = repository.getCollection(new Filter<String>() {
+        entities = repository.getCollection(new Predicate<String>() {
 
             @Override
-            final public Boolean isValid(final String entity) {
+            final public boolean apply(final String entity) {
                 return true;
             }
 
@@ -226,10 +226,10 @@ public final class TestCollectionRepository {
 
         repository.update("d");
 
-        entities = repository.getCollection(new Filter<String>() {
+        entities = repository.getCollection(new Predicate<String>() {
 
             @Override
-            final public Boolean isValid(final String entity) {
+            final public boolean apply(final String entity) {
                 return true;
             }
 
