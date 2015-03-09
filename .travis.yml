@@ -9,6 +9,7 @@ before_install:
   - chmod +x ./.scripts/deploy.sh
   - chmod +x ./.scripts/deploy-site.sh
   - ./.scripts/create-maven-settings.sh
+  - echo $Test
 script:
   - mvn clean verify
 after_success:
