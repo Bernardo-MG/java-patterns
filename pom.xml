@@ -43,13 +43,13 @@
 		<repository>
 			<uniqueVersion>false</uniqueVersion>
 			<id>wandrell-releases</id>
-			<name>Wandrell releases repository</name>
+			<name>Project Releases Repository</name>
 			<url>https://api.bintray.com/maven/bernardo-mg/maven/java-patterns</url>
 		</repository>
 		<snapshotRepository>
 			<uniqueVersion>true</uniqueVersion>
 			<id>wandrell-snapshots</id>
-			<name>Wandrell snapshots repository</name>
+			<name>Project Snapshots Repository</name>
 			<url>ftp://maven.wandrell.com</url>
 		</snapshotRepository>
 	</distributionManagement>
@@ -63,7 +63,7 @@
 			<distributionManagement>
 				<site>
 					<id>wandrell-site</id>
-					<name>Wandrell Maven sites</name>
+					<name>Project Documentation Site</name>
 					<url>ftp://docs.wandrell.com/java-patterns</url>
 				</site>
 			</distributionManagement>
@@ -73,7 +73,7 @@
 			<distributionManagement>
 				<site>
 					<id>wandrell-site-development</id>
-					<name>Wandrell Development Maven sites</name>
+					<name>Project Development Documentation Site</name>
 					<url>ftp://docs.wandrell.com/java-patterns</url>
 				</site>
 			</distributionManagement>
