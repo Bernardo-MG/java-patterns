@@ -37,7 +37,6 @@ import com.google.common.base.Predicate;
  * there is no need of anything fancy such as persistence.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @param <V>
  *            the type stored on the repository
  */

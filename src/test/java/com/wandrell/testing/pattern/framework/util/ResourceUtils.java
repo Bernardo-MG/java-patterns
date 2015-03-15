@@ -45,7 +45,6 @@ import java.net.URL;
  * {@code ResourceUtils.class.getClassLoader().getResource(path)}.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public final class ResourceUtils {
 

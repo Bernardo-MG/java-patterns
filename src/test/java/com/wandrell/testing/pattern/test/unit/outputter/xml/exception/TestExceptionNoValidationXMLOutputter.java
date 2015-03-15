@@ -50,7 +50,6 @@ import com.wandrell.pattern.outputter.xml.XMLOutputter;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see XMLOutputter
  */
 public final class TestExceptionNoValidationXMLOutputter {

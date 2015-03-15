@@ -50,7 +50,6 @@ import com.wandrell.pattern.repository.Repository;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see Repository
  */
 public final class TestCollectionRepository {

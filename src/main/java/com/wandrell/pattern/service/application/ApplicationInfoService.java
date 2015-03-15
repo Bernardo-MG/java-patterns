@@ -42,7 +42,6 @@ import java.net.URI;
  * localization framework.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public interface ApplicationInfoService {
 

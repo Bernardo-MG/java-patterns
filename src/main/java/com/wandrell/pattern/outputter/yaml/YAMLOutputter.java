@@ -47,7 +47,6 @@ import com.wandrell.pattern.outputter.Outputter;
  * That structure adapts easily into a YAML tree and is easy to understand.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public final class YAMLOutputter implements Outputter<Object> {
 

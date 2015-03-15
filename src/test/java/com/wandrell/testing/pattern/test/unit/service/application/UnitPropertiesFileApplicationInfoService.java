@@ -45,7 +45,6 @@ import com.wandrell.pattern.service.application.PropertiesApplicationInfoService
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see PropertiesApplicationInfoService
  */
 public final class UnitPropertiesFileApplicationInfoService {

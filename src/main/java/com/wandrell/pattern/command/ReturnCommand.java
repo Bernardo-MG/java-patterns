@@ -47,7 +47,6 @@ package com.wandrell.pattern.command;
  * {@link Command} is preferred.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see CommandExecutor
  * @see Command
  * @param <V>

@@ -43,7 +43,6 @@ import com.wandrell.testing.pattern.framework.util.ResourceUtils;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see NotValidatedXMLFileParser
  */
 public final class ITNotValidatedXMLFileParser {

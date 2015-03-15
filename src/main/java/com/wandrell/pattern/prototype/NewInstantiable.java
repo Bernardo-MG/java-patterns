@@ -43,7 +43,6 @@ package com.wandrell.pattern.prototype;
  * instance should have a copy of that collection, but not the same collection.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public interface NewInstantiable {
 

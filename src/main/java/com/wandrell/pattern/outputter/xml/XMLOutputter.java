@@ -52,7 +52,6 @@ import com.wandrell.pattern.outputter.Outputter;
  * on the {@code Document} as received.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see Document
  */
 public final class XMLOutputter implements Outputter<Document> {

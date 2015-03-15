@@ -36,7 +36,6 @@ import java.io.Writer;
  * It is expected to close the output object once the operation is finished.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @param <V>
  *            the type to be sent into the output
  */

@@ -49,7 +49,6 @@ package com.wandrell.pattern.parser;
  * reusable.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @param <I>
  *            the input type to be parsed
  * @param <O>

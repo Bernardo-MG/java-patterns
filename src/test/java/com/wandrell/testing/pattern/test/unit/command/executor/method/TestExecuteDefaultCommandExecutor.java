@@ -47,7 +47,6 @@ import com.wandrell.pattern.command.ReturnCommand;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see DefaultCommandExecutor
  */
 public final class TestExecuteDefaultCommandExecutor {

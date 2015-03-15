@@ -51,7 +51,6 @@ import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see AbstractAttributesFilterXMLFileParser
  */
 public final class TestAbstractAttributesFilterXMLFileParser {

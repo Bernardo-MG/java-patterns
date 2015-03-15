@@ -57,7 +57,6 @@ import com.wandrell.pattern.parser.Parser;
  * are modified.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public abstract class AbstractAttributesFilterXMLFileParser implements
         Parser<Reader, Document> {

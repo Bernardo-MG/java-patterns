@@ -60,7 +60,6 @@ import com.wandrell.testing.pattern.framework.util.ResourceUtils;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see XMLOutputter
  */
 public final class ITNoValidationXMLOutputter {

@@ -82,7 +82,6 @@ import java.util.Properties;
  * return a key for the localization framework.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public final class PropertiesApplicationInfoService implements
         ApplicationInfoService {

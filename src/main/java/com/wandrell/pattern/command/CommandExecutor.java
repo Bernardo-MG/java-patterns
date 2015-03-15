@@ -49,7 +49,6 @@ package com.wandrell.pattern.command;
  * never postpone the command's execution more than necessary.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see Command
  * @see ReturnCommand
  */

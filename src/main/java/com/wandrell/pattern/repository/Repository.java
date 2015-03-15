@@ -42,7 +42,6 @@ import com.google.common.base.Predicate;
  * return all the entities which validate the received {@code Filter}.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @param <V>
  *            the type stored on the repository
  * @see Predicate

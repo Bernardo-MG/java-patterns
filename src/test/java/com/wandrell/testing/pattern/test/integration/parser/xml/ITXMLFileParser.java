@@ -48,7 +48,6 @@ import com.wandrell.testing.pattern.framework.util.ResourceUtils;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see XMLFileParser
  */
 public final class ITXMLFileParser {

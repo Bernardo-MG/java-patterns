@@ -38,7 +38,6 @@ import com.wandrell.testing.pattern.framework.util.ResourceUtils;
  * The validation file applies default values for several of the entries
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see FilteredEntriesXMLFileParser
  */
 public final class ITFilteredDTDValidationDefaultsFilteredEntriesXMLFileParser

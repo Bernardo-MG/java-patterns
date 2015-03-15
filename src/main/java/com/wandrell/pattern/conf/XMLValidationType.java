@@ -27,7 +27,6 @@ package com.wandrell.pattern.conf;
  * Enumeration representing the various XML validation methods.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public enum XMLValidationType {
 

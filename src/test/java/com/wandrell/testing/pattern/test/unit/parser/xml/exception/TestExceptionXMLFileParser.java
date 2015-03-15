@@ -31,7 +31,6 @@ import com.wandrell.testing.pattern.framework.test.unit.parser.xml.exception.Abs
  * {@code AbstractUnitExceptionReadXMLInputParser}.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see NotValidatedXMLFileParser
  */
 public final class TestExceptionXMLFileParser extends

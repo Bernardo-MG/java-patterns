@@ -27,7 +27,6 @@ package com.wandrell.testing.pattern.framework.conf;
  * Configuration class storing info for XML tests.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public final class XMLConf {
 

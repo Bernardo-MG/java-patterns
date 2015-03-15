@@ -47,7 +47,6 @@ import com.wandrell.pattern.parser.Parser;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see InputParser
  */
 public abstract class AbstractUnitExceptionParseXMLReaderParser<V> {

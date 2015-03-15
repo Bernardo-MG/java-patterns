@@ -42,7 +42,6 @@ package com.wandrell.pattern.command;
  * execution. For commands which do return values use the {@link ReturnCommand}.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see CommandExecutor
  * @see ReturnCommand
  */

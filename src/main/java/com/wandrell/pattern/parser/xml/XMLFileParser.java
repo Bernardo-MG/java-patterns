@@ -46,7 +46,6 @@ import com.wandrell.pattern.parser.Parser;
  * This way when no validation is used the parsing can become faster.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public final class XMLFileParser implements Parser<Reader, Document> {
 

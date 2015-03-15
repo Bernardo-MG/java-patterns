@@ -58,7 +58,6 @@ import com.wandrell.pattern.conf.XMLValidationType;
  * used to set default values on the attributes.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public final class FilteredEntriesXMLFileParser extends
         AbstractAttributesFilterXMLFileParser {

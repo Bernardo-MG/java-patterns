@@ -60,7 +60,6 @@ import com.wandrell.pattern.parser.Parser;
  * need it, think about using {@code XMLFileParser}, which may be faster.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  */
 public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
 

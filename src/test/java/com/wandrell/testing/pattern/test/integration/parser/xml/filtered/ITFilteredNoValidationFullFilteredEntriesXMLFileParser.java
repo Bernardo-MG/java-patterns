@@ -37,7 +37,6 @@ import com.wandrell.testing.pattern.framework.test.integration.parser.xml.Abstra
  * attributes.
  * 
  * @author Bernardo Martínez Garrido
- * @version 0.1.0
  * @see FilteredEntriesXMLFileParser
  */
 public final class ITFilteredNoValidationFullFilteredEntriesXMLFileParser
