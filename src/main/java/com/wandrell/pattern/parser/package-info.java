@@ -34,6 +34,9 @@
  * <p>
  * Implementations of this interface for processing XML files can be found on
  * the {@link com.wandrell.pattern.parser.xml xml} package.
+ * <p>
+ * Parsers are meant to be used to transform data structures, usually as part of
+ * transforming a file into a readable structure, but can be adapted to any use.
  */
 package com.wandrell.pattern.parser;
 

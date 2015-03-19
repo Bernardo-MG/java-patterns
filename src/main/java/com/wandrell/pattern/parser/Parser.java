@@ -31,9 +31,10 @@ package com.wandrell.pattern.parser;
  * process, then it is said to be a lossless parsing, otherwise it is a lossfull
  * one, but that is an implementation detail, not handled by the interface.
  * <p>
- * A straightforward examplefor this interface would be reading from a file,
- * using a {@code Parser} which receives a {@code Reader} for a YAML file and
- * returns a model object.
+ * Usually this interface is used as part of a file reading process, where a
+ * {@code Parser} which receives a {@code Reader} for the file and returns a
+ * model object. But it can be adapted to any job where it is required to
+ * transform data.
  * <p>
  * While this is perfectly good use, it is preferable to use parsers for the
  * smallest possible job and then chain their results. In the previous example
