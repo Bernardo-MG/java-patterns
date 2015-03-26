@@ -16,9 +16,11 @@ Currently the patterns included are as follows:
 Currently the project has no webpage.
 
 ### Documentation webpage
-The project has a [Maven site][] and [Javadoc page][] with the information from the latest release.
+You can consult the current status and general info of the project on the [Maven site][] and the [development Maven site][].
 
-There is also a [development Maven site][] and a [development Javadoc page][], generated from the latest development snapshot.
+General code documentation can be found on the [Javadoc site][] and the [development Javadoc site][].
+
+The development sites are always generated from the latest development commit.
 
 ## Status
 The project is still under development, so expect a certain degree of volatility.
@@ -59,9 +61,9 @@ The continuous integration information can be found at the [project CI page][] b
 ## License
 The project is released under the [MIT License][].
 
-[development Javadoc page]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
+[development Javadoc site]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
 [development Maven site]: http://docs.wandrell.com/development/maven/java-patterns
-[Javadoc page]: http://docs.wandrell.com/maven/java-patterns/apidocs
+[Javadoc site]: http://docs.wandrell.com/maven/java-patterns/apidocs
 [Maven site]: http://docs.wandrell.com/maven/java-patterns
 [MIT License]: http://www.opensource.org/licenses/mit-license.php
 [project CI page]: https://travis-ci.org/Bernardo-MG/Java-Patterns
