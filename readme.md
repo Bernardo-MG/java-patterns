@@ -1,26 +1,31 @@
 # Java Patterns
-Common design patterns for Java.
+A collection of common design pattern.
 
 Not all the design patterns have been included in this library. This is a compilation of only those which I've needed, and only if there wasn't any available implementation for them. 
 
 For each of them an interface and, when possible, also a basic implementation are offered.
 
 Currently the patterns included are as follows:
-* Command and Executor patterns. For encapsulating code executions.
-* Repository pattern. To access persistent entities as if they were on a list.
-* Parser pattern. To transform a data structure into another.
-* Outputter pattern. To send data structures through output operations.
-* Prototype pattern. To easily create copies of existing entities.
+- The **Command**, and the **CommandExecutor**, help to encapsulate code inside an object.
+- The **Outputter** allows writing for files, or just sending structures, without worrying about the actual implementation.
+- The **Parser** transforms one object into another, keeping as much of the data intact as possible.
+- The **Prototype** permits creating an identical copy of a base template.
+- The **Repository** allows handling data persistence as if you were working on a collection.
 
 ## Webpage
 Currently the project has no webpage.
 
-### Documentation webpage
-You can consult the current status and general info of the project on the [Maven site][] and the [development Maven site][].
+### Documentation webpages
+You can consult the current status and general info of the project on the [Maven site][maven-release].
 
-General code documentation can be found on the [Javadoc site][] and the [development Javadoc site][].
+General code documentation can be found on the [Javadoc site][javadoc-release].
 
-The development sites are always generated from the latest development commit.
+Also, if needed, these pages can be generated from the project with Maven.
+
+#### Development Documentation webpages
+Documentation pages are also generated for the latest commit on the 'develop' branch.
+
+There is a [development Maven site][maven-develop] and a [development Javadoc site][javadoc-develop].
 
 ## Status
 The project is still under development, so expect a certain degree of volatility.
@@ -28,7 +33,7 @@ The project is still under development, so expect a certain degree of volatility
 Still, it is mostly stable, and classpath or name changes should be infrequent, but classes may be added or removed without warning.
 
 ### Issues management
-Issues are managed at the GitHub [project issues page][].
+Issues are managed at the GitHub [project issues page][issues].
 
 ## Building the code
 The application is coded in Java, using Maven to handle the project's configuration and tests.
@@ -42,31 +47,23 @@ Has been tested on the following Java versions:
 All other dependencies are handled through Maven, and noted in the included POM file.
 
 ### Getting the code
-The code can be found at the GitHub [project page][].
-
-To acquire it through Git use the following clone URI:
-
-`git clone https://github.com/Bernardo-MG/Java-Patterns.git`
+The code can be found at the [GitHub project page][scm].
 
 #### Repository
-Releases can be found in the [releases repository][] on Bintray.
-
-It can be added to Maven as a repository using the following URI:
-
-`http://dl.bintray.com/bernardo-mg/maven`
+Releases can be found in the [releases repository][releases-repo] on Bintray.
 
 ## Continuous integration
-The continuous integration information can be found at the [project CI page][] based on Travis CI.
+The continuous integration information can be found at the [project CI page][ci] based on Travis CI.
 
 ## License
-The project is released under the [MIT License][].
+The project is released under the [MIT License][license].
 
-[development Javadoc site]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
-[development Maven site]: http://docs.wandrell.com/development/maven/java-patterns
-[Javadoc site]: http://docs.wandrell.com/maven/java-patterns/apidocs
-[Maven site]: http://docs.wandrell.com/maven/java-patterns
-[MIT License]: http://www.opensource.org/licenses/mit-license.php
-[project CI page]: https://travis-ci.org/Bernardo-MG/Java-Patterns
-[project issues page]: https://github.com/Bernardo-MG/Java-Patterns/issues
-[project page]: http://github.com/Bernardo-MG/Java-Patterns
-[releases repository]: http://dl.bintray.com/bernardo-mg/java-patterns
+[ci]: https://travis-ci.org/Bernardo-MG/Java-Patterns
+[issues]: https://github.com/Bernardo-MG/Java-Patterns/issues
+[javadoc-develop]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
+[javadoc-release]: http://docs.wandrell.com/maven/java-patterns/apidocs
+[license]: http://www.opensource.org/licenses/mit-license.php
+[maven-develop]: http://docs.wandrell.com/development/maven/java-patterns
+[maven-release]: http://docs.wandrell.com/maven/java-patterns
+[releases-repo]: http://dl.bintray.com/bernardo-mg/java-patterns
+[scm]: http://github.com/Bernardo-MG/Java-Patterns
