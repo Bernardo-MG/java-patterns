@@ -53,7 +53,8 @@ public interface Outputter<V> {
      * @throws Exception
      *             if sending the object causes an error
      */
-    public void send(final V value, final OutputStream stream) throws Exception;
+    public void output(final V value, final OutputStream stream)
+            throws Exception;
 
     /**
      * Sends an object through a {@code Writer}.
@@ -67,6 +68,6 @@ public interface Outputter<V> {
      * @throws Exception
      *             if sending the object causes an error
      */
-    public void send(final V value, final Writer writer) throws Exception;
+    public void output(final V value, final Writer writer) throws Exception;
 
 }

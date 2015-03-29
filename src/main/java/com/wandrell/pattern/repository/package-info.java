@@ -34,8 +34,8 @@
  * achieves this through the
  * {@link com.wandrell.pattern.repository.Repository#getCollection
  * getCollection} method, which makes use of Guava's
- * {@link com.google.common.base.Predicate Predicate} interface to
- * return a specific subset of the repository's data.
+ * {@link com.google.common.base.Predicate Predicate} interface to return a
+ * specific subset of the repository's data.
  * <p>
  * A basic implementation,
  * {@link com.wandrell.pattern.repository.CollectionRepository

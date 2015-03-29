@@ -44,13 +44,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.outputter.Outputter;
 import com.wandrell.pattern.outputter.xml.XMLOutputter;
 import com.wandrell.testing.pattern.framework.conf.XMLConf;
 import com.wandrell.testing.pattern.framework.util.ResourceUtils;
 
 /**
- * Integration tests for {@link XMLOutputter}, checking that XML files with no
+ * Integration tests for {@link XMLOutputter}, checking that XML files with XSD
  * validation are created.
  * <p>
  * Checks the following cases:
@@ -62,7 +63,7 @@ import com.wandrell.testing.pattern.framework.util.ResourceUtils;
  * @author Bernardo Martínez Garrido
  * @see XMLOutputter
  */
-public final class ITNoValidationXMLOutputter {
+public final class ITXSDValidationXMLOutputter {
 
     /**
      * Random number generator.
@@ -86,8 +87,9 @@ public final class ITNoValidationXMLOutputter {
     /**
      * Default constructor.
      */
-    public ITNoValidationXMLOutputter() {
+    public ITXSDValidationXMLOutputter() {
         super();
+        // TODO: Make this test with validation.
     }
 
     /**
@@ -147,7 +149,7 @@ public final class ITNoValidationXMLOutputter {
 
         streamTest = new FileInputStream(path.toFile());
         readerExpected = ResourceUtils
-                .getClassPathReader(XMLConf.INTEGER_EXPECTED);
+                .getClassPathReader(XMLConf.INTEGER_EXPECTED_XSD);
 
         Assert.assertTrue(XMLUnit.compareXML(readerExpected,
                 new InputStreamReader(streamTest)).identical());
@@ -172,7 +174,8 @@ public final class ITNoValidationXMLOutputter {
         value.getRootElement().addContent(
                 new Element(XMLConf.NODE_VALUE).addContent("1"));
 
-        outputter = new XMLOutputter();
+        outputter = new XMLOutputter(XMLValidationType.XSD,
+                "/validation/xsd_validation.xsd");
     }
 
 }

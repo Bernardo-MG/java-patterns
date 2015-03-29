@@ -35,8 +35,8 @@ import com.google.common.base.Predicate;
  * that data persists.
  * <p>
  * Most of the methods on this interface are very simple, but the one used for
- * reading, the {@link #getCollection getCollection(Filter)} method, has a bit
- * of additional complexity due it's use of {@code Predicate}.
+ * reading, the {@link #getCollection getCollection} method, has a bit of
+ * additional complexity due it's use of {@code Predicate}.
  * <p>
  * And still that one is too very straightforward, as that method will just
  * return all the entities which validate the received {@code Filter}.

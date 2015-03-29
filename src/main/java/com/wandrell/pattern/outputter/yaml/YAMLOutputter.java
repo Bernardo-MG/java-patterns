@@ -90,9 +90,9 @@ public final class YAMLOutputter implements Outputter<Object> {
      *             if the stream is not in UTF-8 format
      */
     @Override
-    public final void send(final Object value, final OutputStream stream)
+    public final void output(final Object value, final OutputStream stream)
             throws UnsupportedEncodingException {
-        send(value, new BufferedWriter(new OutputStreamWriter(stream,
+        output(value, new BufferedWriter(new OutputStreamWriter(stream,
                 getEncoding())));
     }
 
@@ -107,7 +107,7 @@ public final class YAMLOutputter implements Outputter<Object> {
      *            {@code Writer} to receive the resulting YAML text
      */
     @Override
-    public final void send(final Object value, final Writer writer) {
+    public final void output(final Object value, final Writer writer) {
         getYaml().dump(value, writer);
     }
 

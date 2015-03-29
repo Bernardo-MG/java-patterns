@@ -44,6 +44,8 @@ public final class XMLConf {
     public static final String FILTERED_WITH_VALIDATION_XSD          = "files/xml/filtered/filtered_validation_a.xml";
     public static final String FILTERED_WITH_VALIDATION_XSD_DEFAULTS = "files/xml/filtered/filtered_validation_b.xml";
     public static final String INTEGER_EXPECTED                      = "files/xml/integer_expected.xml";
+    public static final String INTEGER_EXPECTED_DTD                  = "files/xml/integer_expected_dtd.xml";
+    public static final String INTEGER_EXPECTED_XSD                  = "files/xml/integer_expected_xsd.xml";
     public static final String INTEGER_NO_VALIDATES                  = "files/xml/validation/xsd_validation_no_validates.xml";
     public static final String INTEGER_READ                          = "files/xml/integer_read.xml";
     public static final String NODE_NODE                             = "node";

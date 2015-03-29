@@ -199,6 +199,7 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
                     break;
                 default:
                     builder.setXMLReaderFactory(null);
+                    break;
             }
 
             setValidationChanged(false);

@@ -88,7 +88,7 @@ public final class XMLOutputter implements Outputter<Document> {
      * The path will be stored along the rest of the validation data on the
      * resulting file.
      */
-    private String              validationPath;
+    private String              valFilePath;
     /**
      * Type of validation being used.
      */
@@ -110,17 +110,19 @@ public final class XMLOutputter implements Outputter<Document> {
      * 
      * @param validation
      *            the validation type
-     * @param path
+     * @param validationPath
      *            path to the validation file
      */
-    public XMLOutputter(final XMLValidationType validation, final String path) {
+    public XMLOutputter(final XMLValidationType validation,
+            final String validationPath) {
         super();
 
         checkNotNull(validation, "Received a null pointer as validation type");
-        checkNotNull(path, "Received a null pointer as validation path");
+        checkNotNull(validationPath,
+                "Received a null pointer as validation path");
 
         validationType = validation;
-        validationPath = path;
+        valFilePath = validationPath;
     }
 
     /**
@@ -136,7 +138,7 @@ public final class XMLOutputter implements Outputter<Document> {
      *             when there's any problem on the outputting process
      */
     @Override
-    public final void send(final Document value, final OutputStream stream)
+    public final void output(final Document value, final OutputStream stream)
             throws Exception {
 
         checkNotNull(value, "Received a null pointer as value");
@@ -161,7 +163,7 @@ public final class XMLOutputter implements Outputter<Document> {
      *             when there's any problem on the writing process
      */
     @Override
-    public final void send(final Document value, final Writer writer)
+    public final void output(final Document value, final Writer writer)
             throws Exception {
 
         checkNotNull(value, "Received a null pointer as value");
@@ -192,7 +194,7 @@ public final class XMLOutputter implements Outputter<Document> {
         checkNotNull(path, "Received a null pointer as validation path");
 
         validationType = validation;
-        validationPath = path;
+        valFilePath = path;
     }
 
     /**
@@ -215,7 +217,7 @@ public final class XMLOutputter implements Outputter<Document> {
      * @return the path to the validation file.
      */
     private final String getValidationPath() {
-        return validationPath;
+        return valFilePath;
     }
 
     /**

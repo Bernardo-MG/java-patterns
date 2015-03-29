@@ -36,7 +36,7 @@ import com.wandrell.pattern.repository.CollectionRepository;
 import com.wandrell.pattern.repository.Repository;
 
 /**
- * Unit tests for {@link Repository}.
+ * Unit tests for {@link Repository} using strings.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -48,6 +48,9 @@ import com.wandrell.pattern.repository.Repository;
  * <li>Modifying the {@code Collection} returned by {@code getCollection} does
  * not modify the repository's internal collection</li>
  * </ol>
+ * <p>
+ * Note that due to the way the testing is configured, Maven will run these test
+ * parallelized.
  * 
  * @author Bernardo Martínez Garrido
  * @see Repository
@@ -64,7 +67,6 @@ public final class TestCollectionRepository {
      */
     public TestCollectionRepository() {
         super();
-        // TODO: Add concurrency tests
     }
 
     /**
@@ -199,7 +201,6 @@ public final class TestCollectionRepository {
      */
     @Test
     public final void testUpdate_Existing_Update() {
-        // TODO: Check this with more complex data
         final Collection<String> entities; // All the entities
 
         repository.update("c");
