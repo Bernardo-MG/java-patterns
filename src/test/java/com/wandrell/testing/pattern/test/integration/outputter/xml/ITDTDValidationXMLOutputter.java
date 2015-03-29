@@ -175,7 +175,7 @@ public final class ITDTDValidationXMLOutputter {
                 new Element(XMLConf.NODE_VALUE).addContent("1"));
 
         outputter = new XMLOutputter(XMLValidationType.DTD,
-                "/validation/dtd_validation.dtd");
+                "./src/test/resources/files/xml/validation/dtd_validation.dtd");
     }
 
 }

@@ -10,7 +10,7 @@
 	<packaging>jar</packaging>
 
 	<name>Java Patterns</name>
-	<description>A collection of common design pattern.</description>
+	<description>A collection of common design patterns for Java.</description>
 	<url />
 
 	<licenses>

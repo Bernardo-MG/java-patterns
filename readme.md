@@ -1,5 +1,5 @@
 # Java Patterns
-A collection of common design pattern.
+A collection of common design patterns for Java.
 
 Not all the design patterns have been included in this library. This is a compilation of only those which I've needed, and only if there wasn't any available implementation for them. 
 
