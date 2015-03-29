@@ -28,8 +28,8 @@
  * it is possible to have a single object in memory configured as wished, and
  * then create perfect copies of it when needed.
  * <p>
- * {@link com.wandrell.pattern.prototype.NewInstantiable NewInstantiable} takes
- * care of this. Any class implementing it will allow to create copies of itself
+ * {@link com.wandrell.pattern.prototype.Prototype NewInstantiable} takes care
+ * of this. Any class implementing it will allow to create copies of itself
  * through the {@code createNewInstance} method.
  * <p>
  * It is similar to the {@code Cloneable} interface, but is meant to be used

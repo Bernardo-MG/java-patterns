@@ -81,6 +81,9 @@ public final class YAMLOutputter implements Outputter<Object> {
      * Sends an object through an {@code OutputStream}.
      * <p>
      * The object will be transformed into an YAML text file.
+     * <p>
+     * This accepts only streams using the UTF-8 format. If you need any other
+     * format use a formatted {@code Writer}.
      * 
      * @param value
      *            object to send

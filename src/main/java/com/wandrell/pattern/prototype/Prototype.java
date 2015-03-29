@@ -44,7 +44,7 @@ package com.wandrell.pattern.prototype;
  * 
  * @author Bernardo Martínez Garrido
  */
-public interface NewInstantiable {
+public interface Prototype {
 
     /**
      * Creates a copy of the object.
@@ -57,6 +57,6 @@ public interface NewInstantiable {
      * 
      * @return a copy of the object
      */
-    public NewInstantiable createNewInstance();
+    public Prototype createNewInstance();
 
 }
