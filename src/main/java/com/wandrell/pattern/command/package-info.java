@@ -26,7 +26,7 @@
  * executor patterns.
  * <p>
  * The command, in the shape of the {@link com.wandrell.pattern.command.Command
- * Command} and the {@link com.wandrell.pattern.command.ReturnCommand
+ * Command} and the {@link com.wandrell.pattern.command.ResultCommand
  * ReturnCommand}, encapsulates pieces of code to be executed at a later time.
  * In a way, it can be seen as a function which can be stored and transmitted
  * like any object.

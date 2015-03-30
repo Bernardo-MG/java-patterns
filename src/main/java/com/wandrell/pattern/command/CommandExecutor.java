@@ -26,7 +26,7 @@ package com.wandrell.pattern.command;
 /**
  * Interface for the command executor pattern. It is prepared to work with the
  * two command pattern interfaces existing on this same package: {@link Command}
- * and {@link ReturnCommand}.
+ * and {@link ResultCommand}.
  * <p>
  * The executor's job is receiving one of these commands through its own
  * {@code execute} method and processing it by calling that same command's
@@ -39,7 +39,7 @@ package com.wandrell.pattern.command;
  * <p>
  * For {@code Command} instances an {@link #execute(Command) execute(Command)}
  * method exists with a {@code void} return type. While for
- * {@code ReturnCommand} instances another {@link #execute(ReturnCommand)
+ * {@code ReturnCommand} instances another {@link #execute(ResultCommand)
  * execute(ReturnCommand)} exists, returning the received command's return
  * value.
  * <p>
@@ -50,7 +50,7 @@ package com.wandrell.pattern.command;
  * 
  * @author Bernardo Martínez Garrido
  * @see Command
- * @see ReturnCommand
+ * @see ResultCommand
  */
 public interface CommandExecutor {
 
@@ -78,6 +78,20 @@ public interface CommandExecutor {
      *            the type to be returned
      * @return the command's return value
      */
-    public <V> V execute(final ReturnCommand<V> command);
+    public <V> V execute(final ResultCommand<V> command);
+
+    /**
+     * Undoes the received {@code Command}.
+     * <p>
+     * Any exception thrown by the command is expected to be caught and handled
+     * inside this method.
+     * <p>
+     * When calling this method if there is nothing to undo no exception is
+     * expected, the execution process as usual.
+     * 
+     * @param command
+     *            the command to be executed
+     */
+    public void undo(final UndoCommand command);
 
 }

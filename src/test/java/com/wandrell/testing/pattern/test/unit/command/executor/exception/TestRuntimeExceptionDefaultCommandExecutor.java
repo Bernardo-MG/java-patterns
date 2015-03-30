@@ -31,7 +31,8 @@ import org.testng.annotations.Test;
 import com.wandrell.pattern.command.Command;
 import com.wandrell.pattern.command.CommandExecutor;
 import com.wandrell.pattern.command.DefaultCommandExecutor;
-import com.wandrell.pattern.command.ReturnCommand;
+import com.wandrell.pattern.command.ResultCommand;
+import com.wandrell.pattern.command.UndoCommand;
 
 /**
  * Unit tests for {@link DefaultCommandExecutor}, checking that exceptions
@@ -48,6 +49,10 @@ import com.wandrell.pattern.command.ReturnCommand;
  * execution it is wrapped into a {@code RuntimeException}.</li>
  * <li>When a {@code ReturnCommand} throws an {@code RuntimeException} during
  * it's execution it is thrown again.</li>
+ * <li>When a {@code ReturnCommand} throws an {@code Exception} during it's
+ * undoing it is wrapped into a {@code RuntimeException}.</li>
+ * <li>When a {@code ReturnCommand} throws an {@code RuntimeException} during
+ * it's undoing it is thrown again.</li>
  * </ol>
  * <p>
  * Mocked {@code Command} and {@code ReturnCommand} instances are used for the
@@ -139,9 +144,9 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     public final void
             testExecute_ReturnCommand_ExceptionThrown_ThrowsRuntimeException()
                     throws Exception {
-        final ReturnCommand<?> command;
+        final ResultCommand<?> command;
 
-        command = Mockito.mock(ReturnCommand.class);
+        command = Mockito.mock(ResultCommand.class);
 
         try {
             Mockito.doThrow(Exception.class).when(command).execute();
@@ -164,12 +169,59 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
             void
             testExecute_ReturnCommand_RuntimeExceptionThrown_ThrowsRuntimeException()
                     throws Exception {
-        final ReturnCommand<?> command;
+        final ResultCommand<?> command;
 
-        command = Mockito.mock(ReturnCommand.class);
+        command = Mockito.mock(ResultCommand.class);
 
         try {
             Mockito.doThrow(RuntimeException.class).when(command).execute();
+        } catch (final Exception e) {
+            Assert.fail(e.getMessage());
+        }
+
+        executor.execute(command);
+    }
+
+    /**
+     * Tests that when a {@code ReturnCommand} throws an {@code Exception}
+     * during it's undoing it is wrapped into a {@code RuntimeException}.
+     * 
+     * @throws Exception
+     *             always as part of the test
+     */
+    @Test(expectedExceptions = RuntimeException.class)
+    public final void testUndo_Command_ExceptionThrown_ThrowsRuntimeException()
+            throws Exception {
+        final UndoCommand command;
+
+        command = Mockito.mock(UndoCommand.class);
+
+        try {
+            Mockito.doThrow(Exception.class).when(command).undo();
+        } catch (final Exception e) {
+            Assert.fail(e.getMessage());
+        }
+
+        executor.execute(command);
+    }
+
+    /**
+     * Tests that when a {@code ReturnCommand} throws a {@code RuntimeException}
+     * during it's undoing it is thrown again.
+     * 
+     * @throws Exception
+     *             always as part of the test
+     */
+    @Test(expectedExceptions = RuntimeException.class)
+    public final void
+            testUndo_Command_RuntimeExceptionThrown_ThrowsRuntimeException()
+                    throws Exception {
+        final UndoCommand command;
+
+        command = Mockito.mock(UndoCommand.class);
+
+        try {
+            Mockito.doThrow(RuntimeException.class).when(command).undo();
         } catch (final Exception e) {
             Assert.fail(e.getMessage());
         }

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2014 the original author or authors.
+ * Copyright (c) 2015 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,38 +24,25 @@
 package com.wandrell.pattern.command;
 
 /**
- * Interface for the command pattern. This is the most basic type of command,
- * which doesn't return anything when executed.
+ * Extension of {@code Command} which allows undoing the process done during the
+ * execution.
  * <p>
- * A command is a behavioral design pattern which encapsulates a piece of code,
- * which this way can be stored and transmitted, until it is required to be
- * executed.
- * <p>
- * This execution is done through the {@link #execute() execute} method.
- * <p>
- * But this is not meant to be called manually. Instead a
- * {@link CommandExecutor} will receive the command and then call its
- * {@code execute} method. This way commands are kept isolated from the rest of
- * the code.
- * <p>
- * If you need the command to return a value, use the {@link ResultCommand}
- * interface.
+ * The {@link #undo() undo} method takes care of undoing whatever was done
+ * during the {@link #execute() execute} method call
  * 
  * @author Bernardo Martínez Garrido
  * @see CommandExecutor
- * @see ResultCommand
+ * @see Command
  */
-public interface Command {
+public interface UndoCommand extends Command {
 
+    // TODO: Test that the executor call this
     /**
-     * Executes the command.
+     * Undoes the work done during the execution.
      * <p>
-     * Any exception caused during the execution is expected to be let spread,
-     * and not be caught inside the command.
-     * 
-     * @throws Exception
-     *             when any exception is thrown during the execution
+     * If the {@code Command} has not been executed when this method is called
+     * then this call is expected to do nothing at all.
      */
-    public void execute() throws Exception;
+    public void undo() throws Exception;
 
 }

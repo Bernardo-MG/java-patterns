@@ -24,7 +24,7 @@
 package com.wandrell.pattern.command;
 
 /**
- * Extension of {@code Command} capable of returning a value.
+ * Extension of {@code Command} which generates a value during the execution.
  * <p>
  * It works the same way as the basic {@code Command}, just that a
  * {@link #getResult()} method allows retrieving the value generated during the
@@ -36,7 +36,7 @@ package com.wandrell.pattern.command;
  * @param <V>
  *            the type being returned
  */
-public interface ReturnCommand<V> extends Command {
+public interface ResultCommand<V> extends Command {
 
     /**
      * Returns the value generated during the execution.
