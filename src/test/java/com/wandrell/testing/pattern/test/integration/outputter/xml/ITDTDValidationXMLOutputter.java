@@ -89,7 +89,6 @@ public final class ITDTDValidationXMLOutputter {
      */
     public ITDTDValidationXMLOutputter() {
         super();
-        // TODO: Make this test with validation.
     }
 
     /**

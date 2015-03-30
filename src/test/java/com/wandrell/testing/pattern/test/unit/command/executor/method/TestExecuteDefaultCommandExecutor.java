@@ -124,11 +124,7 @@ public final class TestExecuteDefaultCommandExecutor {
 
         command = Mockito.mock(ReturnCommand.class);
 
-        try {
-            Mockito.when(command.execute()).thenReturn(true);
-        } catch (final Exception e) {
-            Assert.fail(e.getMessage());
-        }
+        Mockito.when(command.getResult()).thenReturn(true);
 
         Assert.assertTrue(executor.execute(command));
     }

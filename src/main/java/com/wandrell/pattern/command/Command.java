@@ -38,8 +38,8 @@ package com.wandrell.pattern.command;
  * {@code execute} method. This way commands are kept isolated from the rest of
  * the code.
  * <p>
- * As previously stated, this a basic command which does not return anything on
- * execution. For commands which do return values use the {@link ReturnCommand}.
+ * If you need the command to return a value, use the {@link ReturnCommand}
+ * interface.
  * 
  * @author Bernardo Martínez Garrido
  * @see CommandExecutor

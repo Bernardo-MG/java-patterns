@@ -89,7 +89,6 @@ public final class ITXSDValidationXMLOutputter {
      */
     public ITXSDValidationXMLOutputter() {
         super();
-        // TODO: Make this test with validation.
     }
 
     /**

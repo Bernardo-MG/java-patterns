@@ -147,9 +147,9 @@
 		<site.skin.version>1.1.1</site.skin.version>
 		<javaVersion>JDK 7, JDK 8 and OpenJDK 7</javaVersion>
 		<scmName>GitHub</scmName>
-		<scmURL>${scm.url}</scmURL>
-		<ciName>${ciManagement.system}</ciName>
-		<ciURL>${ciManagement.url}</ciURL>
+		<scmURL>${project.scm.url}</scmURL>
+		<ciName>${project.ciManagement.system}</ciName>
+		<ciURL>${project.ciManagement.url}</ciURL>
 		<license>MIT</license>
 	</properties>
 

@@ -116,21 +116,9 @@ public final class DefaultCommandExecutor implements CommandExecutor {
     public final <V> V execute(final ReturnCommand<V> command) {
         checkNotNull(command, "Received a null pointer as command");
 
-        final V result; // The result of executing the command
+        execute((Command) command);
 
-        try {
-            result = command.execute();
-        } catch (final RuntimeException exception) {
-            // RuntimeExceptions are just thrown after logging
-            getLogger().error(exception.getMessage());
-            throw exception;
-        } catch (final Exception exception) {
-            // Other exceptions are wrapped after logging
-            getLogger().error(exception.getMessage());
-            throw new RuntimeException(exception);
-        }
-
-        return result;
+        return command.getResult();
     }
 
 }
