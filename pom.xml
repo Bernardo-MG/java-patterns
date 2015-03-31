@@ -29,7 +29,7 @@
 	</scm>
 
 	<issueManagement>
-		<system>GitHub Issues</system>
+		<system>GitHub</system>
 		<url>https://github.com/Bernardo-MG/Java-Patterns/issues</url>
 	</issueManagement>
 
@@ -125,6 +125,7 @@
 		<!-- Plugins versions -->
 		<plugin.checkstyle.version>2.13</plugin.checkstyle.version>
 		<plugin.compiler.version>3.2</plugin.compiler.version>
+		<plugin.changes.version>2.11</plugin.changes.version>
 		<plugin.deploy.version>2.8.2</plugin.deploy.version>
 		<plugin.failsafe.version>2.18</plugin.failsafe.version>
 		<plugin.findbugs.version>3.0.0</plugin.findbugs.version>
@@ -136,6 +137,7 @@
 		<plugin.pmd.version>3.3</plugin.pmd.version>
 		<plugin.reports.version>2.8</plugin.reports.version>
 		<plugin.site.version>3.4</plugin.site.version>
+		<plugin.site.doxia.version>1.6</plugin.site.doxia.version>
 		<plugin.site.reflow.version>1.1.1</plugin.site.reflow.version>
 		<plugin.site.velocity.version>1.7</plugin.site.velocity.version>
 		<plugin.source.version>2.4</plugin.source.version>
@@ -385,12 +387,20 @@
 				<version>${plugin.site.version}</version>
 				<dependencies>
 					<dependency>
+						<!-- Doxia -->
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-module-markdown</artifactId>
+						<version>${plugin.site.doxia.version}</version>
+					</dependency>
+					<dependency>
+						<!-- Reflow Skin -->
 						<groupId>lt.velykis.maven.skins</groupId>
 						<artifactId>reflow-velocity-tools</artifactId>
 						<version>${plugin.site.reflow.version}</version>
 					</dependency>
-					<!-- Reflow skin requires Velocity >= 1.7 -->
 					<dependency>
+						<!-- Velocity -->
+						<!-- Reflow skin requires Velocity >= 1.7 -->
 						<groupId>org.apache.velocity</groupId>
 						<artifactId>velocity</artifactId>
 						<version>${plugin.site.velocity.version}</version>
@@ -498,6 +508,12 @@
 				</reportSets>
 			</plugin>
 			<plugin>
+				<!-- JXR -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${plugin.jxr.version}</version>
+			</plugin>
+			<plugin>
 				<!-- Site -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -512,6 +528,19 @@
 					<reportSet>
 						<reports>
 							<report>javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<!-- Changes -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<version>${plugin.changes.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -615,12 +644,6 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>
 				<version>${plugin.jdepend.version}</version>
-			</plugin>
-			<plugin>
-				<!-- JXR -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>${plugin.jxr.version}</version>
 			</plugin>
 		</plugins>
 	</reporting>

@@ -12,20 +12,14 @@ Currently the patterns included are as follows:
 - The **Prototype** permits creating an identical copy of a base template.
 - The **Repository** allows handling data persistence as if you were working on a collection.
 
-## Webpage
-Currently the project has no webpage.
+## Documentation
+There is documentation both for the release and the development versions.
 
-### Documentation webpages
-You can consult the current status and general info of the project on the [Maven site][maven-release].
+The latest release can be consulted at the [documentation page][site-release] or the [Javadoc site][javadoc-release].
 
-General code documentation can be found on the [Javadoc site][javadoc-release].
+While the current version under development can be consulted at the [development documentation page][site-develop] or the [development Javadoc site][javadoc-develop].
 
-Also, if needed, these pages can be generated from the project with Maven.
-
-#### Development Documentation webpages
-Documentation pages are also generated for the latest commit on the 'develop' branch.
-
-There is a [development Maven site][maven-develop] and a [development Javadoc site][javadoc-develop].
+These pages are generated through the Maven site command, so it is always possible to generate them from the code on the repository.
 
 ## Status
 The project is still under development, so expect a certain degree of volatility.
@@ -63,7 +57,7 @@ The project is released under the [MIT License][license].
 [javadoc-develop]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
 [javadoc-release]: http://docs.wandrell.com/maven/java-patterns/apidocs
 [license]: http://www.opensource.org/licenses/mit-license.php
-[maven-develop]: http://docs.wandrell.com/development/maven/java-patterns
-[maven-release]: http://docs.wandrell.com/maven/java-patterns
 [releases-repo]: http://dl.bintray.com/bernardo-mg/java-patterns
 [scm]: http://github.com/Bernardo-MG/Java-Patterns
+[site-develop]: http://docs.wandrell.com/development/maven/java-patterns
+[site-release]: http://docs.wandrell.com/maven/java-patterns

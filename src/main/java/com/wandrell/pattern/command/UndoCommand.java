@@ -42,6 +42,9 @@ public interface UndoCommand extends Command {
      * <p>
      * If the {@code Command} has not been executed when this method is called
      * then this call is expected to do nothing at all.
+     * 
+     * @throws Exception
+     *             when any exception is thrown during the undoing
      */
     public void undo() throws Exception;
 

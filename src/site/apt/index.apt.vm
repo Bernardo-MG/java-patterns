@@ -38,8 +38,10 @@ About the code
 
 	* Java version: ${javaVersion}
 
-	* License: {{{ /license.html } ${license} }}
+	* License: {{{./license.html}${license}}}
 
-	* SCM: {{{ ${scmURL} } ${scmName} }}
+	* SCM: {{{${scmURL}}${scmName}}}
 	
-	* CI: {{{ ${ciURL} } ${ciName} }}
+	* CI: {{{${ciURL}}${ciName}}}
+	
+	* Changes Log: {{{./changes-report.html}project history}}
