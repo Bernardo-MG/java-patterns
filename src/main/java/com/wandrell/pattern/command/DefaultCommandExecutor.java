@@ -132,7 +132,7 @@ public final class DefaultCommandExecutor implements CommandExecutor {
      *            the {@code Command} to be executed
      */
     @Override
-    public void undo(UndoCommand command) {
+    public final void undo(final UndoCommand command) {
         try {
             command.undo();
         } catch (final RuntimeException exception) {

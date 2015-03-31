@@ -36,7 +36,6 @@ package com.wandrell.pattern.command;
  */
 public interface UndoCommand extends Command {
 
-    // TODO: Test that the executor call this
     /**
      * Undoes the work done during the execution.
      * <p>
