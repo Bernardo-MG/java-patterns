@@ -202,7 +202,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
             Assert.fail(e.getMessage());
         }
 
-        executor.execute(command);
+        executor.undo(command);
     }
 
     /**
@@ -226,7 +226,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
             Assert.fail(e.getMessage());
         }
 
-        executor.execute(command);
+        executor.undo(command);
     }
 
 }
