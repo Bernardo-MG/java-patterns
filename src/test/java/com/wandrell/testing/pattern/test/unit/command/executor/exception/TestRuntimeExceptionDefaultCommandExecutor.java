@@ -45,17 +45,17 @@ import com.wandrell.pattern.command.UndoCommand;
  * it is wrapped into a {@code RuntimeException}.</li>
  * <li>When a {@code Command} throws an {@code RuntimeException} during it's
  * execution it is thrown again.</li>
- * <li>When a {@code ReturnCommand} throws an {@code Exception} during it's
+ * <li>When a {@code ResultCommand} throws an {@code Exception} during it's
  * execution it is wrapped into a {@code RuntimeException}.</li>
- * <li>When a {@code ReturnCommand} throws an {@code RuntimeException} during
+ * <li>When a {@code ResultCommand} throws an {@code RuntimeException} during
  * it's execution it is thrown again.</li>
- * <li>When a {@code ReturnCommand} throws an {@code Exception} during it's
+ * <li>When a {@code ResultCommand} throws an {@code Exception} during it's
  * undoing it is wrapped into a {@code RuntimeException}.</li>
- * <li>When a {@code ReturnCommand} throws an {@code RuntimeException} during
+ * <li>When a {@code ResultCommand} throws an {@code RuntimeException} during
  * it's undoing it is thrown again.</li>
  * </ol>
  * <p>
- * Mocked {@code Command} and {@code ReturnCommand} instances are used for the
+ * Mocked {@code Command} and {@code ResultCommand} instances are used for the
  * tests.
  * 
  * @author Bernardo Martínez Garrido
@@ -134,7 +134,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     }
 
     /**
-     * Tests that when a {@code ReturnCommand} throws an {@code Exception}
+     * Tests that when a {@code ResultCommand} throws an {@code Exception}
      * during it's execution it is wrapped into a {@code RuntimeException}.
      * 
      * @throws Exception
@@ -142,7 +142,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
      */
     @Test(expectedExceptions = RuntimeException.class)
     public final void
-            testExecute_ReturnCommand_ExceptionThrown_ThrowsRuntimeException()
+            testExecute_ResultCommand_ExceptionThrown_ThrowsRuntimeException()
                     throws Exception {
         final ResultCommand<?> command;
 
@@ -158,7 +158,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     }
 
     /**
-     * Tests that when a {@code ReturnCommand} throws an
+     * Tests that when a {@code ResultCommand} throws an
      * {@code RuntimeException} during it's execution it is thrown again.
      * 
      * @throws Exception
@@ -167,7 +167,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     @Test(expectedExceptions = RuntimeException.class)
     public final
             void
-            testExecute_ReturnCommand_RuntimeExceptionThrown_ThrowsRuntimeException()
+            testExecute_ResultCommand_RuntimeExceptionThrown_ThrowsRuntimeException()
                     throws Exception {
         final ResultCommand<?> command;
 
@@ -183,7 +183,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     }
 
     /**
-     * Tests that when a {@code ReturnCommand} throws an {@code Exception}
+     * Tests that when a {@code ResultCommand} throws an {@code Exception}
      * during it's undoing it is wrapped into a {@code RuntimeException}.
      * 
      * @throws Exception
@@ -206,7 +206,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     }
 
     /**
-     * Tests that when a {@code ReturnCommand} throws a {@code RuntimeException}
+     * Tests that when a {@code ResultCommand} throws a {@code RuntimeException}
      * during it's undoing it is thrown again.
      * 
      * @throws Exception

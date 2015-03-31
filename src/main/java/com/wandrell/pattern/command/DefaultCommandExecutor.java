@@ -107,7 +107,7 @@ public final class DefaultCommandExecutor implements CommandExecutor {
      * be wrapped by it, when they are thrown out of this method.
      * 
      * @param command
-     *            the {@code ReturnCommand} to be executed
+     *            the {@code ResultCommand} to be executed
      * @param <V>
      *            the command's return type
      * @return the command's return value

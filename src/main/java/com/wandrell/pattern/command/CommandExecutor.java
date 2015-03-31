@@ -33,14 +33,14 @@ package com.wandrell.pattern.command;
  * {@code execute} method.
  * <p>
  * The only difference between both types of command is that
- * {@code ReturnCommand} returns a value when executed, while {@code Command}
+ * {@code ResultCommand} returns a value when executed, while {@code Command}
  * doesn't. This is reflected by the executor, as it contains two
  * {@code execute} methods.
  * <p>
  * For {@code Command} instances an {@link #execute(Command) execute(Command)}
  * method exists with a {@code void} return type. While for
- * {@code ReturnCommand} instances another {@link #execute(ResultCommand)
- * execute(ReturnCommand)} exists, returning the received command's return
+ * {@code ResultCommand} instances another {@link #execute(ResultCommand)
+ * execute(ResultCommand)} exists, returning the received command's return
  * value.
  * <p>
  * Both methods are expected to execute the command as soon as they receive it.
