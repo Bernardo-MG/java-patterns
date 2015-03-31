@@ -13,13 +13,13 @@ Currently the patterns included are as follows:
 - The **Repository** allows handling data persistence as if you were working on a collection.
 
 ## Documentation
-There is documentation both for the release and the development versions.
+There is documentation both for the latest release and the latest snapshot.
 
-The latest release can be consulted at the [documentation page][site-release] or the [Javadoc site][javadoc-release].
+Information for the latest release can be consulted at the [documentation page][site-release] and the [Javadoc site][javadoc-release].
 
-While the current version under development can be consulted at the [development documentation page][site-develop] or the [development Javadoc site][javadoc-develop].
+The latest information for the 'develop' branch, from which the snapshots are created, can be found at the [development documentation page][site-develop] and the [development Javadoc site][javadoc-develop].
 
-These pages are generated through the Maven site command, so it is always possible to generate them from the code on the repository.
+As these pages are generated through the Maven site command, it is always possible to generate them from the source code taken from the repository.
 
 ## Status
 The project is still under development, so expect a certain degree of volatility.
