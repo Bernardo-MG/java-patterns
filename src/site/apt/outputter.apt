@@ -1,0 +1,47 @@
+Outputter
+
+	An outputter received data to be sent through an output I/O operation, so the
+	actual implementation or API being used is unknown, favoring decoupling.
+	
+* Interface
+
+[./images/outputter_class.png] Outputter interface
+
+	The {{{./apidocs/com/wandrell/pattern/outputter/Outputter.html}Outputter}}
+	consists of just two methods, both called <output>, which send an object
+	through the accompanying output object.
+	
+	The output object is expected to be closed once the operation is finished,
+	so it can't be reused.
+
+* Implementations
+
+[./images/outputter_class_tree.png] Outputter class hierarchy tree
+
+===
+
+** XML
+
+	The {{{./apidocs/com/wandrell/pattern/outputter/xml/XMLOutputter.html}XMLOutputter}}
+	allows storing data into XML files. It requires a JDOM 2 Document.
+
+** YAML
+
+	The {{{./apidocs/com/wandrell/pattern/outputter/yaml/YAMLOutputter.html}YAMLOutputter}}
+	allows storing data into YAML files. It requires an object, which will be
+	processed into the file.
+	
+	The easiest way to use this class is by giving it a <Map>, as it adapts
+	best to the structure of a YAML file.
+	
++---------------------
+Map<String, Object> data = new LinkedHashMap<String, Object>();
+Outputter<Object> outputter = new YAMLOutputter();
+
+data.put("key1", "value1");
+data.put("key2", 2);
+data.put("key3", true);
+
+// The writer initialization is not shown
+outputter.output(data, writer);
++---------------------

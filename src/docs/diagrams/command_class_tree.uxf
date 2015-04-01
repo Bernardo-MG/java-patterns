@@ -10,7 +10,7 @@
       <h>70</h>
     </coordinates>
     <panel_attributes>bg=cyan
-Command
+/Command/
 --
 
 --
@@ -26,7 +26,7 @@ Command
       <h>70</h>
     </coordinates>
     <panel_attributes>bg=cyan
-Command
+/Command/
 --
  
 --
@@ -43,7 +43,7 @@ Command
     </coordinates>
     <panel_attributes>bg=cyan
 template=V: Object
-ResultCommand
+/ResultCommand/
 --
  
 --

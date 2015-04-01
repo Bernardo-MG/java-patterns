@@ -27,8 +27,7 @@
  * <p>
  * Currently the only one existing is
  * {@link com.wandrell.pattern.outputter.yaml.YAMLOutputter YAMLOutputter},
- * which transforms an {@code Object} into a YAML text file and sends it through
- * an output class.
+ * which transforms an {@code Object} into a YAML text file.
  */
 package com.wandrell.pattern.outputter.yaml;
 

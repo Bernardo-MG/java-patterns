@@ -27,7 +27,7 @@
  * <p>
  * Currently the only one existing is
  * {@link com.wandrell.pattern.outputter.xml.XMLOutputter XMLOutputter}, which
- * sends a JDOM2 {@link org.jdom2.Document Document} through an output class.
+ * transforms a JDOM2 {@link org.jdom2.Document Document} into an XML text file.
  */
 package com.wandrell.pattern.outputter.xml;
 

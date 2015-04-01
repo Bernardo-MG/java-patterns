@@ -27,24 +27,29 @@ import java.io.OutputStream;
 import java.io.Writer;
 
 /**
- * Interface for sending Java objects through output operations. Commonly this
- * means writing an object into a file.
+ * Interface for the outputter pattern. This allows sending data through an I/O
+ * output operation, without having to worry about the concrete implementation
+ * or API being used.
  * <p>
- * Most of the time this interface will be used to hide the actual API being
- * used for the job, to reduce the coupling with third party libraries.
+ * For example, if a file has to be saved into a file, an {@code Outputter} can
+ * be used. That way the file format can be changed just by swapping the current
+ * {@code Outputter} for another implementation.
  * <p>
- * It is expected to close the output object once the operation is finished.
+ * It should be noted that this interface received the output class to be used
+ * directly on it's methods, instead of it being set on a constructor or a
+ * setter, because instances of {@code Outputter} are expected to close the
+ * output object once the operation is finished.
  * 
  * @author Bernardo Martínez Garrido
  * @param <V>
- *            the type to be sent into the output
+ *            the type to be sent through the output operation
  */
 public interface Outputter<V> {
 
     /**
      * Sends an object through an {@code OutputStream}.
      * <p>
-     * The stream is expected to be closed when the operation ends.
+     * The stream is expected to be closed once the operation is finished.
      * 
      * @param value
      *            object to send
@@ -59,7 +64,7 @@ public interface Outputter<V> {
     /**
      * Sends an object through a {@code Writer}.
      * <p>
-     * The reader is expected to be closed when the operation ends.
+     * The reader is expected to be closed once the operation is finished.
      * 
      * @param value
      *            object to send

@@ -28,7 +28,7 @@ DefaultCommandExecutor
       <h>100</h>
     </coordinates>
     <panel_attributes>bg=cyan
-CommandExecutor
+/CommandExecutor/
 --
 
 --

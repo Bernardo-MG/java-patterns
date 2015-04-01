@@ -42,9 +42,8 @@ import com.wandrell.pattern.outputter.Outputter;
  * transformed into the resulting data.
  * <p>
  * The easiest way to use this class is sending a {@code Map<String, Object>},
- * where the values may be other maps or collections.
- * <p>
- * That structure adapts easily into a YAML tree and is easy to understand.
+ * where the values may be other maps or collections, as that structure adapts
+ * easily into a YAML tree and is easy to understand.
  * 
  * @author Bernardo Martínez Garrido
  */
@@ -52,6 +51,8 @@ public final class YAMLOutputter implements Outputter<Object> {
 
     /**
      * Encoding for the output stream.
+     * <p>
+     * If another encoding is required a {@code Writer} should be used.
      */
     private static final String ENCODING = "UTF-8";
     /**
@@ -80,7 +81,7 @@ public final class YAMLOutputter implements Outputter<Object> {
     /**
      * Sends an object through an {@code OutputStream}.
      * <p>
-     * The object will be transformed into an YAML text file.
+     * The object will be transformed into a YAML text file.
      * <p>
      * This accepts only streams using the UTF-8 format. If you need any other
      * format use a formatted {@code Writer}.
@@ -102,7 +103,7 @@ public final class YAMLOutputter implements Outputter<Object> {
     /**
      * Sends an object through a {@code OutputStream}.
      * <p>
-     * The object will be transformed into an YAML text file.
+     * The object will be transformed into a YAML text file.
      * 
      * @param value
      *            object to send

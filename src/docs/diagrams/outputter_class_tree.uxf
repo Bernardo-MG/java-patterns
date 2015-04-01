@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>260</x>
+      <y>90</y>
+      <w>300</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>bg=cyan
+template=V: Object
+/Outputter/
+--
+ 
+--
+/+output(value: V, stream: OutputStream)/
+/+output(value: V, writer: Writer)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>290</y>
+      <w>320</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+XMLOutputter
+--
+ 
+--
++output(value: Document, stream: OutputStream)
++output(value: Document, writer: Writer)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>190</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>190.0;10.0;190.0;50.0;10.0;50.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>290</y>
+      <w>320</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+YAMLOutputter
+--
+ 
+--
++output(value: Object, stream: OutputStream)
++output(value: Object, writer: Writer)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>230</y>
+      <w>260</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>240.0;60.0;240.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

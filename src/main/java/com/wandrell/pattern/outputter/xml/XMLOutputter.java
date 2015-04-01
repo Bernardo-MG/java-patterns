@@ -39,17 +39,19 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.outputter.Outputter;
 
 /**
- * Implementation of {@link Outputter} for XML data. Behind the scenes this is
+ * Implementation of {@link Outputter} for XML files. Behind the scenes this is
  * based on the JDOM 2 API.
  * <p>
  * The data is received as a JDOM 2 {@link org.jdom2.Document Document}, along
  * the output object to be used.
  * <p>
  * It is also possible to include XML validation data, which will be added to
- * the {@code Document} before sending it.
+ * the {@code Document} before sending it. This should be set using the
+ * {@link #setValidation(Document) setValidation} method before outputting the
+ * data.
  * <p>
  * Note that the validation file path won't be checked in any way, just stored
- * on the {@code Document} as received.
+ * on the resulting file as received.
  * 
  * @author Bernardo Martínez Garrido
  * @see Document
@@ -57,7 +59,8 @@ import com.wandrell.pattern.outputter.Outputter;
 public final class XMLOutputter implements Outputter<Document> {
 
     /**
-     * The name of the element registering the validation file being used.
+     * The name of the element which will register the validation file being
+     * used.
      * <p>
      * This will be used only if DTD validation is set.
      */
@@ -83,14 +86,16 @@ public final class XMLOutputter implements Outputter<Document> {
     /**
      * Path to the validation file.
      * <p>
-     * It should be noted that this file won't be read.
+     * It should be noted that this file won't be read or validated in any way.
      * <p>
      * The path will be stored along the rest of the validation data on the
-     * resulting file.
+     * resulting file, but only if any kind of validation has been set.
      */
     private String              valFilePath;
     /**
      * Type of validation being used.
+     * <p>
+     * If the validation is set to 'NONE' no validation will be applied.
      */
     private XMLValidationType   validationType;
 
@@ -105,8 +110,8 @@ public final class XMLOutputter implements Outputter<Document> {
      * Constructs an {@code XMLOutputter} with the specified validation
      * information.
      * <p>
-     * Note that the received path will just be added to the {@code Document} as
-     * received, doing no verification or reading.
+     * Note that the received path will just be added to the resulting file as
+     * received, and it won't be read of checked in any way.
      * 
      * @param validation
      *            the validation type
@@ -144,10 +149,14 @@ public final class XMLOutputter implements Outputter<Document> {
         checkNotNull(value, "Received a null pointer as value");
         checkNotNull(stream, "Received a null pointer as output stream");
 
-        setValidation(value);
+        final Document doc;
 
-        new org.jdom2.output.XMLOutputter(Format.getPrettyFormat()).output(
-                value, stream);
+        doc = value.clone();
+
+        setValidation(doc);
+
+        new org.jdom2.output.XMLOutputter(Format.getPrettyFormat()).output(doc,
+                stream);
     }
 
     /**
@@ -169,10 +178,14 @@ public final class XMLOutputter implements Outputter<Document> {
         checkNotNull(value, "Received a null pointer as value");
         checkNotNull(writer, "Received a null pointer as writer");
 
-        setValidation(value);
+        final Document doc;
 
-        new org.jdom2.output.XMLOutputter(Format.getPrettyFormat()).output(
-                value, writer);
+        doc = value.clone();
+
+        setValidation(doc);
+
+        new org.jdom2.output.XMLOutputter(Format.getPrettyFormat()).output(doc,
+                writer);
     }
 
     /**
@@ -198,7 +211,7 @@ public final class XMLOutputter implements Outputter<Document> {
     }
 
     /**
-     * Returns the name of the element registering the validation file.
+     * Returns the name of the element which will register the validation file.
      * <p>
      * This is used for DTD validation.
      * 
@@ -211,8 +224,8 @@ public final class XMLOutputter implements Outputter<Document> {
     /**
      * Returns the path to the validation file.
      * <p>
-     * This file won't be read, it will just be stored in the {@code Document}
-     * as part of the validation info.
+     * This file won't be read or checked in any way, it will just be stored in
+     * the {@code Document} as part of the validation info.
      * 
      * @return the path to the validation file.
      */

@@ -70,6 +70,12 @@
 						<body />
 					</sections>
 				</command>
+				<outputter>
+					<sections>
+						<body />
+						<columns>2</columns>
+					</sections>
+				</outputter>
 				<contribute>
 					<breadcrumbs>false</breadcrumbs>
 				</contribute>
@@ -116,11 +122,10 @@
 		</menu>
 		<menu name="Documentation" inherit="bottom">
 			<item name="Command" href="./command.html" />
-			<item name="Outputter" href="skin/" />
-			<item name="Parser" href="skin/" />
-			<item name="Prototype" href="skin/" />
-			<item name="Repository" href="skin/" />
-			<item name="Other classes" href="skin/" />
+			<item name="Outputter" href="./outputter.html" />
+			<item name="Parser" href="./parser.html" />
+			<item name="Prototype" href="./prototype.html" />
+			<item name="Repository" href="./repository.html" />
 		</menu>
 		<menu name="Reports" ref="reports" inherit="bottom" />
 		<menu name="Contribute" inherit="bottom">
