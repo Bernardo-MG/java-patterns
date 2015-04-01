@@ -24,23 +24,39 @@
 package com.wandrell.pattern.command;
 
 /**
- * Extension of {@code Command} which allows undoing the process done during the
- * execution.
+ * Extension of {@link Command} which allows reversing the process done during
+ * the execution.
  * <p>
- * The {@link #undo() undo} method takes care of undoing whatever was done
- * during the {@link #execute() execute} method call
+ * This is done calling the {@link #undo() undo} method after the
+ * {@link #execute() execute} method call. Note that if any exception is caused
+ * by the undoing it is expected to be let spread out of the method, and not be
+ * caught inside.
+ * <p>
+ * Note that if the command's execution has caused an exception, then it may not
+ * be possible to undo it.
+ * <p>
+ * Also, if the command has not been executed, then undoing it is expected to do
+ * nothing.
+ * <p>
+ * A simple example of this procedure would be a command which during it's
+ * execution adds a 1 to a number it stores. Undoing the command would subtract
+ * 1 from said stored number.
  * 
  * @author Bernardo Martínez Garrido
- * @see CommandExecutor
- * @see Command
  */
-public interface UndoCommand extends Command {
+public interface UndoableCommand extends Command {
 
     /**
      * Undoes the work done during the execution.
      * <p>
      * If the {@code Command} has not been executed when this method is called
      * then this call is expected to do nothing at all.
+     * <p>
+     * If any error has occurred during the execution, then it may not be
+     * possible to undo the command's execution.
+     * <p>
+     * Also, if the command has not been executed undoing it is expected to do
+     * nothing.
      * 
      * @throws Exception
      *             when any exception is thrown during the undoing

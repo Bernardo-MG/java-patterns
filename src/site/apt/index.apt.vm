@@ -18,15 +18,15 @@ The patterns in the library
 
 	These are not following any concrete book or specification, just a mix of what I needed and what they are usually expected to do.
 
-	* The <<Command>>, and the <<CommandExecutor>>, help to encapsulate code inside an object.
-	
-	* The <<Outputter>> allows writing for files, or just sending structures, without worrying about the actual implementation.
-	
-	* The <<Parser>> transforms one object into another, keeping as much of the data intact as possible.
-	
-	* The <<Prototype>> permits creating an identical copy of a base template.
-	
-	* The <<Repository>> allows handling data persistence as if you were working on a collection.
+		* The <<Command>>, and the <<CommandExecutor>>, help to encapsulate code inside an object.
+		
+		* The <<Outputter>> allows writing for files, or just sending structures, without worrying about the actual implementation.
+		
+		* The <<Parser>> transforms one object into another, keeping as much of the data intact as possible.
+		
+		* The <<Prototype>> permits creating an identical copy of a base template.
+		
+		* The <<Repository>> allows handling data persistence as if you were working on a collection.
 
 	For each of them, whenever possible, basic implementations have been included.
 

@@ -32,7 +32,7 @@ import com.wandrell.pattern.command.Command;
 import com.wandrell.pattern.command.CommandExecutor;
 import com.wandrell.pattern.command.DefaultCommandExecutor;
 import com.wandrell.pattern.command.ResultCommand;
-import com.wandrell.pattern.command.UndoCommand;
+import com.wandrell.pattern.command.UndoableCommand;
 
 /**
  * Unit tests for {@link DefaultCommandExecutor}, checking that exceptions
@@ -192,9 +192,9 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     @Test(expectedExceptions = RuntimeException.class)
     public final void testUndo_Command_ExceptionThrown_ThrowsRuntimeException()
             throws Exception {
-        final UndoCommand command;
+        final UndoableCommand command;
 
-        command = Mockito.mock(UndoCommand.class);
+        command = Mockito.mock(UndoableCommand.class);
 
         try {
             Mockito.doThrow(Exception.class).when(command).undo();
@@ -216,9 +216,9 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     public final void
             testUndo_Command_RuntimeExceptionThrown_ThrowsRuntimeException()
                     throws Exception {
-        final UndoCommand command;
+        final UndoableCommand command;
 
-        command = Mockito.mock(UndoCommand.class);
+        command = Mockito.mock(UndoableCommand.class);
 
         try {
             Mockito.doThrow(RuntimeException.class).when(command).undo();

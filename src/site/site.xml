@@ -62,6 +62,14 @@
 						<sidebar />
 					</sections>
 				</index>
+				<!-- Documentation pages -->
+				<command>
+					<sections>
+						<body />
+						<columns>2</columns>
+						<body />
+					</sections>
+				</command>
 				<contribute>
 					<breadcrumbs>false</breadcrumbs>
 				</contribute>
@@ -107,7 +115,7 @@
 			<item name="License" href="./license.html" />
 		</menu>
 		<menu name="Documentation" inherit="bottom">
-			<item name="Command" href="skin/" />
+			<item name="Command" href="./command.html" />
 			<item name="Outputter" href="skin/" />
 			<item name="Parser" href="skin/" />
 			<item name="Prototype" href="skin/" />

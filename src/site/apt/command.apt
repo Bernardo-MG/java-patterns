@@ -1,0 +1,132 @@
+Command and command executor
+
+	A command is an object which contains a series of instructions which to be
+	executed when required.
+	
+	This is a behavioral pattern which allows decoupling pieces of code, as
+	for example a service may request a command and execute it, not caring
+	about the actual logic being run.
+
+	But it offers other additional uses, as it is possible to create a queue of
+	commands to be executed one after the other. Or even create a bidirectional
+	list, where it is possible to do and undo the commands.
+	
+	To increase the decoupling a command executor can be used. This will not only
+	execute the command, but may also take care of exceptions, dependency injection
+	and any additional procedure the commands may require.
+
+* Command
+	
+[./images/command_class_tree.png] Command class hierarchy tree
+		
+	The command pattern is implemented through a small hierarchy of interfaces.
+	
+	At it's root is the {{{./apidocs/com/wandrell/pattern/command/Command.html}Command}}
+	interface, which offers the <execute> method, through which the encapsulated code
+	can be called.
+	
+	Calling the code inside the command is simple:
+	
++---------------------
+command.execute()
++---------------------
+	
+	But handling the parameters required by the code is not so simple. The
+	interface offers no method to set the parameters, instead these should be
+	set on the constructor, or through setters on the command implementation.
+	
+	It should be noted that the <execute> method can throw exceptions. It is not
+	required to throw an exception, of course, and concrete implementations may
+	remove the 'throws' declaration.
+	
+	But by default when executing a command exceptions should be caught, which
+	means that executing a command most of the times will be closer to:
+	
++---------------------
+try {
+   command.execute()
+} catch (final Exception exception) {
+   exception.printStackTrace();
+}
++---------------------
+	
+===
+
+** Commands and return values
+
+	A clear limitation of the basic command interface is that it doesn't allow
+	returning values generated during the execution.
+	
+	This is solved through the {{{./apidocs/com/wandrell/pattern/command/ResultCommand.html}ResultCommand}}
+	interface which can, through it's <getResult> method, return a value.
+	
+	Of course, if the command has not been executed, or it has caused an error, it
+	may be possible that the returned value is invalid. This will depend on the
+	implementation.
+	
+	If everything goes as intended, acquiring a command's value is very simple:
+	
++---------------------
+command.execute()
+
+value = command.getResult()
++---------------------
+
+** Undoing commands
+
+	When undoing a command is required the {{{./apidocs/com/wandrell/pattern/command/UndoableCommand.html}UndoableCommand}}
+	should be used.
+	
+	The logic behind it is very simple, whatever the <execute> methods does, the
+	<undo> method reverses it.
+	
+	Of course, it is the implementation's job to make sure this works as intended.
+
+===
+
+* Command Executor
+	
+[./images/command_executor_class_tree.png] Command executor class hierarchy tree
+
+	The command executor is defined by the {{{./apidocs/com/wandrell/pattern/command/CommandExecutor.html}CommandExecutor}}
+	interface.
+	
+	This offers three methods, one for each type of command.
+	
+		* The <execute(Command)> method receives a <Command> and just executes it.
+		
+		* The <execute(ResultCommand)> method receives a <ResultCommand>, executes
+		it and returns the value it has generated.
+		
+		* The <undo> method receives an <UndoableCommand> and calls it's <undo> 
+		method.
+	
+	This logic is very simple, after all, the executor is just meant to hide
+	the command's use. But it can also be used as a centralized point where all
+	the commands are executed, allowing any additional operation, such as catching
+	the exceptions or injecting dependencies.
+	
+	About that exceptions point, it should be noted that the executor's <execute>
+	methods don't throw exceptions.
+	
+	So, what with a command is:
+	
++---------------------
+try {
+   command.execute()
+} catch (final Exception exception) {
+   exception.printStackTrace();
+}
++---------------------
+
+	With an executor is:
+	
++---------------------
+executor.execute(command)
++---------------------
+
+	This is actually what the basic implementation of the interface, the
+	{{{./apidocs/com/wandrell/pattern/command/DefaultCommandExecutor.html}DefaultCommandExecutor}}
+	serves for. It takes care of the exceptions thrown by the commands, logging
+	them and throwing them again, but also hiding the exception catching
+	blocks.

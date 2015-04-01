@@ -24,26 +24,30 @@
 package com.wandrell.pattern.command;
 
 /**
- * Extension of {@code Command} which generates a value during the execution.
+ * Extension of {@link Command} which generates a value during the execution.
  * <p>
- * It works the same way as the basic {@code Command}, just that a
- * {@link #getResult()} method allows retrieving the value generated during the
- * execution.
+ * It works the same way as the basic {@code Command}, just that the
+ * {@link #getResult() getResult} method allows retrieving a value generated
+ * when calling the {@link #execute() execute} method.
+ * <p>
+ * Note that if an exception occurs during the command's execution then the
+ * {@code getResult} value may be invalid.
  * 
  * @author Bernardo Martínez Garrido
- * @see CommandExecutor
- * @see Command
  * @param <V>
- *            the type being returned
+ *            the type being generated during the execution
  */
 public interface ResultCommand<V> extends Command {
 
     /**
-     * Returns the value generated during the execution.
+     * Returns the value generated during the execution. This value should be
+     * closely related to the command's job.
      * <p>
-     * The value to be returned is expected to be closely related to the
-     * command's job, and not any kind of control value, such as an 'ok' status
-     * flag.
+     * For example, a division would return just the divided value, not an
+     * status value indicating if it was a valid division or not.
+     * <p>
+     * If any error has occurred during the execution, then the value returned
+     * may be invalid.
      * 
      * @return a value generated during the execution
      */

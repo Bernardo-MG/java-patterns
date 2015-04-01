@@ -32,7 +32,7 @@ import com.wandrell.pattern.command.Command;
 import com.wandrell.pattern.command.CommandExecutor;
 import com.wandrell.pattern.command.DefaultCommandExecutor;
 import com.wandrell.pattern.command.ResultCommand;
-import com.wandrell.pattern.command.UndoCommand;
+import com.wandrell.pattern.command.UndoableCommand;
 
 /**
  * Unit tests for {@link DefaultCommandExecutor}.
@@ -121,9 +121,9 @@ public final class TestCallsDefaultCommandExecutor {
      */
     @Test
     public final void testUndo() throws Exception {
-        final UndoCommand command;  // The command used for the test
+        final UndoableCommand command;  // The command used for the test
 
-        command = Mockito.mock(UndoCommand.class);
+        command = Mockito.mock(UndoableCommand.class);
 
         executor.undo(command);
 

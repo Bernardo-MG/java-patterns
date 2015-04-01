@@ -15,13 +15,13 @@ Currently the patterns included are as follows:
 ## Documentation
 Documentation is always generated for the latest release:
 
-- The [documentation page][site-release] for the latest release.
-- The [Javadoc site][javadoc-release] for the latest release.
+- The [latest release documentation page][site-release].
+- The [the latest release Javadoc site][javadoc-release].
 
-Documentation is also generated from the latest snapshot, taken from the 'develop' branch.
+Documentation is also generated from the latest snapshot, taken from the 'develop' branch:
 
-- The [documentation page][site-develop] for the latest snapshot.
-- The [Javadoc site][javadoc-develop] for the latest snapshot.
+- The [the latest snapshot documentation page][site-develop].
+- The [the latest snapshot Javadoc site][javadoc-develop].
 
 The site sources come along the source code, so it is always possible to generate them through the Maven site command.
 
