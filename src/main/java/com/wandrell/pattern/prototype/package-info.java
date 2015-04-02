@@ -24,16 +24,22 @@
 /**
  * Provides interfaces and basic implementations for the prototype pattern.
  * <p>
- * This pattern is used to create a copy of an already existing object. This way
- * it is possible to have a single object in memory configured as wished, and
- * then create perfect copies of it when needed.
+ * The prototype is a creational pattern which allows creating a copy of an
+ * existing class. With this pattern new instances of a class may be created
+ * using a defined method, instead of through constructors.
  * <p>
- * {@link com.wandrell.pattern.prototype.Prototype NewInstantiable} takes care
- * of this. Any class implementing it will allow to create copies of itself
- * through the {@code createNewInstance} method.
+ * This is not a simple pattern to implement, attention should be paid to things
+ * such as dependencies, or otherwise they may not work correctly after creating
+ * the new instance.
  * <p>
- * It is similar to the {@code Cloneable} interface, but is meant to be used
- * instead of it, to avoid all the complications it causes.
+ * Java already has it's own interface for the prototype pattern, the
+ * {@link Cloneable} interface. But trying to use it usually gives more problems
+ * than those it solves, and so appears the need to create an alternative.
+ * <h2>Interfaces</h2>
+ * <p>
+ * The {@link com.wandrell.pattern.prototype.Prototype Prototype} offers the
+ * {@link com.wandrell.pattern.prototype.Prototype#createNewInstance
+ * createNewInstance} method as a way to create new instances from a prototype.
  */
 package com.wandrell.pattern.prototype;
 
