@@ -23,12 +23,13 @@
  */
 /**
  * Provides interfaces and basic implementations for the repository pattern.
+ * <p>
  * This pattern is similar to a DAO, as it allows accessing data through CRUD
  * operations, hiding the source of this data.
  * <p>
- * The main difference is the data access logic. While the DAO operates in a
- * case by case way, returning a concrete object, the repository works like a
- * collection where queries can be made.
+ * The main difference is the logic behind the data access. While the DAO
+ * operates in a case by case way, returning a concrete object, the repository
+ * works like a collection where queries can be made.
  * <p>
  * The {@link com.wandrell.pattern.repository.Repository Repository} interface
  * achieves this through the

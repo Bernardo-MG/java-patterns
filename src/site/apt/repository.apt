@@ -1,0 +1,28 @@
+Repository
+
+	A repository allows accessing data through CRUD operations in a similar way
+	to a DAO. The difference is that while a DAO is meant to handle a single
+	entity the repository works as if it were a collection of persistent
+	entities.
+	
+* Interface
+
+[./images/repository_class_tree.png] Repository interface
+
+	The {{{./apidocs/com/wandrell/pattern/repository/Repository.html}Repository}}
+	offers the usual CRUD operations, the only difference is the <getCollection>,
+	which returns the result of querying the entities inside the repository.
+	
+	The query is done through a Guava <Predicate>, used instead of Java 8 own
+	<Predicate> to keep backwards compatibility. All the entities which make
+	this predicate true will be returned.
+	
+* Collection Repository
+
+[./images/collection_repository_class_tree.png] Collection repository interface
+
+	A basic implementation of the repository is offered, 
+	{{{./apidocs/com/wandrell/pattern/repository/CollectionRepository.html}CollectionRepository}}.
+	This serves as a stub to avoid using a persistence system, or for those cases 
+	where a complex	repository is not needed, as it will just use a <Collection>
+	to store all the entities.
