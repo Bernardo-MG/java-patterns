@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>370</x>
+      <y>190</y>
+      <w>300</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>bg=cyan
+template=I: Object, O: Object
+/Parser/
+--
+ 
+--
+/+parse(input: I): O/</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

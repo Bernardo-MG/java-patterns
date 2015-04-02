@@ -24,19 +24,21 @@
 /**
  * Provides interfaces and basic implementations for the parser pattern.
  * <p>
- * This pattern allows transforming one structure to another, both containing
- * the same or similar data. In the case any data is lost during the process
- * this is called a lossfull parsing, otherwise it is a lossless parsing.
+ * The parser transforms a data structure into another, both containing the same
+ * or similar data. In the case any data is lost during the process this is
+ * called a lossfull parsing, otherwise it is a lossless parsing.
+ * <h2>Interfaces</h2>
  * <p>
  * The interface {@link com.wandrell.pattern.parser.Parser Parser} offers a
- * generic way to implement any kind of parser, through a method that just
- * receives one object and returns another.
+ * single method, which receives an input type and returns an output type.
+ * <h2>Implementations</h2>
  * <p>
- * Implementations of this interface for processing XML files can be found on
- * the {@link com.wandrell.pattern.parser.xml xml} package.
+ * Default implementations exists for parsing XML files.
  * <p>
- * Parsers are meant to be used to transform data structures, usually as part of
- * transforming a file into a readable structure, but can be adapted to any use.
+ * The {@link com.wandrell.pattern.parser.xml.XMLFileParser XMLFileParser} takes
+ * a {@code Reader}, pointing to an XML file, and returns a JDOM 2
+ * {@code Document}. It is capable of applying validation, which may be from an
+ * XSD or DTD file.
  */
 package com.wandrell.pattern.parser;
 

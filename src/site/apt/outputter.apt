@@ -1,6 +1,6 @@
 Outputter
 
-	An outputter received data to be sent through an output I/O operation, so the
+	An outputter receives data to be sent through an output I/O operation, so the
 	actual implementation or API being used is unknown, favoring decoupling.
 	
 * Interface

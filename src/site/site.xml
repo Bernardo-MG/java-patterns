@@ -76,6 +76,12 @@
 						<columns>2</columns>
 					</sections>
 				</outputter>
+				<parser>
+					<sections>
+						<body />
+						<columns>2</columns>
+					</sections>
+				</parser>
 				<contribute>
 					<breadcrumbs>false</breadcrumbs>
 				</contribute>

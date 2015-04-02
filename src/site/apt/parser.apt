@@ -1,0 +1,74 @@
+Parser
+
+	A parser receives a data structure, and transforms it into another equivalent
+	data structure.
+	
+* Interface
+
+[./images/parser_class_tree.png] Parser interface
+
+	The {{{./apidocs/com/wandrell/pattern/parser/Parser.html}Parser}} only
+	contains one method, <parse>, which takes care of transforming an object
+	into another.
+	
+	The actual way this is achieved will depend on each implementation. Also,
+	it should be noted that if the parsing process is complex, it may be possible,
+	and desirable, to divide it into several chained parsers, each of them
+	receiving as input the output of the previous parser.
+
+* Implementations for XML files
+
+	The only default implementations for the parser patterns are for XML files.
+
+[./images/xml_parser_class_tree.png] XML parsers class hierarchy tree
+
+===
+
+** XML file parser
+
+	The basic parsers for XML files are
+	{{{./apidocs/com/wandrell/pattern/parser/xml/ValidatedXMLFileParser.html}ValidatedXMLFileParser}}
+	and
+	{{{./apidocs/com/wandrell/pattern/parser/xml/NotValidatedXMLFileParser.html}NotValidatedXMLFileParser}}.
+	The difference between them is that the first allows applying validation files,
+	while the second doesn't, but in exchange is faster.
+	
+	To avoid having to choose between them the
+	{{{./apidocs/com/wandrell/pattern/parser/xml/XMLFileParser.html}XMLFileParser}}
+	exists, which automatically switchs between one and the other depending on if
+	the validation data has been set or not.
+
+** Filtered parser
+
+	The
+	{{{./apidocs/com/wandrell/pattern/parser/xml/FilteredEntriesXMLFileParser.html}FilteredEntriesXMLFileParser}}
+	filters the nodes on an XML file, taking only those with an specific name,
+	and an specific set of boolean attributes.
+	
+	For example, having a file as follows:
+		
++---------------------
+<test>
+	<node attribute1="false" attribute2="false">value1</node>
+	<node attribute1="false" attribute2="true">value2</node>
+	<node attribute1="true" attribute2="true">value3</node>
+</test>
++---------------------
+
+	To get the node with the text "value2" the parser would have to be set up as:
+	
++---------------------
+FilteredEntriesXMLFileParser parser = new FilteredEntriesXMLFileParser("node");
+
+parser.addRequiredAttribute("attribute2");
+
+parser.addRejectedAttribute("attribute1");
+
+// The reader initialization is not shown
+Document doc = parser.parse(reader)
++---------------------
+
+	The resulting <Document> would have only the wanted node.
+	
+	Note that it is possible to apply a validation file to the parser, so it is
+	possible to apply default values to the attributes.
