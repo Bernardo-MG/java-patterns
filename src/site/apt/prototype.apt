@@ -19,7 +19,7 @@ Prototype
 	will be called by the method.
 	
 +---------------------
-public class TheClass {
+public class TheClass implements Prototype {
 
 	private String text = "";
 	
@@ -33,6 +33,7 @@ public class TheClass {
 		text = theClass.text;
 	}
 
+    @Override
 	public void createNewInstance() {
 		return new TheClass(this);
 	}
