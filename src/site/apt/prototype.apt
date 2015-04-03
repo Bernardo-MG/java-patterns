@@ -33,7 +33,7 @@ public class TheClass implements Prototype {
 		text = theClass.text;
 	}
 
-    @Override
+	@Override
 	public void createNewInstance() {
 		return new TheClass(this);
 	}

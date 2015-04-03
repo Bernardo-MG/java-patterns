@@ -1,32 +1,52 @@
 Design Patterns
 
-	Even though the concept already existed before, design patterns where made popular in the computing world when the Gang of Four published <Design Patterns: Elements of Reusable Object-Oriented Software> back on 1994.
+	Even though the concept already existed before, design patterns where made 
+	popular in the computing world when the Gang of Four published <Design Patterns:
+	Elements of Reusable Object-Oriented Software> back on 1994.
 
-	During the years these have evolved, with programmers adapting them to their needs or adding new ones to fit those spaces the existing ones couldn't cover, but the basic concept behind them is still the same: being a collection of good practices used to solve common problems.
+	During the years these have evolved, with programmers adapting them to their 
+	needs or adding new ones to fit those spaces the existing ones couldn't cover,
+	but the basic concept behind them is still the same: being a collection of 
+	good practices used to solve common problems.
 
 Why this library?
 
-	It came from a personal necessity. I found that a group of classes where reused along my Java projects, being all of them more or less common patterns which I was unable to substitute with third party libraries and, just so I could reuse and maintain them with ease, they were grouped into a single library.
+	It came from a personal necessity. I found myself reusing various similar
+	classes across projects, all of them patterns which would do better if they
+	were grouped on a single library.
 	
-	Not all the existing patterns are included on this project. There are great implementations of some of them around, and it would be a waste trying to reinvent the wheel.
+	That's one of the reasons not all the existing patterns are included on this
+	project, I've added just those I need.
 	
-	This project just aims to fill a gap I found on my own projects. If there is an openly available implementation of any pattern around, then it won't appear here.
+	But there are two other important reasons for it: first, there are some great 
+	third party libraries around which make it a waste trying to create classes 
+	for some common patterns, and also some of the more specific patterns have to 
+	be tailored for a specific problems, and so are not reusable.
+	
+	After all, this project just aims to fill a gap I found on my own projects,
+	and its development will be directed by this fact.
 
 ===
 
 The patterns in the library
 
-	These are not following any concrete book or specification, just a mix of what I needed and what they are usually expected to do.
+	The implementations are not following any concrete book or specification,
+	they just mix what I need with a general idea of what they are expected to do.
 
-		* The <<Command>>, and the <<CommandExecutor>>, help to encapsulate code inside an object.
+		* The <<Command>>, and the <<CommandExecutor>>, help to encapsulate code 
+		inside an object {{{./command.html}>>}}
 		
-		* The <<Outputter>> allows writing for files, or just sending structures, without worrying about the actual implementation.
+		* The <<Outputter>> allows writing for files, or just sending structures, 
+		without worrying about the actual implementation {{{./outputter.html}>>}}
 		
-		* The <<Parser>> transforms one object into another, keeping as much of the data intact as possible.
+		* The <<Parser>> transforms one object into another, keeping as much of the
+		data intact as possible {{{./parser.html}>>}}
 		
-		* The <<Prototype>> permits creating an identical copy of a base template.
+		* The <<Prototype>> permits creating an identical copy of a base template
+		{{{./prototype.html}>>}}
 		
-		* The <<Repository>> allows handling data persistence as if you were working on a collection.
+		* The <<Repository>> allows handling data persistence as if you were 
+		working on a collection {{{./repository.html}>>}}
 
 	For each of them, whenever possible, basic implementations have been included.
 
@@ -34,7 +54,8 @@ The patterns in the library
 
 About the code
 
-	The code is open source and freely accessible. Feel free to take it and adapt to your needs, and I would love to hear of any improvement or new version of the library.
+	The code is open source and freely accessible. If you want to do any kind of
+	modification just fork it from the repository.
 
 	* Java version: ${javaVersion}
 

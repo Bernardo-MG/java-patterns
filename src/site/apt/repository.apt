@@ -13,9 +13,10 @@ Repository
 	offers the usual CRUD operations, the only difference is the <getCollection>,
 	which returns the result of querying the entities inside the repository.
 	
-	The query is done through a Guava <Predicate>, used instead of Java 8 own
-	<Predicate> to keep backwards compatibility. All the entities which make
-	this predicate true will be returned.
+	The query is done through a Guava
+	{{{http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html}}Predicate},
+	used instead of Java 8 own <Predicate> to keep backwards compatibility. All the
+	entities which make this predicate true will be returned.
 	
 * Collection Repository
 

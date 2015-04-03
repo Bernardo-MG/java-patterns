@@ -8,11 +8,12 @@ Parser
 [./images/parser_class_tree.png] Parser interface
 
 	The {{{./apidocs/com/wandrell/pattern/parser/Parser.html}Parser}} only
-	contains one method, <parse>, which takes care of transforming an object
-	into another.
+	contains one method, <parse>, which takes and input object and generates
+	and output structure.
 	
-	The actual way this is achieved will depend on each implementation. Also,
-	it should be noted that if the parsing process is complex, it may be possible,
+	The actual way this is achieved will depend on each implementation.
+	
+	It should be noted that if the parsing process is complex, it may be possible,
 	and desirable, to divide it into several chained parsers, each of them
 	receiving as input the output of the previous parser.
 
@@ -37,6 +38,44 @@ Parser
 	{{{./apidocs/com/wandrell/pattern/parser/xml/XMLFileParser.html}XMLFileParser}}
 	exists, which automatically switchs between one and the other depending on if
 	the validation data has been set or not.
+	
+	No matter this, setting the validation data is simple.
+	
+	It can be set through the constructor:
+	
++---------------------
+public final void setValidation(final Reader reader) {
+	final Parser<Reader, Document> parser;
+	
+	parser = new ValidatedXMLFileParser(XMLValidationType.XSD, reader);
+}
++---------------------
+	
+	Or through the setter:
+	
++---------------------
+public final void setValidation(final Reader reader) {
+	final Parser<Reader, Document> parser;
+	
+	parser = new ValidatedXMLFileParser();
+	
+	parser.setValidation(XMLValidationType.XSD, reader);
+}
++---------------------
+
+	And removing it equally simple:
+	
++---------------------
+public final void removeValidation() {
+	final Parser<Reader, Document> parser;
+	
+	parser = new ValidatedXMLFileParser();
+	
+	parser.setValidation(XMLValidationType.NONE, null);
+}
++---------------------
+
+	Note that the reader can only be null if the validation is set to <NONE>.
 
 ** Filtered parser
 
@@ -58,17 +97,19 @@ Parser
 	To get the node with the text "value2" the parser would have to be set up as:
 	
 +---------------------
-FilteredEntriesXMLFileParser parser = new FilteredEntriesXMLFileParser("node");
-
-parser.addRequiredAttribute("attribute2");
-
-parser.addRejectedAttribute("attribute1");
-
-// The reader initialization is not shown
-Document doc = parser.parse(reader)
-+---------------------
-
-	The resulting <Document> would have only the wanted node.
+public final void parseFile(final Reader reader) {
+	final FilteredEntriesXMLFileParser parser;
+	final Document doc;
 	
-	Note that it is possible to apply a validation file to the parser, so it is
-	possible to apply default values to the attributes.
+	parser = new FilteredEntriesXMLFileParser("node");
+	
+	parser.addRequiredAttribute("attribute2");
+	
+	parser.addRejectedAttribute("attribute1");
+	
+	doc = parser.parse(reader);
+}
++---------------------
+	
+	Note that it is possible to apply a validation file to the parser, which can
+	be used to apply default values to the attributes.
