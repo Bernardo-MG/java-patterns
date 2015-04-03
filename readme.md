@@ -26,9 +26,7 @@ Documentation is also generated from the latest snapshot, taken from the 'develo
 The site sources come along the source code, so it is always possible to generate them through the Maven site command.
 
 ## Status
-The project is still under development, so expect a certain degree of volatility.
-
-Still, it is mostly stable, and classpath or name changes should be infrequent, but classes may be added or removed without warning.
+The current version is 0.1.0
 
 ### Issues management
 Issues are managed at the GitHub [project issues page][issues].
@@ -47,9 +45,6 @@ All other dependencies are handled through Maven, and noted in the included POM 
 ### Getting the code
 The code can be found at the [GitHub project page][scm].
 
-#### Repository
-Releases can be found in the [releases repository][releases-repo] on Bintray.
-
 ## Continuous integration
 The continuous integration information can be found at the [project CI page][ci] based on Travis CI.
 
@@ -61,7 +56,6 @@ The project is released under the [MIT License][license].
 [javadoc-develop]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
 [javadoc-release]: http://docs.wandrell.com/maven/java-patterns/apidocs
 [license]: http://www.opensource.org/licenses/mit-license.php
-[releases-repo]: http://dl.bintray.com/bernardo-mg/java-patterns
 [scm]: http://github.com/Bernardo-MG/Java-Patterns
 [site-develop]: http://docs.wandrell.com/development/maven/java-patterns
 [site-release]: http://docs.wandrell.com/maven/java-patterns
