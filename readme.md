@@ -45,13 +45,9 @@ All other dependencies are handled through Maven, and noted in the included POM 
 ### Getting the code
 The code can be found at the [GitHub project page][scm].
 
-## Continuous integration
-The continuous integration information can be found at the [project CI page][ci] based on Travis CI.
-
 ## License
 The project is released under the [MIT License][license].
 
-[ci]: https://travis-ci.org/Bernardo-MG/Java-Patterns
 [issues]: https://github.com/Bernardo-MG/Java-Patterns/issues
 [javadoc-develop]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
 [javadoc-release]: http://docs.wandrell.com/maven/java-patterns/apidocs
