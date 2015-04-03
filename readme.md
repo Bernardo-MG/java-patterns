@@ -23,7 +23,7 @@ Documentation is also generated from the latest snapshot, taken from the 'develo
 - The [the latest snapshot documentation page][site-develop].
 - The [the latest snapshot Javadoc site][javadoc-develop].
 
-The site sources come along the source code, so it is always possible to generate them through the Maven site command.
+The site sources come along the source code, so it is always possible to generate them using the Maven site command.
 
 ## Status
 The current version is 0.1.0
@@ -35,7 +35,7 @@ Issues are managed at the GitHub [project issues page][issues].
 The application is coded in Java, using Maven to handle the project's configuration and tests.
 
 ### Prerequisites
-Has been tested on the following Java versions:
+The project has been tested on the following Java versions:
 * JDK 7
 * JDK 8
 * OpenJDK 7
