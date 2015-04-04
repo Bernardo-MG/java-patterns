@@ -63,6 +63,12 @@
 					</sections>
 				</index>
 				<!-- Documentation pages -->
+				<setup>
+					<sections>
+						<body />
+						<columns>2</columns>
+					</sections>
+				</setup>
 				<command>
 					<sections>
 						<body />
@@ -127,6 +133,7 @@
 			<item name="License" href="./license.html" />
 		</menu>
 		<menu name="Documentation" inherit="bottom">
+			<item name="Setup" href="./setup.html" />
 			<item name="Command" href="./command.html" />
 			<item name="Outputter" href="./outputter.html" />
 			<item name="Parser" href="./parser.html" />

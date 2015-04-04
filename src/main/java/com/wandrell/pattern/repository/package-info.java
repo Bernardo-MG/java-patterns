@@ -27,21 +27,29 @@
  * This pattern is similar to a DAO, as it allows accessing data through CRUD
  * operations, hiding the source of this data.
  * <p>
- * The main difference is the logic behind the data access. While the DAO
- * operates in a case by case way, returning a concrete object, the repository
- * works like a collection where queries can be made.
+ * It can be hard to find differences between a DAO and a repository, but the
+ * first is used as an interface between the application and a table on a
+ * database, while the second is a domain driven pattern, which may or not be
+ * linked to a database.
+ * <h2>Interfaces</h2>
  * <p>
  * The {@link com.wandrell.pattern.repository.Repository Repository} interface
  * achieves this through the
- * {@link com.wandrell.pattern.repository.Repository#getCollection
- * getCollection} method, which makes use of Guava's
- * {@link com.google.common.base.Predicate Predicate} interface to return a
- * specific subset of the repository's data.
+ * {@link com.wandrell.pattern.repository.Repository#getCollection(Object)
+ * getCollection} method, which through the use of a filter class will return a
+ * specific subset of the repository's entities.
+ * <p>
+ * How this works, and which class will be used depends on each implementation.
+ * <h2>Implementations</h2>
  * <p>
  * A basic implementation,
  * {@link com.wandrell.pattern.repository.CollectionRepository
  * CollectionRepository}, offers a simple and fast way of creating the simplest
  * possible repository.
+ * <p>
+ * It stores entities inside a {@code Collection}, and filters them through
+ * Guava classes, specifically it requires a {@code Predicate} which the
+ * entities to be returned should validate.
  */
 package com.wandrell.pattern.repository;
 

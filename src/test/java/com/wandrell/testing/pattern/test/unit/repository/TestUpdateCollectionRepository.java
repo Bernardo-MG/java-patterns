@@ -54,7 +54,7 @@ public final class TestUpdateCollectionRepository {
     /**
      * The repository being tested.
      */
-    private Repository<TestClass> repository;
+    private Repository<TestClass, Predicate<TestClass>> repository;
 
     /**
      * This is a test class for testing the {@code Repository} using a class

@@ -7,17 +7,18 @@
       <x>240</x>
       <y>70</y>
       <w>400</w>
-      <h>140</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>bg=cyan
-template=V: Object
+template=V: Object, F: Object
 /Repository/
 --
  
 --
 /+add(entity: V)/
-/+getCollection(predicate: Predicate&lt;V&gt;): Collection&lt;V&gt;/
-/+removed(entity: V)/
+/+getCollection(filter: F): Collection&lt;V&gt;/
+/+getEntity(filter: F): V/
+/+remove(entity: V)/
 /+update(entity: V)/</panel_attributes>
     <additional_attributes/>
   </element>
@@ -27,7 +28,7 @@ template=V: Object
       <x>240</x>
       <y>300</y>
       <w>400</w>
-      <h>140</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>bg=yellow
 template=V: Object
@@ -36,8 +37,9 @@ CollectionRepository
  
 --
 +add(entity: V)
-+getCollection(predicate: Predicate&lt;V&gt;): Collection&lt;V&gt;
-+removed(entity: V)
++getCollection(filter: Predicate&lt;V&gt;): Collection&lt;V&gt;
++getEntity(filter: Predicate&lt;V&gt;): V
++remove(entity: V)
 +update(entity: V)</panel_attributes>
     <additional_attributes/>
   </element>
@@ -45,11 +47,11 @@ CollectionRepository
     <id>Relation</id>
     <coordinates>
       <x>410</x>
-      <y>200</y>
+      <y>220</y>
       <w>30</w>
-      <h>130</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
 </diagram>
