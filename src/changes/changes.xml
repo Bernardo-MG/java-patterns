@@ -6,9 +6,17 @@
 		<author email="programming@wandrell.com">Bernardo Martínez Garrido</author>
 	</properties>
 	<body>
-		<release version="0.1" date="2015-04-03" description="First release">
+		<release version="0.1.0" date="2015-04-03" description="First release">
 			<action dev="bmg" type="update">
 				First release of the library.
+			</action>
+		</release>
+		<release version="0.2.0" date="2015-04-04" description="First release">
+			<action dev="bmg" type="update">
+				Changed the Repository so the filter being used can be chosen.
+			</action>
+			<action dev="bmg" type="fix">
+				Fixed errors on the documentation.
 			</action>
 		</release>
 	</body>
