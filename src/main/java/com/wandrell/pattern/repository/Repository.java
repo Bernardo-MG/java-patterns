@@ -35,18 +35,21 @@ import com.google.common.base.Predicate;
  * that data persists.
  * <p>
  * Most of the methods on this interface are very simple, but the one used for
- * reading, the {@link #getCollection getCollection} method, has a bit of
- * additional complexity due it's use of {@code Predicate}.
+ * reading, the {@link #getCollection(Object) getCollection} method, has a bit
+ * of additional complexity due it's requirement of a filter.
  * <p>
- * And still that one is too very straightforward, as that method will just
- * return all the entities which validate the received {@code Filter}.
+ * This method receives a class containing the required information to build a
+ * subset of entities, created from those in the repository. How this works, and
+ * which structure will be used as a filter, will depend on the implementation.
  * 
  * @author Bernardo Martínez Garrido
  * @param <V>
  *            the type stored on the repository
+ * @param <V>
+ *            the type being used to filter the entities
  * @see Predicate
  */
-public interface Repository<V> {
+public interface Repository<V, F> {
 
     /**
      * Adds an entity to the repository.
@@ -57,18 +60,20 @@ public interface Repository<V> {
     public void add(final V entity);
 
     /**
-     * Queries the entities in the repository and returns a collection of them.
+     * Queries the entities in the repository and returns a subset of them.
      * <p>
      * The collection is created filtering the stored data with the specified
-     * {@code Predicate}. All the entities validating this predicate will be
-     * returned.
+     * filter.
+     * <p>
+     * How this filter exactly work will depend on the implementation, it may be
+     * an structure containing information to build an SQL query, or may just be
+     * a predicate which the entities should validate.
      * 
-     * @param predicate
-     *            the {@code Predicate} which the returned entities should
-     *            validate
+     * @param filter
+     *            the filter which discriminates the entities to be returned
      * @return the filtered subset of entities
      */
-    public Collection<V> getCollection(final Predicate<V> predicate);
+    public Collection<V> getCollection(final F filter);
 
     /**
      * Removes an entity from the repository.

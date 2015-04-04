@@ -10,14 +10,14 @@
       <h>140</h>
     </coordinates>
     <panel_attributes>bg=cyan
-template=V: Object
+template=V: Object, F: Object
 /Repository/
 --
  
 --
 /+add(entity: V)/
-/+getCollection(predicate: Predicate&lt;V&gt;): Collection&lt;V&gt;/
-/+removed(entity: V)/
+/+getCollection(filter: F): Collection&lt;V&gt;/
+/+remove(entity: V)/
 /+update(entity: V)/</panel_attributes>
     <additional_attributes/>
   </element>
@@ -36,8 +36,8 @@ CollectionRepository
  
 --
 +add(entity: V)
-+getCollection(predicate: Predicate&lt;V&gt;): Collection&lt;V&gt;
-+removed(entity: V)
++getCollection(filter: Predicate&lt;V&gt;): Collection&lt;V&gt;
++remove(entity: V)
 +update(entity: V)</panel_attributes>
     <additional_attributes/>
   </element>

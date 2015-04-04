@@ -35,12 +35,17 @@ import com.google.common.base.Predicate;
  * <p>
  * This is meant to be the most basic form of {@code Repository}, used when
  * there is no need of anything fancy such as persistence.
+ * <p>
+ * The {@link #getCollection(Predicate) getCollection} method works through the
+ * use of a Guava {@code Predicate}. All the entities validating this predicate
+ * will be returned.
  * 
  * @author Bernardo Martínez Garrido
  * @param <V>
  *            the type stored on the repository
  */
-public final class CollectionRepository<V> implements Repository<V> {
+public final class CollectionRepository<V> implements
+        Repository<V, Predicate<V>> {
 
     /**
      * The entities stored in the repository.

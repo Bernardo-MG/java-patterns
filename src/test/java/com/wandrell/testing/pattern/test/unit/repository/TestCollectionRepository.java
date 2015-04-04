@@ -60,7 +60,7 @@ public final class TestCollectionRepository {
     /**
      * The repository being tested.
      */
-    private Repository<String> repository;
+    private Repository<String, Predicate<String>> repository;
 
     /**
      * Default constructor.
