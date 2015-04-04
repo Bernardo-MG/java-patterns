@@ -35,12 +35,17 @@ import com.google.common.base.Predicate;
  * <p>
  * This is meant to be the most basic form of {@code Repository}, used when
  * there is no need of anything fancy such as persistence.
+ * <p>
+ * The {@link #getCollection(Predicate) getCollection} method works through the
+ * use of a Guava {@code Predicate}. All the entities validating this predicate
+ * will be returned.
  * 
  * @author Bernardo Martínez Garrido
  * @param <V>
  *            the type stored on the repository
  */
-public final class CollectionRepository<V> implements Repository<V> {
+public final class CollectionRepository<V> implements
+        Repository<V, Predicate<V>> {
 
     /**
      * The entities stored in the repository.
@@ -48,9 +53,8 @@ public final class CollectionRepository<V> implements Repository<V> {
     private final Collection<V> data;
 
     /**
-     * Constructs a {@code CollectionRepository}.
-     * 
-     * Will use a {@code LinkedList} as the collection.
+     * Constructs a {@code CollectionRepository} using a {@code LinkedList} as
+     * the {@code Collection}.
      */
     public CollectionRepository() {
         this(new LinkedList<V>());
@@ -88,6 +92,22 @@ public final class CollectionRepository<V> implements Repository<V> {
         }
 
         return result;
+    }
+
+    @Override
+    public final V getEntity(final Predicate<V> filter) {
+        final Collection<V> entities;
+        final V entity;
+
+        entities = getCollection(filter);
+
+        if (entities.isEmpty()) {
+            entity = null;
+        } else {
+            entity = entities.iterator().next();
+        }
+
+        return entity;
     }
 
     @Override

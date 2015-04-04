@@ -6,7 +6,7 @@
 
 	<groupId>com.wandrell</groupId>
 	<artifactId>java-patterns</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Java Patterns</name>
@@ -43,13 +43,13 @@
 		<repository>
 			<uniqueVersion>false</uniqueVersion>
 			<id>wandrell-releases</id>
-			<name>Project Releases Repository</name>
+			<name>Releases Repository</name>
 			<url>https://api.bintray.com/maven/bernardo-mg/maven/java-patterns</url>
 		</repository>
 		<snapshotRepository>
 			<uniqueVersion>true</uniqueVersion>
 			<id>wandrell-snapshots</id>
-			<name>Project Snapshots Repository</name>
+			<name>Snapshots Repository</name>
 			<url>ftp://maven.wandrell.com</url>
 		</snapshotRepository>
 	</distributionManagement>

@@ -5,7 +5,7 @@ Repository
 	entity the repository works as if it were a collection of persistent
 	entities.
 	
-* Interface
+* Repository
 
 [./images/repository_class_tree.png] Repository interface
 
@@ -13,17 +13,38 @@ Repository
 	offers the usual CRUD operations, the only difference is the <getCollection>,
 	which returns the result of querying the entities inside the repository.
 	
-	The query is done through a Guava
-	{{{http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html}}Predicate},
-	used instead of Java 8 own <Predicate> to keep backwards compatibility. All the
-	entities which make this predicate true will be returned.
+	The <getEntity> method works the same way, just returning a single entity.
+	
+	Querying is done using any object which may be used to generate a subset of
+	entities, may it be a predicate they must validate, or an SQL query. The
+	exact object, and how it is used, will depend on the implementation.
+	
+** The Query filter
+
+[./images/query_class_tree.png] Query class tree
+
+	Accompanying the repositories there is the
+	{{{./apidocs/com/wandrell/pattern/repository/Query.html}Query}} interface.
+	
+	It is meant to be used on repositories which depend on a database, usually
+	an SQL database. Using this interface as a filter it is possible to give
+	the repository all the data to build a query, and then get the result from it.
+	
+	To ease it's use a basic implementation,
+	{{{./apidocs/com/wandrell/pattern/repository/DefaultQuery.html}DefaultQuery}},
+	is included.
 	
 * Collection Repository
 
-[./images/collection_repository_class_tree.png] Collection repository interface
+[./images/collection_repository_class_tree.png] Collection repository class tree
 
-	A basic implementation of the repository is offered, 
-	{{{./apidocs/com/wandrell/pattern/repository/CollectionRepository.html}CollectionRepository}}.
-	This serves as a stub to avoid using a persistence system, or for those cases 
-	where a complex	repository is not needed, as it will just use a <Collection>
-	to store all the entities.
+	A basic implementation of the repository, 
+	{{{./apidocs/com/wandrell/pattern/repository/CollectionRepository.html}CollectionRepository}},
+	is offered. This serves as a stub to avoid using a persistence system, or for
+	those cases where a complex	repository is not needed, as it will just use a 
+	<Collection> to store all the entities.
+	
+	This repository queries the entities through the use of a Guava
+	{{{http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html}Predicate}},
+	used instead of Java 8 own <Predicate> to keep backwards compatibility. All the
+	entities which make this predicate true will be returned.
