@@ -45,6 +45,7 @@ import com.wandrell.pattern.repository.Repository;
  * <li>Entities are updated correctly</li>
  * <li>Updating a non existing entity does not add it</li>
  * <li>The {@code getCollection} method filters the entities correctly</li>
+ * <li>The {@code getEntity} method filters the entities correctly</li>
  * <li>Modifying the {@code Collection} returned by {@code getCollection} does
  * not modify the repository's internal collection</li>
  * </ol>
@@ -172,6 +173,25 @@ public final class TestCollectionRepository {
             }
 
         }).size(), 3);
+    }
+
+    /**
+     * Test that the {@code getEntity} method filters the entities correctly.
+     */
+    @Test
+    public final void testGetEntity_Filter_Filters() {
+        final String entity; // Filtered entity
+
+        entity = repository.getEntity(new Predicate<String>() {
+
+            @Override
+            final public boolean apply(final String entity) {
+                return entity.equals("b");
+            }
+
+        });
+
+        Assert.assertEquals(entity, "b");
     }
 
     /**

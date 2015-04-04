@@ -53,9 +53,8 @@ public final class CollectionRepository<V> implements
     private final Collection<V> data;
 
     /**
-     * Constructs a {@code CollectionRepository}.
-     * 
-     * Will use a {@code LinkedList} as the collection.
+     * Constructs a {@code CollectionRepository} using a {@code LinkedList} as
+     * the {@code Collection}.
      */
     public CollectionRepository() {
         this(new LinkedList<V>());
@@ -93,6 +92,22 @@ public final class CollectionRepository<V> implements
         }
 
         return result;
+    }
+
+    @Override
+    public final V getEntity(final Predicate<V> filter) {
+        final Collection<V> entities;
+        final V entity;
+
+        entities = getCollection(filter);
+
+        if (entities.isEmpty()) {
+            entity = null;
+        } else {
+            entity = entities.iterator().next();
+        }
+
+        return entity;
     }
 
     @Override

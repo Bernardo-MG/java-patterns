@@ -76,6 +76,29 @@ public interface Repository<V, F> {
     public Collection<V> getCollection(final F filter);
 
     /**
+     * Queries the entities in the repository and returns only one.
+     * <p>
+     * The collection is created filtering the stored data with the specified
+     * filter.
+     * <p>
+     * How this filter exactly work will depend on the implementation, it may be
+     * an structure containing information to build an SQL query, or may just be
+     * a predicate which the entities should validate.
+     * <p>
+     * Unlike {@link #getCollection(Object) getCollection}, which returns all
+     * the entities chosen by the filter, this method will return only one of
+     * them, usually the first.
+     * <p>
+     * If no entity is found, then {@code null} will be returned.
+     * 
+     * @param filter
+     *            the filter which discriminates the entities to be returned
+     * @return a single entity found by the filter, or {@code null} is no entity
+     *         is found
+     */
+    public V getEntity(final F filter);
+
+    /**
      * Removes an entity from the repository.
      * 
      * @param entity

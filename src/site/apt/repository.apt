@@ -13,6 +13,8 @@ Repository
 	offers the usual CRUD operations, the only difference is the <getCollection>,
 	which returns the result of querying the entities inside the repository.
 	
+	The <getEntity> method works the same way, just returning a single entity.
+	
 	Querying is done using any object which may be used to generate a subset of
 	entities, may it be a predicate they must validate, or an SQL query. The
 	exact object, and how it is used, will depend on the implementation.
