@@ -45,7 +45,7 @@ import com.google.common.base.Predicate;
  *            the type stored on the repository
  */
 public final class CollectionRepository<V> implements
-        Repository<V, Predicate<V>> {
+        QueryableRepository<V, Predicate<V>> {
 
     /**
      * The entities stored in the repository.
@@ -78,6 +78,11 @@ public final class CollectionRepository<V> implements
     @Override
     public final void add(final V entity) {
         getData().add(entity);
+    }
+
+    @Override
+    public final Collection<V> getAll() {
+        return new LinkedList<V>(getData());
     }
 
     @Override

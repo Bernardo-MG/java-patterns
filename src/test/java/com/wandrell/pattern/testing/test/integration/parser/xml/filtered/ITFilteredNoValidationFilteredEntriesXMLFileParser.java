@@ -21,52 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.repository;
+package com.wandrell.pattern.testing.test.integration.parser.xml.filtered;
 
-import java.util.Collection;
+import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
+import com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser;
+import com.wandrell.pattern.testing.framework.conf.XMLConf;
+import com.wandrell.pattern.testing.framework.test.integration.parser.xml.AbstractITParseAbstractAttributesFilterXMLFileParser;
 
 /**
- * Interface for the repository pattern. Offers a way to apply CRUD operations
- * into a collection of instances taken from a hidden source.
- * <p>
- * This serves as a way to handle persistent data, without needing to know where
- * that data persists.
+ * Integration tests for {@link FilteredEntriesXMLFileParser} implementing
+ * {@code AbstractITParseAbstractAttributesFilterXMLFileParser} and no
+ * validation.
  * 
  * @author Bernardo Martínez Garrido
- * @param <V>
- *            the type stored on the repository
+ * @see FilteredEntriesXMLFileParser
  */
-public interface Repository<V> {
+public final class ITFilteredNoValidationFilteredEntriesXMLFileParser extends
+        AbstractITParseAbstractAttributesFilterXMLFileParser<Integer> {
 
     /**
-     * Adds an entity to the repository.
+     * Generates the parser to be tested.
      * 
-     * @param entity
-     *            the entity to add
+     * @return the parser to be tested
      */
-    public void add(final V entity);
+    private static final AbstractAttributesFilterXMLFileParser buildParser() {
+        final AbstractAttributesFilterXMLFileParser parser;
+
+        parser = new FilteredEntriesXMLFileParser(XMLConf.NODE_ROOT_FILTER);
+
+        return parser;
+    }
 
     /**
-     * Returns all the entities contained in the repository.
-     * 
-     * @return all the entities contained in the repository
+     * Default constructor.
      */
-    public Collection<V> getAll();
-
-    /**
-     * Removes an entity from the repository.
-     * 
-     * @param entity
-     *            the entity to remove
-     */
-    public void remove(final V entity);
-
-    /**
-     * Updates an entity on the repository.
-     * 
-     * @param entity
-     *            the entity to update.
-     */
-    public void update(final V entity);
+    public ITFilteredNoValidationFilteredEntriesXMLFileParser() {
+        super(buildParser(), XMLConf.FILTERED_NO_VALIDATION, 3, 1, 3, 1, 1, 9);
+    }
 
 }

@@ -21,52 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.repository;
-
-import java.util.Collection;
+package com.wandrell.pattern.testing.framework.conf;
 
 /**
- * Interface for the repository pattern. Offers a way to apply CRUD operations
- * into a collection of instances taken from a hidden source.
- * <p>
- * This serves as a way to handle persistent data, without needing to know where
- * that data persists.
+ * Configuration class storing info for DSV tests.
  * 
  * @author Bernardo Martínez Garrido
- * @param <V>
- *            the type stored on the repository
  */
-public interface Repository<V> {
+public final class DSVConf {
 
-    /**
-     * Adds an entity to the repository.
-     * 
-     * @param entity
-     *            the entity to add
-     */
-    public void add(final V entity);
+    public static final String COMMA_SEPARATED = "files/dsv/comma.dsv";
+    public static final String TAB_SEPARATED   = "files/dsv/tab.dsv";
 
-    /**
-     * Returns all the entities contained in the repository.
-     * 
-     * @return all the entities contained in the repository
-     */
-    public Collection<V> getAll();
-
-    /**
-     * Removes an entity from the repository.
-     * 
-     * @param entity
-     *            the entity to remove
-     */
-    public void remove(final V entity);
-
-    /**
-     * Updates an entity on the repository.
-     * 
-     * @param entity
-     *            the entity to update.
-     */
-    public void update(final V entity);
+    private DSVConf() {
+        super();
+    }
 
 }

@@ -26,6 +26,7 @@ package com.wandrell.pattern.repository;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -52,7 +53,17 @@ public final class DefaultQuery implements Query {
     private final String              queryStr;
 
     /**
-     * Constructs a {@code DefaultQuery} with the query's data.
+     * Constructs a {@code DefaultQuery} with no parameters.
+     * 
+     * @param query
+     *            the query string
+     */
+    public DefaultQuery(final String query) {
+        this(query, new LinkedHashMap<String, Object>());
+    }
+
+    /**
+     * Constructs a {@code DefaultQuery} with the specified query's data.
      * 
      * @param query
      *            the query string

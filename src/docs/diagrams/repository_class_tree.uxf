@@ -4,31 +4,28 @@
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>240</x>
-      <y>70</y>
+      <x>270</x>
+      <y>260</y>
       <w>400</w>
-      <h>160</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>bg=cyan
 template=V: Object, F: Object
-/Repository/
+/QueryableRepository/
 --
  
 --
-/+add(entity: V)/
 /+getCollection(filter: F): Collection&lt;V&gt;/
-/+getEntity(filter: F): V/
-/+remove(entity: V)/
-/+update(entity: V)/</panel_attributes>
+/+getEntity(filter: F): V/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.baselet.element.old.element.Class</type>
     <coordinates>
-      <x>240</x>
-      <y>300</y>
+      <x>270</x>
+      <y>420</y>
       <w>400</w>
-      <h>160</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>bg=yellow
 template=V: Object
@@ -37,6 +34,7 @@ CollectionRepository
  
 --
 +add(entity: V)
++getAll(): Collection&lt;V&gt;
 +getCollection(filter: Predicate&lt;V&gt;): Collection&lt;V&gt;
 +getEntity(filter: Predicate&lt;V&gt;): V
 +remove(entity: V)
@@ -46,12 +44,43 @@ CollectionRepository
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>220</y>
+      <x>440</x>
+      <y>360</y>
       <w>30</w>
-      <h>110</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>270</x>
+      <y>80</y>
+      <w>400</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>bg=cyan
+template=V: Object
+/Repository/
+--
+ 
+--
+/+add(entity: V)/
+/+getAll(): Collection&lt;V&gt;/
+/+remove(entity: V)/
+/+update(entity: V)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>210</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
 </diagram>

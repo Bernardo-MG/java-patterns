@@ -4,7 +4,7 @@
 
 	<test name="wandrell_pattern_integration">
 		<packages>
-			<package name="com.wandrell.testing.pattern.test.integration.*" />
+			<package name="com.wandrell.pattern.testing.test.integration.*" />
 		</packages>
 	</test>
 

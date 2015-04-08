@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2014 the original author or authors.
+ * Copyright (c) 2015 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,52 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.repository;
+package com.wandrell.pattern.testing.test.unit.parser.xml.exception;
 
-import java.util.Collection;
+import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
+import com.wandrell.pattern.testing.framework.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
 
 /**
- * Interface for the repository pattern. Offers a way to apply CRUD operations
- * into a collection of instances taken from a hidden source.
- * <p>
- * This serves as a way to handle persistent data, without needing to know where
- * that data persists.
+ * Unit tests for {@link ValidatedXMLFileParser} implementing
+ * {@code AbstractUnitExceptionReadXMLInputParser}.
  * 
  * @author Bernardo Martínez Garrido
- * @param <V>
- *            the type stored on the repository
+ * @see ValidatedXMLFileParser
  */
-public interface Repository<V> {
+public final class TestExceptionValidatedXMLFileParser extends
+        AbstractUnitExceptionParseXMLReaderParser<Integer> {
 
     /**
-     * Adds an entity to the repository.
-     * 
-     * @param entity
-     *            the entity to add
+     * Default constructor.
      */
-    public void add(final V entity);
-
-    /**
-     * Returns all the entities contained in the repository.
-     * 
-     * @return all the entities contained in the repository
-     */
-    public Collection<V> getAll();
-
-    /**
-     * Removes an entity from the repository.
-     * 
-     * @param entity
-     *            the entity to remove
-     */
-    public void remove(final V entity);
-
-    /**
-     * Updates an entity on the repository.
-     * 
-     * @param entity
-     *            the entity to update.
-     */
-    public void update(final V entity);
+    public TestExceptionValidatedXMLFileParser() {
+        super(new ValidatedXMLFileParser());
+    }
 
 }

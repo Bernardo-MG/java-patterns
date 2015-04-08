@@ -21,52 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.repository;
+package com.wandrell.pattern.testing.test.unit.parser.xml.exception;
 
-import java.util.Collection;
+import java.io.Reader;
+
+import org.jdom2.Document;
+
+import com.wandrell.pattern.conf.XMLValidationType;
+import com.wandrell.pattern.parser.Parser;
+import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
+import com.wandrell.pattern.testing.framework.conf.XMLConf;
+import com.wandrell.pattern.testing.framework.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
+import com.wandrell.pattern.testing.framework.util.ResourceUtils;
 
 /**
- * Interface for the repository pattern. Offers a way to apply CRUD operations
- * into a collection of instances taken from a hidden source.
- * <p>
- * This serves as a way to handle persistent data, without needing to know where
- * that data persists.
+ * Unit tests for {@link ValidatedXMLFileParser} implementing
+ * {@code AbstractUnitExceptionParseXMLReaderParser} and using DTD validation.
  * 
  * @author Bernardo Martínez Garrido
- * @param <V>
- *            the type stored on the repository
+ * @see ValidatedXMLFileParser
  */
-public interface Repository<V> {
+public final class TestExceptionDTDValidationValidatedXMLFileParser extends
+        AbstractUnitExceptionParseXMLReaderParser<Integer> {
 
     /**
-     * Adds an entity to the repository.
+     * Generates the parser to be tested.
      * 
-     * @param entity
-     *            the entity to add
+     * @return the parser to be tested
      */
-    public void add(final V entity);
+    private static final Parser<Reader, Document> buildParser() {
+        return new ValidatedXMLFileParser(XMLValidationType.DTD,
+                ResourceUtils.getClassPathReader(XMLConf.DTD_VALIDATION));
+    }
 
     /**
-     * Returns all the entities contained in the repository.
-     * 
-     * @return all the entities contained in the repository
+     * Default constructor.
      */
-    public Collection<V> getAll();
-
-    /**
-     * Removes an entity from the repository.
-     * 
-     * @param entity
-     *            the entity to remove
-     */
-    public void remove(final V entity);
-
-    /**
-     * Updates an entity on the repository.
-     * 
-     * @param entity
-     *            the entity to update.
-     */
-    public void update(final V entity);
+    public TestExceptionDTDValidationValidatedXMLFileParser() {
+        super(buildParser());
+    }
 
 }
