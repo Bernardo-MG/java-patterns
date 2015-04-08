@@ -8,16 +8,24 @@ Repository
 * Repository
 
 [./images/repository_class_tree.png] Repository interface
-
+	
 	The {{{./apidocs/com/wandrell/pattern/repository/Repository.html}Repository}}
-	offers the usual CRUD operations, the only difference is the <getCollection>,
-	which returns the result of querying the entities inside the repository.
+	is meant to hide the data access, so the code works only with domain model
+	classes. It offers basic CRUD operations, and implementations of it may extend
+	the interface and add methods as required.
 	
-	The <getEntity> method works the same way, just returning a single entity.
+	An extension of this basic interface, 
+	{{{./apidocs/com/wandrell/pattern/repository/QueryableRepository.html}QueryableRepository}}
+	allows executing queries on the entities.
+
+	The <getCollection> and <getEntity> methods take care of this. The first will
+	return a subset of the entities contained in the repository, while the second
+	will return a single one. 
 	
-	Querying is done using any object which may be used to generate a subset of
-	entities, may it be a predicate they must validate, or an SQL query. The
-	exact object, and how it is used, will depend on the implementation.
+	Any object can be used as a filter for the queries, but it is expected to be
+	able to work as such. A predicate which the entities to return must validate,
+	or an SQL query are examples of it, but the actual object, and how it is used,
+	will depend on the implementation.
 	
 ** The Query filter
 
