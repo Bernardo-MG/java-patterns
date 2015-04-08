@@ -41,10 +41,10 @@ import java.util.Collection;
  * @author Bernardo Martínez Garrido
  * @param <V>
  *            the type stored on the repository
- * @param <F>
+ * @param <Q>
  *            the type being used to filter the entities
  */
-public interface QueryableRepository<V, F> extends Repository<V> {
+public interface QueryableRepository<V, Q> extends Repository<V> {
 
     /**
      * Queries the entities in the repository and returns a subset of them.
@@ -56,11 +56,11 @@ public interface QueryableRepository<V, F> extends Repository<V> {
      * an structure containing information to build an SQL query, or may just be
      * a predicate which the entities should validate.
      * 
-     * @param filter
+     * @param query
      *            the filter which discriminates the entities to be returned
      * @return the filtered subset of entities
      */
-    public Collection<V> getCollection(final F filter);
+    public Collection<V> getCollection(final Q query);
 
     /**
      * Queries the entities in the repository and returns only one.
@@ -78,11 +78,11 @@ public interface QueryableRepository<V, F> extends Repository<V> {
      * <p>
      * If no entity is found, then {@code null} will be returned.
      * 
-     * @param filter
+     * @param query
      *            the filter which discriminates the entities to be returned
      * @return a single entity found by the filter, or {@code null} is no entity
      *         is found
      */
-    public V getEntity(final F filter);
+    public V getEntity(final Q query);
 
 }
