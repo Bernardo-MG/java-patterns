@@ -60,6 +60,13 @@ public interface Repository<V, F> {
     public void add(final V entity);
 
     /**
+     * Returns all the entities contained in the repository.
+     * 
+     * @return all the entities contained in the repository
+     */
+    public Collection<V> getAll();
+
+    /**
      * Queries the entities in the repository and returns a subset of them.
      * <p>
      * The collection is created filtering the stored data with the specified

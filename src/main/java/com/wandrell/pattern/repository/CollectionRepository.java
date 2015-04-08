@@ -81,6 +81,11 @@ public final class CollectionRepository<V> implements
     }
 
     @Override
+    public final Collection<V> getAll() {
+        return new LinkedList<V>(getData());
+    }
+
+    @Override
     public final Collection<V> getCollection(final Predicate<V> filter) {
         final Collection<V> result;
 
