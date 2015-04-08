@@ -33,6 +33,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.base.Predicate;
 import com.wandrell.pattern.repository.CollectionRepository;
+import com.wandrell.pattern.repository.QueryableRepository;
 import com.wandrell.pattern.repository.Repository;
 
 /**
@@ -46,6 +47,8 @@ import com.wandrell.pattern.repository.Repository;
  * <li>Updating a non existing entity does not add it</li>
  * <li>The {@code getCollection} method filters the entities correctly</li>
  * <li>The {@code getEntity} method filters the entities correctly</li>
+ * <li>Modifying the {@code Collection} returned by {@code getAll} does not
+ * modify the repository's internal collection</li>
  * <li>Modifying the {@code Collection} returned by {@code getCollection} does
  * not modify the repository's internal collection</li>
  * </ol>
@@ -61,7 +64,7 @@ public final class TestCollectionRepository {
     /**
      * The repository being tested.
      */
-    private Repository<String, Predicate<String>> repository;
+    private QueryableRepository<String, Predicate<String>> repository;
 
     /**
      * Default constructor.
@@ -121,6 +124,22 @@ public final class TestCollectionRepository {
 
         Assert.assertEquals(entities.size(), 4);
         Assert.assertTrue(entities.contains("d"));
+    }
+
+    /**
+     * Tests that modifying the {@code Collection} returned by {@code getAll}
+     * does not modify the repository's internal collection.
+     */
+    @Test
+    public final void testGetAll_Remove_OriginalNotChanges() {
+        final Collection<String> entities; // Filtered entities
+
+        entities = repository.getAll();
+
+        entities.clear();
+
+        Assert.assertEquals(entities.size(), 0);
+        Assert.assertEquals(repository.getAll().size(), 3);
     }
 
     /**

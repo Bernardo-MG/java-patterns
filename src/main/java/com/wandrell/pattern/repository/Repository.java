@@ -25,31 +25,18 @@ package com.wandrell.pattern.repository;
 
 import java.util.Collection;
 
-import com.google.common.base.Predicate;
-
 /**
  * Interface for the repository pattern. Offers a way to apply CRUD operations
  * into a collection of instances taken from a hidden source.
  * <p>
  * This serves as a way to handle persistent data, without needing to know where
  * that data persists.
- * <p>
- * Most of the methods on this interface are very simple, but the one used for
- * reading, the {@link #getCollection(Object) getCollection} method, has a bit
- * of additional complexity due it's requirement of a filter.
- * <p>
- * This method receives a class containing the required information to build a
- * subset of entities, created from those in the repository. How this works, and
- * which structure will be used as a filter, will depend on the implementation.
  * 
  * @author Bernardo Martínez Garrido
  * @param <V>
  *            the type stored on the repository
- * @param <V>
- *            the type being used to filter the entities
- * @see Predicate
  */
-public interface Repository<V, F> {
+public interface Repository<V> {
 
     /**
      * Adds an entity to the repository.
@@ -60,43 +47,11 @@ public interface Repository<V, F> {
     public void add(final V entity);
 
     /**
-     * Queries the entities in the repository and returns a subset of them.
-     * <p>
-     * The collection is created filtering the stored data with the specified
-     * filter.
-     * <p>
-     * How this filter exactly work will depend on the implementation, it may be
-     * an structure containing information to build an SQL query, or may just be
-     * a predicate which the entities should validate.
+     * Returns all the entities contained in the repository.
      * 
-     * @param filter
-     *            the filter which discriminates the entities to be returned
-     * @return the filtered subset of entities
+     * @return all the entities contained in the repository
      */
-    public Collection<V> getCollection(final F filter);
-
-    /**
-     * Queries the entities in the repository and returns only one.
-     * <p>
-     * The collection is created filtering the stored data with the specified
-     * filter.
-     * <p>
-     * How this filter exactly work will depend on the implementation, it may be
-     * an structure containing information to build an SQL query, or may just be
-     * a predicate which the entities should validate.
-     * <p>
-     * Unlike {@link #getCollection(Object) getCollection}, which returns all
-     * the entities chosen by the filter, this method will return only one of
-     * them, usually the first.
-     * <p>
-     * If no entity is found, then {@code null} will be returned.
-     * 
-     * @param filter
-     *            the filter which discriminates the entities to be returned
-     * @return a single entity found by the filter, or {@code null} is no entity
-     *         is found
-     */
-    public V getEntity(final F filter);
+    public Collection<V> getAll();
 
     /**
      * Removes an entity from the repository.

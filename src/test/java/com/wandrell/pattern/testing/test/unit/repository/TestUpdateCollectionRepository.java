@@ -35,6 +35,7 @@ import org.testng.annotations.Test;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Predicate;
 import com.wandrell.pattern.repository.CollectionRepository;
+import com.wandrell.pattern.repository.QueryableRepository;
 import com.wandrell.pattern.repository.Repository;
 
 /**
@@ -54,7 +55,7 @@ public final class TestUpdateCollectionRepository {
     /**
      * The repository being tested.
      */
-    private Repository<TestClass, Predicate<TestClass>> repository;
+    private QueryableRepository<TestClass, Predicate<TestClass>> repository;
 
     /**
      * This is a test class for testing the {@code Repository} using a class
