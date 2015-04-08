@@ -45,7 +45,7 @@ import com.google.common.base.Predicate;
  *            the type stored on the repository
  */
 public final class CollectionRepository<V> implements
-        Repository<V, Predicate<V>> {
+        QueryableRepository<V, Predicate<V>> {
 
     /**
      * The entities stored in the repository.

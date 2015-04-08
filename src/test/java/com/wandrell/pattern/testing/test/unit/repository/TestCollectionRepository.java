@@ -33,6 +33,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.base.Predicate;
 import com.wandrell.pattern.repository.CollectionRepository;
+import com.wandrell.pattern.repository.QueryableRepository;
 import com.wandrell.pattern.repository.Repository;
 
 /**
@@ -63,7 +64,7 @@ public final class TestCollectionRepository {
     /**
      * The repository being tested.
      */
-    private Repository<String, Predicate<String>> repository;
+    private QueryableRepository<String, Predicate<String>> repository;
 
     /**
      * Default constructor.
