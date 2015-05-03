@@ -36,5 +36,10 @@
 				Fixed errors on the documentation.
 			</action>
 		</release>
+		<release version="0.5.0" date="2015-xx-xx" description="Various fixes">
+			<action dev="bmg" type="fix">
+				Fixed errors on the site.
+			</action>
+		</release>
 	</body>
 </document>
