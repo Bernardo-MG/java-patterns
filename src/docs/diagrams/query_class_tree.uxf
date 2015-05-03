@@ -10,7 +10,7 @@
       <h>90</h>
     </coordinates>
     <panel_attributes>bg=cyan
-/Query/
+/QueryData/
 --
 
 --
@@ -27,7 +27,7 @@
       <h>90</h>
     </coordinates>
     <panel_attributes>bg=yellow
-DefaultQuery
+DefaultQueryData
 --
 
 --

@@ -38,7 +38,7 @@ import java.util.Map;
  * @author Bernardo Martínez Garrido
  * @see com.wandrell.pattern.repository.Repository Repository
  */
-public interface Query {
+public interface QueryData {
 
     /**
      * The parameters to be applied to the query.
