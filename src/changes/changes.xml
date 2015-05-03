@@ -29,6 +29,9 @@
 			<action dev="bmg" type="update">
 				Changed the Query to QueryData to avoid name collisions.
 			</action>
+			<action dev="bmg" type="update">
+				Changed the QueryableRepository to FilteredRepository for clarity.
+			</action>
 			<action dev="bmg" type="fix">
 				Fixed errors on the documentation.
 			</action>

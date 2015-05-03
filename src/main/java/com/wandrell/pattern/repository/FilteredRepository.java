@@ -26,7 +26,8 @@ package com.wandrell.pattern.repository;
 import java.util.Collection;
 
 /**
- * Extension of {@code Repository} allowing querying it's contents.
+ * Extension of {@code Repository} allowing filtering it's contents to get a
+ * subset of them.
  * <p>
  * The methods added by this interface allow finding concrete sets of entities,
  * or a single concrete one, through the use of a filter.
@@ -41,10 +42,10 @@ import java.util.Collection;
  * @author Bernardo Martínez Garrido
  * @param <V>
  *            the type stored on the repository
- * @param <Q>
+ * @param <F>
  *            the type being used to filter the entities
  */
-public interface QueryableRepository<V, Q> extends Repository<V> {
+public interface FilteredRepository<V, F> extends Repository<V> {
 
     /**
      * Queries the entities in the repository and returns a subset of them.
@@ -56,11 +57,11 @@ public interface QueryableRepository<V, Q> extends Repository<V> {
      * an structure containing information to build an SQL query, or may just be
      * a predicate which the entities should validate.
      * 
-     * @param query
+     * @param filter
      *            the filter which discriminates the entities to be returned
      * @return the filtered subset of entities
      */
-    public Collection<V> getCollection(final Q query);
+    public Collection<V> getCollection(final F filter);
 
     /**
      * Queries the entities in the repository and returns only one.
@@ -78,11 +79,11 @@ public interface QueryableRepository<V, Q> extends Repository<V> {
      * <p>
      * If no entity is found, then {@code null} will be returned.
      * 
-     * @param query
+     * @param filter
      *            the filter which discriminates the entities to be returned
      * @return a single entity found by the filter, or {@code null} is no entity
      *         is found
      */
-    public V getEntity(final Q query);
+    public V getEntity(final F filter);
 
 }

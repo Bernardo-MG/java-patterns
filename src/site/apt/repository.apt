@@ -15,7 +15,7 @@ Repository
 	the interface and add methods as required.
 	
 	An extension of this basic interface, 
-	{{{./apidocs/com/wandrell/pattern/repository/QueryableRepository.html}QueryableRepository}}
+	{{{./apidocs/com/wandrell/pattern/repository/FilteredRepository.html}FilteredRepository}}
 	allows executing queries on the entities.
 
 	The <getCollection> and <getEntity> methods take care of this. The first will
