@@ -15,7 +15,7 @@ Repository
 	the interface and add methods as required.
 	
 	An extension of this basic interface, 
-	{{{./apidocs/com/wandrell/pattern/repository/QueryableRepository.html}QueryableRepository}}
+	{{{./apidocs/com/wandrell/pattern/repository/FilteredRepository.html}FilteredRepository}}
 	allows executing queries on the entities.
 
 	The <getCollection> and <getEntity> methods take care of this. The first will
@@ -32,14 +32,14 @@ Repository
 [./images/query_class_tree.png] Query class tree
 
 	Accompanying the repositories there is the
-	{{{./apidocs/com/wandrell/pattern/repository/Query.html}Query}} interface.
+	{{{./apidocs/com/wandrell/pattern/repository/QueryData.html}QueryData}} interface.
 	
 	It is meant to be used on repositories which depend on a database, usually
 	an SQL database. Using this interface as a filter it is possible to give
 	the repository all the data to build a query, and then get the result from it.
 	
 	To ease it's use a basic implementation,
-	{{{./apidocs/com/wandrell/pattern/repository/DefaultQuery.html}DefaultQuery}},
+	{{{./apidocs/com/wandrell/pattern/repository/DefaultQueryData.html}DefaultQueryData}},
 	is included.
 	
 * Collection Repository

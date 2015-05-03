@@ -25,5 +25,16 @@
 				Fixed errors on the documentation.
 			</action>
 		</release>
+		<release version="0.4.0" date="2015-05-03" description="Renamed classes">
+			<action dev="bmg" type="update">
+				Changed the Query to QueryData to avoid name collisions.
+			</action>
+			<action dev="bmg" type="update">
+				Changed the QueryableRepository to FilteredRepository for clarity.
+			</action>
+			<action dev="bmg" type="fix">
+				Fixed errors on the documentation.
+			</action>
+		</release>
 	</body>
 </document>

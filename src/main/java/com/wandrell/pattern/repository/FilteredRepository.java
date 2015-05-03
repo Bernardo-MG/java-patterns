@@ -26,7 +26,8 @@ package com.wandrell.pattern.repository;
 import java.util.Collection;
 
 /**
- * Extension of {@code Repository} allowing querying it's contents.
+ * Extension of {@code Repository} allowing filtering it's contents to get a
+ * subset of them.
  * <p>
  * The methods added by this interface allow finding concrete sets of entities,
  * or a single concrete one, through the use of a filter.
@@ -44,7 +45,7 @@ import java.util.Collection;
  * @param <F>
  *            the type being used to filter the entities
  */
-public interface QueryableRepository<V, F> extends Repository<V> {
+public interface FilteredRepository<V, F> extends Repository<V> {
 
     /**
      * Queries the entities in the repository and returns a subset of them.

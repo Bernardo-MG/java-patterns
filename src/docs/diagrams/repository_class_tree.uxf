@@ -11,7 +11,7 @@
     </coordinates>
     <panel_attributes>bg=cyan
 template=V: Object, F: Object
-/QueryableRepository/
+/FilteredRepository/
 --
  
 --

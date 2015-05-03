@@ -30,14 +30,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Default implementation of {@link Query}.
+ * Default implementation of {@link QueryData}.
  * <p>
  * This is an immutable class, which will just store the data to be used in a
  * query, not allowing it to be edited.
  * 
  * @author Bernardo Martínez Garrido
  */
-public final class DefaultQuery implements Query {
+public final class DefaultQueryData implements QueryData {
 
     /**
      * Parameters for the query.
@@ -58,7 +58,7 @@ public final class DefaultQuery implements Query {
      * @param query
      *            the query string
      */
-    public DefaultQuery(final String query) {
+    public DefaultQueryData(final String query) {
         this(query, new LinkedHashMap<String, Object>());
     }
 
@@ -70,7 +70,8 @@ public final class DefaultQuery implements Query {
      * @param parameters
      *            the query's parameters
      */
-    public DefaultQuery(final String query, final Map<String, Object> parameters) {
+    public DefaultQueryData(final String query,
+            final Map<String, Object> parameters) {
         super();
 
         checkNotNull(query, "Received a null pointer as query");
