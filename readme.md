@@ -26,7 +26,7 @@ Documentation is also generated from the latest snapshot, taken from the 'develo
 The site sources come along the source code, so it is always possible to generate them using the Maven site command.
 
 ## Status
-The current version is 0.3.0
+The current version is mostly stable. Still, changes to the classpath may happen.
 
 ### Issues management
 Issues are managed at the GitHub [project issues page][issues].
