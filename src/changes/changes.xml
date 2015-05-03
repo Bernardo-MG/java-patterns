@@ -25,7 +25,7 @@
 				Fixed errors on the documentation.
 			</action>
 		</release>
-		<release version="0.4.0" date="2015-05-03" description="Small fixes">
+		<release version="0.4.0" date="2015-05-03" description="Renamed classes">
 			<action dev="bmg" type="update">
 				Changed the Query to QueryData to avoid name collisions.
 			</action>
