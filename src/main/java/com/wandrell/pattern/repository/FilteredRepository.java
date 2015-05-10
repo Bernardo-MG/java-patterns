@@ -26,8 +26,8 @@ package com.wandrell.pattern.repository;
 import java.util.Collection;
 
 /**
- * Extension of {@code Repository} allowing filtering it's contents to get a
- * subset of them.
+ * Extension of {@link com.wandrell.pattern.repository.Repository Repository}
+ * allowing filtering it's contents to get a subset of them.
  * <p>
  * The methods added by this interface allow finding concrete sets of entities,
  * or a single concrete one, through the use of a filter.

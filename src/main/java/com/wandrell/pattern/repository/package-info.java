@@ -33,13 +33,23 @@
  * linked to a database.
  * <h2>Interfaces</h2>
  * <p>
- * The {@link com.wandrell.pattern.repository.Repository Repository} interface
- * achieves this through the
- * {@link com.wandrell.pattern.repository.Repository#getCollection(Object)
- * getCollection} method, which through the use of a filter class will return a
- * specific subset of the repository's entities.
+ * The {@link com.wandrell.pattern.repository.Repository Repository} offers the
+ * most basic implementation of this pattern, using the general CRUD operations.
  * <p>
- * How this works, and which class will be used depends on each implementation.
+ * But the {@link com.wandrell.pattern.repository.FilteredRepository
+ * FilteredRepository} additionally allows acquiring just a subset of data from
+ * the repository, with the use of the
+ * {@link com.wandrell.pattern.repository.FilteredRepository#getCollection(Object)
+ * getCollection} and the
+ * {@link com.wandrell.pattern.repository.FilteredRepository#getEntity(Object)
+ * getEntity} methods. Both of them require a filter class, the difference being
+ * that {@code getCollection} returns a collection of entities, while
+ * {@code getEntity} returns just a single entity.
+ * <p>
+ * Each implementation will take care of which type of object will it use for
+ * filtering, and how it will apply such filter. But an example is the
+ * {@link com.wandrell.pattern.repository.QueryData QueryData} interface, which
+ * stores data for generating queries similar to the SQL ones.
  * <h2>Implementations</h2>
  * <p>
  * A basic implementation,
@@ -48,8 +58,9 @@
  * possible repository.
  * <p>
  * It stores entities inside a {@code Collection}, and filters them through
- * Guava classes, specifically it requires a {@code Predicate} which the
- * entities to be returned should validate.
+ * Guava classes, specifically it requires a <a href=
+ * "http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html"
+ * >Predicate</a> which the entities to be returned should validate.
  */
 package com.wandrell.pattern.repository;
 

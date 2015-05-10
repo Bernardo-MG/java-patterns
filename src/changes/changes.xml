@@ -40,6 +40,9 @@
 			<action dev="bmg" type="fix">
 				Fixed errors on the site.
 			</action>
+			<action dev="bmg" type="fix">
+				Corrected Javadocs.
+			</action>
 		</release>
 	</body>
 </document>
