@@ -52,7 +52,7 @@
  * stores data for generating queries similar to the SQL ones.
  * <h2>Implementations</h2>
  * <p>
- * A basic implementation,
+ * A basic implementation of the {@code FilteredRepository},
  * {@link com.wandrell.pattern.repository.CollectionRepository
  * CollectionRepository}, offers a simple and fast way of creating the simplest
  * possible repository.
@@ -61,6 +61,10 @@
  * Guava classes, specifically it requires a <a href=
  * "http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html"
  * >Predicate</a> which the entities to be returned should validate.
+ * <p>
+ * Additionally, there is a default implementation of {@code QueryData},
+ * {@link com.wandrell.pattern.repository.DefaultQueryData DefaultQueryData},
+ * which just serves to ease using said interface.
  */
 package com.wandrell.pattern.repository;
 
