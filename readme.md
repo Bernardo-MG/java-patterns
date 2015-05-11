@@ -25,12 +25,6 @@ Documentation is also generated from the latest snapshot, taken from the 'develo
 
 The site sources come along the source code, so it is always possible to generate them using the Maven site command.
 
-## Status
-The current version is 0.3.0
-
-### Issues management
-Issues are managed at the GitHub [project issues page][issues].
-
 ## Building the code
 The application is coded in Java, using Maven to handle the project's configuration and tests.
 
@@ -42,8 +36,21 @@ The project has been tested on the following Java versions:
 
 All other dependencies are handled through Maven, and noted in the included POM file.
 
+## Collaborate
+
+The project is still under ongoing development, and any help will be well received.
+
+There are two ways to help: reporting errors and asking for extensions through the issues management, or forking the repository and extending the project.
+
+### Issues management
+Issues are managed at the GitHub [project issues page][issues].
+
+Everybody is allowed to report bugs or ask for features.
+
 ### Getting the code
 The code can be found at the [GitHub project page][scm].
+
+Feel free to fork it, and share the changes.
 
 ## License
 The project is released under the [MIT License][license].
