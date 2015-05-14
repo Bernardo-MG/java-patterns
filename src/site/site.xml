@@ -131,7 +131,7 @@
 			<item name="Changes Log" href="./changes-report.html" />
 		</menu>
 		<menu name="Acquire" inherit="top">
-			<item name="Download" href="https://bintray.com/bernardo-mg/maven/java-patterns/view" />
+			<item name="Download" href="${site.download}" />
 			<item name="GitHub" href="${scm.url}" />
 			<item name="License" href="./license.html" />
 		</menu>
