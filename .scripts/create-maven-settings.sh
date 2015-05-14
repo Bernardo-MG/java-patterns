@@ -12,11 +12,11 @@
       echo "<username>\${env.REPO_RELEASES_USER}</username>";
       echo "<password>\${env.REPO_RELEASES_PASSWORD}</password>";
    echo "</server>";
-   # Snapshots FTP
+   # DEVELOP FTP
    echo "<server>";
-      echo "<id>\${env.REPO_SNAPSHOTS_ID}</id>";
-      echo "<username>\${env.REPO_SNAPSHOTS_USER}</username>";
-      echo "<password>\${env.REPO_SNAPSHOTS_PASSWORD}</password>";
+      echo "<id>\${env.REPO_DEVELOP_ID}</id>";
+      echo "<username>\${env.REPO_DEVELOP_USER}</username>";
+      echo "<password>\${env.REPO_DEVELOP_PASSWORD}</password>";
    echo "</server>";
    # Site FTP
    echo "<server>";
