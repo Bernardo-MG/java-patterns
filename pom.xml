@@ -115,13 +115,11 @@
 		<guava.version>18.0</guava.version>
 		<jaxen.version>1.1.6</jaxen.version>
 		<jdom.version>2.0.5</jdom.version>
-		<log4j.version>1.2.17</log4j.version>
 		<mockito.version>1.9.5</mockito.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<snakeyaml.version>1.14</snakeyaml.version>
 		<testng.version>6.8.8</testng.version>
 		<xmlunit.version>1.5</xmlunit.version>
-		<woodstox.version>4.4.1</woodstox.version>
 		<!-- Plugins versions -->
 		<plugin.checkstyle.version>2.13</plugin.checkstyle.version>
 		<plugin.compiler.version>3.2</plugin.compiler.version>
@@ -182,13 +180,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<!-- Log4J -->
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<!-- Mockito -->
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
@@ -206,6 +197,7 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<!-- SnakeYAML -->
@@ -220,19 +212,6 @@
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<!-- Woodstox core -->
-			<groupId>org.codehaus.woodstox</groupId>
-			<artifactId>woodstox-core-asl</artifactId>
-			<version>${woodstox.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.xml.stream</groupId>
-					<artifactId>stax-api</artifactId>
-				</exclusion>
-			</exclusions>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<!-- XMLUnit -->

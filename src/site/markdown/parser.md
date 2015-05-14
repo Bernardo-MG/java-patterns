@@ -96,7 +96,35 @@ public final void parseFile(final Reader reader) {
 ```
 	
 Note that it is possible to apply a validation file to the parser, which can be used to apply default values to the attributes.
-	
+
+---
+
+## Dependencies to third party libraries
+
+To reduce the size of this library, the third party dependencies required by concrete parsers are using the 'provided' scope set on Maven. This means, that to use certain parsers there are some third party libraries which must be added to the project.
+
+First, all the XML parsers require JDOM2, which uses the following dependency:
+
+```
+<dependency>
+	<!-- JDom 2 -->
+	<groupId>org.jdom</groupId>
+	<artifactId>jdom2</artifactId>
+	<version>${jdom.version}</version>
+</dependency>
+```
+
+All the filtered XML parsers require Jaxen, which uses the following dependency:
+
+```
+<dependency>
+	<!-- Jaxen -->
+	<groupId>jaxen</groupId>
+	<artifactId>jaxen</artifactId>
+	<version>${jaxen.version}</version>
+</dependency>
+```
+
 [parser]: ./apidocs/com/wandrell/pattern/parser/Parser.html
 [validated_xml_parser]: ./apidocs/com/wandrell/pattern/parser/xml/ValidatedXMLFileParser.html
 [not_validated_xml_parser]: ./apidocs/com/wandrell/pattern/parser/xml/NotValidatedXMLFileParser.html

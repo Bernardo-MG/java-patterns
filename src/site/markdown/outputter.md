@@ -56,6 +56,34 @@ public final void writeYAML(final Writer writer) {
 }
 ```
 
+---
+
+## Dependencies to third party libraries
+
+To reduce the size of this library, the third party dependencies required by concrete outputters are using the 'provided' scope set on Maven. This means, that to use certain outputters there are some third party libraries which must be added to the project.
+
+The XML outputter requires JDOM2, which uses the following dependency:
+
+```
+<dependency>
+	<!-- JDom 2 -->
+	<groupId>org.jdom</groupId>
+	<artifactId>jdom2</artifactId>
+	<version>${jdom.version}</version>
+</dependency>
+```
+
+The YAML outputter requires SnakeYAML, which uses the following dependency:
+
+```
+<dependency>
+	<!-- SnakeYAML -->
+	<groupId>org.yaml</groupId>
+	<artifactId>snakeyaml</artifactId>
+	<version>${snakeyaml.version}</version>
+</dependency>
+```
+
 [outputter]: ./apidocs/com/wandrell/pattern/outputter/Outputter.html
 [xml_outputter]: ./apidocs/com/wandrell/pattern/outputter/xml/XMLOutputter.html
 [yaml_outputter]: ./apidocs/com/wandrell/pattern/outputter/yaml/YAMLOutputter.html

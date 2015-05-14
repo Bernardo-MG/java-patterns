@@ -80,12 +80,14 @@
 					<sections>
 						<body />
 						<columns>2</columns>
+						<body />
 					</sections>
 				</outputter>
 				<parser>
 					<sections>
 						<body />
 						<columns>2</columns>
+						<body />
 					</sections>
 				</parser>
 				<contribute>
