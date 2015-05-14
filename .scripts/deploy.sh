@@ -8,9 +8,15 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_JDK_VERSION" == "$JDK_DEP
    echo "Deploying Java artifact to repository"
 
    mvn deploy --settings ~/settings.xml
+   
+   OUT=$?
 
+   exit $OUT
+   
 else
 
    echo "Java artifact won't be deployed to repository"
+   
+   exit 0
 
 fi
