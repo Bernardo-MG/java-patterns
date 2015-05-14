@@ -55,10 +55,10 @@ Feel free to fork it, and share the changes.
 ## License
 The project is released under the [MIT License][license].
 
-[issues]: https://github.com/Bernardo-MG/Java-Patterns/issues
+[issues]: https://github.com/Bernardo-MG/java-patterns/issues
 [javadoc-develop]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
 [javadoc-release]: http://docs.wandrell.com/maven/java-patterns/apidocs
 [license]: http://www.opensource.org/licenses/mit-license.php
-[scm]: http://github.com/Bernardo-MG/Java-Patterns
+[scm]: http://github.com/Bernardo-MG/java-patterns
 [site-develop]: http://docs.wandrell.com/development/maven/java-patterns
 [site-release]: http://docs.wandrell.com/maven/java-patterns

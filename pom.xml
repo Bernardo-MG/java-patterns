@@ -22,20 +22,20 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:https://github.com/Bernardo-MG/Java-Patterns.git</connection>
-		<developerConnection>scm:git:https://github.com/Bernardo-MG/Java-Patterns.git</developerConnection>
+		<connection>scm:git:https://github.com/Bernardo-MG/java-patterns.git</connection>
+		<developerConnection>scm:git:https://github.com/Bernardo-MG/java-patterns.git</developerConnection>
 		<tag>head</tag>
-		<url>http://github.com/Bernardo-MG/Java-Patterns</url>
+		<url>http://github.com/Bernardo-MG/java-patterns</url>
 	</scm>
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/Bernardo-MG/Java-Patterns/issues</url>
+		<url>https://github.com/Bernardo-MG/java-patterns/issues</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>Travis CI</system>
-		<url>https://travis-ci.org/Bernardo-MG/Java-Patterns</url>
+		<url>https://travis-ci.org/Bernardo-MG/java-patterns</url>
 		<notifiers />
 	</ciManagement>
 
