@@ -475,7 +475,6 @@
 							<report>dependency-management</report>
 							<report>plugins</report>
 							<report>plugin-management</report>
-							<report>help</report>
 						</reports>
 					</reportSet>
 				</reportSets>
