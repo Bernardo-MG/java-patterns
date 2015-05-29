@@ -5,6 +5,8 @@ Not all the design patterns have been included in this library. This is a compil
 
 For each of them an interface and, when possible, also a basic implementation are offered.
 
+## Features
+
 Currently the patterns included are as follows:
 - The **Command**, and the **CommandExecutor**, help to encapsulate code inside an object.
 - The **Outputter** allows writing for files, or just sending structures, without worrying about the actual implementation.
