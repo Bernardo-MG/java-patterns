@@ -50,7 +50,7 @@
 			<uniqueVersion>false</uniqueVersion>
 			<id>snapshots</id>
 			<name>Snapshots Repository</name>
-			<url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
+			<url>ftp://maven.wandrell.com</url>
 		</snapshotRepository>
 	</distributionManagement>
 
