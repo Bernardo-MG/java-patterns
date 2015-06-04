@@ -6,12 +6,12 @@
 
 	<groupId>com.wandrell</groupId>
 	<artifactId>java-patterns</artifactId>
-	<version>0.4.0</version>
+	<version>0.4.1</version>
 	<packaging>jar</packaging>
 
 	<name>Java Patterns</name>
 	<description>A collection of common design patterns for Java.</description>
-	<url />
+	<url>http://github.com/Bernardo-MG/java-patterns</url>
 
 	<licenses>
 		<license>
@@ -22,33 +22,33 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:https://github.com/Bernardo-MG/Java-Patterns.git</connection>
-		<developerConnection>scm:git:https://github.com/Bernardo-MG/Java-Patterns.git</developerConnection>
+		<connection>scm:git:https://github.com/Bernardo-MG/java-patterns.git</connection>
+		<developerConnection>scm:git:https://github.com/Bernardo-MG/java-patterns.git</developerConnection>
 		<tag>head</tag>
-		<url>http://github.com/Bernardo-MG/Java-Patterns</url>
+		<url>http://github.com/Bernardo-MG/java-patterns</url>
 	</scm>
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/Bernardo-MG/Java-Patterns/issues</url>
+		<url>https://github.com/Bernardo-MG/java-patterns/issues</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>Travis CI</system>
-		<url>https://travis-ci.org/Bernardo-MG/Java-Patterns</url>
+		<url>https://travis-ci.org/Bernardo-MG/java-patterns</url>
 		<notifiers />
 	</ciManagement>
 
 	<distributionManagement>
 		<repository>
 			<uniqueVersion>false</uniqueVersion>
-			<id>wandrell-releases</id>
+			<id>releases</id>
 			<name>Releases Repository</name>
 			<url>https://api.bintray.com/maven/bernardo-mg/maven/java-patterns</url>
 		</repository>
 		<snapshotRepository>
-			<uniqueVersion>true</uniqueVersion>
-			<id>wandrell-snapshots</id>
+			<uniqueVersion>false</uniqueVersion>
+			<id>snapshots</id>
 			<name>Snapshots Repository</name>
 			<url>ftp://maven.wandrell.com</url>
 		</snapshotRepository>
@@ -62,7 +62,7 @@
 			</activation>
 			<distributionManagement>
 				<site>
-					<id>wandrell-site</id>
+					<id>site</id>
 					<name>Project Documentation Site</name>
 					<url>ftp://docs.wandrell.com/java-patterns</url>
 				</site>
@@ -72,7 +72,7 @@
 			<id>development</id>
 			<distributionManagement>
 				<site>
-					<id>wandrell-site-development</id>
+					<id>site-development</id>
 					<name>Project Development Documentation Site</name>
 					<url>ftp://docs.wandrell.com/java-patterns</url>
 				</site>
@@ -82,7 +82,7 @@
 
 	<organization>
 		<name>Bernardo Martínez Garrido</name>
-		<url />
+		<url>https://github.com/Bernardo-MG</url>
 	</organization>
 
 	<developers>
@@ -90,9 +90,9 @@
 			<id>bmg</id>
 			<name>Bernardo Martínez Garrido</name>
 			<email>programming@wandrell.com</email>
-			<url />
-			<organization />
-			<organizationUrl />
+			<url>https://github.com/Bernardo-MG</url>
+			<organization>Bernardo Martínez Garrido</organization>
+			<organizationUrl>https://github.com/Bernardo-MG</organizationUrl>
 			<roles>
 				<role>Developer</role>
 			</roles>
@@ -115,13 +115,11 @@
 		<guava.version>18.0</guava.version>
 		<jaxen.version>1.1.6</jaxen.version>
 		<jdom.version>2.0.5</jdom.version>
-		<log4j.version>1.2.17</log4j.version>
 		<mockito.version>1.9.5</mockito.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<snakeyaml.version>1.14</snakeyaml.version>
 		<testng.version>6.8.8</testng.version>
 		<xmlunit.version>1.5</xmlunit.version>
-		<woodstox.version>4.4.1</woodstox.version>
 		<!-- Plugins versions -->
 		<plugin.checkstyle.version>2.13</plugin.checkstyle.version>
 		<plugin.compiler.version>3.2</plugin.compiler.version>
@@ -146,6 +144,7 @@
 		<extension.wagon.version>2.8</extension.wagon.version>
 		<!-- Maven Site -->
 		<site.skin.version>1.1.1</site.skin.version>
+		<site.download>https://bintray.com/bernardo-mg/maven/java-patterns/view</site.download>
 		<javaVersion>JDK 7, JDK 8 and OpenJDK 7</javaVersion>
 		<scmName>GitHub</scmName>
 		<scmURL>${project.scm.url}</scmURL>
@@ -182,13 +181,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<!-- Log4J -->
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<!-- Mockito -->
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
@@ -206,6 +198,7 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<!-- SnakeYAML -->
@@ -220,19 +213,6 @@
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<!-- Woodstox core -->
-			<groupId>org.codehaus.woodstox</groupId>
-			<artifactId>woodstox-core-asl</artifactId>
-			<version>${woodstox.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.xml.stream</groupId>
-					<artifactId>stax-api</artifactId>
-				</exclusion>
-			</exclusions>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<!-- XMLUnit -->
@@ -495,7 +475,6 @@
 							<report>dependency-management</report>
 							<report>plugins</report>
 							<report>plugin-management</report>
-							<report>help</report>
 						</reports>
 					</reportSet>
 				</reportSets>

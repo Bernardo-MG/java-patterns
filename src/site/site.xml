@@ -63,12 +63,12 @@
 					</sections>
 				</index>
 				<!-- Documentation pages -->
-				<setup>
+				<usage>
 					<sections>
 						<body />
 						<columns>2</columns>
 					</sections>
-				</setup>
+				</usage>
 				<command>
 					<sections>
 						<body />
@@ -80,12 +80,14 @@
 					<sections>
 						<body />
 						<columns>2</columns>
+						<body />
 					</sections>
 				</outputter>
 				<parser>
 					<sections>
 						<body />
 						<columns>2</columns>
+						<body />
 					</sections>
 				</parser>
 				<contribute>
@@ -128,12 +130,13 @@
 			<item name="GitHub project" href="${scm.url}" />
 			<item name="Changes Log" href="./changes-report.html" />
 		</menu>
-		<menu name="Download" inherit="top">
-			<item name="Download" href="./usage.html" />
+		<menu name="Acquire" inherit="top">
+			<item name="Download" href="${site.download}" />
+			<item name="GitHub" href="${scm.url}" />
 			<item name="License" href="./license.html" />
 		</menu>
 		<menu name="Documentation" inherit="bottom">
-			<item name="Setup" href="./setup.html" />
+			<item name="Usage" href="./usage.html" />
 			<item name="Command" href="./command.html" />
 			<item name="Outputter" href="./outputter.html" />
 			<item name="Parser" href="./parser.html" />

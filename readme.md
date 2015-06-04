@@ -5,6 +5,8 @@ Not all the design patterns have been included in this library. This is a compil
 
 For each of them an interface and, when possible, also a basic implementation are offered.
 
+## Features
+
 Currently the patterns included are as follows:
 - The **Command**, and the **CommandExecutor**, help to encapsulate code inside an object.
 - The **Outputter** allows writing for files, or just sending structures, without worrying about the actual implementation.
@@ -36,6 +38,14 @@ The project has been tested on the following Java versions:
 
 All other dependencies are handled through Maven, and noted in the included POM file.
 
+### Installing
+
+Thanks to Maven, the project is easy to install, by just using the following command:
+
+```mvn install```
+
+But the recommended way to install the project is by using the code repositories, where the releases and snapshots are stored. The way to set this is detailed on the documentation page.
+
 ## Collaborate
 
 The project is still under ongoing development, and any help will be well received.
@@ -48,17 +58,17 @@ Issues are managed at the GitHub [project issues page][issues].
 Everybody is allowed to report bugs or ask for features.
 
 ### Getting the code
-The code can be found at the [GitHub project page][scm].
+The latest version of the code can be found at the [GitHub project page][scm].
 
 Feel free to fork it, and share the changes.
 
 ## License
 The project is released under the [MIT License][license].
 
-[issues]: https://github.com/Bernardo-MG/Java-Patterns/issues
+[issues]: https://github.com/Bernardo-MG/java-patterns/issues
 [javadoc-develop]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
 [javadoc-release]: http://docs.wandrell.com/maven/java-patterns/apidocs
 [license]: http://www.opensource.org/licenses/mit-license.php
-[scm]: http://github.com/Bernardo-MG/Java-Patterns
+[scm]: http://github.com/Bernardo-MG/java-patterns
 [site-develop]: http://docs.wandrell.com/development/maven/java-patterns
 [site-release]: http://docs.wandrell.com/maven/java-patterns

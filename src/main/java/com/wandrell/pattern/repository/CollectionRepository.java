@@ -31,14 +31,18 @@ import java.util.LinkedList;
 import com.google.common.base.Predicate;
 
 /**
- * Collection-based implementation of {@code FilteredRepository}.
+ * Collection-based implementation of
+ * {@link com.wandrell.pattern.repository.FilteredRepository FilteredRepository}
+ * .
  * <p>
  * This is meant to be the most basic form of {@code Repository}, used when
  * there is no need of anything fancy such as persistence.
  * <p>
  * The filters required by the {@code FilteredRepository} interfaces are
- * instances of the Guava {@code Predicate} class. All the entities validating
- * the predicate being used as filter will be returned.
+ * instances of the Guava <a href=
+ * "http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html"
+ * >Predicate</a> class. All the entities validating the predicate being used as
+ * filter will be returned.
  * 
  * @author Bernardo Martínez Garrido
  * @param <V>

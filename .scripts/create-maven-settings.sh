@@ -8,27 +8,27 @@
    echo "<servers>";
    # Releases FTP
    echo "<server>";
-      echo "<id>\${env.FTP_RELEASES_ID}</id>";
-      echo "<username>\${env.FTP_RELEASES_USER}</username>";
-      echo "<password>\${env.FTP_RELEASES_PASSWORD}</password>";
+      echo "<id>releases</id>";
+      echo "<username>\${env.REPO_RELEASES_USER}</username>";
+      echo "<password>\${env.REPO_RELEASES_PASSWORD}</password>";
    echo "</server>";
-   # Snapshots FTP
+   # DEVELOP FTP
    echo "<server>";
-      echo "<id>\${env.FTP_SNAPSHOTS_ID}</id>";
-      echo "<username>\${env.FTP_SNAPSHOTS_USER}</username>";
-      echo "<password>\${env.FTP_SNAPSHOTS_PASSWORD}</password>";
+      echo "<id>snapshots</id>";
+      echo "<username>\${env.REPO_DEVELOP_USER}</username>";
+      echo "<password>\${env.REPO_DEVELOP_PASSWORD}</password>";
    echo "</server>";
    # Site FTP
    echo "<server>";
-      echo "<id>\${env.FTP_SITE_ID}</id>";
-      echo "<username>\${env.FTP_SITE_USER}</username>";
-      echo "<password>\${env.FTP_SITE_PASSWORD}</password>";
+      echo "<id>site</id>";
+      echo "<username>\${env.REPO_SITE_USER}</username>";
+      echo "<password>\${env.REPO_SITE_PASSWORD}</password>";
    echo "</server>";
    # Development site FTP
    echo "<server>";
-      echo "<id>\${env.FTP_SITE_DEVELOP_ID}</id>";
-      echo "<username>\${env.FTP_SITE_DEVELOP_USER}</username>";
-      echo "<password>\${env.FTP_SITE_DEVELOP_PASSWORD}</password>";
+      echo "<id>site-development</id>";
+      echo "<username>\${env.REPO_SITE_DEVELOP_USER}</username>";
+      echo "<password>\${env.REPO_SITE_DEVELOP_PASSWORD}</password>";
    echo "</server>";
    
    echo "</servers>";

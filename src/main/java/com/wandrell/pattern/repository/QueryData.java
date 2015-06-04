@@ -26,14 +26,16 @@ package com.wandrell.pattern.repository;
 import java.util.Map;
 
 /**
- * Interface for filtering a {@link com.wandrell.pattern.repository.Repository
- * Repository} when queries are required.
+ * Interface for filtering a
+ * {@link com.wandrell.pattern.repository.FilteredRepository FilteredRepository}
+ * when queries are required.
  * <p>
- * Usually this will be a {@code Repository} taking data from an SQL database.
+ * Usually this will be a {@code FilteredRepository} taking data from an SQL
+ * database.
  * <p>
  * The query and it's parameters are separated. That way the actual query to be
- * used will be built inside the {@code Repository}, using whatever API or
- * implementation it requires.
+ * used will be built inside the {@code FilteredRepository}, using whatever API
+ * or implementation it requires.
  * 
  * @author Bernardo Martínez Garrido
  * @see com.wandrell.pattern.repository.Repository Repository
