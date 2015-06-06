@@ -25,7 +25,7 @@
 		<connection>scm:git:https://github.com/Bernardo-MG/java-patterns.git</connection>
 		<developerConnection>scm:git:https://github.com/Bernardo-MG/java-patterns.git</developerConnection>
 		<tag>head</tag>
-		<url>http://github.com/Bernardo-MG/java-patterns</url>
+		<url>https://github.com/Bernardo-MG/java-patterns</url>
 	</scm>
 
 	<issueManagement>
