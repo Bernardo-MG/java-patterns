@@ -41,5 +41,10 @@
 				Configuration fixes to publish on Sonatype.
 			</action>
 		</release>
+		<release version="0.4.2" date="2015-xx-xx" description="Corrections">
+			<action dev="bmg" type="fix">
+				Fixed links on the Maven site.
+			</action>
+		</release>
 	</body>
 </document>
