@@ -1,4 +1,11 @@
 # Java Patterns
+
+[![Maven Central](https://img.shields.io/maven-central/v/com.wandrell/java-patterns.svg)][maven-repo]
+
+[![Release docs](https://img.shields.io/badge/docs-release-blue.svg)][site-release]
+
+[![Development docs](https://img.shields.io/badge/docs-develop-blue.svg)][site-develop]
+
 A collection of common design patterns for Java.
 
 Not all the design patterns have been included in this library. This is a compilation of only those which I've needed, and only if there wasn't any available implementation for them. 
@@ -44,7 +51,7 @@ Thanks to Maven, the project is easy to install, by just using the following com
 
 ```mvn install```
 
-But the recommended way to install the project is by using the code repositories, where the releases and snapshots are stored. The way to set this is detailed on the documentation page.
+But the recommended way to install the project is by setting up the dependencies manager being used. For this check the [Maven repository page][maven-repo].
 
 ## Collaborate
 
@@ -65,6 +72,7 @@ Feel free to fork it, and share the changes.
 ## License
 The project is released under the [MIT License][license].
 
+[maven-repo]: http://mvnrepository.com/artifact/com.wandrell/java-patterns
 [issues]: https://github.com/Bernardo-MG/java-patterns/issues
 [javadoc-develop]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
 [javadoc-release]: http://docs.wandrell.com/maven/java-patterns/apidocs
