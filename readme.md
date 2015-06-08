@@ -1,9 +1,7 @@
 # Java Patterns
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.wandrell/java-patterns.svg)][maven-repo]
-
 [![Release docs](https://img.shields.io/badge/docs-release-blue.svg)][site-release]
-
 [![Development docs](https://img.shields.io/badge/docs-develop-blue.svg)][site-develop]
 
 A collection of common design patterns for Java.
