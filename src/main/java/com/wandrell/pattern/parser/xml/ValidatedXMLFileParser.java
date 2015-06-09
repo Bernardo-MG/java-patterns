@@ -255,25 +255,22 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
              */
             private final String getDTDFileContents() throws IOException {
                 final StringBuilder readDTD;
-                BufferedReader reader;
+                final BufferedReader reader;
                 String line;
 
                 if (dtd == null) {
-                    reader = null;
-                    try {
-                        reader = IOUtils.toBufferedReader(getValidationData());
+                    readDTD = new StringBuilder();
 
-                        readDTD = new StringBuilder();
+                    reader = IOUtils.toBufferedReader(getValidationData());
+
+                    line = reader.readLine();
+
+                    while (line != null) {
+                        readDTD.append(line);
                         line = reader.readLine();
-                        while (line != null) {
-                            readDTD.append(line);
-                            line = reader.readLine();
-                        }
-                    } finally {
-                        if (reader != null) {
-                            reader.close();
-                        }
                     }
+
+                    reader.close();
 
                     dtd = readDTD.toString();
                 }

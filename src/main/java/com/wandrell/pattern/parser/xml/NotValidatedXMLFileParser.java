@@ -108,16 +108,12 @@ public final class NotValidatedXMLFileParser implements
         final XMLInputFactory factory;     // Factory to create the reader
         final XMLStreamReader staxReader;  // Resulting reader
 
-        if (reader instanceof XMLStreamReader) {
-            staxReader = (XMLStreamReader) reader;
-        } else {
-            factory = XMLInputFactory.newInstance();
+        factory = XMLInputFactory.newInstance();
 
-            try {
-                staxReader = factory.createXMLStreamReader(reader);
-            } catch (final XMLStreamException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            staxReader = factory.createXMLStreamReader(reader);
+        } catch (final XMLStreamException e) {
+            throw new RuntimeException(e);
         }
 
         return staxReader;

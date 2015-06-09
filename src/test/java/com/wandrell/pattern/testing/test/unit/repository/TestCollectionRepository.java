@@ -47,6 +47,8 @@ import com.wandrell.pattern.repository.Repository;
  * <li>Updating a non existing entity does not add it</li>
  * <li>The {@code getCollection} method filters the entities correctly</li>
  * <li>The {@code getEntity} method filters the entities correctly</li>
+ * <li>The {@code getEntity} method returns {@code null} when the repository is
+ * empty</li>
  * <li>Modifying the {@code Collection} returned by {@code getAll} does not
  * modify the repository's internal collection</li>
  * <li>Modifying the {@code Collection} returned by {@code getCollection} does
@@ -192,6 +194,30 @@ public final class TestCollectionRepository {
             }
 
         }).size(), 3);
+    }
+
+    /**
+     * Tests that the {@code getEntity} method returns {@code null} when the
+     * repository is empty.
+     */
+    @Test
+    public final void testGetEntity_Empty() {
+        final String entity; // Filtered entity
+
+        for (final String ent : repository.getAll()) {
+            repository.remove(ent);
+        }
+
+        entity = repository.getEntity(new Predicate<String>() {
+
+            @Override
+            final public boolean apply(final String entity) {
+                return entity.equals("b");
+            }
+
+        });
+
+        Assert.assertEquals(entity, null);
     }
 
     /**
