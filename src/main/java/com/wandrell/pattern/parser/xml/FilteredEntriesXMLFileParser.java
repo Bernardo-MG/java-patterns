@@ -34,8 +34,6 @@ import org.jdom2.Element;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.common.base.MoreObjects;
 import com.wandrell.pattern.conf.XMLValidationType;
@@ -62,11 +60,6 @@ import com.wandrell.pattern.conf.XMLValidationType;
 public final class FilteredEntriesXMLFileParser extends
         AbstractAttributesFilterXMLFileParser {
 
-    /**
-     * Logger being used to log the generated XPath expression.
-     */
-    private static final Logger      LOGGER     = LoggerFactory
-                                                        .getLogger(FilteredEntriesXMLFileParser.class);
     /**
      * Base parser handling the creation of the {@code Document}.
      * <p>
@@ -96,17 +89,6 @@ public final class FilteredEntriesXMLFileParser extends
      * read from the XML file.
      */
     private XPathExpression<Element> xpath;
-
-    /**
-     * Returns the logger being used by this class.
-     * <p>
-     * It will be used to log the generated XPath expression.
-     * 
-     * @return the logger being used
-     */
-    private static final Logger getLogger() {
-        return LOGGER;
-    }
 
     /**
      * Constructs a {@code FilteredEntriesXMLFileParser} which will only pick
@@ -142,7 +124,7 @@ public final class FilteredEntriesXMLFileParser extends
 
         nodeName = node;
 
-        getBaseParser().setValidation(validation, validationFile);
+        setValidation(validation, validationFile);
     }
 
     /**
@@ -250,14 +232,6 @@ public final class FilteredEntriesXMLFileParser extends
 
         // Filters the nodes
         nodes = getXPathExpression().evaluate(document.getRootElement());
-
-        // Logs the result
-        if (getLogger().isDebugEnabled()) {
-            getLogger().debug(
-                    String.format(
-                            "Executed XPath expression '%s'. Got %d nodes",
-                            getExpression(), nodes.size()));
-        }
 
         // Nodes are detached from the original Document
         for (final Element node : nodes) {

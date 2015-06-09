@@ -45,8 +45,14 @@
 			<action dev="bmg" type="fix">
 				Fixed links on the Maven site.
 			</action>
-			<action dev="bmg" type="fix">
+			<action dev="bmg" type="update">
+				Added shields on the readme.
+			</action>
+			<action dev="bmg" type="update">
 				Changes to docs.
+			</action>
+			<action dev="bmg" type="update">
+				Cleaned up code.
 			</action>
 		</release>
 	</body>
