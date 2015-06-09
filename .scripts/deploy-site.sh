@@ -4,17 +4,12 @@
 #
 # Also, it will only deploy if the DEPLOY environment variable is set to 'true'
 
+# Failfast and printing commands
+set -ev
+
 if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$DEPLOY" == "true" ] && [[ "$TRAVIS_BRANCH" == "master" || "$TRAVIS_BRANCH" == "develop" ]]; then
 
-   echo "Deploying Maven site"
-
-   mvn site site:deploy --settings ~/settings.xml > site_output.txt
-	  
-   head -50 site_output.txt
-   echo " "
-   echo "(...)"
-   echo " "
-   tail -50 site_output.txt
+   mvn site site:deploy --settings ~/settings.xml
 
 else
 

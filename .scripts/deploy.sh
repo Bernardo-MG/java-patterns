@@ -4,9 +4,10 @@
 #
 # Also, it will only deploy if the DEPLOY environment variable is set to 'true'
 
-if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$DEPLOY" == "true" ] && [[ "$TRAVIS_BRANCH" == "master" || "$TRAVIS_BRANCH" == "develop" ]]; then
+# Failfast and printing commands
+set -ev
 
-   echo "Deploying Java artifact to repository"
+if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$DEPLOY" == "true" ] && [[ "$TRAVIS_BRANCH" == "master" || "$TRAVIS_BRANCH" == "develop" ]]; then
 
    mvn deploy --settings ~/settings.xml
    

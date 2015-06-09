@@ -5,14 +5,20 @@ jdk:
   - openjdk7
 env:
   - DEPLOY=false
-
+# Setting the JDK which will do the deployment
+matrix:
+  exclude:
+    - jdk: oraclejdk7
+      env: DEPLOY=false
+  include:
+    - jdk: oraclejdk7
+      env: DEPLOY=true
+    
 before_install:
   - chmod +x ./.scripts/create-maven-settings.sh
   - chmod +x ./.scripts/deploy.sh
   - chmod +x ./.scripts/deploy-site.sh
   - ./.scripts/create-maven-settings.sh
-  # Set the JDK which will do the deployment here
-  - if [ "$TRAVIS_JDK_VERSION" == "oraclejdk7" ]; then export DEPLOY=true; fi
 script:
   - mvn clean verify
 after_success:
