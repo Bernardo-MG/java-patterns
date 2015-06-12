@@ -47,8 +47,8 @@ import org.testng.annotations.Test;
 import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.outputter.Outputter;
 import com.wandrell.pattern.outputter.xml.XMLOutputter;
-import com.wandrell.pattern.testing.framework.conf.XMLConf;
-import com.wandrell.pattern.testing.framework.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
  * Integration tests for {@link XMLOutputter}, checking that XML files with XSD

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.testing.framework.conf;
+package com.wandrell.pattern.testing.util.conf;
 
 /**
  * Configuration class storing info for XML tests.

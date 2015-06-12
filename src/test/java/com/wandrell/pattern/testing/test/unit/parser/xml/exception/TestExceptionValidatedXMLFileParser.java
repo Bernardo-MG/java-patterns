@@ -24,7 +24,7 @@
 package com.wandrell.pattern.testing.test.unit.parser.xml.exception;
 
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
-import com.wandrell.pattern.testing.framework.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
+import com.wandrell.pattern.testing.util.basetest.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
 
 /**
  * Unit tests for {@link ValidatedXMLFileParser} implementing

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.testing.framework.test.unit.parser.xml.exception;
+package com.wandrell.pattern.testing.util.basetest.unit.parser.xml.exception;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
