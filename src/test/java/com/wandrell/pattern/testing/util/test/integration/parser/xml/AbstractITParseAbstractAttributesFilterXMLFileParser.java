@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.testing.util.basetest.integration.parser.xml;
+package com.wandrell.pattern.testing.util.test.integration.parser.xml;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

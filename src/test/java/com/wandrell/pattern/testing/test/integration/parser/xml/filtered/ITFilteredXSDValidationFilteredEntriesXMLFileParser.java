@@ -27,8 +27,8 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
 import com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser;
 import com.wandrell.pattern.testing.util.ResourceUtils;
-import com.wandrell.pattern.testing.util.basetest.integration.parser.xml.AbstractITParseAbstractAttributesFilterXMLFileParser;
 import com.wandrell.pattern.testing.util.conf.XMLConf;
+import com.wandrell.pattern.testing.util.test.integration.parser.xml.AbstractITParseAbstractAttributesFilterXMLFileParser;
 
 /**
  * Integration tests for {@link FilteredEntriesXMLFileParser} implementing
