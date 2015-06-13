@@ -41,12 +41,7 @@
 				<column>Documentation</column>
 				<column>reports</column>
 			</bottomNav>
-			<bottomDescription>
-	        <![CDATA[
-	          The Java Patterns libraries contains several common design patterns
-	          which can be reused through Java applications.
-	        ]]>
-			</bottomDescription>
+			<bottomDescription>${site.description}</bottomDescription>
 			<pages>
 				<index project="${project.artifactId}">
 					<!-- Override the title -->

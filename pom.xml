@@ -144,6 +144,12 @@
 		<extension.wagon.version>2.9</extension.wagon.version>
 		<!-- Maven Site -->
 		<site.skin.version>1.1.1</site.skin.version>
+		<site.description>
+	        <![CDATA[
+	          The Java Patterns libraries contains several common design patterns
+	          which can be reused through Java applications.
+	        ]]>
+		</site.description>
 		<site.download>https://bintray.com/bernardo-mg/maven/java-patterns/view</site.download>
 		<javaVersion>JDK 7, JDK 8 and OpenJDK 7</javaVersion>
 		<scmName>GitHub</scmName>
