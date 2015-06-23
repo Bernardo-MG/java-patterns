@@ -1,5 +1,11 @@
 # Java Patterns
 
+A collection of common design patterns for Java.
+
+Not all the design patterns have been included in this library. This is a compilation of only those which I've needed, and only if there wasn't any available implementation for them. 
+
+For each of them an interface and, when possible, also a basic implementation are offered.
+
 [![Maven Central](https://img.shields.io/maven-central/v/com.wandrell/java-patterns.svg)][maven-repo]
 [![Bintray](https://api.bintray.com/packages/bernardo-mg/maven/java-patterns/images/download.svg)][bintray-repo]
 
@@ -8,12 +14,6 @@
 
 [![Release javadocs](https://img.shields.io/badge/javadocs-release-blue.svg)][javadoc-release]
 [![Development javadocs](https://img.shields.io/badge/javadocs-develop-blue.svg)][javadoc-develop]
-
-A collection of common design patterns for Java.
-
-Not all the design patterns have been included in this library. This is a compilation of only those which I've needed, and only if there wasn't any available implementation for them. 
-
-For each of them an interface and, when possible, also a basic implementation are offered.
 
 ## Features
 
