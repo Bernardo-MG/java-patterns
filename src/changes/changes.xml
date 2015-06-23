@@ -55,5 +55,10 @@
 				Cleaned up code.
 			</action>
 		</release>
+		<release version="0.4.3" date="2015-06-09" description="Corrections">
+			<action dev="bmg" type="fix">
+				Fixed links on the Maven site.
+			</action>
+		</release>
 	</body>
 </document>
