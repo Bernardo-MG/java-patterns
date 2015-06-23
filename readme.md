@@ -79,7 +79,7 @@ Feel free to fork it, and share the changes.
 ## License
 The project is released under the [MIT License][license].
 
-[bintray-repo]: https://bintray.com/bernardo-mg/maven
+[bintray-repo]: https://bintray.com/bernardo-mg/maven/java-patterns/view
 [maven-repo]: http://mvnrepository.com/artifact/com.wandrell/java-patterns
 [issues]: https://github.com/Bernardo-MG/java-patterns/issues
 [javadoc-develop]: http://docs.wandrell.com/development/maven/java-patterns/apidocs
