@@ -14,8 +14,6 @@ But there are two other important reasons for it: first, there are some great th
 	
 After all, this project just aims to fill a gap I found on my own projects, and its development will be directed by this fact.
 
----
-
 # The patterns in the library
 
 The implementations are not following any concrete book or specification, they just mix what I need with a general idea of what they are expected to do.
