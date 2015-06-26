@@ -77,9 +77,6 @@
 						<body />
 					</sections>
 				</parser>
-				<contribute>
-					<breadcrumbs>false</breadcrumbs>
-				</contribute>
 				<!-- Disable source highlighting for Maven reports -->
 				<source-repository>
 					<highlightJs>false</highlightJs>
