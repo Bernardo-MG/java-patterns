@@ -6,13 +6,13 @@ It should be noted that Java offers it's own interface for this pattern, the _cl
 	
 ## Interface
 
-![Prototype interface](./images/prototype_class_tree.png)
+[![Prototype interface][prototype-class_tree]][prototype-class_tree]
 
 The [Prototype][prototype] interface is very simple, it just offers a single method named _createNewInstance_ which returns a copy of the prototype.
 	
 The easiest way to implement this is just through a copy constructor, which will be called by the method.
 	
-```
+```java
 public class TheClass implements Prototype {
 
 	private String text = "";
@@ -36,3 +36,4 @@ public class TheClass implements Prototype {
 ```
 
 [prototype]: ./apidocs/com/wandrell/pattern/prototype/Prototype.html
+[prototype-class_tree]: ./images/prototype_class_tree.png

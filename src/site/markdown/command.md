@@ -10,19 +10,19 @@ To increase the decoupling a command executor can be used. This will not only ex
 
 ## Command
 
-![Command class hierarchy tree](./images/command_class_tree.png)
+[![Command class hierarchy tree][command-class_tree]][command-class_tree]
 
 The command pattern is implemented through a small hierarchy of interfaces which has at it's root the [Command][command] interface. This offers the _execute_ method, through which the encapsulated code can be called.
 
 This makes it very easy to use:
 
-```
+```java
 command.execute();
 ```
 
 But note that this same method can throw exceptions, which means that  executing a command most of the times will be closer to:
 
-```
+```java
 try {
    command.execute();
 } catch (final Exception exception) {
@@ -44,7 +44,7 @@ Of course, if the command has not been executed, or it has thrown an error, it m
 
 Barring any problem, acquiring a command's value is very simple:
 
-```
+```java
 command.execute();
 
 value = command.getResult();
@@ -62,7 +62,7 @@ Of course, it is the implementation's job to make sure this works as intended.
 
 ## Command Executor
 
-![Command executor class hierarchy tree](./images/command_executor_class_tree.png)
+[![Command executor class hierarchy tree][command_executor-class_tree]][command_executor-class_tree]
 
 The command executor is defined by the [CommandExecutor][command_executor] interface.
 
@@ -76,7 +76,7 @@ This is very simple as, after all, the executor is just meant to hide the comman
 
 It should be noted that the executor's _execute_ methods do not throw exceptions. So, what with a command is:
 
-```
+```java
 try {
    command.execute();
 } catch (final Exception exception) {
@@ -86,14 +86,16 @@ try {
 
 With an executor is just:
 
-```
+```java
 executor.execute(command)
 ```
 
 This is actually what the basic implementation of the interface, the [DefaultCommandExecutor][default_command_executor] serves for. It takes care of the exceptions thrown by the commands, logging them and throwing them again, but also hiding the exception catching blocks.
 
 [command]: ./apidocs/com/wandrell/pattern/command/Command.html
+[command-class_tree]: ./images/command_class_tree.png
 [result_command]: ./apidocs/com/wandrell/pattern/command/ResultCommand.html
 [undoable_command]: ./apidocs/com/wandrell/pattern/command/UndoableCommand.html
+[command_executor-class_tree]: ./images/command_executor_class_tree.png
 [command_executor]: ./apidocs/com/wandrell/pattern/command/CommandExecutor.html
 [default_command_executor]: ./apidocs/com/wandrell/pattern/command/CommandExecutor.html
