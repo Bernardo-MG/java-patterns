@@ -61,7 +61,9 @@ The recommended way to install the project is by setting up your preferred depen
 
 If for some reason manual installation is necessary, just use the following Maven command:
 
-```mvn install```
+```
+$ mvn install
+```
 
 ## Collaborate
 
