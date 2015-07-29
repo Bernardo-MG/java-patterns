@@ -18,11 +18,11 @@ After all, this project just aims to fill a gap I found on my own projects, and 
 
 The implementations are not following any concrete book or specification, they just mix what I need with a general idea of what they are expected to do.
 
-- The __Command__, and the __CommandExecutor__, help to encapsulate code inside an object [>>](./command.html)
-- The __Outputter__ allows writing for files, or just sending structures, without worrying about the actual implementation [>>](./outputter.html)
-- The __Parser__ transforms one object into another, keeping as much of the data intact as possible [>>](./parser.html)
-- The __Prototype__ permits creating an identical copy of a base template [>>](./prototype.html)
-- The __Repository__ allows handling data persistence as if you were working on a collection [>>](./repository.html)
+- The [__Command__][docs-command], and the [__CommandExecutor__][docs-command], help to encapsulate code inside an object.
+- The [__Outputter__][docs-outputter] allows writing for files, or just sending structures, without worrying about the actual implementation.
+- The [__Parser__][docs-parser] transforms one object into another, keeping as much of the data intact as possible.
+- The [__Prototype__][docs-prototype] permits creating an identical copy of a base template.
+- The [__Repository__][docs-prototype] allows handling data persistence as if you were working on a collection.
 
 For each of them, whenever possible, basic implementations have been included.
 
@@ -38,3 +38,9 @@ The code is open source and freely accessible. If you want to do any kind of mod
 - CI: [${ciName}](${ciURL})
 - [Bintray repo](${bintrayURL})
 - [Maven Central Repository](${mavenURL})
+
+[docs-command]: ./command.html
+[docs-outputter]: ./outputter.html
+[docs-parser]: ./parser.html
+[docs-prototype]: ./prototype.html
+[docs-prototype]: ./repository.html
