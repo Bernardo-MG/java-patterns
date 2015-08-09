@@ -4,7 +4,7 @@ An outputter sends data through an output I/O operation, hiding the actual imple
 	
 ## Interface
 
-![Outputter interface](./images/outputter_class.png)
+[![Outputter interface][outputter-class_tree]][outputter-class_tree]
 
 The [Outputter][outputter] consists of just two methods, both called _output_, which send an object through the accompanying output object, which may be a _Writer_ or an _OutputStream_.
 	
@@ -12,7 +12,7 @@ Note that the output object is expected to be closed once the operation is finis
 
 ## Implementations
 
-![Outputter class hierarchy tree](./images/outputter_class_tree.png)
+[![Outputter class hierarchy tree][outputter-class_hierarchy]][outputter-class_hierarchy]
 
 ---
 
@@ -24,7 +24,7 @@ It is possible to add a validation file to the resulting XML file. Both DTD and 
 	
 For example, generating an XML file with XSD validation just requires the following lines:
 
-```
+```java
 public final void writeValidation(final Document doc, final Writer writer) {
 	final Outputter<Document> outputter;
 	
@@ -40,7 +40,7 @@ The [YAMLOutputter][yaml_outputter] allows storing data into YAML files. It requ
 	
 The easiest way to use this class is by giving it a _Map_, as it adapts best to the structure of a YAML file.
 	
-```
+```java
 public final void writeYAML(final Writer writer) {
 	final Map<String, Object> data;
 	final Outputter<Object> outputter;
@@ -64,7 +64,7 @@ To reduce the size of this library, the third party dependencies required by con
 
 The XML outputter requires JDOM2, which uses the following dependency:
 
-```
+```xml
 <dependency>
 	<!-- JDom 2 -->
 	<groupId>org.jdom</groupId>
@@ -75,7 +75,7 @@ The XML outputter requires JDOM2, which uses the following dependency:
 
 The YAML outputter requires SnakeYAML, which uses the following dependency:
 
-```
+```xml
 <dependency>
 	<!-- SnakeYAML -->
 	<groupId>org.yaml</groupId>
@@ -85,5 +85,7 @@ The YAML outputter requires SnakeYAML, which uses the following dependency:
 ```
 
 [outputter]: ./apidocs/com/wandrell/pattern/outputter/Outputter.html
+[outputter-class_hierarchy]: ./images/outputter_class_tree.png
+[outputter-class_tree]: ./images/outputter_class.png
 [xml_outputter]: ./apidocs/com/wandrell/pattern/outputter/xml/XMLOutputter.html
 [yaml_outputter]: ./apidocs/com/wandrell/pattern/outputter/yaml/YAMLOutputter.html

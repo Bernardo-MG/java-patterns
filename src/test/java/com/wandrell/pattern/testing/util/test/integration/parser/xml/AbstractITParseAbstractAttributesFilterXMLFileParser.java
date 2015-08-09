@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.wandrell.pattern.testing.framework.test.integration.parser.xml;
+package com.wandrell.pattern.testing.util.test.integration.parser.xml;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -34,8 +34,8 @@ import org.testng.annotations.Test;
 
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
-import com.wandrell.pattern.testing.framework.conf.XMLConf;
-import com.wandrell.pattern.testing.framework.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
  * Abstract integration tests for {@link AbstractAttributesFilterXMLFileParser}.

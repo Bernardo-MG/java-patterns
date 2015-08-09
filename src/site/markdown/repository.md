@@ -4,7 +4,7 @@ A repository allows accessing data through CRUD operations in a similar way to a
 
 ## Repository
 
-![Repository interface](./images/repository_class_tree.png)
+[![Repository interface][repository-class_tree]][repository-class_tree]
 
 The [Repository][repository] is meant to hide the data access, so the code works only with domain model classes. It offers basic CRUD operations, and implementations of it may extend the interface and add methods as required.
 
@@ -16,7 +16,7 @@ Any object can be used as a filter for the queries, but it is expected to be abl
 
 ### The Query filter
 
-![Query class tree](./images/query_class_tree.png)
+[![Query class tree][query_data-class_tree]][query\_data-class\_tree]
 
 Accompanying the repositories there is the [QueryData][query_data] interface.
 
@@ -26,15 +26,18 @@ To ease it's use a basic implementation, [DefaultQueryData][default_query_data],
 
 ## Collection Repository
 
-![Collection repository class tree](./images/collection_repository_class_tree.png)
+[![Collection repository class tree][collection_repository-class_tree]][collection_repository-class_tree]
 
 A basic implementation of the repository, [CollectionRepository][collection_repository], is offered. This serves as a stub to avoid using a persistence system, or for those cases where a complexrepository is not needed, as it will just use a _Collection_ to store all the entities.
 
 This repository queries the entities through the use of a Guava [Predicate][predicate], used instead of Java 8 own _Predicate_ to keep backwards compatibility. All the entities which make this predicate true will be returned.
 
 [repository]: ./apidocs/com/wandrell/pattern/repository/Repository.html
+[repository-class_tree]: ./images/repository_class_tree.png
 [filtered_repository]: ./apidocs/com/wandrell/pattern/repository/FilteredRepository.html
 [query_data]: ./apidocs/com/wandrell/pattern/repository/QueryData.html
+[query_data-class_tree]: ./images/query_class_tree.png
 [default_query_data]: ./apidocs/com/wandrell/pattern/repository/DefaultQueryData.html
 [collection_repository]: ./apidocs/com/wandrell/pattern/repository/CollectionRepository.html
+[collection_repository-class_tree]: ./images/collection_repository_class_tree.png
 [predicate]: http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html

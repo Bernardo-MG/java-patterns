@@ -4,7 +4,7 @@ A parser receives a data structure, and transforms it into another equivalent da
 	
 ## Interface
 
-![Parser interface](./images/parser_class_tree.png)
+[![Parser interface][parser-interface]][parser-interface]
 
 The [Parser][parser] only contains one method, _parse_, which takes and input object and generates and output structure.
 	
@@ -16,7 +16,7 @@ It should be noted that if the parsing process is complex, it may be possible, a
 
 The only default implementations for the parser patterns are for XML files.
 
-![XML parsers class hierarchy tree](./images/xml_parser_class_tree.png)
+[![XML parsers class hierarchy tree][xml_parser-class_tree]][xml_parser-class_tree]
 
 ---
 
@@ -30,7 +30,7 @@ No matter this, setting the validation data is simple.
 	
 It can be set through the constructor:
 	
-```
+```java
 public final void setValidation(final Reader reader) {
 	final Parser<Reader, Document> parser;
 	
@@ -40,7 +40,7 @@ public final void setValidation(final Reader reader) {
 	
 Or through the setter:
 	
-```
+```java
 public final void setValidation(final Reader reader) {
 	final Parser<Reader, Document> parser;
 	
@@ -52,7 +52,7 @@ public final void setValidation(final Reader reader) {
 
 And removing it equally simple:
 	
-```
+```java
 public final void removeValidation() {
 	final Parser<Reader, Document> parser;
 	
@@ -70,7 +70,7 @@ The [FilteredEntriesXMLFileParser][filtered_xml_parser] filters the nodes on an 
 	
 For example, having a file as follows:
 		
-```
+```xml
 <test>
 	<node attribute1="false" attribute2="false">value1</node>
 	<node attribute1="false" attribute2="true">value2</node>
@@ -80,7 +80,7 @@ For example, having a file as follows:
 
 To get the node with the text "value2" the parser would have to be set up as:
 	
-```
+```java
 public final void parseFile(final Reader reader) {
 	final FilteredEntriesXMLFileParser parser;
 	final Document doc;
@@ -105,7 +105,7 @@ To reduce the size of this library, the third party dependencies required by con
 
 First, all the XML parsers require JDOM2, which uses the following dependency:
 
-```
+```xml
 <dependency>
 	<!-- JDom 2 -->
 	<groupId>org.jdom</groupId>
@@ -116,7 +116,7 @@ First, all the XML parsers require JDOM2, which uses the following dependency:
 
 All the filtered XML parsers require Jaxen, which uses the following dependency:
 
-```
+```xml
 <dependency>
 	<!-- Jaxen -->
 	<groupId>jaxen</groupId>
@@ -126,6 +126,8 @@ All the filtered XML parsers require Jaxen, which uses the following dependency:
 ```
 
 [parser]: ./apidocs/com/wandrell/pattern/parser/Parser.html
+[parser-interface]: ./images/parser_class_tree.png
+[xml_parser-class_tree]: ./images/xml_parser_class_tree.png
 [validated_xml_parser]: ./apidocs/com/wandrell/pattern/parser/xml/ValidatedXMLFileParser.html
 [not_validated_xml_parser]: ./apidocs/com/wandrell/pattern/parser/xml/NotValidatedXMLFileParser.html
 [xml_parser]: ./apidocs/com/wandrell/pattern/parser/xml/XMLFileParser.html

@@ -34,8 +34,8 @@ import org.testng.annotations.Test;
 import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLFileParser;
-import com.wandrell.pattern.testing.framework.conf.XMLConf;
-import com.wandrell.pattern.testing.framework.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
  * Integration tests for {@link XMLFileParser} with no validation.

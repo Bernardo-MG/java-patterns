@@ -29,7 +29,7 @@ import org.jdom2.Document;
 
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
-import com.wandrell.pattern.testing.framework.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
+import com.wandrell.pattern.testing.util.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
 
 /**
  * Unit tests for {@link ValidatedXMLFileParser} implementing
