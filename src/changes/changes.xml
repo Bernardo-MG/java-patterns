@@ -57,10 +57,7 @@
 		</release>
 		<release version="0.4.3" date="2015-06-09" description="Corrections">
 			<action dev="bmg" type="update">
-				Changed Maven site look.
-			</action>
-			<action dev="bmg" type="fix">
-				Fixed links on the Maven site.
+				Changed Maven site skin to Docs Maven Skin.
 			</action>
 		</release>
 	</body>
