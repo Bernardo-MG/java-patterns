@@ -60,7 +60,7 @@
 				Changed Maven site skin to Docs Maven Skin.
 			</action>
 		</release>
-		<release version="0.4.4" date="2015-06-09" description="Enhancements">
+		<release version="0.4.4" date="2015-06-10" description="Enhancements">
 			<action dev="bmg" type="update">
 				QueryData is now editable.
 			</action>
