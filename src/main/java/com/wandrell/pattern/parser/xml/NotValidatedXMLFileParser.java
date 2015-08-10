@@ -47,8 +47,8 @@ import com.wandrell.pattern.parser.Parser;
  * 
  * @author Bernardo Martínez Garrido
  */
-public final class NotValidatedXMLFileParser implements
-        Parser<Reader, Document> {
+public final class NotValidatedXMLFileParser
+        implements Parser<Reader, Document> {
 
     /**
      * Builder to transform the {@code Reader} into a {@code Document}.

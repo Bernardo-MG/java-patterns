@@ -38,8 +38,8 @@ import com.wandrell.pattern.testing.util.test.unit.parser.xml.exception.Abstract
  * @author Bernardo Martínez Garrido
  * @see SAXInputParser
  */
-public final class TestExceptionNoValidationValidatedXMLFileParser extends
-        AbstractUnitExceptionParseXMLReaderParser<Integer> {
+public final class TestExceptionNoValidationValidatedXMLFileParser
+        extends AbstractUnitExceptionParseXMLReaderParser<Integer> {
 
     /**
      * Generates the parser to be tested.

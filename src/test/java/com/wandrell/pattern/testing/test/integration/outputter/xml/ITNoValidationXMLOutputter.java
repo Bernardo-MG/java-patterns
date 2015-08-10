@@ -149,8 +149,9 @@ public final class ITNoValidationXMLOutputter {
         readerExpected = ResourceUtils
                 .getClassPathReader(XMLConf.INTEGER_EXPECTED);
 
-        Assert.assertTrue(XMLUnit.compareXML(readerExpected,
-                new InputStreamReader(streamTest)).identical());
+        Assert.assertTrue(XMLUnit
+                .compareXML(readerExpected, new InputStreamReader(streamTest))
+                .identical());
     }
 
     /**
@@ -169,8 +170,8 @@ public final class ITNoValidationXMLOutputter {
     private final void initialize() {
         value = new Document();
         value.addContent(new Element(XMLConf.NODE_ROOT));
-        value.getRootElement().addContent(
-                new Element(XMLConf.NODE_VALUE).addContent("1"));
+        value.getRootElement()
+                .addContent(new Element(XMLConf.NODE_VALUE).addContent("1"));
 
         outputter = new XMLOutputter();
     }

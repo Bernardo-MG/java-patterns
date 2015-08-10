@@ -58,4 +58,3 @@
  * do the same on a YAML file.
  */
 package com.wandrell.pattern.outputter;
-

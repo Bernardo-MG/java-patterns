@@ -48,8 +48,8 @@ import com.google.common.base.Predicate;
  * @param <V>
  *            the type stored on the repository
  */
-public final class CollectionRepository<V> implements
-        FilteredRepository<V, Predicate<V>> {
+public final class CollectionRepository<V>
+        implements FilteredRepository<V, Predicate<V>> {
 
     /**
      * The entities stored in the repository.

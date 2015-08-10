@@ -67,4 +67,3 @@
  * which just serves to ease using said interface.
  */
 package com.wandrell.pattern.repository;
-

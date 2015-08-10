@@ -89,8 +89,8 @@ public final class ResourceUtils {
      * @return an {@code InputStream} pointing to the path
      */
     public static final Reader getClassPathReader(final String path) {
-        return new BufferedReader(new InputStreamReader(
-                getClassPathInputStream(path)));
+        return new BufferedReader(
+                new InputStreamReader(getClassPathInputStream(path)));
     }
 
     /**

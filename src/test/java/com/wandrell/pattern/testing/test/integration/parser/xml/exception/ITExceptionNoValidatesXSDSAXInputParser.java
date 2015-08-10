@@ -70,9 +70,10 @@ public final class ITExceptionNoValidatesXSDSAXInputParser {
      *             always, as part of the test
      */
     @Test(expectedExceptions = JDOMParseException.class)
-    public final void testParse_NotValidates_ThrowsException() throws Exception {
-        parser.parse(ResourceUtils
-                .getClassPathReader(XMLConf.INTEGER_NO_VALIDATES));
+    public final void testParse_NotValidates_ThrowsException()
+            throws Exception {
+        parser.parse(
+                ResourceUtils.getClassPathReader(XMLConf.INTEGER_NO_VALIDATES));
     }
 
     /**

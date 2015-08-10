@@ -75,8 +75,8 @@ public final class ITNotValidatedXMLFileParser {
             public final Integer parse(final Document doc) {
                 final Integer value;
 
-                value = Integer.parseInt(doc.getRootElement().getChildText(
-                        XMLConf.NODE_VALUE));
+                value = Integer.parseInt(
+                        doc.getRootElement().getChildText(XMLConf.NODE_VALUE));
 
                 return value;
             }

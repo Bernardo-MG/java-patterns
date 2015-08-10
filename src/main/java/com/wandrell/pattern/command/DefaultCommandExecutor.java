@@ -53,7 +53,7 @@ public final class DefaultCommandExecutor implements CommandExecutor {
      * The logger used for logging exceptions thrown by the commands.
      */
     private static final Logger LOGGER = LoggerFactory
-                                               .getLogger(DefaultCommandExecutor.class);
+            .getLogger(DefaultCommandExecutor.class);
 
     /**
      * Returns the logger being used to log exceptions thrown by commands.

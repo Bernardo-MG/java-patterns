@@ -57,8 +57,8 @@ import com.wandrell.pattern.conf.XMLValidationType;
  * 
  * @author Bernardo Martínez Garrido
  */
-public final class FilteredEntriesXMLFileParser extends
-        AbstractAttributesFilterXMLFileParser {
+public final class FilteredEntriesXMLFileParser
+        extends AbstractAttributesFilterXMLFileParser {
 
     /**
      * Base parser handling the creation of the {@code Document}.

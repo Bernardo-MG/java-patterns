@@ -79,8 +79,8 @@ public final class TestExceptionNoValidationXMLOutputter {
         OutputStream stream = null; // Closed stream
 
         try {
-            stream = new BufferedOutputStream(new PipedOutputStream(
-                    new PipedInputStream()));
+            stream = new BufferedOutputStream(
+                    new PipedOutputStream(new PipedInputStream()));
             stream.close();
         } catch (final Exception e) {
             Assert.fail(e.getMessage());
@@ -102,9 +102,9 @@ public final class TestExceptionNoValidationXMLOutputter {
         Writer writer = null; // Closed writer
 
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(
-                    new BufferedOutputStream(new PipedOutputStream(
-                            new PipedInputStream()))));
+            writer = new BufferedWriter(
+                    new OutputStreamWriter(new BufferedOutputStream(
+                            new PipedOutputStream(new PipedInputStream()))));
             writer.close();
         } catch (final Exception e) {
             Assert.fail(e.getMessage());

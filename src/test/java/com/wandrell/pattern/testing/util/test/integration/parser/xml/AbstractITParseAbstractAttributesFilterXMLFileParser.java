@@ -48,9 +48,11 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * <li>Requiring a not existing attribute returns no entries.</li>
  * <li>Requiring and rejecting the same attribute returns no entries.</li>
  * <li>Rejecting the attribute 1 returns the correct amount of entries.</li>
- * <li>Rejecting the attribute 1 and 2 returns the correct amount of entries.</li>
+ * <li>Rejecting the attribute 1 and 2 returns the correct amount of entries.
+ * </li>
  * <li>Requiring the attribute 1 returns the correct amount of entries.</li>
- * <li>Requiring the attribute 1 and 2 returns the correct amount of entries.</li>
+ * <li>Requiring the attribute 1 and 2 returns the correct amount of entries.
+ * </li>
  * <li>Requiring the attribute 1 and rejecting the attribute 2 returns the
  * correct amount of entries.</li>
  * </ol>

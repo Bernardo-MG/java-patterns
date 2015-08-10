@@ -42,7 +42,8 @@ import com.wandrell.pattern.parser.Parser;
  * <p>
  * Adds the following cases:
  * <ol>
- * <li>A {@code JDOMException} is thrown when trying to parse a non XML file.</li>
+ * <li>A {@code JDOMException} is thrown when trying to parse a non XML file.
+ * </li>
  * <li>An {@code Exception} is thrown when reading from a closed {@code Reader}.
  * </ol>
  * 
@@ -74,8 +75,8 @@ public abstract class AbstractUnitExceptionParseXMLReaderParser<V> {
      */
     @Test(expectedExceptions = JDOMException.class)
     public final void testRead_NotXML_ThrowsException() throws Exception {
-        parser.parse(new BufferedReader(new InputStreamReader(IOUtils
-                .toInputStream(""))));
+        parser.parse(new BufferedReader(
+                new InputStreamReader(IOUtils.toInputStream(""))));
     }
 
     /**
@@ -86,7 +87,8 @@ public abstract class AbstractUnitExceptionParseXMLReaderParser<V> {
      *             always, as part of the test
      */
     @Test(expectedExceptions = Exception.class)
-    public final void testRead_Reader_Closed_ThrowsException() throws Exception {
+    public final void testRead_Reader_Closed_ThrowsException()
+            throws Exception {
         Reader reader = null; // Stubbed reader
 
         try {

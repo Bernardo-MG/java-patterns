@@ -36,6 +36,10 @@ import java.util.Map;
  * The query and it's parameters are separated. That way the actual query to be
  * used will be built inside the {@code FilteredRepository}, using whatever API
  * or implementation it requires.
+ * <p>
+ * Parameters will be used to substitute codes on the query string. Each key
+ * should match a code on the string, and the value for that key will be used to
+ * create the string which will take the code's place.
  * 
  * @author Bernardo Martínez Garrido
  * @see com.wandrell.pattern.repository.Repository Repository
@@ -43,7 +47,34 @@ import java.util.Map;
 public interface QueryData {
 
     /**
+     * Adds a parameter.
+     * <p>
+     * If a parameter with the specified key already exists the new one will
+     * take it's place.
+     * 
+     * @param key
+     *            key for the parameter
+     * @param value
+     *            value for the parameter
+     */
+    public void addParameter(final String key, final Object value);
+
+    /**
+     * Adds a collection of parameters.
+     * <p>
+     * If any parameter with one of the specified keys already exists the new
+     * one will take it's place.
+     * 
+     * @param parameters
+     *            {@code Map} with all the parameter pairs
+     */
+    public void addParameters(final Map<String, Object> parameters);
+
+    /**
      * The parameters to be applied to the query.
+     * <p>
+     * The parameters are a collection of pairs, where the key is a code in the
+     * query, and the value the object which will take that code's place.
      * 
      * @return the query's parameters
      */
@@ -55,5 +86,13 @@ public interface QueryData {
      * @return the query for acquiring the entities subset
      */
     public String getQuery();
+
+    /**
+     * Removes the parameter for the specified key.
+     * 
+     * @param key
+     *            the key for the parameter to remove
+     */
+    public void removeParameter(final String key);
 
 }

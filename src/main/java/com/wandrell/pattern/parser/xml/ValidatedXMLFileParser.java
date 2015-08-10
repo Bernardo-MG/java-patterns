@@ -144,8 +144,8 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
      *             when an IO exception stops the parsing
      */
     @Override
-    public final Document parse(final Reader input) throws JDOMException,
-            IOException {
+    public final Document parse(final Reader input)
+            throws JDOMException, IOException {
         return getBuilder().build(input);
     }
 
@@ -232,8 +232,8 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
                     final String systemId) throws IOException {
                 final InputSource source;
 
-                source = new InputSource(IOUtils.toInputStream(
-                        getDTDFileContents(), "UTF-8"));
+                source = new InputSource(
+                        IOUtils.toInputStream(getDTDFileContents(), "UTF-8"));
                 source.setPublicId(publicId);
                 source.setSystemId(systemId);
 

@@ -28,4 +28,3 @@
  * XMLValidationType} exists. It is an enumerator for the XML validation types.
  */
 package com.wandrell.pattern.conf;
-

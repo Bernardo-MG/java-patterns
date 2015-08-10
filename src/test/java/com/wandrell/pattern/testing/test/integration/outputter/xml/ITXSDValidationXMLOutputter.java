@@ -150,8 +150,9 @@ public final class ITXSDValidationXMLOutputter {
         readerExpected = ResourceUtils
                 .getClassPathReader(XMLConf.INTEGER_EXPECTED_XSD);
 
-        Assert.assertTrue(XMLUnit.compareXML(readerExpected,
-                new InputStreamReader(streamTest)).identical());
+        Assert.assertTrue(XMLUnit
+                .compareXML(readerExpected, new InputStreamReader(streamTest))
+                .identical());
     }
 
     /**
@@ -170,8 +171,8 @@ public final class ITXSDValidationXMLOutputter {
     private final void initialize() {
         value = new Document();
         value.addContent(new Element(XMLConf.NODE_ROOT));
-        value.getRootElement().addContent(
-                new Element(XMLConf.NODE_VALUE).addContent("1"));
+        value.getRootElement()
+                .addContent(new Element(XMLConf.NODE_VALUE).addContent("1"));
 
         outputter = new XMLOutputter(XMLValidationType.XSD,
                 "/validation/xsd_validation.xsd");

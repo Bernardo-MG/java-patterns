@@ -42,4 +42,3 @@
  * createNewInstance} method as a way to create new instances from a prototype.
  */
 package com.wandrell.pattern.prototype;
-

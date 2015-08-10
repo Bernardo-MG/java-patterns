@@ -33,14 +33,12 @@ public enum XMLValidationType {
     /**
      * DTD validation.
      */
-    DTD,
-    /**
-     * No validation.
-     */
-    NONE,
-    /**
-     * XSD validation.
-     */
+    DTD, /**
+          * No validation.
+          */
+    NONE, /**
+           * XSD validation.
+           */
     XSD
 
 }

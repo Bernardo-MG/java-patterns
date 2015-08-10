@@ -73,8 +73,8 @@ public final class ITExceptionBadValidationFileSAXInputParser {
         final Parser<Reader, Document> parser;    // Tested parser
 
         parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
-                IOUtils.toBufferedReader(new InputStreamReader(IOUtils
-                        .toInputStream(""))));
+                IOUtils.toBufferedReader(
+                        new InputStreamReader(IOUtils.toInputStream(""))));
 
         parser.parse(ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ));
     }
@@ -91,8 +91,8 @@ public final class ITExceptionBadValidationFileSAXInputParser {
         final Parser<Reader, Document> parser;    // Tested parser
 
         parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
-                IOUtils.toBufferedReader(new InputStreamReader(IOUtils
-                        .toInputStream(""))));
+                IOUtils.toBufferedReader(
+                        new InputStreamReader(IOUtils.toInputStream(""))));
 
         parser.parse(ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ));
     }
@@ -109,11 +109,11 @@ public final class ITExceptionBadValidationFileSAXInputParser {
         final Parser<Reader, Document> parser;    // Tested parser
 
         parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
-                IOUtils.toBufferedReader(new InputStreamReader(IOUtils
-                        .toInputStream(""))));
+                IOUtils.toBufferedReader(
+                        new InputStreamReader(IOUtils.toInputStream(""))));
 
-        parser.parse(new BufferedReader(new InputStreamReader(ResourceUtils
-                .getClassPathInputStream(XMLConf.INTEGER_READ))));
+        parser.parse(new BufferedReader(new InputStreamReader(
+                ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ))));
     }
 
     /**
@@ -128,8 +128,8 @@ public final class ITExceptionBadValidationFileSAXInputParser {
         final Parser<Reader, Document> parser;    // Tested parser
 
         parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
-                IOUtils.toBufferedReader(new InputStreamReader(IOUtils
-                        .toInputStream(""))));
+                IOUtils.toBufferedReader(
+                        new InputStreamReader(IOUtils.toInputStream(""))));
 
         parser.parse(ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ));
     }

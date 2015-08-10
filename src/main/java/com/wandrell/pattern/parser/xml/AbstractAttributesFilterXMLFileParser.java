@@ -58,8 +58,8 @@ import com.wandrell.pattern.parser.Parser;
  * 
  * @author Bernardo Martínez Garrido
  */
-public abstract class AbstractAttributesFilterXMLFileParser implements
-        Parser<Reader, Document> {
+public abstract class AbstractAttributesFilterXMLFileParser
+        implements Parser<Reader, Document> {
 
     /**
      * Attributes which should be set as {@code false}. Otherwise, the node will
