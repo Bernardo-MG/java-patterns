@@ -56,12 +56,9 @@ public final class ITNotValidatedXMLFileParser {
 
     /**
      * Tests that parsing a XML file returns the expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse() throws Exception {
+    public final void testParse() {
         final Parser<Reader, Document> parserA;  // Parser tested
         final Parser<Document, Integer> parserB; // Parser for the result
         final Reader reader; // Reader to the test file
@@ -75,8 +72,8 @@ public final class ITNotValidatedXMLFileParser {
             public final Integer parse(final Document doc) {
                 final Integer value;
 
-                value = Integer.parseInt(doc.getRootElement().getChildText(
-                        XMLConf.NODE_VALUE));
+                value = Integer.parseInt(
+                        doc.getRootElement().getChildText(XMLConf.NODE_VALUE));
 
                 return value;
             }

@@ -96,8 +96,8 @@ public final class YAMLOutputter implements Outputter<Object> {
     @Override
     public final void output(final Object value, final OutputStream stream)
             throws UnsupportedEncodingException {
-        output(value, new BufferedWriter(new OutputStreamWriter(stream,
-                getEncoding())));
+        output(value, new BufferedWriter(
+                new OutputStreamWriter(stream, getEncoding())));
     }
 
     /**

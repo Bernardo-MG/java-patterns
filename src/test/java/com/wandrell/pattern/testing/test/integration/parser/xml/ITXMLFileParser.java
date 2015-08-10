@@ -64,8 +64,8 @@ public final class ITXMLFileParser {
             public final Integer parse(final Document doc) {
                 final Integer value;
 
-                value = Integer.parseInt(doc.getRootElement().getChildText(
-                        XMLConf.NODE_VALUE));
+                value = Integer.parseInt(
+                        doc.getRootElement().getChildText(XMLConf.NODE_VALUE));
 
                 return value;
             }
@@ -82,12 +82,9 @@ public final class ITXMLFileParser {
 
     /**
      * Tests that parsing a XML file returns the expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse() throws Exception {
+    public final void testParse() {
         final Parser<Reader, Document> parser;  // Parser tested
         final Reader reader; // Reader to the test file
         final Integer value; // Tested result from the parsed file
@@ -103,12 +100,9 @@ public final class ITXMLFileParser {
 
     /**
      * Tests that parsing a DTD-validated XML file returns the expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse_DTD() throws Exception {
+    public final void testParse_DTD() {
         final XMLFileParser parser;  // Parser tested
         final Reader reader; // Reader to the test file
         final Integer value; // Tested result from the parsed file
@@ -124,12 +118,9 @@ public final class ITXMLFileParser {
 
     /**
      * Tests that parsing a XSD-validated XML file returns the expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse_XSD() throws Exception {
+    public final void testParse_XSD() {
         final XMLFileParser parser;  // Parser tested
         final Reader reader; // Reader to the test file
         final Integer value; // Tested result from the parsed file

@@ -48,9 +48,11 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * <li>Requiring a not existing attribute returns no entries.</li>
  * <li>Requiring and rejecting the same attribute returns no entries.</li>
  * <li>Rejecting the attribute 1 returns the correct amount of entries.</li>
- * <li>Rejecting the attribute 1 and 2 returns the correct amount of entries.</li>
+ * <li>Rejecting the attribute 1 and 2 returns the correct amount of entries.
+ * </li>
  * <li>Requiring the attribute 1 returns the correct amount of entries.</li>
- * <li>Requiring the attribute 1 and 2 returns the correct amount of entries.</li>
+ * <li>Requiring the attribute 1 and 2 returns the correct amount of entries.
+ * </li>
  * <li>Requiring the attribute 1 and rejecting the attribute 2 returns the
  * correct amount of entries.</li>
  * </ol>
@@ -186,12 +188,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     /**
      * Tests that the returned entries change after changing the filtered
      * attributes.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_FilterChanges_Adapts() throws Exception {
+    public final void testParse_FilterChanges_Adapts() {
         Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -208,12 +207,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
 
     /**
      * Tests that applying no filter returns all the entries.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_NoFilter_ReturnsAll() throws Exception {
+    public final void testParse_NoFilter_ReturnsAll() {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -224,12 +220,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     /**
      * Tests that rejecting the attribute 1 returns the correct amount of
      * entries.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_Rejects1_ReturnsPart() throws Exception {
+    public final void testParse_Rejects1_ReturnsPart() {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -243,12 +236,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     /**
      * Tests that rejecting the attribute 1 and 2 returns the correct amount of
      * entries.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_Rejects1And2_ReturnsPart() throws Exception {
+    public final void testParse_Rejects1And2_ReturnsPart() {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -262,13 +252,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
 
     /**
      * Tests that rejecting a not existing attribute returns no entries.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_RejectsNotExisting_ReturnsNone()
-            throws Exception {
+    public final void testParse_RejectsNotExisting_ReturnsNone() {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -282,12 +268,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     /**
      * Tests that requiring the attribute 1 returns the correct amount of
      * entries.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_Requires1_ReturnsPart() throws Exception {
+    public final void testParse_Requires1_ReturnsPart() {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -301,12 +284,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     /**
      * Tests that requiring the attribute 1 and 2 returns the correct amount of
      * entries.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_Requires1And2_ReturnsPart() throws Exception {
+    public final void testParse_Requires1And2_ReturnsPart() {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -320,13 +300,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
 
     /**
      * Tests that requiring and rejecting the same attribute returns no entries.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_Requires1Rejects1_ReturnsNone()
-            throws Exception {
+    public final void testParse_Requires1Rejects1_ReturnsNone() {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -341,13 +317,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     /**
      * Tests that requiring the attribute 1 and rejecting the attribute 2
      * returns the correct amount of entries.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_Requires1Rejects2_ReturnsPart()
-            throws Exception {
+    public final void testParse_Requires1Rejects2_ReturnsPart() {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());
@@ -361,13 +333,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
 
     /**
      * Tests that requiring a not existing attribute returns no entries.
-     * 
-     * @throws Exception
-     *             never, this is just a required declaration
      */
     @Test
-    public final void testParse_RequiresNotExisting_ReturnsNone()
-            throws Exception {
+    public final void testParse_RequiresNotExisting_ReturnsNone() {
         final Reader r; // Reader for the test data
 
         r = ResourceUtils.getClassPathReader(getPath());

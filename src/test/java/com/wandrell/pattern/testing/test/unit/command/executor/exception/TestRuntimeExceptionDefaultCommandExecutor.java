@@ -165,8 +165,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
      *             always as part of the test
      */
     @Test(expectedExceptions = RuntimeException.class)
-    public final
-            void
+    public final void
             testExecute_ResultCommand_RuntimeExceptionThrown_ThrowsRuntimeException()
                     throws Exception {
         final ResultCommand<?> command;

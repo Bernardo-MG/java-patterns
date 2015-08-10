@@ -150,8 +150,9 @@ public final class ITDTDValidationXMLOutputter {
         readerExpected = ResourceUtils
                 .getClassPathReader(XMLConf.INTEGER_EXPECTED_DTD);
 
-        Assert.assertTrue(XMLUnit.compareXML(readerExpected,
-                new InputStreamReader(streamTest)).identical());
+        Assert.assertTrue(XMLUnit
+                .compareXML(readerExpected, new InputStreamReader(streamTest))
+                .identical());
     }
 
     /**
@@ -170,8 +171,8 @@ public final class ITDTDValidationXMLOutputter {
     private final void initialize() {
         value = new Document();
         value.addContent(new Element(XMLConf.NODE_ROOT));
-        value.getRootElement().addContent(
-                new Element(XMLConf.NODE_VALUE).addContent("1"));
+        value.getRootElement()
+                .addContent(new Element(XMLConf.NODE_VALUE).addContent("1"));
 
         outputter = new XMLOutputter(XMLValidationType.DTD,
                 "./src/test/resources/files/xml/validation/dtd_validation.dtd");

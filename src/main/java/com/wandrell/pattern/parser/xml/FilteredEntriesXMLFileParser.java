@@ -57,8 +57,8 @@ import com.wandrell.pattern.conf.XMLValidationType;
  * 
  * @author Bernardo Martínez Garrido
  */
-public final class FilteredEntriesXMLFileParser extends
-        AbstractAttributesFilterXMLFileParser {
+public final class FilteredEntriesXMLFileParser
+        extends AbstractAttributesFilterXMLFileParser {
 
     /**
      * Base parser handling the creation of the {@code Document}.
@@ -146,11 +146,9 @@ public final class FilteredEntriesXMLFileParser extends
      * @param input
      *            {@code Reader} for the XML file
      * @return a {@code Document} with the XML contents
-     * @throws Exception
-     *             when an error ocurrs during parsing
      */
     @Override
-    public final Document parse(final Reader input) throws Exception {
+    public final Document parse(final Reader input) {
         return filter(getBaseParser().parse(input));
     }
 

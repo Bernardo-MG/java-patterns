@@ -4,7 +4,7 @@
 
 	<test name="all" verbose="2">
 		<packages>
-			<package name="om.wandrell.testing.pattern.test.unit.parser.xml.filtered" />
+			<package name="com.wandrell.pattern.testing.test.unit.parser.xml.filtered" />
 		</packages>
 	</test>
 

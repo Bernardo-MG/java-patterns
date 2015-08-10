@@ -55,9 +55,17 @@
 				Cleaned up code.
 			</action>
 		</release>
-		<release version="0.4.3" date="2015-06-09" description="Corrections">
+		<release version="0.4.3" date="2015-06-09" description="Maven Skin">
 			<action dev="bmg" type="update">
 				Changed Maven site skin to Docs Maven Skin.
+			</action>
+		</release>
+		<release version="0.4.4" date="2015-06-10" description="Enhancements">
+			<action dev="bmg" type="update">
+				QueryData is now editable.
+			</action>
+			<action dev="bmg" type="update">
+				Parsers no longer throw checked exceptions.
 			</action>
 		</release>
 	</body>

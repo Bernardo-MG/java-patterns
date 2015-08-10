@@ -41,4 +41,3 @@
  * XSD or DTD file.
  */
 package com.wandrell.pattern.parser;
-

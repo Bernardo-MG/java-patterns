@@ -36,8 +36,8 @@ import com.wandrell.pattern.testing.util.test.integration.parser.xml.AbstractITP
  * @author Bernardo Martínez Garrido
  * @see FilteredEntriesXMLFileParser
  */
-public final class ITFilteredNoValidationFilteredEntriesXMLFileParser extends
-        AbstractITParseAbstractAttributesFilterXMLFileParser<Integer> {
+public final class ITFilteredNoValidationFilteredEntriesXMLFileParser
+        extends AbstractITParseAbstractAttributesFilterXMLFileParser<Integer> {
 
     /**
      * Generates the parser to be tested.

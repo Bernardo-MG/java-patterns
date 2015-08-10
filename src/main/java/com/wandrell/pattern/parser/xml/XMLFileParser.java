@@ -103,11 +103,9 @@ public final class XMLFileParser implements Parser<Reader, Document> {
      * @param input
      *            {@code Reader} for the XML file
      * @return a {@code Document} with the XML contents
-     * @throws Exception
-     *             when an error occurs during parsing
      */
     @Override
-    public final Document parse(final Reader input) throws Exception {
+    public final Document parse(final Reader input) {
         return getParser().parse(input);
     }
 

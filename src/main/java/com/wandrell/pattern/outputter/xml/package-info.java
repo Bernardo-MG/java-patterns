@@ -30,4 +30,3 @@
  * transforms a JDOM2 {@link org.jdom2.Document Document} into an XML text file.
  */
 package com.wandrell.pattern.outputter.xml;
-

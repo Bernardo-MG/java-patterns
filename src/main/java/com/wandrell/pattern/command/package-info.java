@@ -71,4 +71,3 @@
  * needs, so no default implementation is offered for them.
  */
 package com.wandrell.pattern.command;
-

@@ -30,4 +30,3 @@
  * which transforms an {@code Object} into a YAML text file.
  */
 package com.wandrell.pattern.outputter.yaml;
-

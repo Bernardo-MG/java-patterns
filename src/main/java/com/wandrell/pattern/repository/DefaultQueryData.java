@@ -64,6 +64,9 @@ public final class DefaultQueryData implements QueryData {
 
     /**
      * Constructs a {@code DefaultQuery} with the specified query's data.
+     * <p>
+     * Parameters are pairs of keys on the query and the object which will be
+     * used to substitute them.
      * 
      * @param query
      *            the query string
@@ -82,6 +85,21 @@ public final class DefaultQueryData implements QueryData {
     }
 
     @Override
+    public final void addParameter(final String key, final Object value) {
+        checkNotNull(key, "Received a null pointer as key");
+        checkNotNull(value, "Received a null pointer as value");
+
+        params.put(key, value);
+    }
+
+    @Override
+    public final void addParameters(final Map<String, Object> parameters) {
+        checkNotNull(parameters, "Received a null pointer as parameters");
+
+        params.putAll(parameters);
+    }
+
+    @Override
     public final Map<String, Object> getParameters() {
         return Collections.unmodifiableMap(params);
     }
@@ -89,6 +107,11 @@ public final class DefaultQueryData implements QueryData {
     @Override
     public final String getQuery() {
         return queryStr;
+    }
+
+    @Override
+    public final void removeParameter(final String key) {
+        params.remove(key);
     }
 
 }

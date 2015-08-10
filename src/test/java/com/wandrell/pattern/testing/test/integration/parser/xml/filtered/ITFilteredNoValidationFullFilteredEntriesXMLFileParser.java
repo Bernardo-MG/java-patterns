@@ -59,8 +59,8 @@ public final class ITFilteredNoValidationFullFilteredEntriesXMLFileParser
      * Default constructor.
      */
     public ITFilteredNoValidationFullFilteredEntriesXMLFileParser() {
-        super(buildParser(), XMLConf.FILTERED_NO_VALIDATION_FULL, 6, 4, 3, 1,
-                2, 9);
+        super(buildParser(), XMLConf.FILTERED_NO_VALIDATION_FULL, 6, 4, 3, 1, 2,
+                9);
     }
 
 }

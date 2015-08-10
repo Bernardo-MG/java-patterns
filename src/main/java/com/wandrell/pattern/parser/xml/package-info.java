@@ -45,4 +45,3 @@
  * only part of it.
  */
 package com.wandrell.pattern.parser.xml;
-
