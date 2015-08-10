@@ -70,12 +70,19 @@ public final class NotValidatedXMLFileParser
      * @param input
      *            {@code Reader} for the XML file
      * @return a {@code Document} with the XML contents
-     * @throws JDOMException
-     *             when parsing causes an error
      */
     @Override
-    public final Document parse(final Reader input) throws JDOMException {
-        return getBuilder().build(getXMLReader(input));
+    public final Document parse(final Reader input) {
+        Document doc;
+
+        try {
+            doc = getBuilder().build(getXMLReader(input));
+        } catch (final JDOMException e) {
+            doc = null;
+            throw new RuntimeException(e);
+        }
+
+        return doc;
     }
 
     /**

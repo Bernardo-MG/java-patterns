@@ -26,7 +26,6 @@ package com.wandrell.pattern.testing.test.integration.parser.xml.exception;
 import java.io.Reader;
 
 import org.jdom2.Document;
-import org.jdom2.input.JDOMParseException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -41,8 +40,7 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * <p>
  * Checks the following cases:
  * <ol>
- * <li>Reading a file which doesn't validate throws a {@code JDOMParseException}
- * .</li>
+ * <li>Reading a file which doesn't validate throws a {@code Exception} .</li>
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
@@ -64,14 +62,10 @@ public final class ITExceptionNoValidatesDTDSAXInputParser {
 
     /**
      * Tests that reading a file which doesn't validate throws a
-     * {@code JDOMParseException}.
-     * 
-     * @throws Exception
-     *             always, as part of the test
+     * {@code Exception}.
      */
-    @Test(expectedExceptions = JDOMParseException.class)
-    public final void testParse_NotValidates_ThrowsException()
-            throws Exception {
+    @Test(expectedExceptions = Exception.class)
+    public final void testParse_NotValidates_ThrowsException() {
         parser.parse(
                 ResourceUtils.getClassPathReader(XMLConf.INTEGER_NO_VALIDATES));
     }

@@ -146,11 +146,9 @@ public final class FilteredEntriesXMLFileParser
      * @param input
      *            {@code Reader} for the XML file
      * @return a {@code Document} with the XML contents
-     * @throws Exception
-     *             when an error ocurrs during parsing
      */
     @Override
-    public final Document parse(final Reader input) throws Exception {
+    public final Document parse(final Reader input) {
         return filter(getBaseParser().parse(input));
     }
 

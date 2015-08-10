@@ -144,9 +144,17 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
      *             when an IO exception stops the parsing
      */
     @Override
-    public final Document parse(final Reader input)
-            throws JDOMException, IOException {
-        return getBuilder().build(input);
+    public final Document parse(final Reader input) {
+        Document doc;
+
+        try {
+            doc = getBuilder().build(input);
+        } catch (final JDOMException | IOException e) {
+            doc = null;
+            throw new RuntimeException(e);
+        }
+
+        return doc;
     }
 
     /**

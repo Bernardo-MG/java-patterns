@@ -64,12 +64,9 @@ public final class ITExceptionBadValidationFileSAXInputParser {
     /**
      * Tests that an {@code Exception} is thrown when reading a XML file using
      * an empty validation file, when using DTD validation.
-     * 
-     * @throws Exception
-     *             always, as part of the test
      */
     @Test(expectedExceptions = Exception.class)
-    public final void testParse_DTD_Empty() throws Exception {
+    public final void testParse_DTD_Empty() {
         final Parser<Reader, Document> parser;    // Tested parser
 
         parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
@@ -82,12 +79,9 @@ public final class ITExceptionBadValidationFileSAXInputParser {
     /**
      * Tests that an {@code Exception} is thrown when reading a XML file using
      * an incorrectly formatted validation file, when using DTD validation.
-     * 
-     * @throws Exception
-     *             always, as part of the test
      */
     @Test(expectedExceptions = Exception.class)
-    public final void testParse_DTD_Invalid() throws Exception {
+    public final void testParse_DTD_Invalid() {
         final Parser<Reader, Document> parser;    // Tested parser
 
         parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
@@ -100,12 +94,9 @@ public final class ITExceptionBadValidationFileSAXInputParser {
     /**
      * Tests that an {@code Exception} is thrown when reading a XML file using
      * an empty validation file, when using XSD validation.
-     * 
-     * @throws Exception
-     *             always, as part of the test
      */
     @Test(expectedExceptions = Exception.class)
-    public final void testParse_XSD_Empty() throws Exception {
+    public final void testParse_XSD_Empty() {
         final Parser<Reader, Document> parser;    // Tested parser
 
         parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
@@ -119,12 +110,9 @@ public final class ITExceptionBadValidationFileSAXInputParser {
     /**
      * Tests that an {@code Exception} is thrown when reading a XML file using
      * an incorrectly formatted validation file, when using XSD validation.
-     * 
-     * @throws Exception
-     *             always, as part of the test
      */
     @Test(expectedExceptions = Exception.class)
-    public final void testParse_XSD_Invalid() throws Exception {
+    public final void testParse_XSD_Invalid() {
         final Parser<Reader, Document> parser;    // Tested parser
 
         parser = new ValidatedXMLFileParser(XMLValidationType.XSD,

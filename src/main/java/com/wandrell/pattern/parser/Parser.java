@@ -66,9 +66,7 @@ public interface Parser<I, O> {
      * @param input
      *            object to parse
      * @return the input parsed into a new object
-     * @throws Exception
-     *             when the parsing causes an error
      */
-    public O parse(final I input) throws Exception;
+    public O parse(final I input);
 
 }

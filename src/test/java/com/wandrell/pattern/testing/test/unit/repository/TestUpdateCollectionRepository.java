@@ -168,7 +168,7 @@ public final class TestUpdateCollectionRepository {
     @Test
     public final void testUpdate_Existing_Update() {
         final Collection<TestClass> entities; // All the
- // entities
+        // entities
         final TestClass entity; // The updated entity
 
         entity = new TestClass("a", 15);

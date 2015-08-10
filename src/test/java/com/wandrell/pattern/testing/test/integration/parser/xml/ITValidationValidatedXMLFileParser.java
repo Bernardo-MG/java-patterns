@@ -88,12 +88,9 @@ public final class ITValidationValidatedXMLFileParser {
 
     /**
      * Tests that parsing a DTD-Validated XML file returns the expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse_DTD() throws Exception {
+    public final void testParse_DTD() {
         final Parser<Reader, Document> parser;  // Parser tested
         final Reader reader; // Reader to the test file
         final Integer value; // Tested result from the parsed file
@@ -110,12 +107,9 @@ public final class ITValidationValidatedXMLFileParser {
     /**
      * Tests that parsing a XML file with no validation returns the expected
      * value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse_None() throws Exception {
+    public final void testParse_None() {
         final ValidatedXMLFileParser parser;  // Parser tested
         final Integer value; // Tested result from the parsed file
         final Reader reader; // Reader to the test file
@@ -133,12 +127,9 @@ public final class ITValidationValidatedXMLFileParser {
     /**
      * Tests that parsing after setting the validation information returns the
      * expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse_None_XSD() throws Exception {
+    public final void testParse_None_XSD() {
         final ValidatedXMLFileParser parser;  // Parser tested
         final Integer value; // Tested result from the parsed file
         Reader reader;       // Reader to the test file
@@ -161,12 +152,9 @@ public final class ITValidationValidatedXMLFileParser {
 
     /**
      * Tests that parsing a XSD-validated XML file returns the expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse_XSD() throws Exception {
+    public final void testParse_XSD() {
         final Parser<Reader, Document> parser;  // Parser tested
         final Reader reader; // Reader to the test file
         final Integer value; // Tested result from the parsed file
@@ -183,12 +171,9 @@ public final class ITValidationValidatedXMLFileParser {
     /**
      * Tests that parsing after changing the validation information returns the
      * expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse_XSD_DTD() throws Exception {
+    public final void testParse_XSD_DTD() {
         final ValidatedXMLFileParser parser;  // Parser tested
         final Integer value; // Tested result from the parsed file
         Reader reader;       // Reader to the test file
@@ -213,12 +198,9 @@ public final class ITValidationValidatedXMLFileParser {
     /**
      * Tests that parsing after removing the validation information returns the
      * expected value.
-     * 
-     * @throws Exception
-     *             never, this is a required declaration
      */
     @Test
-    public final void testParse_XSD_None() throws Exception {
+    public final void testParse_XSD_None() {
         final ValidatedXMLFileParser parser;  // Parser tested
         final Integer value; // Tested result from the parsed file
         Reader reader;       // Reader to the test file

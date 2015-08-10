@@ -64,6 +64,9 @@
 			<action dev="bmg" type="update">
 				QueryData is now editable.
 			</action>
+			<action dev="bmg" type="update">
+				Parsers no longer throw checked exceptions.
+			</action>
 		</release>
 	</body>
 </document>

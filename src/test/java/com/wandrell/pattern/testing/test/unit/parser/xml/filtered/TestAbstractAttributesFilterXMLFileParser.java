@@ -90,7 +90,7 @@ public final class TestAbstractAttributesFilterXMLFileParser {
         parser = new AbstractAttributesFilterXMLFileParser() {
 
             @Override
-            public final Document parse(final Reader reader) throws Exception {
+            public final Document parse(final Reader reader) {
                 return new Document();
             }
 

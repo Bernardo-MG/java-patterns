@@ -30,7 +30,6 @@ import java.io.Reader;
 
 import org.apache.commons.io.IOUtils;
 import org.jdom2.Document;
-import org.jdom2.JDOMException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -42,8 +41,7 @@ import com.wandrell.pattern.parser.Parser;
  * <p>
  * Adds the following cases:
  * <ol>
- * <li>A {@code JDOMException} is thrown when trying to parse a non XML file.
- * </li>
+ * <li>A {@code Exception} is thrown when trying to parse a non XML file.</li>
  * <li>An {@code Exception} is thrown when reading from a closed {@code Reader}.
  * </ol>
  * 
@@ -68,13 +66,11 @@ public abstract class AbstractUnitExceptionParseXMLReaderParser<V> {
     }
 
     /**
-     * Tries to read a directory.
-     * 
-     * @param file
-     *            the file handler to test
+     * Tests that a {@code Exception} is thrown when trying to parse a non XML
+     * file.
      */
-    @Test(expectedExceptions = JDOMException.class)
-    public final void testRead_NotXML_ThrowsException() throws Exception {
+    @Test(expectedExceptions = Exception.class)
+    public final void testRead_NotXML_ThrowsException() {
         parser.parse(new BufferedReader(
                 new InputStreamReader(IOUtils.toInputStream(""))));
     }
@@ -82,13 +78,9 @@ public abstract class AbstractUnitExceptionParseXMLReaderParser<V> {
     /**
      * Tests an {@code Exception} is thrown when reading from a closed
      * {@code Reader}.
-     * 
-     * @throws Exception
-     *             always, as part of the test
      */
     @Test(expectedExceptions = Exception.class)
-    public final void testRead_Reader_Closed_ThrowsException()
-            throws Exception {
+    public final void testRead_Reader_Closed_ThrowsException() {
         Reader reader = null; // Stubbed reader
 
         try {
