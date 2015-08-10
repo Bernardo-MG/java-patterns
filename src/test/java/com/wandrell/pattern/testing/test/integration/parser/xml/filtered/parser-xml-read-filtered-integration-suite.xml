@@ -6,7 +6,7 @@
 	<test name="all" verbose="2">
 		<packages>
 			<package
-				name="com.wandrell.testing.pattern.test.integration.parser.xml.filtered" />
+				name="com.wandrell.pattern.testing.test.integration.parser.xml.filtered" />
 		</packages>
 	</test>
 
