@@ -138,10 +138,6 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
      * @param input
      *            {@code Reader} for the XML file
      * @return a {@code Document} with the XML contents
-     * @throws JDOMException
-     *             when an error stops the parsing
-     * @throws IOException
-     *             when an IO exception stops the parsing
      */
     @Override
     public final Document parse(final Reader input) {
