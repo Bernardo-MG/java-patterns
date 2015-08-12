@@ -10,7 +10,7 @@ To increase the decoupling a command executor can be used. This will not only ex
 
 ## Command
 
-[![Command class hierarchy tree][command-class_tree]][command-class_tree]
+![Command class hierarchy tree][command-class_tree]
 
 The command pattern is implemented through a small hierarchy of interfaces which has at it's root the [Command][command] interface. This offers the _execute_ method, through which the encapsulated code can be called.
 
@@ -62,7 +62,7 @@ Of course, it is the implementation's job to make sure this works as intended.
 
 ## Command Executor
 
-[![Command executor class hierarchy tree][command_executor-class_tree]][command_executor-class_tree]
+![Command executor class hierarchy tree][command_executor-class_tree]
 
 The command executor is defined by the [CommandExecutor][command_executor] interface.
 

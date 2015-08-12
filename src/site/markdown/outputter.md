@@ -4,7 +4,7 @@ An outputter sends data through an output I/O operation, hiding the actual imple
 	
 ## Interface
 
-[![Outputter interface][outputter-class_tree]][outputter-class_tree]
+![Outputter interface][outputter-class_tree]
 
 The [Outputter][outputter] consists of just two methods, both called _output_, which send an object through the accompanying output object, which may be a _Writer_ or an _OutputStream_.
 	
@@ -12,7 +12,7 @@ Note that the output object is expected to be closed once the operation is finis
 
 ## Implementations
 
-[![Outputter class hierarchy tree][outputter-class_hierarchy]][outputter-class_hierarchy]
+![Outputter class hierarchy tree][outputter-class_hierarchy]
 
 ---
 

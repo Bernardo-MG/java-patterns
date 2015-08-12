@@ -4,7 +4,7 @@ A parser receives a data structure, and transforms it into another equivalent da
 	
 ## Interface
 
-[![Parser interface][parser-interface]][parser-interface]
+![Parser interface][parser-interface]
 
 The [Parser][parser] only contains one method, _parse_, which takes and input object and generates and output structure.
 	
@@ -16,7 +16,7 @@ It should be noted that if the parsing process is complex, it may be possible, a
 
 The only default implementations for the parser patterns are for XML files.
 
-[![XML parsers class hierarchy tree][xml_parser-class_tree]][xml_parser-class_tree]
+![XML parsers class hierarchy tree][xml_parser-class_tree]
 
 ---
 
