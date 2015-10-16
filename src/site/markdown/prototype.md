@@ -6,7 +6,7 @@ It should be noted that Java offers it's own interface for this pattern, the _cl
 	
 ## Interface
 
-[![Prototype interface][prototype-class_tree]][prototype-class_tree]
+![Prototype interface][prototype-class_tree]
 
 The [Prototype][prototype] interface is very simple, it just offers a single method named _createNewInstance_ which returns a copy of the prototype.
 	

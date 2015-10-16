@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2014 the original author or authors.
+ * Copyright (c) 2014-2015 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -138,10 +138,6 @@ public final class ValidatedXMLFileParser implements Parser<Reader, Document> {
      * @param input
      *            {@code Reader} for the XML file
      * @return a {@code Document} with the XML contents
-     * @throws JDOMException
-     *             when an error stops the parsing
-     * @throws IOException
-     *             when an IO exception stops the parsing
      */
     @Override
     public final Document parse(final Reader input) {
