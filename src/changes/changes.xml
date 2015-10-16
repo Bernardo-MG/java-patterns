@@ -68,5 +68,10 @@
 				Parsers no longer throw checked exceptions.
 			</action>
 		</release>
+		<release version="0.4.5" date="2015-10-16" description="Maven Site Skin update">
+			<action dev="bmg" type="update">
+				Updated Maven Site Skin.
+			</action>
+		</release>
 	</body>
 </document>
