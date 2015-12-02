@@ -69,7 +69,12 @@
 
 	<profiles>
 		<profile>
-			<id>eclipse</id>
+			<!-- Profile for the Eclipse Maven plugin -->
+			<!-- Sets the POM so this plugin does not give the usual unregistered 
+				goals errors -->
+			<!-- It will be activated automatically on Eclipse if this has the m2e 
+				plugin, by detecting the version property -->
+			<id>eclipse-maven</id>
 			<activation>
 				<property>
 					<name>m2e.version</name>
@@ -120,27 +125,40 @@
 			</build>
 		</profile>
 		<profile>
-			<id>default</id>
+			<!-- Release site deployment profile -->
+			<!-- Sets the site repository to point to the releases repo -->
+			<id>deploy-site-release</id>
 			<activation>
+				<!-- Active by default so the repository appears in the reports -->
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<distributionManagement>
 				<site>
 					<id>site</id>
 					<name>Project Documentation Site</name>
-					<url>ftp://docs.wandrell.com/java-patterns</url>
+					<url>${urlSiteDeployRelease}/${artifactId}</url>
 				</site>
 			</distributionManagement>
 		</profile>
 		<profile>
-			<id>development</id>
+			<!-- Development site deployment profile -->
+			<!-- Sets the site repository to point to the development repo -->
+			<id>deploy-site-development</id>
 			<distributionManagement>
 				<site>
 					<id>site-development</id>
 					<name>Project Development Documentation Site</name>
-					<url>ftp://docs.wandrell.com/java-patterns</url>
+					<url>${urlSiteDeployDevelop}/${artifactId}</url>
 				</site>
 			</distributionManagement>
+		</profile>
+		<profile>
+			<!-- Deployment profile -->
+			<!-- Sets ups the environment for deployment -->
+			<id>deployment</id>
+			<properties>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
 		</profile>
 	</profiles>
 
