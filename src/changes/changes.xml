@@ -78,5 +78,10 @@
 				Updated configuration.
 			</action>
 		</release>
+		<release version="0.4.7" date="2015-12-2" description="Configuration update">
+			<action dev="bmg" type="update">
+				Updated configuration.
+			</action>
+		</release>
 	</body>
 </document>
