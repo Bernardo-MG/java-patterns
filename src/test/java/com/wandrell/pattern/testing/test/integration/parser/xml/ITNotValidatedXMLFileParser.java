@@ -54,15 +54,15 @@ public final class ITNotValidatedXMLFileParser extends
 AbstractTestNGSpringContextTests {
 
 	/**
-	 * Path to the integers XML file.
-	 */
-	@Value("${xml.integer.path}")
-	private String xmlIntegerPath;
-	/**
 	 * Value node name.
 	 */
 	@Value("${xml.node.value}")
 	private String nodeValue;
+	/**
+	 * Path to the integers XML file.
+	 */
+	@Value("${xml.integer.path}")
+	private String xmlIntegerPath;
 	
     /**
      * Default constructor.

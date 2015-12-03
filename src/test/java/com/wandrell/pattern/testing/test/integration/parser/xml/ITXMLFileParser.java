@@ -64,10 +64,15 @@ AbstractTestNGSpringContextTests {
 	@Value("${xml.dtd.path}")
 	private String dtdPath;
 	/**
+	 * Value node name.
+	 */
+	@Value("${xml.node.value}")
+	private String nodeValue;
+    /**
      * Parser to generate the tested value from the {@code Document}.
      */
     private final Parser<Document, Integer> parserDoc;
-    /**
+	/**
 	 * Path to the DTD validated XML file.
 	 */
 	@Value("${xml.validated.dtd.path}")
@@ -77,11 +82,6 @@ AbstractTestNGSpringContextTests {
 	 */
 	@Value("${xml.integer.path}")
 	private String xmlIntegerPath;
-	/**
-	 * Value node name.
-	 */
-	@Value("${xml.node.value}")
-	private String nodeValue;
 	/**
 	 * Path to the XSD validated XML file.
 	 */

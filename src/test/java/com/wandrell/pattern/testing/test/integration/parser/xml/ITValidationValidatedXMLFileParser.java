@@ -70,6 +70,11 @@ public final class ITValidationValidatedXMLFileParser extends
 	@Value("${xml.dtd.path}")
 	private String dtdPath;
 	/**
+	 * Value node name.
+	 */
+	@Value("${xml.node.value}")
+	private String nodeValue;
+	/**
 	 * Parser to generate the tested value from the {@code Document}.
 	 */
 	private final Parser<Document, Integer> parserDoc;
@@ -93,11 +98,6 @@ public final class ITValidationValidatedXMLFileParser extends
 	 */
 	@Value("${xml.xsd.path}")
 	private String xsdPath;
-	/**
-	 * Value node name.
-	 */
-	@Value("${xml.node.value}")
-	private String nodeValue;
 
 	{
 		parserDoc = new Parser<Document, Integer>() {
