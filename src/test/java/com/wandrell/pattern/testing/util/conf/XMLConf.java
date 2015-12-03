@@ -42,10 +42,7 @@ public final class XMLConf {
     public static final String FILTERED_WITH_VALIDATION_DTD          = "files/xml/filtered/filtered_validation_a_dtd.xml";
     public static final String FILTERED_WITH_VALIDATION_XSD          = "files/xml/filtered/filtered_validation_a.xml";
     public static final String FILTERED_WITH_VALIDATION_XSD_DEFAULTS = "files/xml/filtered/filtered_validation_b.xml";
-    public static final String NODE_NODE                             = "node";
-    public static final String NODE_ROOT                             = "root";
     public static final String NODE_ROOT_FILTER                      = "node";
-    public static final String NODE_VALUE                            = "value";
     
     /**
      * Private constructor.

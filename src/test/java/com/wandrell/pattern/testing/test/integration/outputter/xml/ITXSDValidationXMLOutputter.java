@@ -53,7 +53,6 @@ import com.wandrell.pattern.outputter.Outputter;
 import com.wandrell.pattern.outputter.xml.XMLOutputter;
 import com.wandrell.pattern.testing.util.ResourceUtils;
 import com.wandrell.pattern.testing.util.conf.TestContextConfig;
-import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
  * Integration tests for {@link XMLOutputter}, checking that XML files with XSD
@@ -87,6 +86,11 @@ public final class ITXSDValidationXMLOutputter extends
 	 */
 	private Outputter<Document> outputter;
 	/**
+	 * Root node name.
+	 */
+	@Value("${xml.node.root}")
+	private String nodeRoot;
+	/**
 	 * Value to send.
 	 */
 	private Document value;
@@ -100,6 +104,11 @@ public final class ITXSDValidationXMLOutputter extends
 	 */
 	@Value("${xml.xsd.longPath}")
 	private String xsdPath;
+	/**
+	 * Value node name.
+	 */
+	@Value("${xml.node.value}")
+	private String nodeValue;
 
 	/**
 	 * Default constructor.
@@ -142,9 +151,9 @@ public final class ITXSDValidationXMLOutputter extends
 	@BeforeClass
 	private final void initialize() {
 		value = new Document();
-		value.addContent(new Element(XMLConf.NODE_ROOT));
+		value.addContent(new Element(nodeRoot));
 		value.getRootElement().addContent(
-				new Element(XMLConf.NODE_VALUE).addContent("1"));
+				new Element(nodeValue).addContent("1"));
 
 		outputter = new XMLOutputter(XMLValidationType.XSD, xsdPath);
 	}

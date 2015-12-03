@@ -40,7 +40,6 @@ import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.testing.util.ResourceUtils;
 import com.wandrell.pattern.testing.util.conf.TestContextConfig;
-import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
  * Integration tests for {@link ValidatedXMLFileParser} with XSD validation.
@@ -94,6 +93,11 @@ public final class ITValidationValidatedXMLFileParser extends
 	 */
 	@Value("${xml.xsd.path}")
 	private String xsdPath;
+	/**
+	 * Value node name.
+	 */
+	@Value("${xml.node.value}")
+	private String nodeValue;
 
 	{
 		parserDoc = new Parser<Document, Integer>() {
@@ -103,7 +107,7 @@ public final class ITValidationValidatedXMLFileParser extends
 				final Integer value;
 
 				value = Integer.parseInt(doc.getRootElement().getChildText(
-						XMLConf.NODE_VALUE));
+						nodeValue));
 
 				return value;
 			}
