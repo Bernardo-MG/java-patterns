@@ -24,11 +24,13 @@
 
 package com.wandrell.pattern.testing.util.test.integration.parser.xml;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.io.Reader;
 
 import org.jdom2.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -61,7 +63,8 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * @author Bernardo Martínez Garrido
  * @see InputParser
  */
-public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
+public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V>
+extends AbstractTestNGSpringContextTests{
 
     /**
      * Amount of entries after filtering based on rejecting a not existing
@@ -81,16 +84,20 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     /**
      * Amount of entries after filtering based on rejecting the attribute 1.
      */
-    private final Integer                               noAttribute1;
+	@Value("${count.no1}")
+    private  Integer                               noAttribute1;
     /**
      * Amount of entries after filtering based on rejecting the attribute 1 and
      * the attribute 2.
      */
-    private final Integer                               noAttribute1NoAttribute2;
+	@Value("${count.no1no2}")
+    private  Integer                               noAttribute1NoAttribute2;
     /**
      * Parser being tested.
      */
-    private final AbstractAttributesFilterXMLFileParser parser;
+	@Autowired
+	@Qualifier("parser")
+    private  AbstractAttributesFilterXMLFileParser parser;
     /**
      * Parser which counts the {@code Document} root nodes.
      */
@@ -98,25 +105,31 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     /**
      * Path to the test values file.
      */
-    private final String                                path;
+	@Autowired
+	@Qualifier("xmlPath")
+    private String                                path;
     /**
      * Amount of entries after applying no filter.
      */
-    private final Integer                               total;
+	@Value("${count.total}")
+    private  Integer                               total;
     /**
      * Amount of entries after filtering based on requiring the attribute 1.
      */
-    private final Integer                               withAttribute1;
+	@Value("${count.with1}")
+    private  Integer                               withAttribute1;
     /**
      * Amount of entries after filtering based on requiring the attribute 1 and
      * rejecting the attribute 2.
      */
-    private final Integer                               withAttribute1NoAttribute2;
+	@Value("${count.with1No2}")
+    private  Integer                               withAttribute1NoAttribute2;
     /**
      * Amount of entries after filtering based on requiring the attribute 1 and
      * the attribute 2.
      */
-    private final Integer                               withAttribute1WithAttribute2;
+	@Value("${count.with1With2}")
+    private  Integer                               withAttribute1WithAttribute2;
 
     {
         parserNodes = new Parser<Document, Integer>() {
@@ -134,47 +147,9 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
      * 
      * @param parser
      *            parser being tested
-     * @param path
-     *            path to the test values file
-     * @param no1
-     *            amount of entries after rejecting the attribute 1
-     * @param no1no2
-     *            amount of entries after rejecting the attribute 1 and 2
-     * @param with1
-     *            amount of entries after requiring the attribute 1
-     * @param with1with2
-     *            amount of entries after requiring the attribute 1 and 2
-     * @param with1no2
-     *            amount of entries after requiring the attribute 1 and
-     *            rejecting the 2
-     * @param total
-     *            total amount of entries
      */
-    public AbstractITParseAbstractAttributesFilterXMLFileParser(
-            final AbstractAttributesFilterXMLFileParser parser,
-            final String path, final Integer no1, final Integer no1no2,
-            final Integer with1, final Integer with1with2,
-            final Integer with1no2, final Integer total) {
+    public AbstractITParseAbstractAttributesFilterXMLFileParser() {
         super();
-
-        checkNotNull(parser, "Received a null pointer as parser");
-        checkNotNull(path, "Received a null pointer as path");
-        checkNotNull(no1, "Received a null pointer as no1");
-        checkNotNull(no1no2, "Received a null pointer as no1no2");
-        checkNotNull(with1, "Received a null pointer as with1");
-        checkNotNull(with1with2, "Received a null pointer as with1with2");
-        checkNotNull(with1no2, "Received a null pointer as with1no2");
-        checkNotNull(total, "Received a null pointer as total");
-
-        this.path = path;
-        this.parser = parser;
-
-        noAttribute1 = no1;
-        noAttribute1NoAttribute2 = no1no2;
-        withAttribute1 = with1;
-        withAttribute1WithAttribute2 = with1with2;
-        withAttribute1NoAttribute2 = with1no2;
-        this.total = total;
     }
 
     /**

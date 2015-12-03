@@ -24,11 +24,10 @@
 
 package com.wandrell.pattern.testing.test.integration.parser.xml.filtered;
 
-import com.wandrell.pattern.conf.XMLValidationType;
-import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
+import org.springframework.test.context.ContextConfiguration;
+
 import com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser;
-import com.wandrell.pattern.testing.util.ResourceUtils;
-import com.wandrell.pattern.testing.util.conf.XMLConf;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.test.integration.parser.xml.AbstractITParseAbstractAttributesFilterXMLFileParser;
 
 /**
@@ -41,31 +40,15 @@ import com.wandrell.pattern.testing.util.test.integration.parser.xml.AbstractITP
  * @author Bernardo Martínez Garrido
  * @see FilteredEntriesXMLFileParser
  */
+@ContextConfiguration(TestContextConfig.PARSER_XML_FILTERED_DTD_VALIDATION)
 public final class ITFilteredDTDValidationDefaultsFilteredEntriesXMLFileParser
         extends AbstractITParseAbstractAttributesFilterXMLFileParser<Integer> {
-
-    /**
-     * Generates the parser to be tested.
-     * 
-     * @return the parser to be tested
-     */
-    private static final AbstractAttributesFilterXMLFileParser buildParser() {
-        final AbstractAttributesFilterXMLFileParser parser;
-
-        parser = new FilteredEntriesXMLFileParser(XMLValidationType.DTD,
-                ResourceUtils
-                        .getClassPathReader(XMLConf.FILTERED_VALIDATION_DTD),
-                XMLConf.NODE_ROOT_FILTER);
-
-        return parser;
-    }
 
     /**
      * Default constructor.
      */
     public ITFilteredDTDValidationDefaultsFilteredEntriesXMLFileParser() {
-        super(buildParser(), XMLConf.FILTERED_WITH_VALIDATION_DTD, 6, 4, 3, 1,
-                2, 9);
+        super();
     }
 
 }

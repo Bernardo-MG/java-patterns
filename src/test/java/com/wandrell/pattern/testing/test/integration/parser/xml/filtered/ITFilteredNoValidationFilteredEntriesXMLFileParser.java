@@ -24,9 +24,10 @@
 
 package com.wandrell.pattern.testing.test.integration.parser.xml.filtered;
 
-import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
+import org.springframework.test.context.ContextConfiguration;
+
 import com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser;
-import com.wandrell.pattern.testing.util.conf.XMLConf;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.test.integration.parser.xml.AbstractITParseAbstractAttributesFilterXMLFileParser;
 
 /**
@@ -37,27 +38,15 @@ import com.wandrell.pattern.testing.util.test.integration.parser.xml.AbstractITP
  * @author Bernardo Martínez Garrido
  * @see FilteredEntriesXMLFileParser
  */
+@ContextConfiguration(TestContextConfig.PARSER_XML_FILTERED_NO_VALIDATION)
 public final class ITFilteredNoValidationFilteredEntriesXMLFileParser
         extends AbstractITParseAbstractAttributesFilterXMLFileParser<Integer> {
-
-    /**
-     * Generates the parser to be tested.
-     * 
-     * @return the parser to be tested
-     */
-    private static final AbstractAttributesFilterXMLFileParser buildParser() {
-        final AbstractAttributesFilterXMLFileParser parser;
-
-        parser = new FilteredEntriesXMLFileParser(XMLConf.NODE_ROOT_FILTER);
-
-        return parser;
-    }
 
     /**
      * Default constructor.
      */
     public ITFilteredNoValidationFilteredEntriesXMLFileParser() {
-        super(buildParser(), XMLConf.FILTERED_NO_VALIDATION, 3, 1, 3, 1, 1, 9);
+        super();
     }
 
 }
