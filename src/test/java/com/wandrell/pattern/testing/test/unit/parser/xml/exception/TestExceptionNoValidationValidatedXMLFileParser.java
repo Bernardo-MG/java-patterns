@@ -37,7 +37,7 @@ import com.wandrell.pattern.testing.util.test.unit.parser.xml.exception.Abstract
  * {@code AbstractUnitExceptionReadXMLInputParser} and using no validation.
  * 
  * @author Bernardo Martínez Garrido
- * @see SAXInputParser
+ * @see ValidatedXMLFileParser
  */
 public final class TestExceptionNoValidationValidatedXMLFileParser
         extends AbstractUnitExceptionParseXMLReaderParser<Integer> {

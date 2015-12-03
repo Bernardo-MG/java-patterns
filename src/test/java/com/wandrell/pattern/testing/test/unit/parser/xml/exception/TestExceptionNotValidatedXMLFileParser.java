@@ -34,10 +34,10 @@ import com.wandrell.pattern.testing.util.test.unit.parser.xml.exception.Abstract
  * @author Bernardo Martínez Garrido
  * @see NotValidatedXMLFileParser
  */
-public final class TestExceptionXMLFileParser
+public final class TestExceptionNotValidatedXMLFileParser
         extends AbstractUnitExceptionParseXMLReaderParser<Integer> {
 
-    public TestExceptionXMLFileParser() {
+    public TestExceptionNotValidatedXMLFileParser() {
         super(new NotValidatedXMLFileParser());
     }
 
