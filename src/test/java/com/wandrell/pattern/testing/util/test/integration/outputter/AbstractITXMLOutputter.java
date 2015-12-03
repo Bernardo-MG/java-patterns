@@ -51,7 +51,7 @@ import com.wandrell.pattern.outputter.xml.XMLOutputter;
 import com.wandrell.pattern.testing.util.ResourceUtils;
 
 /**
- * Integration tests for {@link XMLOutputter}, checking that XML files with XSD
+ * Abstract integration tests for {@link XMLOutputter}, checking that XML files with XSD
  * validation are created.
  * <p>
  * Checks the following cases:

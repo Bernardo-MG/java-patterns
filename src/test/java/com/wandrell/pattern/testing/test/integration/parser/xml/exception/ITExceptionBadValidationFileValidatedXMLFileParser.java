@@ -57,7 +57,7 @@ import com.wandrell.pattern.testing.util.conf.TestContextConfig;
  * @see ValidatedXMLFileParser
  */
 @ContextConfiguration(TestContextConfig.XML)
-public final class ITExceptionBadValidationFileSAXInputParser extends
+public final class ITExceptionBadValidationFileValidatedXMLFileParser extends
 AbstractTestNGSpringContextTests {
 
 	/**
@@ -68,7 +68,7 @@ AbstractTestNGSpringContextTests {
     /**
      * Default constructor.
      */
-    public ITExceptionBadValidationFileSAXInputParser() {
+    public ITExceptionBadValidationFileValidatedXMLFileParser() {
         super();
     }
 

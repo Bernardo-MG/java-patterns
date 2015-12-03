@@ -51,7 +51,7 @@ import com.wandrell.pattern.testing.util.conf.TestContextConfig;
  */
 @ContextConfiguration(TestContextConfig.XML)
 public final class ITNotValidatedXMLFileParser extends
-AbstractTestNGSpringContextTests {
+		AbstractTestNGSpringContextTests {
 
 	/**
 	 * Value node name.
@@ -63,44 +63,30 @@ AbstractTestNGSpringContextTests {
 	 */
 	@Value("${xml.integer.path}")
 	private String xmlIntegerPath;
-	
-    /**
-     * Default constructor.
-     */
-    public ITNotValidatedXMLFileParser() {
-        super();
-    }
 
-    /**
-     * Tests that parsing a XML file returns the expected value.
-     */
-    @Test
-    public final void testParse() {
-        final Parser<Reader, Document> parserA;  // Parser tested
-        final Parser<Document, Integer> parserB; // Parser for the result
-        final Reader reader; // Reader to the test file
-        final Integer value; // Tested result from the parsed file
+	/**
+	 * Default constructor.
+	 */
+	public ITNotValidatedXMLFileParser() {
+		super();
+	}
 
-        parserA = new NotValidatedXMLFileParser();
+	/**
+	 * Tests that parsing a XML file returns the expected value.
+	 */
+	@Test
+	public final void testParse() {
+		final Parser<Reader, Document> parser; // Parser tested
+		final Reader reader; // Reader to the test file
+		final Integer value; // Tested result from the parsed file
 
-        parserB = new Parser<Document, Integer>() {
+		parser = new NotValidatedXMLFileParser();
 
-            @Override
-            public final Integer parse(final Document doc) {
-                final Integer value;
+		reader = ResourceUtils.getClassPathReader(xmlIntegerPath);
+		value = Integer.parseInt(parser.parse(reader).getRootElement()
+				.getChildText(nodeValue));
 
-                value = Integer.parseInt(
-                        doc.getRootElement().getChildText(nodeValue));
-
-                return value;
-            }
-
-        };
-
-        reader = ResourceUtils.getClassPathReader(xmlIntegerPath);
-        value = parserB.parse(parserA.parse(reader));
-
-        Assert.assertEquals(value, (Integer) 1);
-    }
+		Assert.assertEquals(value, (Integer) 1);
+	}
 
 }

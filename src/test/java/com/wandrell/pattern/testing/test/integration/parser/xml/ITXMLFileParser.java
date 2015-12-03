@@ -68,10 +68,6 @@ AbstractTestNGSpringContextTests {
 	 */
 	@Value("${xml.node.value}")
 	private String nodeValue;
-    /**
-     * Parser to generate the tested value from the {@code Document}.
-     */
-    private final Parser<Document, Integer> parserDoc;
 	/**
 	 * Path to the DTD validated XML file.
 	 */
@@ -93,22 +89,6 @@ AbstractTestNGSpringContextTests {
 	@Value("${xml.xsd.path}")
 	private String xsdPath;
 
-    {
-        parserDoc = new Parser<Document, Integer>() {
-
-            @Override
-            public final Integer parse(final Document doc) {
-                final Integer value;
-
-                value = Integer.parseInt(
-                        doc.getRootElement().getChildText(nodeValue));
-
-                return value;
-            }
-
-        };
-    }
-
     /**
      * Default constructor.
      */
@@ -129,7 +109,8 @@ AbstractTestNGSpringContextTests {
 
         reader = new BufferedReader(new InputStreamReader(
                 ResourceUtils.getClassPathInputStream(xmlIntegerPath)));
-        value = parserDoc.parse(parser.parse(reader));
+		value = Integer.parseInt(parser.parse(reader).getRootElement()
+				.getChildText(nodeValue));
 
         Assert.assertEquals(value, (Integer) 1);
     }
@@ -147,7 +128,8 @@ AbstractTestNGSpringContextTests {
                 ResourceUtils.getClassPathReader(dtdPath));
 
         reader = ResourceUtils.getClassPathReader(xmlDtdPath);
-        value = parserDoc.parse(parser.parse(reader));
+		value = Integer.parseInt(parser.parse(reader).getRootElement()
+				.getChildText(nodeValue));
 
         Assert.assertEquals(value, (Integer) 1);
     }
@@ -165,7 +147,8 @@ AbstractTestNGSpringContextTests {
                 ResourceUtils.getClassPathReader(xsdPath));
 
         reader = ResourceUtils.getClassPathReader(xmlXsdPath);
-        value = parserDoc.parse(parser.parse(reader));
+		value = Integer.parseInt(parser.parse(reader).getRootElement()
+				.getChildText(nodeValue));
 
         Assert.assertEquals(value, (Integer) 1);
     }

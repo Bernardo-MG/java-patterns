@@ -25,22 +25,13 @@
 package com.wandrell.pattern.testing.test.integration.outputter.xml;
 
 import org.springframework.test.context.ContextConfiguration;
-import com.wandrell.pattern.outputter.xml.XMLOutputter;
 import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.test.integration.outputter.AbstractITXMLOutputter;
 
 /**
- * Integration tests for {@link XMLOutputter}, checking that XML files with XSD
- * validation are created.
- * <p>
- * Checks the following cases:
- * <ol>
- * <li>When creating a XML file with an {@code OutputStream} or {@code Writer}
- * it has the correct structure.</li>
- * </ol>
+ * Implementation of {@link AbstractITXMLOutputter} testing DTD validation.
  * 
  * @author Bernardo Martínez Garrido
- * @see XMLOutputter
  */
 @ContextConfiguration(TestContextConfig.OUTPUTTER_XML_DTD_VALIDATION)
 public final class ITDTDValidationXMLOutputter extends
