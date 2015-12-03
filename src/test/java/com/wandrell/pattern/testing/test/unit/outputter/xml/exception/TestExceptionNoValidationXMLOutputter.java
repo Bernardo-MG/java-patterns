@@ -68,6 +68,14 @@ public final class TestExceptionNoValidationXMLOutputter {
     }
 
     /**
+     * Creates the parser being tested before any test is run.
+     */
+    @BeforeClass
+    private final void initialize() {
+        parser = new XMLOutputter();
+    }
+
+    /**
      * Tests that an {@code Exception} is thrown when writing a XML file using a
      * closed {@code OutputStream}.
      * 
@@ -112,14 +120,6 @@ public final class TestExceptionNoValidationXMLOutputter {
         }
 
         parser.output(new Document(), writer);
-    }
-
-    /**
-     * Creates the parser being tested before any test is run.
-     */
-    @BeforeClass
-    private final void initialize() {
-        parser = new XMLOutputter();
     }
 
 }

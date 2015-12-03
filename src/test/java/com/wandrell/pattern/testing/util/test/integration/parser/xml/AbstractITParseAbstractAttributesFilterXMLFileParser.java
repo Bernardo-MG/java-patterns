@@ -187,6 +187,24 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
     }
 
     /**
+     * Returns the parser being tested.
+     * 
+     * @return the parser being tested
+     */
+    protected final AbstractAttributesFilterXMLFileParser getParser() {
+        return parser;
+    }
+
+    /**
+     * Returns the path to the test data file.
+     * 
+     * @return the path to the test data file
+     */
+    protected final String getPath() {
+        return path;
+    }
+
+    /**
      * Tests that the returned entries change after changing the filtered
      * attributes.
      */
@@ -345,24 +363,6 @@ public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V> {
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 WITH_NOT_EXISTING);
-    }
-
-    /**
-     * Returns the parser being tested.
-     * 
-     * @return the parser being tested
-     */
-    protected final AbstractAttributesFilterXMLFileParser getParser() {
-        return parser;
-    }
-
-    /**
-     * Returns the path to the test data file.
-     * 
-     * @return the path to the test data file
-     */
-    protected final String getPath() {
-        return path;
     }
 
 }

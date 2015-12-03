@@ -27,12 +27,16 @@ package com.wandrell.pattern.testing.test.integration.parser.xml;
 import java.io.Reader;
 
 import org.jdom2.Document;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.NotValidatedXMLFileParser;
 import com.wandrell.pattern.testing.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
@@ -46,8 +50,15 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * @author Bernardo Martínez Garrido
  * @see NotValidatedXMLFileParser
  */
-public final class ITNotValidatedXMLFileParser {
+@ContextConfiguration(TestContextConfig.XML)
+public final class ITNotValidatedXMLFileParser extends
+AbstractTestNGSpringContextTests {
 
+	/**
+	 * Path to the integers XML file.
+	 */
+	@Value("${xml.integer.path}")
+	private String xmlIntegerPath;
     /**
      * Default constructor.
      */
@@ -81,7 +92,7 @@ public final class ITNotValidatedXMLFileParser {
 
         };
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ);
+        reader = ResourceUtils.getClassPathReader(xmlIntegerPath);
         value = parserB.parse(parserA.parse(reader));
 
         Assert.assertEquals(value, (Integer) 1);

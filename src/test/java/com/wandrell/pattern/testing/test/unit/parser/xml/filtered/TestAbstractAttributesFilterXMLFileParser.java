@@ -90,12 +90,12 @@ public final class TestAbstractAttributesFilterXMLFileParser {
         parser = new AbstractAttributesFilterXMLFileParser() {
 
             @Override
+            protected final void onAttributesChange() {}
+
+            @Override
             public final Document parse(final Reader reader) {
                 return new Document();
             }
-
-            @Override
-            protected final void onAttributesChange() {}
 
         };
     }

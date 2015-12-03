@@ -29,6 +29,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.jdom2.Document;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -36,6 +39,7 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.testing.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
@@ -57,169 +61,196 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
  */
-public final class ITValidationValidatedXMLFileParser {
+@ContextConfiguration(TestContextConfig.XML)
+public final class ITValidationValidatedXMLFileParser extends
+		AbstractTestNGSpringContextTests {
 
-    /**
-     * Parser to generate the tested value from the {@code Document}.
-     */
-    private final Parser<Document, Integer> parserDoc;
+	/**
+	 * Path to the DTD file.
+	 */
+	@Value("${xml.dtd.path}")
+	private String dtdPath;
+	/**
+	 * Parser to generate the tested value from the {@code Document}.
+	 */
+	private final Parser<Document, Integer> parserDoc;
+	/**
+	 * Path to the DTD validated XML file.
+	 */
+	@Value("${xml.validated.dtd.path}")
+	private String xmlDtdPath;
+	/**
+	 * Path to the integers XML file.
+	 */
+	@Value("${xml.integer.path}")
+	private String xmlIntegerPath;
+	/**
+	 * Path to the XSD validated XML file.
+	 */
+	@Value("${xml.validated.xsd.path}")
+	private String xmlXsdPath;
+	/**
+	 * Path to the XSD file.
+	 */
+	@Value("${xml.xsd.path}")
+	private String xsdPath;
 
-    {
-        parserDoc = new Parser<Document, Integer>() {
+	{
+		parserDoc = new Parser<Document, Integer>() {
 
-            @Override
-            public final Integer parse(final Document doc) {
-                final Integer value;
+			@Override
+			public final Integer parse(final Document doc) {
+				final Integer value;
 
-                value = Integer.parseInt(
-                        doc.getRootElement().getChildText(XMLConf.NODE_VALUE));
+				value = Integer.parseInt(doc.getRootElement().getChildText(
+						XMLConf.NODE_VALUE));
 
-                return value;
-            }
+				return value;
+			}
 
-        };
-    }
+		};
+	}
 
-    /**
-     * Default constructor.
-     */
-    public ITValidationValidatedXMLFileParser() {
-        super();
-    }
+	/**
+	 * Default constructor.
+	 */
+	public ITValidationValidatedXMLFileParser() {
+		super();
+	}
 
-    /**
-     * Tests that parsing a DTD-Validated XML file returns the expected value.
-     */
-    @Test
-    public final void testParse_DTD() {
-        final Parser<Reader, Document> parser;  // Parser tested
-        final Reader reader; // Reader to the test file
-        final Integer value; // Tested result from the parsed file
+	/**
+	 * Tests that parsing a DTD-Validated XML file returns the expected value.
+	 */
+	@Test
+	public final void testParse_DTD() {
+		final Parser<Reader, Document> parser; // Parser tested
+		final Reader reader; // Reader to the test file
+		final Integer value; // Tested result from the parsed file
 
-        parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
-                ResourceUtils.getClassPathReader(XMLConf.DTD_VALIDATION));
+		parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
+				ResourceUtils.getClassPathReader(dtdPath));
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.VALIDATED_DTD);
-        value = parserDoc.parse(parser.parse(reader));
+		reader = ResourceUtils.getClassPathReader(xmlDtdPath);
+		value = parserDoc.parse(parser.parse(reader));
 
-        Assert.assertEquals(value, (Integer) 1);
-    }
+		Assert.assertEquals(value, (Integer) 1);
+	}
 
-    /**
-     * Tests that parsing a XML file with no validation returns the expected
-     * value.
-     */
-    @Test
-    public final void testParse_None() {
-        final ValidatedXMLFileParser parser;  // Parser tested
-        final Integer value; // Tested result from the parsed file
-        final Reader reader; // Reader to the test file
+	/**
+	 * Tests that parsing a XML file with no validation returns the expected
+	 * value.
+	 */
+	@Test
+	public final void testParse_None() {
+		final ValidatedXMLFileParser parser; // Parser tested
+		final Integer value; // Tested result from the parsed file
+		final Reader reader; // Reader to the test file
 
-        parser = new ValidatedXMLFileParser();
+		parser = new ValidatedXMLFileParser();
 
-        reader = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ)));
+		reader = new BufferedReader(new InputStreamReader(
+				ResourceUtils.getClassPathInputStream(xmlIntegerPath)));
 
-        value = parserDoc.parse(parser.parse(reader));
+		value = parserDoc.parse(parser.parse(reader));
 
-        Assert.assertEquals(value, (Integer) 1);
-    }
+		Assert.assertEquals(value, (Integer) 1);
+	}
 
-    /**
-     * Tests that parsing after setting the validation information returns the
-     * expected value.
-     */
-    @Test
-    public final void testParse_None_XSD() {
-        final ValidatedXMLFileParser parser;  // Parser tested
-        final Integer value; // Tested result from the parsed file
-        Reader reader;       // Reader to the test file
+	/**
+	 * Tests that parsing after setting the validation information returns the
+	 * expected value.
+	 */
+	@Test
+	public final void testParse_None_XSD() {
+		final ValidatedXMLFileParser parser; // Parser tested
+		final Integer value; // Tested result from the parsed file
+		Reader reader; // Reader to the test file
 
-        parser = new ValidatedXMLFileParser();
+		parser = new ValidatedXMLFileParser();
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ);
+		reader = ResourceUtils.getClassPathReader(xmlIntegerPath);
 
-        parserDoc.parse(parser.parse(reader));
+		parserDoc.parse(parser.parse(reader));
 
-        parser.setValidation(XMLValidationType.DTD,
-                ResourceUtils.getClassPathReader(XMLConf.DTD_VALIDATION));
+		parser.setValidation(XMLValidationType.DTD,
+				ResourceUtils.getClassPathReader(dtdPath));
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.VALIDATED_DTD);
+		reader = ResourceUtils.getClassPathReader(xmlDtdPath);
 
-        value = parserDoc.parse(parser.parse(reader));
+		value = parserDoc.parse(parser.parse(reader));
 
-        Assert.assertEquals(value, (Integer) 1);
-    }
+		Assert.assertEquals(value, (Integer) 1);
+	}
 
-    /**
-     * Tests that parsing a XSD-validated XML file returns the expected value.
-     */
-    @Test
-    public final void testParse_XSD() {
-        final Parser<Reader, Document> parser;  // Parser tested
-        final Reader reader; // Reader to the test file
-        final Integer value; // Tested result from the parsed file
+	/**
+	 * Tests that parsing a XSD-validated XML file returns the expected value.
+	 */
+	@Test
+	public final void testParse_XSD() {
+		final Parser<Reader, Document> parser; // Parser tested
+		final Reader reader; // Reader to the test file
+		final Integer value; // Tested result from the parsed file
 
-        parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
-                ResourceUtils.getClassPathReader(XMLConf.XSD_VALIDATION));
+		parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
+				ResourceUtils.getClassPathReader(xsdPath));
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.VALIDATED_XSD);
-        value = parserDoc.parse(parser.parse(reader));
+		reader = ResourceUtils.getClassPathReader(xmlXsdPath);
+		value = parserDoc.parse(parser.parse(reader));
 
-        Assert.assertEquals(value, (Integer) 1);
-    }
+		Assert.assertEquals(value, (Integer) 1);
+	}
 
-    /**
-     * Tests that parsing after changing the validation information returns the
-     * expected value.
-     */
-    @Test
-    public final void testParse_XSD_DTD() {
-        final ValidatedXMLFileParser parser;  // Parser tested
-        final Integer value; // Tested result from the parsed file
-        Reader reader;       // Reader to the test file
+	/**
+	 * Tests that parsing after changing the validation information returns the
+	 * expected value.
+	 */
+	@Test
+	public final void testParse_XSD_DTD() {
+		final ValidatedXMLFileParser parser; // Parser tested
+		final Integer value; // Tested result from the parsed file
+		Reader reader; // Reader to the test file
 
-        parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
-                ResourceUtils.getClassPathReader(XMLConf.XSD_VALIDATION));
+		parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
+				ResourceUtils.getClassPathReader(xsdPath));
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.VALIDATED_XSD);
+		reader = ResourceUtils.getClassPathReader(xmlXsdPath);
 
-        parserDoc.parse(parser.parse(reader));
+		parserDoc.parse(parser.parse(reader));
 
-        parser.setValidation(XMLValidationType.DTD,
-                ResourceUtils.getClassPathReader(XMLConf.DTD_VALIDATION));
+		parser.setValidation(XMLValidationType.DTD,
+				ResourceUtils.getClassPathReader(dtdPath));
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.VALIDATED_DTD);
+		reader = ResourceUtils.getClassPathReader(xmlDtdPath);
 
-        value = parserDoc.parse(parser.parse(reader));
+		value = parserDoc.parse(parser.parse(reader));
 
-        Assert.assertEquals(value, (Integer) 1);
-    }
+		Assert.assertEquals(value, (Integer) 1);
+	}
 
-    /**
-     * Tests that parsing after removing the validation information returns the
-     * expected value.
-     */
-    @Test
-    public final void testParse_XSD_None() {
-        final ValidatedXMLFileParser parser;  // Parser tested
-        final Integer value; // Tested result from the parsed file
-        Reader reader;       // Reader to the test file
+	/**
+	 * Tests that parsing after removing the validation information returns the
+	 * expected value.
+	 */
+	@Test
+	public final void testParse_XSD_None() {
+		final ValidatedXMLFileParser parser; // Parser tested
+		final Integer value; // Tested result from the parsed file
+		Reader reader; // Reader to the test file
 
-        parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
-                ResourceUtils.getClassPathReader(XMLConf.XSD_VALIDATION));
+		parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
+				ResourceUtils.getClassPathReader(xsdPath));
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.VALIDATED_XSD);
+		reader = ResourceUtils.getClassPathReader(xmlXsdPath);
 
-        parserDoc.parse(parser.parse(reader));
+		parserDoc.parse(parser.parse(reader));
 
-        parser.setValidation(XMLValidationType.NONE, null);
+		parser.setValidation(XMLValidationType.NONE, null);
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ);
+		reader = ResourceUtils.getClassPathReader(xmlIntegerPath);
 
-        value = parserDoc.parse(parser.parse(reader));
+		value = parserDoc.parse(parser.parse(reader));
 
-        Assert.assertEquals(value, (Integer) 1);
-    }
+		Assert.assertEquals(value, (Integer) 1);
+	}
 
 }

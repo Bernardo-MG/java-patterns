@@ -30,13 +30,16 @@ import java.io.Reader;
 
 import org.apache.commons.io.IOUtils;
 import org.jdom2.Document;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.testing.util.ResourceUtils;
-import com.wandrell.pattern.testing.util.conf.XMLConf;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 
 /**
  * Integration tests for {@link ValidatedXMLFileParser}, checking that
@@ -53,8 +56,15 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
  */
-public final class ITExceptionBadValidationFileSAXInputParser {
+@ContextConfiguration(TestContextConfig.XML)
+public final class ITExceptionBadValidationFileSAXInputParser extends
+AbstractTestNGSpringContextTests {
 
+	/**
+	 * Path to the integers XML file.
+	 */
+	@Value("${xml.integer.path}")
+	private String xmlIntegerPath;
     /**
      * Default constructor.
      */
@@ -74,7 +84,7 @@ public final class ITExceptionBadValidationFileSAXInputParser {
                 IOUtils.toBufferedReader(
                         new InputStreamReader(IOUtils.toInputStream(""))));
 
-        parser.parse(ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ));
+        parser.parse(ResourceUtils.getClassPathReader(xmlIntegerPath));
     }
 
     /**
@@ -89,7 +99,7 @@ public final class ITExceptionBadValidationFileSAXInputParser {
                 IOUtils.toBufferedReader(
                         new InputStreamReader(IOUtils.toInputStream(""))));
 
-        parser.parse(ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ));
+        parser.parse(ResourceUtils.getClassPathReader(xmlIntegerPath));
     }
 
     /**
@@ -105,7 +115,7 @@ public final class ITExceptionBadValidationFileSAXInputParser {
                         new InputStreamReader(IOUtils.toInputStream(""))));
 
         parser.parse(new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ))));
+                ResourceUtils.getClassPathInputStream(xmlIntegerPath))));
     }
 
     /**
@@ -120,7 +130,7 @@ public final class ITExceptionBadValidationFileSAXInputParser {
                 IOUtils.toBufferedReader(
                         new InputStreamReader(IOUtils.toInputStream(""))));
 
-        parser.parse(ResourceUtils.getClassPathReader(XMLConf.INTEGER_READ));
+        parser.parse(ResourceUtils.getClassPathReader(xmlIntegerPath));
     }
 
 }

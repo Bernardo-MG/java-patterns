@@ -54,11 +54,6 @@ import com.wandrell.pattern.repository.Repository;
 public final class TestUpdateCollectionRepository {
 
     /**
-     * The repository being tested.
-     */
-    private FilteredRepository<TestClass, Predicate<TestClass>> repository;
-
-    /**
      * This is a test class for testing the {@code Repository} using a class
      * with an internal state.
      * 
@@ -124,6 +119,11 @@ public final class TestUpdateCollectionRepository {
         }
 
     }
+
+    /**
+     * The repository being tested.
+     */
+    private FilteredRepository<TestClass, Predicate<TestClass>> repository;
 
     /**
      * Default constructor.

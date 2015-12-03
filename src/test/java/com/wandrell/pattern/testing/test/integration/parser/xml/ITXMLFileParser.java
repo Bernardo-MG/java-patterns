@@ -29,6 +29,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.jdom2.Document;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -36,6 +39,7 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.XMLFileParser;
 import com.wandrell.pattern.testing.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
@@ -51,12 +55,39 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * @author Bernardo Martínez Garrido
  * @see XMLFileParser
  */
-public final class ITXMLFileParser {
+@ContextConfiguration(TestContextConfig.XML)
+public final class ITXMLFileParser extends
+AbstractTestNGSpringContextTests {
 
-    /**
+	/**
+	 * Path to the DTD file.
+	 */
+	@Value("${xml.dtd.path}")
+	private String dtdPath;
+	/**
      * Parser to generate the tested value from the {@code Document}.
      */
     private final Parser<Document, Integer> parserDoc;
+    /**
+	 * Path to the DTD validated XML file.
+	 */
+	@Value("${xml.validated.dtd.path}")
+	private String xmlDtdPath;
+	/**
+	 * Path to the integers XML file.
+	 */
+	@Value("${xml.integer.path}")
+	private String xmlIntegerPath;
+	/**
+	 * Path to the XSD validated XML file.
+	 */
+	@Value("${xml.validated.xsd.path}")
+	private String xmlXsdPath;
+	/**
+	 * Path to the XSD file.
+	 */
+	@Value("${xml.xsd.path}")
+	private String xsdPath;
 
     {
         parserDoc = new Parser<Document, Integer>() {
@@ -93,7 +124,7 @@ public final class ITXMLFileParser {
         parser = new XMLFileParser();
 
         reader = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(XMLConf.INTEGER_READ)));
+                ResourceUtils.getClassPathInputStream(xmlIntegerPath)));
         value = parserDoc.parse(parser.parse(reader));
 
         Assert.assertEquals(value, (Integer) 1);
@@ -109,9 +140,9 @@ public final class ITXMLFileParser {
         final Integer value; // Tested result from the parsed file
 
         parser = new XMLFileParser(XMLValidationType.DTD,
-                ResourceUtils.getClassPathReader(XMLConf.DTD_VALIDATION));
+                ResourceUtils.getClassPathReader(dtdPath));
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.VALIDATED_DTD);
+        reader = ResourceUtils.getClassPathReader(xmlDtdPath);
         value = parserDoc.parse(parser.parse(reader));
 
         Assert.assertEquals(value, (Integer) 1);
@@ -127,9 +158,9 @@ public final class ITXMLFileParser {
         final Integer value; // Tested result from the parsed file
 
         parser = new XMLFileParser(XMLValidationType.XSD,
-                ResourceUtils.getClassPathReader(XMLConf.XSD_VALIDATION));
+                ResourceUtils.getClassPathReader(xsdPath));
 
-        reader = ResourceUtils.getClassPathReader(XMLConf.VALIDATED_XSD);
+        reader = ResourceUtils.getClassPathReader(xmlXsdPath);
         value = parserDoc.parse(parser.parse(reader));
 
         Assert.assertEquals(value, (Integer) 1);

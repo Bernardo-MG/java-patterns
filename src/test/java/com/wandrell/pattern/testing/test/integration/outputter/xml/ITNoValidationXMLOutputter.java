@@ -41,6 +41,9 @@ import java.util.Random;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -48,6 +51,7 @@ import org.testng.annotations.Test;
 import com.wandrell.pattern.outputter.Outputter;
 import com.wandrell.pattern.outputter.xml.XMLOutputter;
 import com.wandrell.pattern.testing.util.ResourceUtils;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
@@ -63,9 +67,11 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * @author Bernardo Martínez Garrido
  * @see XMLOutputter
  */
-public final class ITNoValidationXMLOutputter {
+@ContextConfiguration(TestContextConfig.XML)
+public final class ITNoValidationXMLOutputter extends
+AbstractTestNGSpringContextTests {
 
-    /**
+	/**
      * Random number generator.
      * <p>
      * Used to avoid name collisions when creating test files.
@@ -83,12 +89,60 @@ public final class ITNoValidationXMLOutputter {
      * Value to send.
      */
     private Document            value;
+    /**
+	 * Path to the integers XML file.
+	 */
+	@Value("${xml.integer.path}")
+	private String xmlIntegerPath;
 
     /**
      * Default constructor.
      */
     public ITNoValidationXMLOutputter() {
         super();
+    }
+
+    /**
+     * Asserts that the generated file is equal to the expected file.
+     * 
+     * @param path
+     *            path to the file to check
+     * @throws Exception
+     *             never, this is a required declaration
+     */
+    private final void assertEquals(final Path path) throws Exception {
+        final InputStream streamTest; // Stream to the created file
+        final Reader readerExpected;  // Reader to the expected file
+
+        streamTest = new FileInputStream(path.toFile());
+        readerExpected = ResourceUtils
+                .getClassPathReader(xmlIntegerPath);
+
+        Assert.assertTrue(XMLUnit
+                .compareXML(readerExpected, new InputStreamReader(streamTest))
+                .identical());
+    }
+
+    /**
+     * Generates a random ID for the test files.
+     * 
+     * @return a random ID for the test files
+     */
+    private final Integer getRandomID() {
+        return random.nextInt(Integer.MAX_VALUE);
+    }
+
+    /**
+     * Creates the outputter and value being tested before any test is run.
+     */
+    @BeforeClass
+    private final void initialize() {
+        value = new Document();
+        value.addContent(new Element(XMLConf.NODE_ROOT));
+        value.getRootElement()
+                .addContent(new Element(XMLConf.NODE_VALUE).addContent("1"));
+
+        outputter = new XMLOutputter();
     }
 
     /**
@@ -132,49 +186,6 @@ public final class ITNoValidationXMLOutputter {
         outputter.output(value, writer);
 
         assertEquals(path);
-    }
-
-    /**
-     * Asserts that the generated file is equal to the expected file.
-     * 
-     * @param path
-     *            path to the file to check
-     * @throws Exception
-     *             never, this is a required declaration
-     */
-    private final void assertEquals(final Path path) throws Exception {
-        final InputStream streamTest; // Stream to the created file
-        final Reader readerExpected;  // Reader to the expected file
-
-        streamTest = new FileInputStream(path.toFile());
-        readerExpected = ResourceUtils
-                .getClassPathReader(XMLConf.INTEGER_EXPECTED);
-
-        Assert.assertTrue(XMLUnit
-                .compareXML(readerExpected, new InputStreamReader(streamTest))
-                .identical());
-    }
-
-    /**
-     * Generates a random ID for the test files.
-     * 
-     * @return a random ID for the test files
-     */
-    private final Integer getRandomID() {
-        return random.nextInt(Integer.MAX_VALUE);
-    }
-
-    /**
-     * Creates the outputter and value being tested before any test is run.
-     */
-    @BeforeClass
-    private final void initialize() {
-        value = new Document();
-        value.addContent(new Element(XMLConf.NODE_ROOT));
-        value.getRootElement()
-                .addContent(new Element(XMLConf.NODE_VALUE).addContent("1"));
-
-        outputter = new XMLOutputter();
     }
 
 }

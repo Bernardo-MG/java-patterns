@@ -35,8 +35,6 @@ public final class XMLConf {
     public static final String ATTRIBUTE_ATTRIBUTE2                  = "attribute2";
     public static final String ATTRIBUTE_NOT_EXISTING                = "abc12345";
     public static final String DTD_VALIDATION                        = "files/xml/validation/dtd_validation.dtd";
-    public static final String EMPTY                                 = "files/xml/empty.xml";
-    public static final String FILTERED_FULL                         = "files/xml/filtered/filtered_validation_full.xml";
     public static final String FILTERED_NO_VALIDATION                = "files/xml/filtered/filtered_no_validation.xml";
     public static final String FILTERED_NO_VALIDATION_FULL           = "files/xml/filtered/filtered_no_validation_full.xml";
     public static final String FILTERED_VALIDATION_DTD               = "files/xml/filtered/filtered_validation.dtd";
@@ -44,19 +42,11 @@ public final class XMLConf {
     public static final String FILTERED_WITH_VALIDATION_DTD          = "files/xml/filtered/filtered_validation_a_dtd.xml";
     public static final String FILTERED_WITH_VALIDATION_XSD          = "files/xml/filtered/filtered_validation_a.xml";
     public static final String FILTERED_WITH_VALIDATION_XSD_DEFAULTS = "files/xml/filtered/filtered_validation_b.xml";
-    public static final String INTEGER_EXPECTED                      = "files/xml/integer_expected.xml";
-    public static final String INTEGER_EXPECTED_DTD                  = "files/xml/integer_expected_dtd.xml";
-    public static final String INTEGER_EXPECTED_XSD                  = "files/xml/integer_expected_xsd.xml";
-    public static final String INTEGER_NO_VALIDATES                  = "files/xml/validation/xsd_validation_no_validates.xml";
-    public static final String INTEGER_READ                          = "files/xml/integer_read.xml";
     public static final String NODE_NODE                             = "node";
     public static final String NODE_ROOT                             = "root";
     public static final String NODE_ROOT_FILTER                      = "node";
     public static final String NODE_VALUE                            = "value";
-    public static final String VALIDATED_DTD                         = "files/xml/validation/dtd_validation.xml";
-    public static final String VALIDATED_XSD                         = "files/xml/validation/xsd_validation.xml";
-    public static final String XSD_VALIDATION                        = "files/xml/validation/xsd_validation.xsd";
-
+    
     /**
      * Private constructor.
      */

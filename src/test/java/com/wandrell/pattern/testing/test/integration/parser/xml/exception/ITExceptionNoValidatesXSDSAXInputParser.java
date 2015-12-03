@@ -27,6 +27,9 @@ package com.wandrell.pattern.testing.test.integration.parser.xml.exception;
 import java.io.Reader;
 
 import org.jdom2.Document;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -34,7 +37,7 @@ import com.wandrell.pattern.conf.XMLValidationType;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.testing.util.ResourceUtils;
-import com.wandrell.pattern.testing.util.conf.XMLConf;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 
 /**
  * Integration tests for {@link ValidatedXMLFileParser} using XSD validation.
@@ -47,12 +50,24 @@ import com.wandrell.pattern.testing.util.conf.XMLConf;
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
  */
-public final class ITExceptionNoValidatesXSDSAXInputParser {
+@ContextConfiguration(TestContextConfig.XML)
+public final class ITExceptionNoValidatesXSDSAXInputParser extends
+AbstractTestNGSpringContextTests {
 
-    /**
+	/**
      * Parser to test
      */
     private Parser<Reader, Document> parser;
+    /**
+	 * Path to the integers XML file which does not validate.
+	 */
+	@Value("${xml.integer.noValidates.path}")
+	private String xmlIntNoValPath;
+	/**
+	 * Path to the XSD file.
+	 */
+	@Value("${xml.xsd.path}")
+	private String xsdPath;
 
     /**
      * Default constructor.
@@ -62,22 +77,22 @@ public final class ITExceptionNoValidatesXSDSAXInputParser {
     }
 
     /**
+     * Generates the parser to be tested before any test is run.
+     */
+    @BeforeClass
+    private final void initialize() {
+        parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
+                ResourceUtils.getClassPathReader(xsdPath));
+    }
+
+    /**
      * Tests that reading a file which doesn't validate throws a
      * {@code Exception}.
      */
     @Test(expectedExceptions = Exception.class)
     public final void testParse_NotValidates_ThrowsException() {
         parser.parse(
-                ResourceUtils.getClassPathReader(XMLConf.INTEGER_NO_VALIDATES));
-    }
-
-    /**
-     * Generates the parser to be tested before any test is run.
-     */
-    @BeforeClass
-    private final void initialize() {
-        parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
-                ResourceUtils.getClassPathReader(XMLConf.XSD_VALIDATION));
+                ResourceUtils.getClassPathReader(xmlIntNoValPath));
     }
 
 }
