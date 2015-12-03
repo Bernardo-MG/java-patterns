@@ -80,7 +80,7 @@ AbstractTestNGSpringContextTests {
     /**
      * Template path for the tests.
      */
-    private static final String TEMPLATE_PATH = "target/test_write_Stream_";
+    private static final String TEMPLATE_PATH = "target/test_write_Stream_%d.xml";
     /**
      * Outputter being tested.
      */
@@ -157,7 +157,7 @@ AbstractTestNGSpringContextTests {
         final Path path;           // Path to the output file
         final OutputStream stream; // Stream to the output file
 
-        path = Paths.get(TEMPLATE_PATH + getRandomID() + ".xml")
+		path = Paths.get(String.format(TEMPLATE_PATH, getRandomID()))
                 .toAbsolutePath();
 
         stream = new BufferedOutputStream(new FileOutputStream(path.toFile()));
@@ -179,7 +179,7 @@ AbstractTestNGSpringContextTests {
         final Path path;     // Path to the output file
         final Writer writer; // Stream to the output file
 
-        path = Paths.get(TEMPLATE_PATH + getRandomID() + ".xml")
+		path = Paths.get(String.format(TEMPLATE_PATH, getRandomID()))
                 .toAbsolutePath();
 
         writer = new BufferedWriter(new FileWriter(path.toFile()));
