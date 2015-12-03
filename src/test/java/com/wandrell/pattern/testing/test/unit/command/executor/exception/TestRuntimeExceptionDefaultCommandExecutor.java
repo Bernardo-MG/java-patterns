@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.wandrell.pattern.testing.test.unit.command.executor.exception;
 
 import org.mockito.Mockito;
