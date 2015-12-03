@@ -100,9 +100,9 @@ public final class ITXSDValidationXMLOutputter extends
 	@Value("${xml.integer.validated.xsd.path}")
 	private String xmlIntXSDPath;
 	/**
-	 * Path to the XSD file.
+	 * Path to the XSD file for the XML file.
 	 */
-	@Value("${xml.xsd.longPath}")
+	@Value("${xml.xsd.validationPath}")
 	private String xsdPath;
 	/**
 	 * Value node name.

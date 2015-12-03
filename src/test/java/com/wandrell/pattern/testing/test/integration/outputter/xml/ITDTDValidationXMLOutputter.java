@@ -82,9 +82,9 @@ public final class ITDTDValidationXMLOutputter extends
 	 */
 	private static final String TEMPLATE_PATH = "target/test_write_Stream_%d.xml";
 	/**
-	 * Path to the DTD file.
+	 * Path to the DTD file for the XML file.
 	 */
-	@Value("${xml.dtd.longPath}")
+	@Value("${xml.dtd.validationPath}")
 	private String dtdPath;
 	/**
 	 * Value node name.
