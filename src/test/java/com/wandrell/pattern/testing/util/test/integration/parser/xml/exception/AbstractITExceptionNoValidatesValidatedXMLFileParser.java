@@ -22,17 +22,24 @@
  * SOFTWARE.
  */
 
-package com.wandrell.pattern.testing.test.integration.parser.xml.exception;
+package com.wandrell.pattern.testing.util.test.integration.parser.xml.exception;
 
-import org.springframework.test.context.ContextConfiguration;
+import java.io.Reader;
+
+import org.jdom2.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.Test;
+
+import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
-import com.wandrell.pattern.testing.util.conf.TestContextConfig;
-import com.wandrell.pattern.testing.util.test.integration.parser.xml.exception.AbstractITExceptionNoValidatesValidatedXMLFileParser;
+import com.wandrell.pattern.testing.util.ResourceUtils;
 
 /**
- * Integration tests for {@link ValidatedXMLFileParser} using XSD validation.
+ * Integration tests for {@link ValidatedXMLFileParser} using DTD validation.
  * <p>
- * Adds the following cases:
+ * Checks the following cases:
  * <ol>
  * <li>Reading a file which doesn't validate throws a {@code Exception} .</li>
  * </ol>
@@ -40,15 +47,37 @@ import com.wandrell.pattern.testing.util.test.integration.parser.xml.exception.A
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
  */
-@ContextConfiguration(TestContextConfig.PARSER_XML_XSD_VALIDATION)
-public final class ITExceptionNoValidatesXSDValidatedXMLFileParser extends
-AbstractITExceptionNoValidatesValidatedXMLFileParser {
+public abstract class AbstractITExceptionNoValidatesValidatedXMLFileParser extends
+AbstractTestNGSpringContextTests {
+
+	/**
+     * Parser to test
+     */
+	@Autowired
+	@Qualifier("parser")
+    private Parser<Reader, Document> parser;
+    /**
+	 * Path to the integers XML file which does not validate.
+	 */
+	@Autowired
+	@Qualifier("xmlPath")
+	private String xmlPath;
 
     /**
      * Default constructor.
      */
-    public ITExceptionNoValidatesXSDValidatedXMLFileParser() {
+    public AbstractITExceptionNoValidatesValidatedXMLFileParser() {
         super();
+    }
+
+    /**
+     * Tests that reading a file which doesn't validate throws a
+     * {@code Exception}.
+     */
+    @Test(expectedExceptions = Exception.class)
+    public final void testParse_NotValidates_ThrowsException() {
+        parser.parse(
+                ResourceUtils.getClassPathReader(xmlPath));
     }
 
 }
