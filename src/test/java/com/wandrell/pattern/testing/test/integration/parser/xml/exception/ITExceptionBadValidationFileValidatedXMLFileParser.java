@@ -49,9 +49,6 @@ import com.wandrell.pattern.testing.util.conf.TestContextConfig;
  * <ol>
  * <li>An {@code Exception} is thrown when reading a XML file using an empty
  * validation file, when using DTD or XSD validation.</li>
- * <li>An {@code Exception} is thrown when reading a XML file using an
- * incorrectly formatted validation file, when using DTD or XSD validation.</li>
- * </ol>
  * 
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
@@ -89,21 +86,6 @@ AbstractTestNGSpringContextTests {
 
     /**
      * Tests that an {@code Exception} is thrown when reading a XML file using
-     * an incorrectly formatted validation file, when using DTD validation.
-     */
-    @Test(expectedExceptions = Exception.class)
-    public final void testParse_DTD_Invalid() {
-        final Parser<Reader, Document> parser;    // Tested parser
-
-        parser = new ValidatedXMLFileParser(XMLValidationType.DTD,
-                IOUtils.toBufferedReader(
-                        new InputStreamReader(IOUtils.toInputStream(""))));
-
-        parser.parse(ResourceUtils.getClassPathReader(xmlIntegerPath));
-    }
-
-    /**
-     * Tests that an {@code Exception} is thrown when reading a XML file using
      * an empty validation file, when using XSD validation.
      */
     @Test(expectedExceptions = Exception.class)
@@ -116,21 +98,6 @@ AbstractTestNGSpringContextTests {
 
         parser.parse(new BufferedReader(new InputStreamReader(
                 ResourceUtils.getClassPathInputStream(xmlIntegerPath))));
-    }
-
-    /**
-     * Tests that an {@code Exception} is thrown when reading a XML file using
-     * an incorrectly formatted validation file, when using XSD validation.
-     */
-    @Test(expectedExceptions = Exception.class)
-    public final void testParse_XSD_Invalid() {
-        final Parser<Reader, Document> parser;    // Tested parser
-
-        parser = new ValidatedXMLFileParser(XMLValidationType.XSD,
-                IOUtils.toBufferedReader(
-                        new InputStreamReader(IOUtils.toInputStream(""))));
-
-        parser.parse(ResourceUtils.getClassPathReader(xmlIntegerPath));
     }
 
 }
