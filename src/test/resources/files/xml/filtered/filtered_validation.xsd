@@ -3,7 +3,7 @@
 	<xs:element name="test">
 		<xs:complexType>
 			<xs:sequence minOccurs="1" maxOccurs="unbounded">
-				<xs:element name="node">
+				<xs:element name="value">
 					<xs:complexType>
 						<xs:simpleContent>
 							<xs:extension base="xs:token">

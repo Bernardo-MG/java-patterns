@@ -24,7 +24,7 @@
 	<bean id="parser" class="com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser">
 		<constructor-arg index="0" value="DTD" />
 		<constructor-arg index="1" ref="reader" />
-		<constructor-arg index="2" value="${xml.node.root}" />
+		<constructor-arg index="2" value="${xml.node.value}" />
 	</bean>
 
 </beans>

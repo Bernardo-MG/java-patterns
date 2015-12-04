@@ -13,11 +13,11 @@
 
 	<bean id="xmlPath" class="java.lang.String">
 		<constructor-arg index="0" type="java.lang.String"
-			value="${xml.filtered.path}" />
+			value="${xml.filtered.full.path}" />
 	</bean>
 
 	<bean id="parser" class="com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser">
-		<constructor-arg index="0" value="${xml.node.root}" />
+		<constructor-arg index="0" value="${xml.node.value}" />
 	</bean>
 
 </beans>
