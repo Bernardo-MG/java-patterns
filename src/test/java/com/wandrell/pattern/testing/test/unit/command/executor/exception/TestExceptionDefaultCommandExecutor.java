@@ -62,7 +62,7 @@ import com.wandrell.pattern.command.UndoableCommand;
  * @author Bernardo Martínez Garrido
  * @see DefaultCommandExecutor
  */
-public final class TestRuntimeExceptionDefaultCommandExecutor {
+public final class TestExceptionDefaultCommandExecutor {
 
     /**
      * Executor being tested.
@@ -74,7 +74,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     /**
      * Default constructor.
      */
-    public TestRuntimeExceptionDefaultCommandExecutor() {
+    public TestExceptionDefaultCommandExecutor() {
         super();
     }
 

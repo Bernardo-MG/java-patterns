@@ -19,11 +19,20 @@
 	<bean id="outputter"
 		class="com.wandrell.pattern.outputter.xml.XMLOutputter" />
 
-	<bean id="document"
-		class="com.wandrell.pattern.testing.util.model.TestXMLDocument">
+	<bean id="node" class="org.jdom2.Element">
+		<constructor-arg index="0" value="${xml.node.value}" />
+		<property name="text" value="${xml.node.value.content}" />
+	</bean>
+
+	<bean id="root" class="org.jdom2.Element">
 		<constructor-arg index="0" value="${xml.node.root}" />
-		<constructor-arg index="1" value="${xml.node.value}" />
-		<constructor-arg index="2" value="${xml.node.value.content}" />
+		<property name="content">
+				<ref bean="node" />
+		</property>
+	</bean>
+
+	<bean id="document" class="org.jdom2.Document">
+		<property name="content" ref="root"/>
 	</bean>
 
 </beans>

@@ -101,8 +101,8 @@ public final class TestAbstractAttributesFilterXMLFileParser {
     }
 
     /**
-     * Tests that already added strings are rejected when trying to add them as
-     * rejected attributes.
+     * Tests that empty strings are rejected when trying to add them as rejected
+     * attributes.
      */
     @Test
     public final void testAddRejectedAttribute_EmptyString_Rejected() {
@@ -114,8 +114,8 @@ public final class TestAbstractAttributesFilterXMLFileParser {
     }
 
     /**
-     * Tests that empty strings are rejected when trying to add them as rejected
-     * attributes.
+     * Tests that already added strings are rejected when trying to add them as
+     * rejected attributes.
      */
     @Test
     public final void testAddRejectedAttribute_Existing_Rejected() {
