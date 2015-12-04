@@ -38,7 +38,6 @@ import org.testng.annotations.Test;
 import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
 import com.wandrell.pattern.testing.util.ResourceUtils;
-import com.wandrell.pattern.testing.util.conf.XMLConf;
 
 /**
  * Abstract integration tests for {@link AbstractAttributesFilterXMLFileParser}.
@@ -130,6 +129,21 @@ extends AbstractTestNGSpringContextTests{
      */
 	@Value("${count.with1With2}")
     private  Integer                               withAttribute1WithAttribute2;
+	/**
+	 * Attribute which does not exist in the XML file.
+	 */
+	@Value("${xml.attribute.notExists}")
+	private String attributeNotExisting;
+	/**
+	 * Attribute existing in the XML file.
+	 */
+	@Value("${xml.attribute.attr1}")
+	private String attribute1;
+	/**
+	 * Attribute existing in the XML file.
+	 */
+	@Value("${xml.attribute.attr2}")
+	private String attribute2;
 
     {
         parserNodes = new Parser<Document, Integer>() {
@@ -191,8 +205,8 @@ extends AbstractTestNGSpringContextTests{
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)), total);
 
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
+        getParser().addRequiredAttribute(attribute1);
+        getParser().addRejectedAttribute(attribute1);
 
         r = ResourceUtils.getClassPathReader(getPath());
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
@@ -221,7 +235,7 @@ extends AbstractTestNGSpringContextTests{
 
         r = ResourceUtils.getClassPathReader(getPath());
 
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
+        getParser().addRejectedAttribute(attribute1);
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 noAttribute1);
@@ -237,8 +251,8 @@ extends AbstractTestNGSpringContextTests{
 
         r = ResourceUtils.getClassPathReader(getPath());
 
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
+        getParser().addRejectedAttribute(attribute1);
+        getParser().addRejectedAttribute(attribute2);
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 noAttribute1NoAttribute2);
@@ -253,7 +267,7 @@ extends AbstractTestNGSpringContextTests{
 
         r = ResourceUtils.getClassPathReader(getPath());
 
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_NOT_EXISTING);
+        getParser().addRejectedAttribute(attributeNotExisting);
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 NO_NOT_EXISTING);
@@ -269,7 +283,7 @@ extends AbstractTestNGSpringContextTests{
 
         r = ResourceUtils.getClassPathReader(getPath());
 
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
+        getParser().addRequiredAttribute(attribute1);
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 withAttribute1);
@@ -285,8 +299,8 @@ extends AbstractTestNGSpringContextTests{
 
         r = ResourceUtils.getClassPathReader(getPath());
 
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
+        getParser().addRequiredAttribute(attribute1);
+        getParser().addRequiredAttribute(attribute2);
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 withAttribute1WithAttribute2);
@@ -301,8 +315,8 @@ extends AbstractTestNGSpringContextTests{
 
         r = ResourceUtils.getClassPathReader(getPath());
 
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
+        getParser().addRequiredAttribute(attribute1);
+        getParser().addRejectedAttribute(attribute1);
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 WITH_ATTRIBUTE1_NO_ATTRIBUTE1);
@@ -318,8 +332,8 @@ extends AbstractTestNGSpringContextTests{
 
         r = ResourceUtils.getClassPathReader(getPath());
 
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE1);
-        getParser().addRejectedAttribute(XMLConf.ATTRIBUTE_ATTRIBUTE2);
+        getParser().addRequiredAttribute(attribute1);
+        getParser().addRejectedAttribute(attribute2);
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 withAttribute1NoAttribute2);
@@ -334,7 +348,7 @@ extends AbstractTestNGSpringContextTests{
 
         r = ResourceUtils.getClassPathReader(getPath());
 
-        getParser().addRequiredAttribute(XMLConf.ATTRIBUTE_NOT_EXISTING);
+        getParser().addRequiredAttribute(attributeNotExisting);
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 WITH_NOT_EXISTING);
