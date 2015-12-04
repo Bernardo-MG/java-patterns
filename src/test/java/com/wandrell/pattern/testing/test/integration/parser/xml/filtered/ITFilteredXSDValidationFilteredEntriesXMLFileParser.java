@@ -28,7 +28,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser;
 import com.wandrell.pattern.testing.util.conf.TestContextConfig;
-import com.wandrell.pattern.testing.util.test.integration.parser.xml.AbstractITParseAbstractAttributesFilterXMLFileParser;
+import com.wandrell.pattern.testing.util.test.integration.parser.xml.filtered.AbstractITParseAbstractAttributesFilterXMLFileParser;
 
 /**
  * Integration tests for {@link FilteredEntriesXMLFileParser} implementing

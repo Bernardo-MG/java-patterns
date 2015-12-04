@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.wandrell.pattern.testing.util.test.integration.parser.xml;
+package com.wandrell.pattern.testing.util.test.integration.parser.xml.filtered;
 
 import java.io.Reader;
 

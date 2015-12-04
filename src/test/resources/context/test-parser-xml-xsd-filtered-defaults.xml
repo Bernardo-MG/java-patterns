@@ -18,7 +18,7 @@
 
 	<bean id="reader" class="com.wandrell.pattern.testing.util.ResourceUtils"
 		factory-method="getClassPathReader">
-		<constructor-arg index="0" value="${xml.filtered.xsd.path}" />
+		<constructor-arg index="0" value="${xml.xsd.filtered.path}" />
 	</bean>
 
 	<bean id="parser" class="com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser">
