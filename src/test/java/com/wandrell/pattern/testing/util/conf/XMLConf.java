@@ -34,16 +34,7 @@ public final class XMLConf {
     public static final String ATTRIBUTE_ATTRIBUTE1                  = "attribute1";
     public static final String ATTRIBUTE_ATTRIBUTE2                  = "attribute2";
     public static final String ATTRIBUTE_NOT_EXISTING                = "abc12345";
-    public static final String DTD_VALIDATION                        = "files/xml/validation/dtd_validation.dtd";
-    public static final String FILTERED_NO_VALIDATION                = "files/xml/filtered/filtered_no_validation.xml";
-    public static final String FILTERED_NO_VALIDATION_FULL           = "files/xml/filtered/filtered_no_validation_full.xml";
-    public static final String FILTERED_VALIDATION_DTD               = "files/xml/filtered/filtered_validation.dtd";
-    public static final String FILTERED_VALIDATION_XSD               = "files/xml/filtered/filtered_validation.xsd";
-    public static final String FILTERED_WITH_VALIDATION_DTD          = "files/xml/filtered/filtered_validation_a_dtd.xml";
-    public static final String FILTERED_WITH_VALIDATION_XSD          = "files/xml/filtered/filtered_validation_a.xml";
-    public static final String FILTERED_WITH_VALIDATION_XSD_DEFAULTS = "files/xml/filtered/filtered_validation_b.xml";
-    public static final String NODE_ROOT_FILTER                      = "node";
-    
+      
     /**
      * Private constructor.
      */

@@ -24,12 +24,10 @@
 
 package com.wandrell.pattern.testing.test.unit.parser.xml.exception;
 
-import java.io.Reader;
+import org.springframework.test.context.ContextConfiguration;
 
-import org.jdom2.Document;
-
-import com.wandrell.pattern.parser.Parser;
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
 
 /**
@@ -39,23 +37,15 @@ import com.wandrell.pattern.testing.util.test.unit.parser.xml.exception.Abstract
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
  */
+@ContextConfiguration(TestContextConfig.PARSER_XML_NO_VALIDATION_EXCEPTION)
 public final class TestExceptionNoValidationValidatedXMLFileParser
         extends AbstractUnitExceptionParseXMLReaderParser<Integer> {
-
-    /**
-     * Generates the parser to be tested.
-     * 
-     * @return the parser to be tested
-     */
-    private static final Parser<Reader, Document> buildParser() {
-        return new ValidatedXMLFileParser();
-    }
 
     /**
      * Default constructor.
      */
     public TestExceptionNoValidationValidatedXMLFileParser() {
-        super(buildParser());
+        super();
     }
 
 }

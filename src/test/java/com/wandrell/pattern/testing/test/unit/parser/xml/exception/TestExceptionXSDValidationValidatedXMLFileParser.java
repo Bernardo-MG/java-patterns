@@ -22,32 +22,29 @@
  * SOFTWARE.
  */
 
-package com.wandrell.pattern.testing.test.integration.parser.xml.exception;
+package com.wandrell.pattern.testing.test.unit.parser.xml.exception;
 
 import org.springframework.test.context.ContextConfiguration;
+
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.testing.util.conf.TestContextConfig;
-import com.wandrell.pattern.testing.util.test.integration.parser.xml.exception.AbstractITExceptionNoValidatesValidatedXMLFileParser;
+import com.wandrell.pattern.testing.util.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
 
 /**
- * Integration tests for {@link ValidatedXMLFileParser} using XSD validation.
- * <p>
- * Adds the following cases:
- * <ol>
- * <li>Reading a file which doesn't validate throws a {@code Exception} .</li>
- * </ol>
+ * Unit tests for {@link ValidatedXMLFileParser} implementing
+ * {@code AbstractUnitExceptionParseXMLReaderParser} and using DTD validation.
  * 
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
  */
-@ContextConfiguration(TestContextConfig.PARSER_XML_XSD_VALIDATION_NO_VALIDATES)
-public final class ITExceptionNoValidatesXSDValidatedXMLFileParser extends
-AbstractITExceptionNoValidatesValidatedXMLFileParser {
+@ContextConfiguration(TestContextConfig.PARSER_XML_XSD_VALIDATION_EXCEPTION)
+public final class TestExceptionXSDValidationValidatedXMLFileParser
+        extends AbstractUnitExceptionParseXMLReaderParser<Integer> {
 
     /**
      * Default constructor.
      */
-    public ITExceptionNoValidatesXSDValidatedXMLFileParser() {
+    public TestExceptionXSDValidationValidatedXMLFileParser() {
         super();
     }
 

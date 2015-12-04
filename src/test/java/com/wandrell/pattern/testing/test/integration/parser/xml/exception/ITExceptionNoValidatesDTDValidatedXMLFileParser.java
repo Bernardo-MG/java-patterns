@@ -40,7 +40,7 @@ import com.wandrell.pattern.testing.util.test.integration.parser.xml.exception.A
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
  */
-@ContextConfiguration(TestContextConfig.PARSER_XML_DTD_VALIDATION)
+@ContextConfiguration(TestContextConfig.PARSER_XML_DTD_VALIDATION_NO_VALIDATES)
 public final class ITExceptionNoValidatesDTDValidatedXMLFileParser extends
 AbstractITExceptionNoValidatesValidatedXMLFileParser {
 

@@ -24,7 +24,10 @@
 
 package com.wandrell.pattern.testing.test.unit.parser.xml.exception;
 
+import org.springframework.test.context.ContextConfiguration;
+
 import com.wandrell.pattern.parser.xml.NotValidatedXMLFileParser;
+import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.test.unit.parser.xml.exception.AbstractUnitExceptionParseXMLReaderParser;
 
 /**
@@ -34,11 +37,12 @@ import com.wandrell.pattern.testing.util.test.unit.parser.xml.exception.Abstract
  * @author Bernardo Martínez Garrido
  * @see NotValidatedXMLFileParser
  */
+@ContextConfiguration(TestContextConfig.PARSER_XML_NOT_VALIDATED_EXCEPTION)
 public final class TestExceptionNotValidatedXMLFileParser
         extends AbstractUnitExceptionParseXMLReaderParser<Integer> {
 
     public TestExceptionNotValidatedXMLFileParser() {
-        super(new NotValidatedXMLFileParser());
+        super();
     }
 
 }

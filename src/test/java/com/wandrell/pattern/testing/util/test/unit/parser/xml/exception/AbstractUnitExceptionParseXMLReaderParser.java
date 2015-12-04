@@ -31,6 +31,9 @@ import java.io.Reader;
 
 import org.apache.commons.io.IOUtils;
 import org.jdom2.Document;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -49,9 +52,11 @@ import com.wandrell.pattern.parser.Parser;
  * @author Bernardo Martínez Garrido
  * @see InputParser
  */
-public abstract class AbstractUnitExceptionParseXMLReaderParser<V> {
+public abstract class AbstractUnitExceptionParseXMLReaderParser<V> extends AbstractTestNGSpringContextTests {
 
-    private final Parser<Reader, Document> parser;
+	@Autowired
+	@Qualifier("parser")
+    private Parser<Reader, Document> parser;
 
     /**
      * Constructs the test.
@@ -59,11 +64,8 @@ public abstract class AbstractUnitExceptionParseXMLReaderParser<V> {
      * @param parser
      *            parser to read
      */
-    public AbstractUnitExceptionParseXMLReaderParser(
-            final Parser<Reader, Document> parser) {
+    public AbstractUnitExceptionParseXMLReaderParser() {
         super();
-
-        this.parser = parser;
     }
 
     /**
