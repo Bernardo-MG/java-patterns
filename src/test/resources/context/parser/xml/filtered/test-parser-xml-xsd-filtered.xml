@@ -10,7 +10,7 @@
 	">
 
     <context:property-placeholder
-        location="classpath:context/test-xml.properties, classpath:context/test-parser-xml-xsd-filtered.properties" />
+        location="classpath:context/test-xml.properties, classpath:context/parser/xml/filtered/test-parser-xml-xsd-filtered.properties" />
 
     <bean id="xmlPath" class="java.lang.String">
         <constructor-arg index="0" type="java.lang.String"
