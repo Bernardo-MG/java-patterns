@@ -10,11 +10,11 @@
 	">
 
     <context:property-placeholder
-        location="classpath:context/test-xml.properties, classpath:context/parser/xml/test-parser-xml-no-validation-filtered.properties" />
+        location="classpath:context/test-xml.properties, classpath:context/parser/xml/filtered/test-parser-xml-no-validation-filtered-full.properties" />
 
     <bean id="xmlPath" class="java.lang.String">
         <constructor-arg index="0" type="java.lang.String"
-            value="${xml.filtered.path}" />
+            value="${xml.filtered.full.path}" />
     </bean>
 
     <bean id="parser"
