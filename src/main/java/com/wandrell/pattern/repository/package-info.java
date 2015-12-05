@@ -58,8 +58,7 @@
  * possible repository.
  * <p>
  * It stores entities inside a {@code Collection}, and filters them through
- * Guava classes, specifically it requires a <a href=
- * "http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html"
+ * Guava classes, specifically it requires a <a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html"
  * >Predicate</a> which the entities to be returned should validate.
  * <p>
  * Additionally, there is a default implementation of {@code QueryData},
