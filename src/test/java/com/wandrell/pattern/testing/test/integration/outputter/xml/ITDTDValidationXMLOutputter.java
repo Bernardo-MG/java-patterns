@@ -25,6 +25,7 @@
 package com.wandrell.pattern.testing.test.integration.outputter.xml;
 
 import org.springframework.test.context.ContextConfiguration;
+
 import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.test.integration.outputter.AbstractITXMLOutputter;
 
@@ -34,14 +35,13 @@ import com.wandrell.pattern.testing.util.test.integration.outputter.AbstractITXM
  * @author Bernardo Martínez Garrido
  */
 @ContextConfiguration(TestContextConfig.OUTPUTTER_XML_DTD_VALIDATION)
-public final class ITDTDValidationXMLOutputter extends
-AbstractITXMLOutputter {
+public final class ITDTDValidationXMLOutputter extends AbstractITXMLOutputter {
 
-	/**
-	 * Default constructor.
-	 */
-	public ITDTDValidationXMLOutputter() {
-		super();
-	}
+    /**
+     * Default constructor.
+     */
+    public ITDTDValidationXMLOutputter() {
+        super();
+    }
 
 }

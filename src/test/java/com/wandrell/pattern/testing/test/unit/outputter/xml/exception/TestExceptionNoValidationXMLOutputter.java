@@ -47,7 +47,9 @@ import com.wandrell.pattern.outputter.xml.XMLOutputter;
  * Checks the following cases:
  * <ol>
  * <li>An {@code Exception} is thrown when writing a XML file using a closed
- * {@code OutputStream} or {@code Writer}.</li>
+ * {@code OutputStream}.</li>
+ * <li>An {@code Exception} is thrown when writing a XML file using a closed
+ * {@code Writer}.</li>
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
@@ -56,23 +58,15 @@ import com.wandrell.pattern.outputter.xml.XMLOutputter;
 public final class TestExceptionNoValidationXMLOutputter {
 
     /**
-     * Parser being tested.
+     * Outputter being tested.
      */
-    private Outputter<Document> parser;
+    private Outputter<Document> outputter;
 
     /**
      * Default constructor.
      */
     public TestExceptionNoValidationXMLOutputter() {
         super();
-    }
-
-    /**
-     * Creates the parser being tested before any test is run.
-     */
-    @BeforeClass
-    private final void initialize() {
-        parser = new XMLOutputter();
     }
 
     /**
@@ -95,7 +89,7 @@ public final class TestExceptionNoValidationXMLOutputter {
             Assert.fail(e.getMessage());
         }
 
-        parser.output(new Document(), stream);
+        outputter.output(new Document(), stream);
     }
 
     /**
@@ -119,7 +113,15 @@ public final class TestExceptionNoValidationXMLOutputter {
             Assert.fail(e.getMessage());
         }
 
-        parser.output(new Document(), writer);
+        outputter.output(new Document(), writer);
+    }
+
+    /**
+     * Creates the parser being tested before any test is run.
+     */
+    @BeforeClass
+    private final void initialize() {
+        outputter = new XMLOutputter();
     }
 
 }

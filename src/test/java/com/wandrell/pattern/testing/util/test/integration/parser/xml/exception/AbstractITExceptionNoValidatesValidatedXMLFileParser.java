@@ -33,11 +33,14 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.parser.Parser;
-import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.testing.util.ResourceUtils;
 
 /**
- * Integration tests for {@link ValidatedXMLFileParser} using DTD validation.
+ * Abstract integration tests for an XML {@link Parser} using DTD validation.
+ * <p>
+ * The tested {@code Parser} should receive a {@code Reader} as input, and
+ * return a {@code Document} as output. Additionally it has to be injected with
+ * the use of Spring.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -45,23 +48,26 @@ import com.wandrell.pattern.testing.util.ResourceUtils;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @see ValidatedXMLFileParser
+ * @see Parser
  */
-public abstract class AbstractITExceptionNoValidatesValidatedXMLFileParser extends
-AbstractTestNGSpringContextTests {
+public abstract class AbstractITExceptionNoValidatesValidatedXMLFileParser
+        extends AbstractTestNGSpringContextTests {
 
-	/**
-     * Parser to test
+    /**
+     * Parser to test.
+     * <p>
+     * It has to be injected with the use of Spring.
      */
-	@Autowired
-	@Qualifier("parser")
+    @Autowired
     private Parser<Reader, Document> parser;
     /**
-	 * Path to the integers XML file which does not validate.
-	 */
-	@Autowired
-	@Qualifier("xmlPath")
-	private String xmlPath;
+     * Path to an XML file which does not validate, and so causes an exception.
+     * <p>
+     * It has to be injected with the use of Spring.
+     */
+    @Autowired
+    @Qualifier("xmlPath")
+    private String                   xmlPath;
 
     /**
      * Default constructor.
@@ -76,8 +82,7 @@ AbstractTestNGSpringContextTests {
      */
     @Test(expectedExceptions = Exception.class)
     public final void testParse_NotValidates_ThrowsException() {
-        parser.parse(
-                ResourceUtils.getClassPathReader(xmlPath));
+        parser.parse(ResourceUtils.getClassPathReader(xmlPath));
     }
 
 }

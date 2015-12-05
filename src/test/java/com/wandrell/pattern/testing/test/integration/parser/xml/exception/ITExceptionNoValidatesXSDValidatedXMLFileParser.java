@@ -25,24 +25,22 @@
 package com.wandrell.pattern.testing.test.integration.parser.xml.exception;
 
 import org.springframework.test.context.ContextConfiguration;
+
 import com.wandrell.pattern.parser.xml.ValidatedXMLFileParser;
 import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 import com.wandrell.pattern.testing.util.test.integration.parser.xml.exception.AbstractITExceptionNoValidatesValidatedXMLFileParser;
 
 /**
- * Integration tests for {@link ValidatedXMLFileParser} using XSD validation.
- * <p>
- * Adds the following cases:
- * <ol>
- * <li>Reading a file which doesn't validate throws a {@code Exception} .</li>
- * </ol>
+ * Integration tests for {@link ValidatedXMLFileParser} implementing
+ * {@code AbstractITExceptionNoValidatesValidatedXMLFileParser} and using XSD
+ * validation.
  * 
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
  */
 @ContextConfiguration(TestContextConfig.PARSER_XML_XSD_VALIDATION_NO_VALIDATES)
-public final class ITExceptionNoValidatesXSDValidatedXMLFileParser extends
-AbstractITExceptionNoValidatesValidatedXMLFileParser {
+public final class ITExceptionNoValidatesXSDValidatedXMLFileParser
+        extends AbstractITExceptionNoValidatesValidatedXMLFileParser {
 
     /**
      * Default constructor.

@@ -32,7 +32,6 @@ import java.io.Reader;
 import org.apache.commons.io.IOUtils;
 import org.jdom2.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -40,36 +39,43 @@ import org.testng.annotations.Test;
 import com.wandrell.pattern.parser.Parser;
 
 /**
- * Abstract implementation of {@link AbstractTestExceptionReadInputParser} for
- * an XML {@link InputParser}.
+ * Abstract unit tests for an XML {@link Parser}, checking that exceptions are
+ * thrown with invalid inputs.
+ * <p>
+ * The tested {@code Parser} should receive a {@code Reader} as input, and
+ * return a {@code Document} as output. Additionally it has to be injected with
+ * the use of Spring.
  * <p>
  * Adds the following cases:
  * <ol>
- * <li>A {@code Exception} is thrown when trying to parse a non XML file.</li>
+ * <li>A {@code Exception} is thrown when trying to parse an empty XML file.
+ * </li>
  * <li>An {@code Exception} is thrown when reading from a closed {@code Reader}.
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
  * @see InputParser
  */
-public abstract class AbstractUnitExceptionParseXMLReaderParser<V> extends AbstractTestNGSpringContextTests {
+public abstract class AbstractUnitExceptionParseXMLReaderParser<V>
+        extends AbstractTestNGSpringContextTests {
 
-	@Autowired
-	@Qualifier("parser")
+    /**
+     * Parser to be tested.
+     * <p>
+     * It has to be injected with the use of Spring.
+     */
+    @Autowired
     private Parser<Reader, Document> parser;
 
     /**
      * Constructs the test.
-     * 
-     * @param parser
-     *            parser to read
      */
     public AbstractUnitExceptionParseXMLReaderParser() {
         super();
     }
 
     /**
-     * Tests that a {@code Exception} is thrown when trying to parse a non XML
+     * Tests that a {@code Exception} is thrown when trying to parse a an empty
      * file.
      */
     @Test(expectedExceptions = Exception.class)

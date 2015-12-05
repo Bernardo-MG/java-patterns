@@ -47,134 +47,147 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.wandrell.pattern.outputter.Outputter;
-import com.wandrell.pattern.outputter.xml.XMLOutputter;
 import com.wandrell.pattern.testing.util.ResourceUtils;
 
 /**
- * Abstract integration tests for {@link XMLOutputter}, checking that XML files with XSD
- * validation are created.
+ * Abstract integration tests for {@link Outputter}, checking that XML files
+ * with XSD validation are created.
+ * <p>
+ * The tested {@code Outputter} should receive a {@code Document} as input.
+ * Additionally it has to be injected with the use of Spring.
  * <p>
  * Checks the following cases:
  * <ol>
- * <li>When creating a XML file with an {@code OutputStream} or {@code Writer}
- * it has the correct structure.</li>
+ * <li>When creating a XML file with a {@code Writer} it has the correct
+ * structure.</li>
+ * <li>When creating a XML file with an {@code OutputStream} it has the correct
+ * structure.</li>
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @see XMLOutputter
+ * @see Outputter
  */
-public abstract class AbstractITXMLOutputter extends
-		AbstractTestNGSpringContextTests {
+public abstract class AbstractITXMLOutputter
+        extends AbstractTestNGSpringContextTests {
 
-	/**
-	 * Random number generator.
-	 * <p>
-	 * Used to avoid name collisions when creating test files.
-	 */
-	private static final Random random = new Random();
-	/**
-	 * Template path for the tests.
-	 */
-	private static final String TEMPLATE_PATH = "target/test_write_XML_%d.xml";
-	/**
-	 * Generates a random ID for the test files.
-	 * 
-	 * @return a random ID for the test files
-	 */
-	private static final Integer getRandomID() {
-		return random.nextInt(Integer.MAX_VALUE);
-	}
-	/**
-	 * Outputter being tested.
-	 * <p>
-	 * This will be used to create a XML file.
-	 */
-	@Autowired
-	@Qualifier("outputter")
-	private Outputter<Document> outputter;
-	/**
-	 * Value used to create the resulting XML file.
-	 */
-	@Autowired
-	@Qualifier("document")
-	private Document value;
+    /**
+     * Random number generator.
+     * <p>
+     * Used to avoid name collisions when creating test files.
+     */
+    private static final Random random        = new Random();
+    /**
+     * Template path for the tests. Used when creating the resulting files.
+     * <p>
+     * The random numbers generator will be used along this template to build
+     * the path to the final file.
+     */
+    private static final String TEMPLATE_PATH = "target/test_write_XML_%d.xml";
 
-	/**
-	 * Path to the XML file used to validate the result.
-	 * <p>
-	 * The resulting XML file should be identical to this one.
-	 */
-	@Autowired
-	@Qualifier("xmlPath")
-	private String xmlPath;
+    /**
+     * Outputter being tested.
+     * <p>
+     * This will be used to create a XML file.
+     * <p>
+     * It has to be injected with the use of Spring.
+     */
+    @Autowired
+    private Outputter<Document> outputter;
+    /**
+     * Value used to create the resulting XML file.
+     * <p>
+     * It has to be injected with the use of Spring.
+     */
+    @Autowired
+    private Document            value;
+    /**
+     * Path to the XML file used to validate the result.
+     * <p>
+     * The resulting XML file should be identical to this one.
+     * <p>
+     * It has to be injected with the use of Spring.
+     */
+    @Autowired
+    @Qualifier("xmlPath")
+    private String              xmlPath;
 
-	/**
-	 * Default constructor.
-	 */
-	public AbstractITXMLOutputter() {
-		super();
-	}
+    /**
+     * Generates a random ID for the test files.
+     * 
+     * @return a random ID for the test files
+     */
+    private static final Integer getRandomID() {
+        return random.nextInt(Integer.MAX_VALUE);
+    }
 
-	/**
-	 * Asserts that the generated file is equal to the expected file.
-	 * 
-	 * @param path
-	 *            path to the file to check
-	 * @throws Exception
-	 *             never, this is a required declaration
-	 */
-	private final void assertEquals(final Path path) throws Exception {
-		final InputStream streamTest; // Stream to the created file
-		final Reader readerExpected; // Reader to the expected file
+    /**
+     * Default constructor.
+     */
+    public AbstractITXMLOutputter() {
+        super();
+    }
 
-		streamTest = new FileInputStream(path.toFile());
-		readerExpected = ResourceUtils.getClassPathReader(xmlPath);
+    /**
+     * Tests that when creating a XML file with an {@code OutputStream} it has
+     * the correct structure.
+     * 
+     * @throws Exception
+     *             never, this is a required declaration
+     */
+    @Test
+    public final void testWrite_OutputStream_EqualsExpected() throws Exception {
+        final Path path; // Path to the output file
+        final OutputStream stream; // Stream to the output file
 
-		Assert.assertTrue(XMLUnit.compareXML(readerExpected,
-				new InputStreamReader(streamTest)).identical());
-	}
+        path = Paths.get(String.format(TEMPLATE_PATH, getRandomID()))
+                .toAbsolutePath();
 
-	/**
-	 * Tests that when creating a XML file with an {@code OutputStream} it has
-	 * the correct structure.
-	 * 
-	 * @throws Exception
-	 *             never, this is a required declaration
-	 */
-	@Test
-	public final void testWrite_OutputStream_EqualsExpected() throws Exception {
-		final Path path; // Path to the output file
-		final OutputStream stream; // Stream to the output file
+        stream = new BufferedOutputStream(new FileOutputStream(path.toFile()));
 
-		path = Paths.get(String.format(TEMPLATE_PATH, getRandomID()))
-				.toAbsolutePath();
+        outputter.output(value, stream);
 
-		stream = new BufferedOutputStream(new FileOutputStream(path.toFile()));
+        assertEquals(path);
+    }
 
-		outputter.output(value, stream);
+    /**
+     * Tests that when creating a XML file with a {@code Writer} it has the
+     * correct structure.
+     * 
+     * @throws Exception
+     *             never, this is a required declaration
+     */
+    @Test
+    public final void testWrite_OutputWriter_EqualsExpected() throws Exception {
+        final Path path; // Path to the output file
+        final Writer writer; // Stream to the output file
 
-		assertEquals(path);
-	}
+        path = Paths.get(String.format(TEMPLATE_PATH, getRandomID()))
+                .toAbsolutePath();
 
-	/**
-	 * Tests that when creating a XML file with a {@code Writer} it has the
-	 * correct structure.
-	 * 
-	 * @throws Exception
-	 *             never, this is a required declaration
-	 */
-	@Test
-	public final void testWrite_OutputWriter_EqualsExpected() throws Exception {
-		final Path path; // Path to the output file
-		final Writer writer; // Stream to the output file
+        writer = new BufferedWriter(new FileWriter(path.toFile()));
+        outputter.output(value, writer);
 
-		path = Paths.get(String.format(TEMPLATE_PATH, getRandomID()))
-				.toAbsolutePath();
+        assertEquals(path);
+    }
 
-		writer = new BufferedWriter(new FileWriter(path.toFile()));
-		outputter.output(value, writer);
+    /**
+     * Asserts that the generated file is equal to the expected file.
+     * 
+     * @param path
+     *            path to the file to check
+     * @throws Exception
+     *             never, this is a required declaration
+     */
+    private final void assertEquals(final Path path) throws Exception {
+        final InputStream streamTest; // Stream to the created file
+        final Reader readerExpected; // Reader to the expected file
 
-		assertEquals(path);
-	}
+        streamTest = new FileInputStream(path.toFile());
+        readerExpected = ResourceUtils.getClassPathReader(xmlPath);
+
+        Assert.assertTrue(XMLUnit
+                .compareXML(readerExpected, new InputStreamReader(streamTest))
+                .identical());
+    }
 
 }

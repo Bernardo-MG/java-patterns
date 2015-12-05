@@ -42,7 +42,10 @@ import com.wandrell.pattern.testing.util.ResourceUtils;
 import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 
 /**
- * Integration tests for {@link XMLFileParser} with no validation.
+ * Integration tests for {@link XMLFileParser} testing that it reads XML files
+ * correctly.
+ * <p>
+ * The configuration values for the test will be injected through Spring.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -55,39 +58,50 @@ import com.wandrell.pattern.testing.util.conf.TestContextConfig;
  * @see XMLFileParser
  */
 @ContextConfiguration(TestContextConfig.XML)
-public final class ITXMLFileParser extends
-AbstractTestNGSpringContextTests {
+public final class ITXMLFileParser extends AbstractTestNGSpringContextTests {
 
-	/**
-	 * Path to the DTD file.
-	 */
-	@Value("${xml.dtd.path}")
-	private String dtdPath;
-	/**
-	 * Value node name.
-	 */
-	@Value("${xml.node.value}")
-	private String nodeValue;
-	/**
-	 * Path to the DTD validated XML file.
-	 */
-	@Value("${xml.validated.dtd.path}")
-	private String xmlDtdPath;
-	/**
-	 * Path to the integers XML file.
-	 */
-	@Value("${xml.integer.path}")
-	private String xmlIntegerPath;
-	/**
-	 * Path to the XSD validated XML file.
-	 */
-	@Value("${xml.validated.xsd.path}")
-	private String xmlXsdPath;
-	/**
-	 * Path to the XSD file.
-	 */
-	@Value("${xml.xsd.path}")
-	private String xsdPath;
+    /**
+     * Path to the DTD file.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.dtd.path}")
+    private String dtdPath;
+    /**
+     * Value node name.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.node.value}")
+    private String nodeValue;
+    /**
+     * Path to the DTD validated XML file.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.validated.dtd.path}")
+    private String xmlDtdPath;
+    /**
+     * Path to the integers XML file.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.integer.path}")
+    private String xmlPath;
+    /**
+     * Path to the XSD validated XML file.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.validated.xsd.path}")
+    private String xmlXsdPath;
+    /**
+     * Path to the XSD file.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.xsd.path}")
+    private String xsdPath;
 
     /**
      * Default constructor.
@@ -102,15 +116,16 @@ AbstractTestNGSpringContextTests {
     @Test
     public final void testParse() {
         final Parser<Reader, Document> parser;  // Parser tested
-        final Reader reader; // Reader to the test file
-        final Integer value; // Tested result from the parsed file
+        final Reader reader;                    // Reader to the test file
+        final Integer value;                    // Tested result from the parsed
+                                                // file
 
         parser = new XMLFileParser();
 
         reader = new BufferedReader(new InputStreamReader(
-                ResourceUtils.getClassPathInputStream(xmlIntegerPath)));
-		value = Integer.parseInt(parser.parse(reader).getRootElement()
-				.getChildText(nodeValue));
+                ResourceUtils.getClassPathInputStream(xmlPath)));
+        value = Integer.parseInt(
+                parser.parse(reader).getRootElement().getChildText(nodeValue));
 
         Assert.assertEquals(value, (Integer) 1);
     }
@@ -120,16 +135,16 @@ AbstractTestNGSpringContextTests {
      */
     @Test
     public final void testParse_DTD() {
-        final XMLFileParser parser;  // Parser tested
-        final Reader reader; // Reader to the test file
-        final Integer value; // Tested result from the parsed file
+        final XMLFileParser parser;     // Parser tested
+        final Reader reader;            // Reader to the test file
+        final Integer value;            // Tested result from the parsed file
 
         parser = new XMLFileParser(XMLValidationType.DTD,
                 ResourceUtils.getClassPathReader(dtdPath));
 
         reader = ResourceUtils.getClassPathReader(xmlDtdPath);
-		value = Integer.parseInt(parser.parse(reader).getRootElement()
-				.getChildText(nodeValue));
+        value = Integer.parseInt(
+                parser.parse(reader).getRootElement().getChildText(nodeValue));
 
         Assert.assertEquals(value, (Integer) 1);
     }
@@ -139,16 +154,16 @@ AbstractTestNGSpringContextTests {
      */
     @Test
     public final void testParse_XSD() {
-        final XMLFileParser parser;  // Parser tested
-        final Reader reader; // Reader to the test file
-        final Integer value; // Tested result from the parsed file
+        final XMLFileParser parser;     // Parser tested
+        final Reader reader;            // Reader to the test file
+        final Integer value;            // Tested result from the parsed file
 
         parser = new XMLFileParser(XMLValidationType.XSD,
                 ResourceUtils.getClassPathReader(xsdPath));
 
         reader = ResourceUtils.getClassPathReader(xmlXsdPath);
-		value = Integer.parseInt(parser.parse(reader).getRootElement()
-				.getChildText(nodeValue));
+        value = Integer.parseInt(
+                parser.parse(reader).getRootElement().getChildText(nodeValue));
 
         Assert.assertEquals(value, (Integer) 1);
     }

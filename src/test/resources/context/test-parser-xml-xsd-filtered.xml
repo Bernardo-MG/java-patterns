@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
     	http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-3.2.xsd
 	">
 
-	<context:property-placeholder location="classpath:context/test-xml.properties, classpath:context/test-parser-xml-xsd-filtered.properties" />
+    <context:property-placeholder
+        location="classpath:context/test-xml.properties, classpath:context/test-parser-xml-xsd-filtered.properties" />
 
-	<bean id="xmlPath" class="java.lang.String">
-		<constructor-arg index="0" type="java.lang.String"
-			value="${xml.filtered.xsd.path}" />
-	</bean>
+    <bean id="xmlPath" class="java.lang.String">
+        <constructor-arg index="0" type="java.lang.String"
+            value="${xml.filtered.xsd.path}" />
+    </bean>
 
-	<bean id="reader" class="com.wandrell.pattern.testing.util.ResourceUtils"
-		factory-method="getClassPathReader">
-		<constructor-arg index="0" value="${xml.xsd.filtered.path}" />
-	</bean>
+    <bean id="reader" class="com.wandrell.pattern.testing.util.ResourceUtils"
+        factory-method="getClassPathReader">
+        <constructor-arg index="0"
+            value="${xml.xsd.filtered.path}" />
+    </bean>
 
-	<bean id="parser" class="com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser">
-		<constructor-arg index="0" value="XSD" />
-		<constructor-arg index="1" ref="reader" />
-		<constructor-arg index="2" value="${xml.node.value}" />
-	</bean>
+    <bean id="parser"
+        class="com.wandrell.pattern.parser.xml.FilteredEntriesXMLFileParser">
+        <constructor-arg index="0" value="XSD" />
+        <constructor-arg index="1" ref="reader" />
+        <constructor-arg index="2" value="${xml.node.value}" />
+    </bean>
 
 </beans>

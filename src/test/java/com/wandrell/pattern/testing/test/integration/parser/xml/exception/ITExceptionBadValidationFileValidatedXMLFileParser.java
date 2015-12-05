@@ -47,21 +47,24 @@ import com.wandrell.pattern.testing.util.conf.TestContextConfig;
  * <p>
  * Checks the following cases:
  * <ol>
- * <li>An {@code Exception} is thrown when reading a XML file using an empty
- * validation file, when using DTD or XSD validation.</li>
+ * <li>An {@code Exception} is thrown when reading a XML file using an empty DTD
+ * validation file.</li>
+ * <li>An {@code Exception} is thrown when reading a XML file using an empty XSD
+ * validation file.</li>
  * 
  * @author Bernardo Martínez Garrido
  * @see ValidatedXMLFileParser
  */
 @ContextConfiguration(TestContextConfig.XML)
-public final class ITExceptionBadValidationFileValidatedXMLFileParser extends
-AbstractTestNGSpringContextTests {
+public final class ITExceptionBadValidationFileValidatedXMLFileParser
+        extends AbstractTestNGSpringContextTests {
 
-	/**
-	 * Path to the integers XML file.
-	 */
-	@Value("${xml.integer.path}")
-	private String xmlIntegerPath;
+    /**
+     * Path to the integers XML file.
+     */
+    @Value("${xml.integer.path}")
+    private String xmlIntegerPath;
+
     /**
      * Default constructor.
      */

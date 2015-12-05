@@ -35,10 +35,10 @@ import org.testng.annotations.Test;
 import com.google.common.base.Predicate;
 import com.wandrell.pattern.repository.CollectionRepository;
 import com.wandrell.pattern.repository.FilteredRepository;
-import com.wandrell.pattern.repository.Repository;
 
 /**
- * Unit tests for {@link Repository} using strings.
+ * Unit tests for {@link CollectionRepository}. For this test the repository
+ * will contain {@code String} entities.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -60,9 +60,9 @@ import com.wandrell.pattern.repository.Repository;
  * parallelized.
  * 
  * @author Bernardo Martínez Garrido
- * @see Repository
+ * @see CollectionRepository
  */
-public final class TestCollectionRepository {
+public final class TestStringCollectionRepository {
 
     /**
      * The repository being tested.
@@ -72,7 +72,7 @@ public final class TestCollectionRepository {
     /**
      * Default constructor.
      */
-    public TestCollectionRepository() {
+    public TestStringCollectionRepository() {
         super();
     }
 

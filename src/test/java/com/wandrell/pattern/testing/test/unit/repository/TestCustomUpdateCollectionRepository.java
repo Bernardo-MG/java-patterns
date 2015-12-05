@@ -37,10 +37,10 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Predicate;
 import com.wandrell.pattern.repository.CollectionRepository;
 import com.wandrell.pattern.repository.FilteredRepository;
-import com.wandrell.pattern.repository.Repository;
 
 /**
- * Unit tests for {@link Repository} using a custom test class.
+ * Unit tests for {@link CollectionRepository} testing that the update methods
+ * work correctly. For this test the repository will contain custom entities.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -49,9 +49,14 @@ import com.wandrell.pattern.repository.Repository;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @see Repository
+ * @see CollectionRepository
  */
-public final class TestUpdateCollectionRepository {
+public final class TestCustomUpdateCollectionRepository {
+
+    /**
+     * The repository being tested.
+     */
+    private FilteredRepository<TestClass, Predicate<TestClass>> repository;
 
     /**
      * This is a test class for testing the {@code Repository} using a class
@@ -65,7 +70,7 @@ public final class TestUpdateCollectionRepository {
         /**
          * Name of the class, which will identify it.
          */
-        private final String  name;
+        private final String name;
 
         /**
          * Constructs a test class with the specified data.
@@ -113,14 +118,9 @@ public final class TestUpdateCollectionRepository {
     }
 
     /**
-     * The repository being tested.
-     */
-    private FilteredRepository<TestClass, Predicate<TestClass>> repository;
-
-    /**
      * Default constructor.
      */
-    public TestUpdateCollectionRepository() {
+    public TestCustomUpdateCollectionRepository() {
         super();
     }
 

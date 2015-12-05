@@ -35,7 +35,8 @@ import com.wandrell.pattern.testing.util.test.integration.parser.xml.filtered.Ab
  * {@code AbstractITParseAbstractAttributesFilterXMLFileParser} and XSD
  * validation.
  * <p>
- * The validation file applies default values for several of the entries
+ * This test is called 'default' because the validation file applies default
+ * values for most of the entries, as few have attributes.
  * 
  * @author Bernardo Martínez Garrido
  * @see FilteredEntriesXMLFileParser

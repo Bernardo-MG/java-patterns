@@ -42,6 +42,15 @@ import com.wandrell.pattern.testing.util.ResourceUtils;
 /**
  * Abstract integration tests for {@link AbstractAttributesFilterXMLFileParser}.
  * <p>
+ * The tested {@code AbstractAttributesFilterXMLFileParser}, and all the
+ * required parameters used to validate the results, have to be injected with
+ * the use of Spring.
+ * <p>
+ * These parameters are the number of elements each type of filter should
+ * return, and the path to the file to filter. Also the attributes used on the
+ * filter are injected, to avoid the base test from having to know the structure
+ * of the file.
+ * <p>
  * Checks the following cases:
  * <ol>
  * <li>The returned entries change after changing the filtered attributes.</li>
@@ -60,90 +69,117 @@ import com.wandrell.pattern.testing.util.ResourceUtils;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @see InputParser
+ * @see AbstractAttributesFilterXMLFileParser
  */
 public abstract class AbstractITParseAbstractAttributesFilterXMLFileParser<V>
-extends AbstractTestNGSpringContextTests{
+        extends AbstractTestNGSpringContextTests {
 
     /**
      * Amount of entries after filtering based on rejecting a not existing
      * attribute.
+     * <p>
+     * As it is an absurd and impossible case, the result should be always zero.
      */
-    private static final Integer                        NO_NOT_EXISTING               = 0;
+    private static final Integer                  NO_NOT_EXISTING               = 0;
     /**
      * Amount of entries after filtering based on rejecting and requiring the
      * same attribute.
+     * <p>
+     * As it is an absurd and impossible case, the result should be always zero.
      */
-    private static final Integer                        WITH_ATTRIBUTE1_NO_ATTRIBUTE1 = 0;
+    private static final Integer                  WITH_ATTRIBUTE1_NO_ATTRIBUTE1 = 0;
     /**
      * Amount of entries after filtering based on requiring a not existing
      * attribute.
+     * <p>
+     * As it is an absurd and impossible case, the result should be always zero.
      */
-    private static final Integer                        WITH_NOT_EXISTING             = 0;
+    private static final Integer                  WITH_NOT_EXISTING             = 0;
+    /**
+     * Attribute existing in the XML file.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.attribute.attr1}")
+    private String                                attribute1;
+    /**
+     * Attribute existing in the XML file.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.attribute.attr2}")
+    private String                                attribute2;
+    /**
+     * Attribute which does not exist in the XML file.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.attribute.notExists}")
+    private String                                attributeNotExisting;
     /**
      * Amount of entries after filtering based on rejecting the attribute 1.
+     * <p>
+     * Injected through Spring from a properties file.
      */
-	@Value("${count.no1}")
-    private  Integer                               noAttribute1;
+    @Value("${count.no1}")
+    private Integer                               noAttribute1;
     /**
      * Amount of entries after filtering based on rejecting the attribute 1 and
      * the attribute 2.
+     * <p>
+     * Injected through Spring from a properties file.
      */
-	@Value("${count.no1no2}")
-    private  Integer                               noAttribute1NoAttribute2;
+    @Value("${count.no1no2}")
+    private Integer                               noAttribute1NoAttribute2;
     /**
      * Parser being tested.
+     * <p>
+     * It has to be injected with the use of Spring.
      */
-	@Autowired
-	@Qualifier("parser")
-    private  AbstractAttributesFilterXMLFileParser parser;
+    @Autowired
+    private AbstractAttributesFilterXMLFileParser parser;
     /**
      * Parser which counts the {@code Document} root nodes.
      */
-    private final Parser<Document, Integer>             parserNodes;
+    private final Parser<Document, Integer>       parserNodes;
     /**
      * Path to the test values file.
+     * <p>
+     * It has to be injected with the use of Spring.
      */
-	@Autowired
-	@Qualifier("xmlPath")
+    @Autowired
+    @Qualifier("xmlPath")
     private String                                path;
     /**
      * Amount of entries after applying no filter.
+     * <p>
+     * Injected through Spring from a properties file.
      */
-	@Value("${count.total}")
-    private  Integer                               total;
+    @Value("${count.total}")
+    private Integer                               total;
     /**
      * Amount of entries after filtering based on requiring the attribute 1.
+     * <p>
+     * Injected through Spring from a properties file.
      */
-	@Value("${count.with1}")
-    private  Integer                               withAttribute1;
+    @Value("${count.with1}")
+    private Integer                               withAttribute1;
     /**
      * Amount of entries after filtering based on requiring the attribute 1 and
      * rejecting the attribute 2.
+     * <p>
+     * Injected through Spring from a properties file.
      */
-	@Value("${count.with1No2}")
-    private  Integer                               withAttribute1NoAttribute2;
+    @Value("${count.with1No2}")
+    private Integer                               withAttribute1NoAttribute2;
     /**
      * Amount of entries after filtering based on requiring the attribute 1 and
      * the attribute 2.
+     * <p>
+     * Injected through Spring from a properties file.
      */
-	@Value("${count.with1With2}")
-    private  Integer                               withAttribute1WithAttribute2;
-	/**
-	 * Attribute which does not exist in the XML file.
-	 */
-	@Value("${xml.attribute.notExists}")
-	private String attributeNotExisting;
-	/**
-	 * Attribute existing in the XML file.
-	 */
-	@Value("${xml.attribute.attr1}")
-	private String attribute1;
-	/**
-	 * Attribute existing in the XML file.
-	 */
-	@Value("${xml.attribute.attr2}")
-	private String attribute2;
+    @Value("${count.with1With2}")
+    private Integer                               withAttribute1WithAttribute2;
 
     {
         parserNodes = new Parser<Document, Integer>() {
@@ -158,9 +194,6 @@ extends AbstractTestNGSpringContextTests{
 
     /**
      * Constructs the test with the specified counts.
-     * 
-     * @param parser
-     *            parser being tested
      */
     public AbstractITParseAbstractAttributesFilterXMLFileParser() {
         super();
@@ -173,24 +206,6 @@ extends AbstractTestNGSpringContextTests{
     public final void clear() {
         getParser().clearRejectedAttributes();
         getParser().clearRequiredAttributes();
-    }
-
-    /**
-     * Returns the parser being tested.
-     * 
-     * @return the parser being tested
-     */
-    protected final AbstractAttributesFilterXMLFileParser getParser() {
-        return parser;
-    }
-
-    /**
-     * Returns the path to the test data file.
-     * 
-     * @return the path to the test data file
-     */
-    protected final String getPath() {
-        return path;
     }
 
     /**
@@ -352,6 +367,24 @@ extends AbstractTestNGSpringContextTests{
 
         Assert.assertEquals(parserNodes.parse(getParser().parse(r)),
                 WITH_NOT_EXISTING);
+    }
+
+    /**
+     * Returns the parser being tested.
+     * 
+     * @return the parser being tested
+     */
+    protected final AbstractAttributesFilterXMLFileParser getParser() {
+        return parser;
+    }
+
+    /**
+     * Returns the path to the test data file.
+     * 
+     * @return the path to the test data file
+     */
+    protected final String getPath() {
+        return path;
     }
 
 }

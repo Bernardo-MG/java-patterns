@@ -34,7 +34,8 @@ import org.testng.annotations.Test;
 import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
 
 /**
- * Unit tests for {@link AbstractAttributesFilterXMLFileParser}.
+ * Unit tests for {@link AbstractAttributesFilterXMLFileParser} checking that
+ * the attributes methods work correctly.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -53,7 +54,7 @@ import com.wandrell.pattern.parser.xml.AbstractAttributesFilterXMLFileParser;
  * @author Bernardo Martínez Garrido
  * @see AbstractAttributesFilterXMLFileParser
  */
-public final class TestAbstractAttributesFilterXMLFileParser {
+public final class TestAttributesAbstractAttributesFilterXMLFileParser {
 
     /**
      * Attribute being used for the tests.
@@ -69,7 +70,7 @@ public final class TestAbstractAttributesFilterXMLFileParser {
     /**
      * Default constructor.
      */
-    public TestAbstractAttributesFilterXMLFileParser() {
+    public TestAttributesAbstractAttributesFilterXMLFileParser() {
         super();
     }
 
@@ -90,12 +91,12 @@ public final class TestAbstractAttributesFilterXMLFileParser {
         parser = new AbstractAttributesFilterXMLFileParser() {
 
             @Override
-            protected final void onAttributesChange() {}
-
-            @Override
             public final Document parse(final Reader reader) {
                 return new Document();
             }
+
+            @Override
+            protected final void onAttributesChange() {}
 
         };
     }

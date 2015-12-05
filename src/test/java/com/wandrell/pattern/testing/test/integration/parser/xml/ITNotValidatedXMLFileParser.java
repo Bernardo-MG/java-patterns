@@ -39,7 +39,10 @@ import com.wandrell.pattern.testing.util.ResourceUtils;
 import com.wandrell.pattern.testing.util.conf.TestContextConfig;
 
 /**
- * Integration tests for {@link NotValidatedXMLFileParser}.
+ * Integration tests for {@link NotValidatedXMLFileParser} testing that it reads
+ * XML files correctly.
+ * <p>
+ * The configuration values for the test will be injected through Spring.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -50,43 +53,47 @@ import com.wandrell.pattern.testing.util.conf.TestContextConfig;
  * @see NotValidatedXMLFileParser
  */
 @ContextConfiguration(TestContextConfig.XML)
-public final class ITNotValidatedXMLFileParser extends
-		AbstractTestNGSpringContextTests {
+public final class ITNotValidatedXMLFileParser
+        extends AbstractTestNGSpringContextTests {
 
-	/**
-	 * Value node name.
-	 */
-	@Value("${xml.node.value}")
-	private String nodeValue;
-	/**
-	 * Path to the integers XML file.
-	 */
-	@Value("${xml.integer.path}")
-	private String xmlIntegerPath;
+    /**
+     * Value node name.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.node.value}")
+    private String nodeValue;
+    /**
+     * Path to the integers XML file.
+     * <p>
+     * Injected through Spring from a properties file.
+     */
+    @Value("${xml.integer.path}")
+    private String xmlPath;
 
-	/**
-	 * Default constructor.
-	 */
-	public ITNotValidatedXMLFileParser() {
-		super();
-	}
+    /**
+     * Default constructor.
+     */
+    public ITNotValidatedXMLFileParser() {
+        super();
+    }
 
-	/**
-	 * Tests that parsing a XML file returns the expected value.
-	 */
-	@Test
-	public final void testParse() {
-		final Parser<Reader, Document> parser; // Parser tested
-		final Reader reader; // Reader to the test file
-		final Integer value; // Tested result from the parsed file
+    /**
+     * Tests that parsing a XML file returns the expected value.
+     */
+    @Test
+    public final void testParse() {
+        final Parser<Reader, Document> parser; // Parser tested
+        final Reader reader; // Reader to the test file
+        final Integer value; // Tested result from the parsed file
 
-		parser = new NotValidatedXMLFileParser();
+        parser = new NotValidatedXMLFileParser();
 
-		reader = ResourceUtils.getClassPathReader(xmlIntegerPath);
-		value = Integer.parseInt(parser.parse(reader).getRootElement()
-				.getChildText(nodeValue));
+        reader = ResourceUtils.getClassPathReader(xmlPath);
+        value = Integer.parseInt(
+                parser.parse(reader).getRootElement().getChildText(nodeValue));
 
-		Assert.assertEquals(value, (Integer) 1);
-	}
+        Assert.assertEquals(value, (Integer) 1);
+    }
 
 }
