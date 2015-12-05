@@ -24,13 +24,10 @@
         <property name="text" value="${xml.node.value.content}" />
     </bean>
 
-    <bean id="root" class="org.jdom2.Element">
+    <bean id="document"
+        class="com.wandrell.pattern.testing.util.model.TestXMLDocument">
         <constructor-arg index="0" value="${xml.node.root}" />
-        <property name="content" ref="node" />
-    </bean>
-
-    <bean id="document" class="org.jdom2.Document">
-        <property name="content" ref="root" />
+        <constructor-arg index="1" ref="node" />
     </bean>
 
 </beans>
