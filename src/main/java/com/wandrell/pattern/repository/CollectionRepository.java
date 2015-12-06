@@ -40,7 +40,8 @@ import com.google.common.base.Predicate;
  * there is no need of anything fancy such as persistence.
  * <p>
  * The filters required by the {@code FilteredRepository} interfaces are
- * instances of the Guava <a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html">
+ * instances of the Guava <a href=
+ * "http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/base/Predicate.html">
  * Predicate</a> class. All the entities validating the predicate being used as
  * filter will be returned.
  * 

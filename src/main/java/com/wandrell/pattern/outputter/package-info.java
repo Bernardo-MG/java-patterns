@@ -42,19 +42,5 @@
  * while the other uses an {@code OutputWriter}. In both cases the received
  * output object is expected to be a single use object, which will be closed,
  * and so can't be reused, after the operation is finished.
- * <h2>Implementations</h2>
- * <p>
- * Some basic implementations for this interface, based on third party
- * libraries, are offered. These are meant as a way to easily handle various
- * common file formats, as they take care of setting a common basic
- * configuration
- * <p>
- * These outputters are stored in packages named after the format they can
- * handle.
- * <p>
- * The {@link com.wandrell.pattern.outputter.xml.XMLOutputter} can save data
- * into an XML file, while the
- * {@link com.wandrell.pattern.outputter.yaml.YAMLOutputter YAMLOutputter} can
- * do the same on a YAML file.
  */
 package com.wandrell.pattern.outputter;

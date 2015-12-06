@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE validator SYSTEM "./src/test/resources/files/xml/validation/dtd_validation.dtd">
-<root>
-  <value>1</value>
-</root>

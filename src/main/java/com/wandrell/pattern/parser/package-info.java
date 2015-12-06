@@ -29,15 +29,8 @@
  * called a lossfull parsing, otherwise it is a lossless parsing.
  * <h2>Interfaces</h2>
  * <p>
- * The interface {@link com.wandrell.pattern.parser.Parser Parser} offers a
- * single method, which receives an input type and returns an output type.
- * <h2>Implementations</h2>
- * <p>
- * Default implementations exists for parsing XML files.
- * <p>
- * The {@link com.wandrell.pattern.parser.xml.XMLFileParser XMLFileParser} takes
- * a {@code Reader}, pointing to an XML file, and returns a JDOM 2
- * {@code Document}. It is capable of applying validation, which may be from an
- * XSD or DTD file.
+ * The interface {@link com.wandrell.pattern.parser.Parser Parser} represents
+ * this pattern with a single method, which receives an input type and returns
+ * an output type.
  */
 package com.wandrell.pattern.parser;

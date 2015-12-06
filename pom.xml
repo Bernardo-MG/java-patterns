@@ -209,15 +209,10 @@
         <!-- Dependencies versions -->
         <commons.io.version>2.4</commons.io.version>
         <guava.version>18.0</guava.version>
-        <jaxen.version>1.1.6</jaxen.version>
-        <jdom.version>2.0.6</jdom.version>
         <log4j.version>2.4.1</log4j.version>
-        <spring.version>4.2.3.RELEASE</spring.version>
         <mockito.version>1.10.19</mockito.version>
         <slf4j.version>1.7.13</slf4j.version>
-        <snakeyaml.version>1.16</snakeyaml.version>
         <testng.version>6.9.9</testng.version>
-        <xmlunit.version>1.6</xmlunit.version>
         <!-- Plugins versions -->
         <plugin.changes.version>2.11</plugin.changes.version>
         <plugin.site.velocity.version>1.7</plugin.site.velocity.version>
@@ -245,13 +240,6 @@
             <version>${guava.version}</version>
         </dependency>
         <dependency>
-            <!-- Jaxen -->
-            <groupId>jaxen</groupId>
-            <artifactId>jaxen</artifactId>
-            <version>${jaxen.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <!-- Log4j SLF4J Bridge -->
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
@@ -262,23 +250,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-        <!-- ============================================== -->
-        <!-- =========== OPTIONAL DEPENDENCIES ============ -->
-        <!-- ============================================== -->
-        <dependency>
-            <!-- JDom 2 -->
-            <groupId>org.jdom</groupId>
-            <artifactId>jdom2</artifactId>
-            <version>${jdom.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <!-- SnakeYAML -->
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>${snakeyaml.version}</version>
-            <optional>true</optional>
         </dependency>
         <!-- ============================================== -->
         <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
@@ -298,38 +269,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <!-- Spring context -->
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <!-- Spring core -->
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <!-- Spring test -->
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <!-- TestNG -->
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <!-- XMLUnit -->
-            <groupId>xmlunit</groupId>
-            <artifactId>xmlunit</artifactId>
-            <version>${xmlunit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
