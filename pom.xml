@@ -20,7 +20,7 @@
 
     <groupId>com.wandrell</groupId>
     <artifactId>java-patterns</artifactId>
-    <version>0.4.7-SNAPSHOT</version>
+    <version>0.4.7</version>
     <packaging>jar</packaging>
 
     <name>Java Patterns</name>
