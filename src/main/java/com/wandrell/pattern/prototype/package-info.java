@@ -33,8 +33,9 @@
  * the new instance.
  * <p>
  * Java already has it's own interface for the prototype pattern, the
- * {@link Cloneable} interface. But trying to use it usually gives more problems
- * than those it solves, and so appears the need to create an alternative.
+ * {@link java.lang.Cloneable Cloneable} interface. But trying to use it usually
+ * gives more problems than those it solves, and so appears the need to create
+ * an alternative.
  * <h2>Interfaces</h2>
  * <p>
  * The {@link com.wandrell.pattern.prototype.Prototype Prototype} offers the

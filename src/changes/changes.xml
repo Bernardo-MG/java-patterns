@@ -13,13 +13,16 @@
 		</release>
 		<release version="0.2.0" date="2015-04-04" description="Enhancements to the Repository">
 			<action dev="bmg" type="update">
-				Changed the Repository so the filter being used can be chosen.
+				Changed the Repository so the filter
+				being used can be chosen.
 			</action>
 			<action dev="bmg" type="add">
-				Added the getEntity method to the Repository, so now a single entity can be acquired.
+				Added the getEntity method to the
+				Repository, so now a single entity can be acquired.
 			</action>
 			<action dev="bmg" type="add">
-				Added information about how to get the library as a dependency to the documentation.
+				Added information about how to get the
+				library as a dependency to the documentation.
 			</action>
 			<action dev="bmg" type="fix">
 				Fixed errors on the documentation.
@@ -27,10 +30,12 @@
 		</release>
 		<release version="0.4.0" date="2015-05-03" description="Renamed classes">
 			<action dev="bmg" type="update">
-				Changed the Query to QueryData to avoid name collisions.
+				Changed the Query to QueryData to avoid
+				name collisions.
 			</action>
 			<action dev="bmg" type="update">
-				Changed the QueryableRepository to FilteredRepository for clarity.
+				Changed the QueryableRepository to
+				FilteredRepository for clarity.
 			</action>
 			<action dev="bmg" type="fix">
 				Fixed errors on the documentation.
@@ -38,7 +43,8 @@
 		</release>
 		<release version="0.4.1" date="2015-06-04" description="Sonatype">
 			<action dev="bmg" type="update">
-				Configuration fixes to publish on Sonatype.
+				Configuration fixes to publish on
+				Sonatype.
 			</action>
 		</release>
 		<release version="0.4.2" date="2015-06-09" description="Corrections">
@@ -57,7 +63,8 @@
 		</release>
 		<release version="0.4.3" date="2015-06-09" description="Maven Skin">
 			<action dev="bmg" type="update">
-				Changed Maven site skin to Docs Maven Skin.
+				Changed Maven site skin to Docs Maven
+				Skin.
 			</action>
 		</release>
 		<release version="0.4.4" date="2015-06-10" description="Enhancements">
@@ -65,7 +72,8 @@
 				QueryData is now editable.
 			</action>
 			<action dev="bmg" type="update">
-				Parsers no longer throw checked exceptions.
+				Parsers no longer throw checked
+				exceptions.
 			</action>
 		</release>
 		<release version="0.4.5" date="2015-10-16" description="Maven Site Skin update">
@@ -76,6 +84,15 @@
 		<release version="0.4.6" date="2015-11-21" description="Configuration update">
 			<action dev="bmg" type="update">
 				Updated configuration.
+			</action>
+		</release>
+		<release version="0.4.7" date="2015-12-2" description="Configuration update">
+			<action dev="bmg" type="update">
+				Updated configuration.
+			</action>
+			<action dev="bmg" type="update">
+				Tests now make use of Spring for the
+				configuration.
 			</action>
 		</release>
 	</body>

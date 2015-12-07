@@ -2,7 +2,7 @@
 
 A repository allows accessing data through CRUD operations in a similar way to a DAO. The difference is that while a DAO is meant to handle a single entity the repository works as if it were a collection of persistent entities.
 
-## Repository
+## Interface
 
 ![Repository interface][repository-class_tree]
 

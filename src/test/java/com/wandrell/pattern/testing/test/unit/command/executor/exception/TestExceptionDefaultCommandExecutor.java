@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.wandrell.pattern.testing.test.unit.command.executor.exception;
 
 import org.mockito.Mockito;
@@ -61,7 +62,7 @@ import com.wandrell.pattern.command.UndoableCommand;
  * @author Bernardo Martínez Garrido
  * @see DefaultCommandExecutor
  */
-public final class TestRuntimeExceptionDefaultCommandExecutor {
+public final class TestExceptionDefaultCommandExecutor {
 
     /**
      * Executor being tested.
@@ -73,7 +74,7 @@ public final class TestRuntimeExceptionDefaultCommandExecutor {
     /**
      * Default constructor.
      */
-    public TestRuntimeExceptionDefaultCommandExecutor() {
+    public TestExceptionDefaultCommandExecutor() {
         super();
     }
 

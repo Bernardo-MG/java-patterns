@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.wandrell.pattern.testing.test.unit.repository;
 
 import java.util.Collection;
@@ -36,10 +37,10 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Predicate;
 import com.wandrell.pattern.repository.CollectionRepository;
 import com.wandrell.pattern.repository.FilteredRepository;
-import com.wandrell.pattern.repository.Repository;
 
 /**
- * Unit tests for {@link Repository} using a custom test class.
+ * Unit tests for {@link CollectionRepository} testing that the update methods
+ * work correctly. For this test the repository will contain custom entities.
  * <p>
  * Checks the following cases:
  * <ol>
@@ -48,9 +49,9 @@ import com.wandrell.pattern.repository.Repository;
  * </ol>
  * 
  * @author Bernardo Martínez Garrido
- * @see Repository
+ * @see CollectionRepository
  */
-public final class TestUpdateCollectionRepository {
+public final class TestCustomUpdateCollectionRepository {
 
     /**
      * The repository being tested.
@@ -69,26 +70,18 @@ public final class TestUpdateCollectionRepository {
         /**
          * Name of the class, which will identify it.
          */
-        private final String  name;
-        /**
-         * Values of the class, serving as the state.
-         */
-        @SuppressWarnings("unused")
-        private final Integer value;
+        private final String name;
 
         /**
          * Constructs a test class with the specified data.
          * 
          * @param name
          *            the id
-         * @param value
-         *            the state
          */
-        public TestClass(final String name, final Integer value) {
+        public TestClass(final String name) {
             super();
 
             this.name = name;
-            this.value = value;
         }
 
         @Override
@@ -127,7 +120,7 @@ public final class TestUpdateCollectionRepository {
     /**
      * Default constructor.
      */
-    public TestUpdateCollectionRepository() {
+    public TestCustomUpdateCollectionRepository() {
         super();
     }
 
@@ -148,9 +141,9 @@ public final class TestUpdateCollectionRepository {
             repository.remove(entity);
         }
 
-        repository.add(new TestClass("a", 12));
-        repository.add(new TestClass("b", 41));
-        repository.add(new TestClass("c", 15));
+        repository.add(new TestClass("a"));
+        repository.add(new TestClass("b"));
+        repository.add(new TestClass("c"));
     }
 
     /**
@@ -171,7 +164,7 @@ public final class TestUpdateCollectionRepository {
         // entities
         final TestClass entity; // The updated entity
 
-        entity = new TestClass("a", 15);
+        entity = new TestClass("a");
 
         repository.update(entity);
 
@@ -196,9 +189,9 @@ public final class TestUpdateCollectionRepository {
         final Collection<TestClass> entities; // All the entities
         final TestClass entity; // The updated entity
 
-        entity = new TestClass("d", 15);
+        entity = new TestClass("d");
 
-        repository.update(new TestClass("d", 15));
+        repository.update(new TestClass("d"));
 
         entities = repository.getCollection(new Predicate<TestClass>() {
 

@@ -1,2 +1,0 @@
-<!ELEMENT root (value*)>
-<!ELEMENT value (#PCDATA)>

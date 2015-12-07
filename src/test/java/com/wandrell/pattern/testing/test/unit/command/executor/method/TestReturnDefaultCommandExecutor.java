@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.wandrell.pattern.testing.test.unit.command.executor.method;
 
 import org.mockito.Mockito;
@@ -28,9 +29,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.wandrell.pattern.command.Command;
 import com.wandrell.pattern.command.CommandExecutor;
 import com.wandrell.pattern.command.DefaultCommandExecutor;
 import com.wandrell.pattern.command.ResultCommand;
+import com.wandrell.pattern.command.UndoableCommand;
 
 /**
  * Unit tests for {@link DefaultCommandExecutor}.
@@ -69,6 +72,24 @@ public final class TestReturnDefaultCommandExecutor {
     }
 
     /**
+     * Tests that when a {@code Command} is received by the {@code execute}
+     * method, it is executed.
+     * 
+     * @throws Exception
+     *             never, this is just a required declaration
+     */
+    @Test
+    public final void testExecute_Command_Executed() throws Exception {
+        final Command command;  // The command used for the test
+
+        command = Mockito.mock(Command.class);
+
+        executor.execute(command);
+
+        Mockito.verify(command, Mockito.times(1)).execute();
+    }
+
+    /**
      * Tests that when a {@code ResultCommand} is executed the object generated
      * by it is returned.
      * 
@@ -86,6 +107,24 @@ public final class TestReturnDefaultCommandExecutor {
         Mockito.when(command.getResult()).thenReturn(true);
 
         Assert.assertTrue(executor.execute(command));
+    }
+
+    /**
+     * Tests that when a {@code ResultCommand} is received by the {@code undo}
+     * method, it's {@code undo()} method is called.
+     * 
+     * @throws Exception
+     *             never, this is just a required declaration
+     */
+    @Test
+    public final void testUndo() throws Exception {
+        final UndoableCommand command;  // The command used for the test
+
+        command = Mockito.mock(UndoableCommand.class);
+
+        executor.undo(command);
+
+        Mockito.verify(command, Mockito.times(1)).undo();
     }
 
 }
