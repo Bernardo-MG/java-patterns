@@ -15,6 +15,15 @@ For each of them an interface and, when possible, also a basic implementation ar
 [![Release javadocs](https://img.shields.io/badge/javadocs-release-blue.svg)][javadoc-release]
 [![Development javadocs](https://img.shields.io/badge/javadocs-develop-blue.svg)][javadoc-develop]
 
+## Other libraries with patterns
+
+Some patterns have been moved to their own libraries, and more will be moved as they grow.
+
+Currently the patterns which have their own project, and are not included in this, are:
+
+- [Java Repository Pattern][repository-pattern].
+- [Java Patterns for Files][file-pattern]
+
 ## Features
 
 Currently the patterns included are as follows:
@@ -95,3 +104,6 @@ The project has been released under the [MIT License][license].
 [scm]: http://github.com/Bernardo-MG/java-patterns
 [site-develop]: http://docs.wandrell.com/development/maven/java-patterns
 [site-release]: http://docs.wandrell.com/maven/java-patterns
+
+[repository-pattern]: https://github.com/Bernardo-MG/repository-pattern-java
+[file-pattern]: https://github.com/Bernardo-MG/java-patterns-files

@@ -27,7 +27,19 @@ The implementations are not following any concrete book or specification, they j
 
 For each of them, whenever possible, basic implementations have been included.
 
+## Other libraries with patterns
+
+Some patterns have been moved to their own libraries, and more will be moved as they grow.
+
+Currently the patterns which have their own project, and are not included in this, are:
+
+- [Java Repository Pattern][repository-pattern].
+- [Java Patterns for Files][file-pattern]
+
 [docs-command]: ./command.html
 [docs-outputter]: ./outputter.html
 [docs-parser]: ./parser.html
 [docs-prototype]: ./prototype.html
+
+[repository-pattern]: https://github.com/Bernardo-MG/repository-pattern-java
+[file-pattern]: https://github.com/Bernardo-MG/java-patterns-files
