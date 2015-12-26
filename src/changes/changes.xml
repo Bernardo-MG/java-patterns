@@ -97,5 +97,12 @@
                 Updated configuration.
             </action>
         </release>
+        <release version="0.6.0" date="2015-12-26"
+            description="Removed repositories">
+            <action dev="bmg" type="update">
+                Moved repository patterns to another
+                project.
+            </action>
+        </release>
     </body>
 </document>

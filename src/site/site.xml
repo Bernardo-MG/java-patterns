@@ -80,7 +80,6 @@
 			<item name="Outputter" href="./outputter.html" />
 			<item name="Parser" href="./parser.html" />
 			<item name="Prototype" href="./prototype.html" />
-			<item name="Repository" href="./repository.html" />
 		</menu>
 		<menu name="Info and reports" inherit="bottom">
 			<item name="Info" href="./info.html" />

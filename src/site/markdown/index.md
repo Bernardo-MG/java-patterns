@@ -24,7 +24,6 @@ The implementations are not following any concrete book or specification, they j
 - The [Outputter][docs-outputter] allows writing for files, or just sending structures, without worrying about the actual implementation.
 - The [Parser][docs-parser] transforms one object into another, keeping as much of the data intact as possible.
 - The [Prototype][docs-prototype] permits creating an identical copy of a base template.
-- The [Repository][docs-prototype] allows handling data persistence as if you were working on a collection.
 
 For each of them, whenever possible, basic implementations have been included.
 
@@ -32,4 +31,3 @@ For each of them, whenever possible, basic implementations have been included.
 [docs-outputter]: ./outputter.html
 [docs-parser]: ./parser.html
 [docs-prototype]: ./prototype.html
-[docs-prototype]: ./repository.html
